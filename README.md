@@ -1,2 +1,2 @@
 # 2019-PO-PIGS
-Jeu utilisant la réalité augmenté
+Jeu utilisant la réalité augmentée
