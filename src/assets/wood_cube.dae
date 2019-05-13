@@ -5,8 +5,8 @@
       <author>Blender User</author>
       <authoring_tool>Blender 2.79.0 commit date:2018-03-22, commit time:14:10, hash:f4dc9f9d68b</authoring_tool>
     </contributor>
-    <created>2019-05-13T09:22:07</created>
-    <modified>2019-05-13T09:22:07</modified>
+    <created>2019-05-13T10:26:27</created>
+    <modified>2019-05-13T10:26:27</modified>
     <unit name="meter" meter="1"/>
     <up_axis>Z_UP</up_axis>
   </asset>
@@ -16,36 +16,34 @@
     </image>
   </library_images>
   <library_effects>
-    <effect id="Material-effect">
+    <effect id="cartoon_wood_jpg-effect">
       <profile_COMMON>
+        <newparam sid="cartoon_wood_jpg-surface">
+          <surface type="2D">
+            <init_from>cartoon_wood_jpg</init_from>
+          </surface>
+        </newparam>
+        <newparam sid="cartoon_wood_jpg-sampler">
+          <sampler2D>
+            <source>cartoon_wood_jpg-surface</source>
+          </sampler2D>
+        </newparam>
         <technique sid="common">
           <phong>
-            <emission>
-              <color sid="emission">0 0 0 1</color>
-            </emission>
-            <ambient>
-              <color sid="ambient">0 0 0 1</color>
-            </ambient>
             <diffuse>
-              <color sid="diffuse">0.64 0.64 0.64 1</color>
+              <texture texture="cartoon_wood_jpg-sampler" texcoord="cartoon_wood_jpg"/>
             </diffuse>
             <specular>
-              <color sid="specular">0.5 0.5 0.5 1</color>
+              <color sid="specular">0 0 0 1</color>
             </specular>
-            <shininess>
-              <float sid="shininess">50</float>
-            </shininess>
-            <index_of_refraction>
-              <float sid="index_of_refraction">1</float>
-            </index_of_refraction>
           </phong>
         </technique>
       </profile_COMMON>
     </effect>
   </library_effects>
   <library_materials>
-    <material id="Material-material" name="Material">
-      <instance_effect url="#Material-effect"/>
+    <material id="cartoon_wood_jpg-material" name="cartoon_wood_jpg">
+      <instance_effect url="#cartoon_wood_jpg-effect"/>
     </material>
   </library_materials>
   <library_geometries>
@@ -83,7 +81,7 @@
         <vertices id="Cube-mesh-vertices">
           <input semantic="POSITION" source="#Cube-mesh-positions"/>
         </vertices>
-        <triangles material="Material-material" count="12">
+        <triangles material="cartoon_wood_jpg-material" count="12">
           <input semantic="VERTEX" source="#Cube-mesh-vertices" offset="0"/>
           <input semantic="NORMAL" source="#Cube-mesh-normals" offset="1"/>
           <input semantic="TEXCOORD" source="#Cube-mesh-map-0" offset="2" set="0"/>
@@ -100,7 +98,9 @@
         <instance_geometry url="#Cube-mesh" name="Cube">
           <bind_material>
             <technique_common>
-              <instance_material symbol="Material-material" target="#Material-material"/>
+              <instance_material symbol="cartoon_wood_jpg-material" target="#cartoon_wood_jpg-material">
+                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
             </technique_common>
           </bind_material>
         </instance_geometry>
