@@ -1,0 +1,19 @@
+Découvrez la réalité augmentée sous un autre visage !
+
+Deux équipes s'affrontent dans un combat déjanté avec... des cochons !
+Attention aux obstacles qui s'effondreront sous vos tirs.
+Profitez des bonus pour vaincre votre adversaire à coup sûr !
+
+Le but du jeu consiste à faire tomber les trois lance-cochon adverses.
+
+Bonus :
+    - Cochon farci : C'est un cochon de taille gargantuesque
+    - 3 p'tits cochons : Un trio de cochons destructeurs
+    - Cochon BOOM : Un cochon... explosif
+
+Fonctionnement
+
+Le projet fonctionne grâce à la réalité augmentée. Cela permet d'afficher
+des éléments virtuels dans la vrai vie. L'iPad permet de faire apparaître,
+au travers de sa caméra, le terrain de jeu. Les iPad sont connecté par
+l'intermédiaire d'un Access Point.

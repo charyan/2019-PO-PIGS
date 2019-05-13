@@ -1,0 +1,8 @@
+# Technologies à apprendre
+- Swift
+- ARKit
+- SceneKit
+
+# Outils
+- Xcode
+- Blender

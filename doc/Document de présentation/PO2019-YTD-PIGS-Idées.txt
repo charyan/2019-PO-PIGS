@@ -1,0 +1,22 @@
+PIGS - Two Kingdoms - Idées
+
+Formes :
+    - Cube (Caisse plusieurs tailles)
+    - Prisme droit base triangulaire
+    - Prisme droit base carré
+    - Prisme droit base rectangle(jenga)
+
+Formes spéciales:
+    - TNT
+
+Interface :
+    - Score bas à droite
+    - Bonus milieu gauche
+
+Bonus :
+    - * Grossisement : Cochon farci
+    - * Sépraration en deux/trois : 3 p'tits cochons
+    - ** Explosion : Cochon BOOM
+
+Collision de deux cochons :
+    - Explosion des cochons
