@@ -23,9 +23,14 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         // Show statistics such as fps and timing information
         sceneView.showsStatistics = true
         
+        // Debug options
+        sceneView.debugOptions = ARSCNDebugOptions.showWorldOrigin
+        
+        // Enable antialiasing
+        sceneView.antialiasingMode = .multisampling4X
+        
         // Create a new scene
         let scene = SCNScene()
-        
         
         // Set the scene to the view
         sceneView.scene = scene
