@@ -15,16 +15,18 @@ import ARKit
 // BALL
 let BALL_PROJECTILE_NAME : String! = "ball"
 let BALL_ROOT_NODE_NAME : String! = "Sphere"
-let BALL_SCENE_NAME : String! = "art.scnassets/pink_ball.scn"
+let BALL_SCENE_NAME : String! = "art.scnassets/models/pink_ball.scn"
 let BALL_SPEED : Float = 20
-let BALL_SCALE : SCNVector3 = SCNVector3(0.2,0.2,0.2)
+// let BALL_SCALE : SCNVector3 = SCNVector3(0.2,0.2,0.2)
+let BALL_SCALE : SCNVector3 = SCNVector3(1,1,1)
 
 // LAUNCHER
 let PITCH_LAUNCHER : Float = 0.1 // 0 is straight forward
 
 // TARGET
-let TARGET_SCENE_NAME : String! = "art.scnassets/target.scn"
-let TARGET_SCALE : SCNVector3 = SCNVector3(0.1, 0.05, 0.1)
+let TARGET_SCENE_NAME : String! = "art.scnassets/models/target.scn"
+// let TARGET_SCALE : SCNVector3 = SCNVector3(0.1, 0.05, 0.1)
+let TARGET_SCALE : SCNVector3 = SCNVector3(1, 1, 1)
 let TARGET_POSITION : SCNVector3 = SCNVector3(0, 0, 0)
 
 ////////////////////////////////////////////////////////////
@@ -77,7 +79,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     func createTarget() {
         var node = SCNNode()
         let scene = SCNScene(named: TARGET_SCENE_NAME)!
-        node = scene.rootNode.childNode(withName: "Cylinder", recursively: true)!
+        node = scene.rootNode.childNode(withName: "Target", recursively: true)!
         node.scale = TARGET_SCALE
         node.name = "target"
         node.position = TARGET_POSITION
