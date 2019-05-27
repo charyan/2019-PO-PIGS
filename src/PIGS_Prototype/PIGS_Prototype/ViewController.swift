@@ -13,14 +13,18 @@ import ARKit
 ////////////////////////////////////////////////////////////
 
 // BALL
-let BALL_SPEED : Float = 75
-let BALL_SCALE : SCNVector3 = SCNVector3(0.5,0.5,0.5)
+let BALL_PROJECTILE_NAME : String! = "ball"
+let BALL_ROOT_NODE_NAME : String! = "Sphere"
+let BALL_SCENE_NAME : String! = "art.scnassets/pink_ball.scn"
+let BALL_SPEED : Float = 20
+let BALL_SCALE : SCNVector3 = SCNVector3(0.2,0.2,0.2)
 
 // LAUNCHER
-let PITCH_LAUNCHER : Float = 0.1
+let PITCH_LAUNCHER : Float = 0.1 // 0 is straight forward
 
 // TARGET
-let TARGET_SCALE : SCNVector3 = SCNVector3(0.2, 0.025, 0.2)
+let TARGET_SCENE_NAME : String! = "art.scnassets/target.scn"
+let TARGET_SCALE : SCNVector3 = SCNVector3(0.1, 0.05, 0.1)
 let TARGET_POSITION : SCNVector3 = SCNVector3(0, 0, 0)
 
 ////////////////////////////////////////////////////////////
@@ -32,7 +36,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     // When the Shoot button is pressed
     @IBAction func onShootButton(_ sender: Any) {
         debugPrint(Date().debugDescription + " : Shoot")
-        fireProjectile(type: "ball")
+        fireProjectile(type: BALL_PROJECTILE_NAME)
     }
     
     // Get the user vector
@@ -56,12 +60,12 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         // Check the type of projectile
         switch(type) {
-        case "ball":
-            let scene = SCNScene(named: "art.scnassets/pink_ball.scn")
-            node = (scene?.rootNode.childNode(withName: "Sphere", recursively: true)!)!
+        case BALL_PROJECTILE_NAME:
+            let scene = SCNScene(named: BALL_SCENE_NAME)!
+            node = scene.rootNode.childNode(withName: BALL_ROOT_NODE_NAME, recursively: true)!
             // Adjust the size of the node
             node.scale = BALL_SCALE
-            node.name = "ball"
+            node.name = BALL_PROJECTILE_NAME
         default:
             node = SCNNode()
         }
@@ -72,8 +76,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     // Create the target
     func createTarget() {
         var node = SCNNode()
-        let scene = SCNScene(named: "art.scnassets/target.dae")
-        node = (scene?.rootNode.childNode(withName: "Cylinder", recursively: true)!)!
+        let scene = SCNScene(named: TARGET_SCENE_NAME)!
+        node = scene.rootNode.childNode(withName: "Cylinder", recursively: true)!
         node.scale = TARGET_SCALE
         node.name = "target"
         node.position = TARGET_POSITION
@@ -121,7 +125,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         sceneView.showsStatistics = true
         
         // Debug options
-        sceneView.debugOptions = ARSCNDebugOptions.showWorldOrigin
+        sceneView.debugOptions = [ARSCNDebugOptions.showWorldOrigin,
+                                  ARSCNDebugOptions.showPhysicsShapes]
         
         // Enable antialiasing
         sceneView.antialiasingMode = .multisampling4X
