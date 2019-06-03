@@ -37,7 +37,7 @@ let GAMEZONE_ROOT_NODE_NAME : String! = "root"
 ////////////////////////////////////////////////////////////
 class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDelegate {
 
-    var score:Int = 0
+    var score = 0
     
     @IBOutlet var sceneView: ARSCNView!
     
@@ -80,8 +80,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
             node = SCNNode()
         }
         
-        //node.physicsBody?.categoryBitMask = CollisionCategory.projectileCategory.rawValue
-        //node.physicsBody?.collisionBitMask = CollisionCategory.targetCategory.rawValue
+        node.physicsBody?.categoryBitMask = CollisionCategory.projectileCategory.rawValue
+        node.physicsBody?.collisionBitMask = CollisionCategory.targetCategory.rawValue
         
         return node
     }
@@ -97,10 +97,11 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
         node.rotation = SCNVector4(1, 0, 0, GLKMathDegreesToRadians(90))
         node.physicsBody = SCNPhysicsBody(type: .static, shape: nil)
         
-        //node.physicsBody?.categoryBitMask = CollisionCategory.targetCategory.rawValue
-        //node.physicsBody?.collisionBitMask = CollisionCategory.projectileCategory.rawValue
-        
         sceneView.scene.rootNode.addChildNode(node)
+        
+        node.physicsBody?.categoryBitMask = CollisionCategory.targetCategory.rawValue
+        node.physicsBody?.collisionBitMask = CollisionCategory.projectileCategory.rawValue
+        
     }
     
     // Create the game zone
@@ -156,19 +157,17 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
     func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
         
         print("** Collision!! " + contact.nodeA.name! + " hit " + contact.nodeB.name!)
-        scoreLabel.text = "collision"
         
         if contact.nodeA.physicsBody?.categoryBitMask == CollisionCategory.targetCategory.rawValue
             || contact.nodeB.physicsBody?.categoryBitMask == CollisionCategory.targetCategory.rawValue {
-            scoreLabel.text = "test1"
+            
             if(contact.nodeA.name! == TARGET_ROOT_NODE_NAME || contact.nodeB.name! == TARGET_ROOT_NODE_NAME) {
                 score += 10
-                scoreLabel.text = "contact"
             }
             
             DispatchQueue.main.async {
-                //contact.nodeA.removeFromParentNode()
-                //contact.nodeB.removeFromParentNode()
+                contact.nodeA.removeFromParentNode()
+                contact.nodeB.removeFromParentNode()
                 //self.scoreLabel.text = String(self.score)
             }
         }
@@ -241,6 +240,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
 
 struct CollisionCategory: OptionSet {
     let rawValue: Int
-    static let projectileCategory = CollisionCategory(rawValue: 1<<0)
-    static let targetCategory = CollisionCategory(rawValue: 1<<1)
+    static let projectileCategory  = CollisionCategory(rawValue: 1 << 0)
+    static let targetCategory = CollisionCategory(rawValue: 1 << 1)
 }
