@@ -100,6 +100,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
         sceneView.scene.rootNode.addChildNode(node)
     }
     
+    // Create the game zone
     func createGameZone() {
         var node = SCNNode()
         let scene = SCNScene(named: GAMEZONE_SCENE_NAME)!
@@ -165,9 +166,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
         
         sceneView.scene.physicsWorld.contactDelegate = self
         
-        createGameZone()
-        
-        //createTarget()
+        createTarget()
     }
     
     override func viewWillAppear(_ animated: Bool) {
