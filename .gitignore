@@ -23,3 +23,4 @@ src/.DS_Store
 >>>>>>> origin/master
 
 src/PIGS_Prototype/PIGS_Prototype.xcodeproj/project.xcworkspace/xcuserdata/apprenti.xcuserdatad/UserInterfaceState.xcuserstate
+*.xcuserstate

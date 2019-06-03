@@ -28,11 +28,20 @@ let TARGET_SCALE : SCNVector3 = SCNVector3(3, 0.4, 3)
 let TARGET_POSITION : SCNVector3 = SCNVector3(0, 0, -20)
 let TARGET_ROOT_NODE_NAME : String! = "Target"
 
-////////////////////////////////////////////////////////////
+// GAMEZONE
+let GAMEZONE_SCENE_NAME : String! = "art.scnassets/level/map.scn"
+let GAMEZONE_SCALE : SCNVector3 = SCNVector3(3, 0.4, 3)
+let GAMEZONE_POSITION : SCNVector3 = SCNVector3(0, 0, -20)
+let GAMEZONE_ROOT_NODE_NAME : String! = "root"
 
+////////////////////////////////////////////////////////////
 class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDelegate {
 
+    var score:Int = 0
+    
     @IBOutlet var sceneView: ARSCNView!
+    
+    @IBOutlet weak var scoreLabel: UILabel!
     
     // When the Shoot button is pressed
     @IBAction func onShootButton(_ sender: Any) {
@@ -71,8 +80,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
             node = SCNNode()
         }
         
-        node.physicsBody?.categoryBitMask = CollisionCategory.projectileCategory.rawValue
-        node.physicsBody?.collisionBitMask = CollisionCategory.targetCategory.rawValue
+        //node.physicsBody?.categoryBitMask = CollisionCategory.projectileCategory.rawValue
+        //node.physicsBody?.collisionBitMask = CollisionCategory.targetCategory.rawValue
         
         return node
     }
@@ -88,8 +97,25 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
         node.rotation = SCNVector4(1, 0, 0, GLKMathDegreesToRadians(90))
         node.physicsBody = SCNPhysicsBody(type: .static, shape: nil)
         
-        node.physicsBody?.categoryBitMask = CollisionCategory.targetCategory.rawValue
-        node.physicsBody?.collisionBitMask = CollisionCategory.projectileCategory.rawValue
+        //node.physicsBody?.categoryBitMask = CollisionCategory.targetCategory.rawValue
+        //node.physicsBody?.collisionBitMask = CollisionCategory.projectileCategory.rawValue
+        
+        sceneView.scene.rootNode.addChildNode(node)
+    }
+    
+    // Create the game zone
+    func createGameZone() {
+        var node = SCNNode()
+        let scene = SCNScene(named: GAMEZONE_SCENE_NAME)!
+        node = scene.rootNode.childNode(withName: GAMEZONE_ROOT_NODE_NAME, recursively: true)!
+        node.scale = GAMEZONE_SCALE
+        node.name = GAMEZONE_ROOT_NODE_NAME
+        node.position = GAMEZONE_POSITION
+        //node.rotation = SCNVector4(1, 0, 0, GLKMathDegreesToRadians(90))
+        node.physicsBody = SCNPhysicsBody(type: .static, shape: nil)
+        
+        //node.physicsBody?.categoryBitMask = CollisionCategory.targetCategory.rawValue
+        //node.physicsBody?.collisionBitMask = CollisionCategory.projectileCategory.rawValue
         
         sceneView.scene.rootNode.addChildNode(node)
     }
@@ -125,8 +151,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
         sceneView.scene.rootNode.addChildNode(node)
     }
     
-    // MARK: - Contact Delegate
-    
+    // Check for collision
     func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
         
         print("** Collision!! " + contact.nodeA.name! + " hit " + contact.nodeB.name!)
@@ -134,10 +159,14 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
         if contact.nodeA.physicsBody?.categoryBitMask == CollisionCategory.targetCategory.rawValue
             || contact.nodeB.physicsBody?.categoryBitMask == CollisionCategory.targetCategory.rawValue {
             
+            if(contact.nodeA.name! == TARGET_ROOT_NODE_NAME || contact.nodeB.name! == TARGET_ROOT_NODE_NAME) {
+                score = score + 5
+            }
+            
             DispatchQueue.main.async {
-                contact.nodeA.removeFromParentNode()
-                contact.nodeB.removeFromParentNode()
-                //self.scoreLabel.text = String(self.score)
+                //contact.nodeA.removeFromParentNode()
+                //contact.nodeB.removeFromParentNode()
+                self.scoreLabel.text = String(self.score)
             }
         }
     }
