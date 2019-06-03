@@ -125,6 +125,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
     
     // Fire a projectile
     func fireProjectile(type : String) {
+        
         // Create the projectile node
         var node = SCNNode()
         node = createProjectile(type: type)
@@ -158,18 +159,20 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
     func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
         
         print("** Collision!! " + contact.nodeA.name! + " hit " + contact.nodeB.name!)
+        scoreLabel.text = "collision"
         
         if contact.nodeA.physicsBody?.categoryBitMask == CollisionCategory.targetCategory.rawValue
             || contact.nodeB.physicsBody?.categoryBitMask == CollisionCategory.targetCategory.rawValue {
-            
+            scoreLabel.text = "test1"
             if(contact.nodeA.name! == TARGET_ROOT_NODE_NAME || contact.nodeB.name! == TARGET_ROOT_NODE_NAME) {
-                score = score + 5
+                score += 10
+                scoreLabel.text = "contact"
             }
             
             DispatchQueue.main.async {
                 //contact.nodeA.removeFromParentNode()
                 //contact.nodeB.removeFromParentNode()
-                self.scoreLabel.text = String(self.score)
+                //self.scoreLabel.text = String(self.score)
             }
         }
     }

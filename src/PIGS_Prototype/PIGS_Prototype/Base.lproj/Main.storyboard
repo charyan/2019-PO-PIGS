@@ -38,10 +38,22 @@
                                     <action selector="onShootButton:" destination="BV1-FR-VrT" eventType="touchUpInside" id="9Yr-3l-R1L"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Points 123" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TC9-Ht-wuS" userLabel="scoreLabel">
-                                <rect key="frame" x="46" y="49" width="167" height="61"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="123" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sTO-X4-XNH" userLabel="scoreLabel">
+                                <rect key="frame" x="180" y="49" width="150" height="61"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <accessibility key="accessibilityConfiguration" hint="score" identifier="scoreLabel" label="scoreLabel"/>
+                                <accessibility key="accessibilityConfiguration" hint="score" identifier="scoreLabel" label="scoreLabel">
+                                    <accessibilityTraits key="traits" staticText="YES" notEnabled="YES"/>
+                                </accessibility>
+                                <fontDescription key="fontDescription" type="system" pointSize="37"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Points :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TC9-Ht-wuS" userLabel="labelPoints">
+                                <rect key="frame" x="46" y="49" width="126" height="61"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <accessibility key="accessibilityConfiguration" hint="score" identifier="scoreLabel" label="scoreLabel">
+                                    <accessibilityTraits key="traits" staticText="YES" notEnabled="YES"/>
+                                </accessibility>
                                 <fontDescription key="fontDescription" type="system" pointSize="37"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -52,7 +64,7 @@
                     </view>
                     <connections>
                         <outlet property="sceneView" destination="Dc5-Qt-QHU" id="ozr-I5-c07"/>
-                        <outlet property="scoreLabel" destination="TC9-Ht-wuS" id="FhN-3h-wne"/>
+                        <outlet property="scoreLabel" destination="sTO-X4-XNH" id="HPa-Sl-E84"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
