@@ -148,6 +148,23 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
         sceneView.scene.rootNode.addChildNode(node)
     }
     
+    // MARK: - Contact Delegate
+    
+    func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
+        
+        print("** Collision!! " + contact.nodeA.name! + " hit " + contact.nodeB.name!)
+        
+        if contact.nodeA.physicsBody?.categoryBitMask == CollisionCategory.targetCategory.rawValue
+            || contact.nodeB.physicsBody?.categoryBitMask == CollisionCategory.targetCategory.rawValue {
+            
+            DispatchQueue.main.async {
+                contact.nodeA.removeFromParentNode()
+                contact.nodeB.removeFromParentNode()
+                //self.scoreLabel.text = String(self.score)
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
