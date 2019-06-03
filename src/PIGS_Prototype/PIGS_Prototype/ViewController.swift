@@ -16,8 +16,7 @@ import ARKit
 let BALL_PROJECTILE_NAME : String! = "ball"
 let BALL_ROOT_NODE_NAME : String! = "Sphere"
 let BALL_SCENE_NAME : String! = "art.scnassets/models/pink_ball.scn"
-let BALL_SPEED : Float = 20
-// let BALL_SCALE : SCNVector3 = SCNVector3(0.2,0.2,0.2)
+let BALL_SPEED : Float = 80
 let BALL_SCALE : SCNVector3 = SCNVector3(1,1,1)
 
 // LAUNCHER
@@ -25,13 +24,13 @@ let PITCH_LAUNCHER : Float = 0.1 // 0 is straight forward
 
 // TARGET
 let TARGET_SCENE_NAME : String! = "art.scnassets/models/target.scn"
-// let TARGET_SCALE : SCNVector3 = SCNVector3(0.1, 0.05, 0.1)
-let TARGET_SCALE : SCNVector3 = SCNVector3(1, 1, 1)
-let TARGET_POSITION : SCNVector3 = SCNVector3(0, 0, 0)
+let TARGET_SCALE : SCNVector3 = SCNVector3(3, 0.4, 3)
+let TARGET_POSITION : SCNVector3 = SCNVector3(0, 0, -20)
+let TARGET_ROOT_NODE_NAME : String! = "Target"
 
 ////////////////////////////////////////////////////////////
 
-class ViewController: UIViewController, ARSCNViewDelegate {
+class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDelegate {
 
     @IBOutlet var sceneView: ARSCNView!
     
@@ -72,6 +71,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             node = SCNNode()
         }
         
+        node.physicsBody?.categoryBitMask = CollisionCategory.projectileCategory.rawValue
+        node.physicsBody?.collisionBitMask = CollisionCategory.targetCategory.rawValue
+        
         return node
     }
     
@@ -79,10 +81,16 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     func createTarget() {
         var node = SCNNode()
         let scene = SCNScene(named: TARGET_SCENE_NAME)!
-        node = scene.rootNode.childNode(withName: "Target", recursively: true)!
+        node = scene.rootNode.childNode(withName: TARGET_ROOT_NODE_NAME, recursively: true)!
         node.scale = TARGET_SCALE
-        node.name = "target"
+        node.name = TARGET_ROOT_NODE_NAME
         node.position = TARGET_POSITION
+        node.rotation = SCNVector4(1, 0, 0, GLKMathDegreesToRadians(90))
+        node.physicsBody = SCNPhysicsBody(type: .static, shape: nil)
+        
+        node.physicsBody?.categoryBitMask = CollisionCategory.targetCategory.rawValue
+        node.physicsBody?.collisionBitMask = CollisionCategory.projectileCategory.rawValue
+        
         sceneView.scene.rootNode.addChildNode(node)
     }
     
@@ -133,6 +141,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         // Enable antialiasing
         sceneView.antialiasingMode = .multisampling4X
         
+        sceneView.scene.physicsWorld.contactDelegate = self
+        
         createTarget()
     }
     
@@ -178,4 +188,10 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         // Reset tracking and/or remove existing anchors if consistent tracking is required
         
     }
+}
+
+struct CollisionCategory: OptionSet {
+    let rawValue: Int
+    static let projectileCategory = CollisionCategory(rawValue: 1<<0)
+    static let targetCategory = CollisionCategory(rawValue: 1<<1)
 }
