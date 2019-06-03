@@ -30,8 +30,8 @@ let TARGET_ROOT_NODE_NAME : String! = "Target"
 
 // GAMEZONE
 let GAMEZONE_SCENE_NAME : String! = "art.scnassets/level/map.scn"
-let GAMEZONE_SCALE : SCNVector3 = SCNVector3(3, 0.4, 3)
-let GAMEZONE_POSITION : SCNVector3 = SCNVector3(0, 0, -20)
+let GAMEZONE_SCALE : SCNVector3 = SCNVector3(0.5, 0.5, 0.5)
+let GAMEZONE_POSITION : SCNVector3 = SCNVector3(0, 0, -10)
 let GAMEZONE_ROOT_NODE_NAME : String! = "root"
 
 ////////////////////////////////////////////////////////////
@@ -46,6 +46,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
     // When the Shoot button is pressed
     @IBAction func onShootButton(_ sender: Any) {
         debugPrint(Date().debugDescription + " : Shoot")
+        
         fireProjectile(type: BALL_PROJECTILE_NAME)
     }
     
@@ -76,12 +77,12 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
             // Adjust the size of the node
             node.scale = BALL_SCALE
             node.name = BALL_PROJECTILE_NAME
+            
+//            node.physicsBody?.categoryBitMask = CollisionCategory.projectileCategory.rawValue
+//            node.physicsBody?.collisionBitMask = CollisionCategory.targetCategory.rawValue
         default:
             node = SCNNode()
         }
-        
-        //node.physicsBody?.categoryBitMask = CollisionCategory.projectileCategory.rawValue
-        //node.physicsBody?.collisionBitMask = CollisionCategory.targetCategory.rawValue
         
         return node
     }
@@ -95,10 +96,11 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
         node.name = TARGET_ROOT_NODE_NAME
         node.position = TARGET_POSITION
         node.rotation = SCNVector4(1, 0, 0, GLKMathDegreesToRadians(90))
-        node.physicsBody = SCNPhysicsBody(type: .static, shape: nil)
         
-        //node.physicsBody?.categoryBitMask = CollisionCategory.targetCategory.rawValue
-        //node.physicsBody?.collisionBitMask = CollisionCategory.projectileCategory.rawValue
+        node.physicsBody?.categoryBitMask = CollisionCategory.targetCategory.rawValue
+        node.physicsBody?.collisionBitMask = CollisionCategory.projectileCategory.rawValue
+        
+        node.physicsBody = SCNPhysicsBody(type: .static, shape: nil)
         
         sceneView.scene.rootNode.addChildNode(node)
     }
@@ -108,11 +110,12 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
         var node = SCNNode()
         let scene = SCNScene(named: GAMEZONE_SCENE_NAME)!
         node = scene.rootNode.childNode(withName: GAMEZONE_ROOT_NODE_NAME, recursively: true)!
-        node.scale = GAMEZONE_SCALE
+        //node.scale = GAMEZONE_SCALE
         node.name = GAMEZONE_ROOT_NODE_NAME
         node.position = GAMEZONE_POSITION
+        node.rotation = SCNVector4(0, 1, 0, GLKMathDegreesToRadians(90))
         //node.rotation = SCNVector4(1, 0, 0, GLKMathDegreesToRadians(90))
-        node.physicsBody = SCNPhysicsBody(type: .static, shape: nil)
+        //node.physicsBody = SCNPhysicsBody(type: .static, shape: nil)
         
         //node.physicsBody?.categoryBitMask = CollisionCategory.targetCategory.rawValue
         //node.physicsBody?.collisionBitMask = CollisionCategory.projectileCategory.rawValue
@@ -189,7 +192,10 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
         
         sceneView.scene.physicsWorld.contactDelegate = self
         
-        createTarget()
+        //createTarget()
+        createGameZone()
+        
+        self.scoreLabel.text = "Score: 0"
     }
     
     override func viewWillAppear(_ animated: Bool) {
