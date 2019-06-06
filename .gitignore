@@ -24,3 +24,5 @@ src/.DS_Store
 
 src/PIGS_Prototype/PIGS_Prototype.xcodeproj/project.xcworkspace/xcuserdata/apprenti.xcuserdatad/UserInterfaceState.xcuserstate
 *.xcuserstate
+.DS_Store
+src/PIGS_Prototype/PIGS_Prototype.xcodeproj/project.xcworkspace/xcuserdata/apprenti.xcuserdatad/UserInterfaceState.xcuserstate
