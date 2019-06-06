@@ -35,7 +35,7 @@ let GAMEZONE_POSITION : SCNVector3 = SCNVector3(0, -5, -10)
 let GAMEZONE_ROOT_NODE_NAME : String! = "root"
 
 ////////////////////////////////////////////////////////////
-class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDelegate {
+class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SCNPhysicsContactDelegate {
 
     var score = 0
     
@@ -109,7 +109,12 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
         //node.rotation = SCNVector4(0, 1, 0, GLKMathDegreesToRadians(90))
         //node.rotation = SCNVector4(1, 0, 0, GLKMathDegreesToRadians(90))
         //node.physicsBody = SCNPhysicsBody(type: .static, shape: nil)
+
         sceneView.scene.rootNode.addChildNode(node)
+        
+        // Collision Detection
+        sceneView.scene.physicsWorld.contactDelegate = self
+
     }
     
     // Fire a projectile
@@ -144,7 +149,19 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
         sceneView.scene.rootNode.addChildNode(node)
     }
     
-
+    // Register collision
+    func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
+        let ball = contact.nodeA.physicsBody!.contactTestBitMask == 3 ? contact.nodeA : contact.nodeB
+        let explosion = SCNParticleSystem(named: "Explosion.scnp", inDirectory: nil)!
+        let explosionNode = SCNNode()
+        explosionNode.position = ball.presentation.position
+        sceneView.scene.rootNode.addChildNode(explosionNode)
+        explosionNode.addParticleSystem(explosion)
+        ball.removeFromParentNode()
+        score += 10
+        self.scoreLabel.text = String(score)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -166,7 +183,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
         //createTarget()
         createGameZone()
         
-        self.scoreLabel.text = "0"
+        //self.scoreLabel.text = "0"
         
     }
     
