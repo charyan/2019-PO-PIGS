@@ -82,9 +82,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
         default:
             node = SCNNode()
         }
-    
-        node.physicsBody?.categoryBitMask = CollisionCategory.projectileCategory.rawValue
-        node.physicsBody?.collisionBitMask = CollisionCategory.targetCategory.rawValue
         
         return node
     }
@@ -99,15 +96,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
         node.position = TARGET_POSITION
         node.rotation = SCNVector4(1, 0, 0, GLKMathDegreesToRadians(90))
         
-        node.physicsBody?.categoryBitMask = CollisionCategory.targetCategory.rawValue
-        node.physicsBody?.collisionBitMask = CollisionCategory.projectileCategory.rawValue
-        
         node.physicsBody = SCNPhysicsBody(type: .static, shape: nil)
         
         sceneView.scene.rootNode.addChildNode(node)
-        
-        node.physicsBody?.categoryBitMask = CollisionCategory.targetCategory.rawValue
-        node.physicsBody?.collisionBitMask = CollisionCategory.projectileCategory.rawValue
         
     }
     
@@ -161,26 +152,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
         sceneView.scene.rootNode.addChildNode(node)
     }
     
-    // Check for collision
-    func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
-        
-        print("** Collision!! " + contact.nodeA.name! + " hit " + contact.nodeB.name!)
-        
-        if contact.nodeA.physicsBody?.categoryBitMask == CollisionCategory.targetCategory.rawValue
-            || contact.nodeB.physicsBody?.categoryBitMask == CollisionCategory.targetCategory.rawValue {
-            
-            if(contact.nodeA.name! == TARGET_ROOT_NODE_NAME || contact.nodeB.name! == TARGET_ROOT_NODE_NAME) {
-                score += 10
-            }
-            
-            DispatchQueue.main.async {
-                contact.nodeA.removeFromParentNode()
-                contact.nodeB.removeFromParentNode()
-                //self.scoreLabel.text = String(self.score)
-            }
-        }
-    }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -202,7 +174,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
         //createTarget()
         createGameZone()
         
-        self.scoreLabel.text = "Score: 0"
+        self.scoreLabel.text = "0"
         
     }
     
@@ -248,10 +220,4 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
         // Reset tracking and/or remove existing anchors if consistent tracking is required
         
     }
-}
-
-struct CollisionCategory: OptionSet {
-    let rawValue: Int
-    static let projectileCategory  = CollisionCategory(rawValue: 1 << 0)
-    static let targetCategory = CollisionCategory(rawValue: 1 << 1)
 }
