@@ -17,3 +17,6 @@ ARKit est une bibliothèque permettant de gérer l'expérience de réalité augm
 SceneKit est une bibliothèque permettant de gérer un environnement 3D. On l'utilisera afin de gérer les collisions, la physique et les modèles 3D.
 ### UIKit
 Cette bibliothèque permet de gérer les éléments graphiques de l'application (boutons, labels, champs textes, etc...). Nous utiliserons cette bibliothèque afin de créer l'interface graphique de notre jeu.
+
+## Placement de la zone de jeu
+Pour placer la zone de jeu, nous commençons par détecter une zone plane. La texture de l'objet où nous aimerions placer la zone doit contenir des imperfections se qui permet à l'application de trouver la zone.
