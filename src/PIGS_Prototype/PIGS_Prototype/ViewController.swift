@@ -46,7 +46,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
     // When the Shoot button is pressed
     @IBAction func onShootButton(_ sender: Any) {
         debugPrint(Date().debugDescription + " : Shoot")
-        
         fireProjectile(type: BALL_PROJECTILE_NAME)
     }
     
@@ -199,6 +198,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
         createGameZone()
         
         self.scoreLabel.text = "Score: 0"
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
