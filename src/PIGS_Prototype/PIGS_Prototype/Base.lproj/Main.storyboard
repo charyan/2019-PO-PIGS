@@ -38,8 +38,8 @@
                                     <action selector="onShootButton:" destination="BV1-FR-VrT" eventType="touchUpInside" id="9Yr-3l-R1L"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="123" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sTO-X4-XNH" userLabel="scoreLabel">
-                                <rect key="frame" x="180" y="49" width="150" height="61"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sTO-X4-XNH" userLabel="scoreLabel">
+                                <rect key="frame" x="180" y="49" width="263" height="61"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <accessibility key="accessibilityConfiguration" hint="score" identifier="scoreLabel" label="scoreLabel">
                                     <accessibilityTraits key="traits" staticText="YES" notEnabled="YES"/>
