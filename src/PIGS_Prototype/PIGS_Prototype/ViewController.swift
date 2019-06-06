@@ -82,13 +82,10 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
         default:
             node = SCNNode()
         }
-        
-<<<<<<< HEAD
+    
         node.physicsBody?.categoryBitMask = CollisionCategory.projectileCategory.rawValue
         node.physicsBody?.collisionBitMask = CollisionCategory.targetCategory.rawValue
         
-=======
->>>>>>> origin/master
         return node
     }
     
@@ -102,14 +99,11 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
         node.position = TARGET_POSITION
         node.rotation = SCNVector4(1, 0, 0, GLKMathDegreesToRadians(90))
         
-<<<<<<< HEAD
-=======
         node.physicsBody?.categoryBitMask = CollisionCategory.targetCategory.rawValue
         node.physicsBody?.collisionBitMask = CollisionCategory.projectileCategory.rawValue
         
         node.physicsBody = SCNPhysicsBody(type: .static, shape: nil)
         
->>>>>>> origin/master
         sceneView.scene.rootNode.addChildNode(node)
         
         node.physicsBody?.categoryBitMask = CollisionCategory.targetCategory.rawValue
