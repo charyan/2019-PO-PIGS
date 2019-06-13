@@ -1,28 +1,5 @@
 src/assets/.DS_Store
-
-src/assets/.DS_Store
-
 src/.DS_Store
-
-.DS_Store
-
-.DS_Store
-
-src/.DS_Store
-
-src/assets/.DS_Store
-
-<<<<<<< HEAD
-src/.DS_Store
-
-
-
-src/assets/.DS_Store
-=======
-src/.DS_Store
->>>>>>> origin/master
-
+*.DS_Store
 src/PIGS_Prototype/PIGS_Prototype.xcodeproj/project.xcworkspace/xcuserdata/apprenti.xcuserdatad/UserInterfaceState.xcuserstate
 *.xcuserstate
-.DS_Store
-src/PIGS_Prototype/PIGS_Prototype.xcodeproj/project.xcworkspace/xcuserdata/apprenti.xcuserdatad/UserInterfaceState.xcuserstate
