@@ -226,9 +226,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         case "ball":
             // Set the direction of the projectile
             nodeDirection = SCNVector3(direction.x*BALL_SPEED, direction.y*BALL_SPEED, direction.z*BALL_SPEED)
-            
-            // Add a spin to the projectile
-            node.physicsBody?.applyForce(nodeDirection, at: SCNVector3(0.1, 0, 0), asImpulse: true)
         default:
             nodeDirection = direction
         }
