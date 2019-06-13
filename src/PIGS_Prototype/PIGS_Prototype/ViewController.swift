@@ -16,8 +16,7 @@ import ARKit
 let BALL_PROJECTILE_NAME : String! = "ball"
 let BALL_ROOT_NODE_NAME : String! = "Sphere"
 let BALL_SCENE_NAME : String! = "art.scnassets/models/pink_ball.scn"
-let BALL_SPEED : Float = 80
-let BALL_SCALE : SCNVector3 = SCNVector3(1,1,1)
+let BALL_SPEED : Float = 8
 
 // LAUNCHER
 let PITCH_LAUNCHER : Float = 0.1 // 0 is straight forward
@@ -29,9 +28,9 @@ let TARGET_POSITION : SCNVector3 = SCNVector3(0, 0, -20)
 let TARGET_ROOT_NODE_NAME : String! = "Target"
 
 // GAMEZONE
-let GAMEZONE_SCENE_NAME : String! = "art.scnassets/level/map.scn"
-let GAMEZONE_SCALE : SCNVector3 = SCNVector3(0.5, 0.5, 0.5)
-//let GAMEZONE_POSITION : SCNVector3 = SCNVector3(0, -5, -20)
+let GAMEZONE_SCENE_NAME : String! = "art.scnassets/level/newMap.scn"
+let GAMEZONE_SCALE : SCNVector3 = SCNVector3(1, 1, 1)
+let GAMEZONE_POSITION : SCNVector3 = SCNVector3(0, -0.5, -0.8)
 let GAMEZONE_ROOT_NODE_NAME : String! = "root"
 
 ////////////////////////////////////////////////////////////
@@ -49,6 +48,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         fireProjectile(type: BALL_PROJECTILE_NAME)
     }
     
+
     // When the Done button is pressed
     @IBAction func onDoneButton(_ sender: UIButton) {
         
@@ -104,6 +104,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     }
     
     // Get the user vector
+
+    // Get the user's direction and position
+
     func getUserVector() -> (SCNVector3, SCNVector3) { // (direction, position)
         // Get the current frame
         if let frame = self.sceneView.session.currentFrame {
@@ -127,10 +130,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         case BALL_PROJECTILE_NAME:
             let scene = SCNScene(named: BALL_SCENE_NAME)!
             node = scene.rootNode.childNode(withName: BALL_ROOT_NODE_NAME, recursively: true)!
-            // Adjust the size of the node
-            node.scale = BALL_SCALE
+            //node.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
             node.name = BALL_PROJECTILE_NAME
-            
         default:
             node = SCNNode()
         }
@@ -159,13 +160,13 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         var node = SCNNode()
         let scene = SCNScene(named: GAMEZONE_SCENE_NAME)!
         node = scene.rootNode.childNode(withName: GAMEZONE_ROOT_NODE_NAME, recursively: true)!
-        //node.scale = GAMEZONE_SCALE
         node.name = GAMEZONE_ROOT_NODE_NAME
-        node.position = position
-        node.rotation = SCNVector4(0, 1, 0, GLKMathDegreesToRadians(90))
+
+        node.position = GAMEZONE_POSITION
+        //node.rotation = SCNVector4(0, 1, 0, GLKMathDegreesToRadians(90))
         //node.rotation = SCNVector4(1, 0, 0, GLKMathDegreesToRadians(90))
         //node.physicsBody = SCNPhysicsBody(type: .static, shape: nil)
-        
+
         sceneView.scene.rootNode.addChildNode(node)
         
         // Collision Detection
@@ -205,12 +206,19 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         sceneView.scene.rootNode.addChildNode(node)
     }
     
-
     // Hides the game menu
     func hideGameMenu() {
         
     }
 
+    func scoreUpdate() {
+        self.scoreLabel.text = String(score)
+    }
+    
+    func scoreIncrement(points: Int) {
+        score += points
+    }
+    
 
     // Register collision
     func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
@@ -221,8 +229,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         sceneView.scene.rootNode.addChildNode(explosionNode)
         explosionNode.addParticleSystem(explosion)
         ball.removeFromParentNode()
-        score += 10
-        self.scoreLabel.text = String(score)
+        scoreIncrement(points: 10)
+        scoreUpdate()
     }
     
     override func viewDidLoad() {
