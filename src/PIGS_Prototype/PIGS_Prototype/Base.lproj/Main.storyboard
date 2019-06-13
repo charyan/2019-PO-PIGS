@@ -59,7 +59,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" alpha="0.60000002384185791" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xDm-KS-Eiz" userLabel="Done">
-                                <rect key="frame" x="46" y="676" width="187" height="174"/>
+                                <rect key="frame" x="330" y="790" width="187" height="174"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="34"/>
@@ -68,7 +68,6 @@
                                 </state>
                                 <connections>
                                     <action selector="onDoneButton:" destination="BV1-FR-VrT" eventType="touchUpInside" id="xbu-zI-LHT"/>
-                                    <action selector="onShootButton:" destination="BV1-FR-VrT" eventType="touchUpInside" id="i4v-Pd-kHP"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -76,8 +75,12 @@
                         <viewLayoutGuide key="safeArea" id="AA5-RC-t3s"/>
                     </view>
                     <connections>
+                        <outlet property="crosshair" destination="rgs-g0-f9u" id="7u5-lj-4MG"/>
+                        <outlet property="doneButton" destination="xDm-KS-Eiz" id="bG4-UF-pXs"/>
+                        <outlet property="labelPoints" destination="TC9-Ht-wuS" id="CBd-uv-ktn"/>
                         <outlet property="sceneView" destination="Dc5-Qt-QHU" id="ozr-I5-c07"/>
                         <outlet property="scoreLabel" destination="sTO-X4-XNH" id="HPa-Sl-E84"/>
+                        <outlet property="shootButton" destination="QxQ-gC-I1M" id="6zI-JO-ABI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>

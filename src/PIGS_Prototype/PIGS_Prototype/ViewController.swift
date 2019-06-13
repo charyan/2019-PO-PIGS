@@ -33,6 +33,9 @@ let GAMEZONE_SCALE : SCNVector3 = SCNVector3(1, 1, 1)
 let GAMEZONE_POSITION : SCNVector3 = SCNVector3(0, -0.5, -0.8)
 let GAMEZONE_ROOT_NODE_NAME : String! = "root"
 
+// PLACEHOLDER PLANE for gamezone placement
+let PLACEHOLDER_PLANE_TRANSPARENCY : CGFloat = 0.5
+
 ////////////////////////////////////////////////////////////
 class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SCNPhysicsContactDelegate {
 
@@ -43,14 +46,19 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     @IBOutlet weak var scoreLabel: UILabel!
     
     // When the Shoot button is pressed
-    @IBAction func onShootButton(_ sender: Any) {
+    @IBAction func onShootButton(_ sender: UIButton) {
         debugPrint(Date().debugDescription + " : Shoot")
         fireProjectile(type: BALL_PROJECTILE_NAME)
     }
     
-
+    @IBOutlet weak var doneButton: UIButton!
+    @IBOutlet weak var labelPoints: UILabel!
+    @IBOutlet weak var shootButton: UIButton!
+    @IBOutlet weak var crosshair: UIImageView!
+    
+    
     // When the Done button is pressed
-    @IBAction func onDoneButton(_ sender: UIButton) {
+    @IBAction func onDoneButton(_ sender: Any) {
         if tracking {
             //Set up the scene
             guard foundSurface else { return }
@@ -63,11 +71,43 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             //ambientLightNode = container.childNode(withName: "ambientLight", recursively: false)
             //directionalLightNode = container.childNode(withName: "directionalLight", recursively: false)
             tracking = false //4
-        } else {
-            //
         }
-        // ...
+        displayGameMenu()
+        hideGamezonePlacementMenu()
     }
+    
+    // Display the game menu
+    func displayGameMenu() {
+        scoreLabel.isHidden = false
+        doneButton.isHidden = false
+        labelPoints.isHidden = false
+        shootButton.isHidden = false
+        crosshair.isHidden = false
+    }
+    
+    // Hide the game menu
+    func hideGameMenu() {
+        scoreLabel.isHidden = true
+        doneButton.isHidden = true
+        labelPoints.isHidden = true
+        shootButton.isHidden = true
+        crosshair.isHidden = true
+    }
+    
+    // Display the gamezone placement menu
+    func displayGamezonePlacementMenu() {
+        doneButton.isHidden = false
+        doneButton.isEnabled = true
+    }
+    
+    // Hide the gamezone placement menu
+    func hideGamezonePlacementMenu() {
+        doneButton.isHidden = true
+        doneButton.isEnabled = false
+        doneButton.isOpaque = false
+        
+    }
+    
     // Variables for play zone
     var trackerNode: SCNNode?
     var foundSurface = false
@@ -89,39 +129,18 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             let plane = SCNPlane(width: 1.6, height: 1.6)
             plane.firstMaterial?.diffuse.contents = UIImage(named: "art.scnassets/img/app-icon.png")
             plane.firstMaterial?.isDoubleSided = true
+            plane.firstMaterial?.transparency = CGFloat(PLACEHOLDER_PLANE_TRANSPARENCY)
             trackerNode = SCNNode(geometry: plane) //2
             trackerNode?.eulerAngles.x = -.pi * 0.5 //3
             self.sceneView.scene.rootNode.addChildNode(self.trackerNode!) //4
             foundSurface = true
         }
         self.trackerNode?.position = position //5
-    }
-    
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if tracking {
-            //Set up the scene
-            guard foundSurface else { return } //1
-            let trackingPosition = trackerNode!.position //2
-            trackerNode?.removeFromParentNode()
-            /*container = sceneView.scene.rootNode.childNode(withName: "container", recursively: false)!
-             container.position = trackingPosition
-             container.isHidden = false //3*/
-            createGameZone(position: trackingPosition)
-            //ambientLightNode = container.childNode(withName: "ambientLight", recursively: false)
-            //directionalLightNode = container.childNode(withName: "directionalLight", recursively: false)
-            tracking = false //4
-        } else {
-            //
-        }
-        
+        displayGamezonePlacementMenu()
     }
 
-    
-    // Get the user vector
 
     // Get the user's direction and position
-
     func getUserVector() -> (SCNVector3, SCNVector3) { // (direction, position)
         // Get the current frame
         if let frame = self.sceneView.session.currentFrame {
@@ -220,11 +239,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         // Add the node to the scene
         sceneView.scene.rootNode.addChildNode(node)
     }
-    
-    // Hides the game menu
-    func hideGameMenu() {
-        
-    }
 
     func scoreUpdate() {
         self.scoreLabel.text = String(score)
@@ -267,11 +281,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         
         sceneView.scene.physicsWorld.contactDelegate = self
         
-        //createTarget()
-        //createGameZone()
-        
-        //self.scoreLabel.text = "0"
-        
+        hideGameMenu()
+        hideGamezonePlacementMenu()
     }
     
     override func viewWillAppear(_ animated: Bool) {
