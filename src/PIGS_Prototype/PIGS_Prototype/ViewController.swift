@@ -51,11 +51,24 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
 
     // When the Done button is pressed
     @IBAction func onDoneButton(_ sender: UIButton) {
-        
-        
+        if tracking {
+            //Set up the scene
+            guard foundSurface else { return }
+            let trackingPosition = trackerNode!.position
+            trackerNode?.removeFromParentNode()
+            /*container = sceneView.scene.rootNode.childNode(withName: "container", recursively: false)!
+             container.position = trackingPosition
+             container.isHidden = false */
+            createGameZone(position: trackingPosition)
+            //ambientLightNode = container.childNode(withName: "ambientLight", recursively: false)
+            //directionalLightNode = container.childNode(withName: "directionalLight", recursively: false)
+            tracking = false //4
+        } else {
+            //
+        }
         // ...
     }
-    // Variables utilisées pour le placement du terrain
+    // Variables for play zone
     var trackerNode: SCNNode?
     var foundSurface = false
     var tracking = true
@@ -73,7 +86,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         let position = SCNVector3Make(translation.m41, translation.m42, translation.m43) //3
         
         if trackerNode == nil { //1
-            let plane = SCNPlane(width: 1, height: 1)
+            let plane = SCNPlane(width: 1.6, height: 1.6)
             plane.firstMaterial?.diffuse.contents = UIImage(named: "art.scnassets/img/app-icon.png")
             plane.firstMaterial?.isDoubleSided = true
             trackerNode = SCNNode(geometry: plane) //2
@@ -83,6 +96,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         }
         self.trackerNode?.position = position //5
     }
+    
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if tracking {
@@ -102,6 +116,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         }
         
     }
+
     
     // Get the user vector
 
@@ -162,7 +177,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         node = scene.rootNode.childNode(withName: GAMEZONE_ROOT_NODE_NAME, recursively: true)!
         node.name = GAMEZONE_ROOT_NODE_NAME
 
-        node.position = GAMEZONE_POSITION
+        node.position = position
         //node.rotation = SCNVector4(0, 1, 0, GLKMathDegreesToRadians(90))
         //node.rotation = SCNVector4(1, 0, 0, GLKMathDegreesToRadians(90))
         //node.physicsBody = SCNPhysicsBody(type: .static, shape: nil)
