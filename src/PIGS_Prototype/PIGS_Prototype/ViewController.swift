@@ -10,7 +10,7 @@ import UIKit
 import SceneKit
 import ARKit
 
-////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
 
 // BALL
 let BALL_PROJECTILE_NAME : String! = "ball"
@@ -48,7 +48,80 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         fireProjectile(type: BALL_PROJECTILE_NAME)
     }
     
+
+    // When the Done button is pressed
+    @IBAction func onDoneButton(_ sender: UIButton) {
+        if tracking {
+            //Set up the scene
+            guard foundSurface else { return }
+            let trackingPosition = trackerNode!.position
+            trackerNode?.removeFromParentNode()
+            /*container = sceneView.scene.rootNode.childNode(withName: "container", recursively: false)!
+             container.position = trackingPosition
+             container.isHidden = false */
+            createGameZone(position: trackingPosition)
+            //ambientLightNode = container.childNode(withName: "ambientLight", recursively: false)
+            //directionalLightNode = container.childNode(withName: "directionalLight", recursively: false)
+            tracking = false //4
+        } else {
+            //
+        }
+        // ...
+    }
+    // Variables for play zone
+    var trackerNode: SCNNode?
+    var foundSurface = false
+    var tracking = true
+    
+    var directionalLightNode: SCNNode?
+    var ambientLightNode: SCNNode?
+    var container: SCNNode!
+    
+    // Fonction popur placement du terrain
+    func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
+        guard tracking else { return } //1
+        let hitTest = self.sceneView.hitTest(CGPoint(x: self.view.frame.midX, y: self.view.frame.midY), types: .featurePoint) //2
+        guard let result = hitTest.first else { return }
+        let translation = SCNMatrix4(result.worldTransform)
+        let position = SCNVector3Make(translation.m41, translation.m42, translation.m43) //3
+        
+        if trackerNode == nil { //1
+            let plane = SCNPlane(width: 1.6, height: 1.6)
+            plane.firstMaterial?.diffuse.contents = UIImage(named: "art.scnassets/img/app-icon.png")
+            plane.firstMaterial?.isDoubleSided = true
+            trackerNode = SCNNode(geometry: plane) //2
+            trackerNode?.eulerAngles.x = -.pi * 0.5 //3
+            self.sceneView.scene.rootNode.addChildNode(self.trackerNode!) //4
+            foundSurface = true
+        }
+        self.trackerNode?.position = position //5
+    }
+    
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if tracking {
+            //Set up the scene
+            guard foundSurface else { return } //1
+            let trackingPosition = trackerNode!.position //2
+            trackerNode?.removeFromParentNode()
+            /*container = sceneView.scene.rootNode.childNode(withName: "container", recursively: false)!
+             container.position = trackingPosition
+             container.isHidden = false //3*/
+            createGameZone(position: trackingPosition)
+            //ambientLightNode = container.childNode(withName: "ambientLight", recursively: false)
+            //directionalLightNode = container.childNode(withName: "directionalLight", recursively: false)
+            tracking = false //4
+        } else {
+            //
+        }
+        
+    }
+
+    
+    // Get the user vector
+
     // Get the user's direction and position
+
     func getUserVector() -> (SCNVector3, SCNVector3) { // (direction, position)
         // Get the current frame
         if let frame = self.sceneView.session.currentFrame {
@@ -98,12 +171,13 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     }
     
     // Create the game zone
-    func createGameZone() {
+    func createGameZone(position : SCNVector3) {
         var node = SCNNode()
         let scene = SCNScene(named: GAMEZONE_SCENE_NAME)!
         node = scene.rootNode.childNode(withName: GAMEZONE_ROOT_NODE_NAME, recursively: true)!
         node.name = GAMEZONE_ROOT_NODE_NAME
-        node.position = GAMEZONE_POSITION
+
+        node.position = position
         //node.rotation = SCNVector4(0, 1, 0, GLKMathDegreesToRadians(90))
         //node.rotation = SCNVector4(1, 0, 0, GLKMathDegreesToRadians(90))
         //node.physicsBody = SCNPhysicsBody(type: .static, shape: nil)
@@ -147,6 +221,11 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         sceneView.scene.rootNode.addChildNode(node)
     }
     
+    // Hides the game menu
+    func hideGameMenu() {
+        
+    }
+
     func scoreUpdate() {
         self.scoreLabel.text = String(score)
     }
@@ -155,6 +234,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         score += points
     }
     
+
     // Register collision
     func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
         let ball = contact.nodeA.physicsBody!.contactTestBitMask == 3 ? contact.nodeA : contact.nodeB
@@ -177,17 +257,18 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         // Show statistics such as fps and timing information
         sceneView.showsStatistics = true
         
-        // Debug options
+        /// Debug options
         sceneView.debugOptions = [ARSCNDebugOptions.showWorldOrigin,
-                                  ARSCNDebugOptions.showPhysicsShapes]
-        
+                                  ARSCNDebugOptions.showPhysicsShapes,
+                                  ARSCNDebugOptions.showFeaturePoints
+        ]
         // Enable antialiasing
         sceneView.antialiasingMode = .multisampling4X
         
         sceneView.scene.physicsWorld.contactDelegate = self
         
         //createTarget()
-        createGameZone()
+        //createGameZone()
         
         //self.scoreLabel.text = "0"
         
