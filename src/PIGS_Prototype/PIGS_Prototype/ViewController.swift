@@ -16,7 +16,7 @@ import ARKit
 let BALL_PROJECTILE_NAME : String! = "ball"
 let BALL_ROOT_NODE_NAME : String! = "Sphere"
 let BALL_SCENE_NAME : String! = "art.scnassets/models/pink_ball.scn"
-let BALL_SPEED : Float = 8
+let BALL_SPEED : Float = 15
 
 // LAUNCHER
 let PITCH_LAUNCHER : Float = 0.1 // 0 is straight forward
@@ -36,13 +36,23 @@ let GAMEZONE_ROOT_NODE_NAME : String! = "root"
 // PLACEHOLDER PLANE for gamezone placement
 let PLACEHOLDER_PLANE_TRANSPARENCY : CGFloat = 0.5
 
+// POINTS
+let POINTS_BLOCK : Int = 10
+let POINTS_TARGET : Int = 50
+
 ////////////////////////////////////////////////////////////
+
 class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SCNPhysicsContactDelegate {
 
     var score = 0
     
-    @IBOutlet var sceneView: ARSCNView!
+    enum CATEGORY_BIT_MASK: Int {
+        case BALL   = 2
+        case TARGET  = 3
+    }
     
+    
+    @IBOutlet var sceneView: ARSCNView!
     @IBOutlet weak var scoreLabel: UILabel!
     
     // When the Shoot button is pressed
@@ -70,7 +80,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             createGameZone(position: trackingPosition)
             //ambientLightNode = container.childNode(withName: "ambientLight", recursively: false)
             //directionalLightNode = container.childNode(withName: "directionalLight", recursively: false)
-            tracking = false //4
+            tracking = false
         }
         displayGameMenu()
         hideGamezonePlacementMenu()
@@ -105,7 +115,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         doneButton.isHidden = true
         doneButton.isEnabled = false
         doneButton.isOpaque = false
-        
     }
     
     // Variables for play zone
@@ -117,25 +126,24 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     var ambientLightNode: SCNNode?
     var container: SCNNode!
     
-    // Fonction popur placement du terrain
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
-        guard tracking else { return } //1
-        let hitTest = self.sceneView.hitTest(CGPoint(x: self.view.frame.midX, y: self.view.frame.midY), types: .featurePoint) //2
+        guard tracking else { return }
+        let hitTest = self.sceneView.hitTest(CGPoint(x: self.view.frame.midX, y: self.view.frame.midY), types: .featurePoint)
         guard let result = hitTest.first else { return }
         let translation = SCNMatrix4(result.worldTransform)
-        let position = SCNVector3Make(translation.m41, translation.m42, translation.m43) //3
+        let position = SCNVector3Make(translation.m41, translation.m42, translation.m43)
         
-        if trackerNode == nil { //1
+        if trackerNode == nil {
             let plane = SCNPlane(width: 1.6, height: 1.6)
             plane.firstMaterial?.diffuse.contents = UIImage(named: "art.scnassets/img/app-icon.png")
             plane.firstMaterial?.isDoubleSided = true
             plane.firstMaterial?.transparency = CGFloat(PLACEHOLDER_PLANE_TRANSPARENCY)
-            trackerNode = SCNNode(geometry: plane) //2
-            trackerNode?.eulerAngles.x = -.pi * 0.5 //3
-            self.sceneView.scene.rootNode.addChildNode(self.trackerNode!) //4
+            trackerNode = SCNNode(geometry: plane)
+            trackerNode?.eulerAngles.x = -.pi * 0.5
+            self.sceneView.scene.rootNode.addChildNode(self.trackerNode!)
             foundSurface = true
         }
-        self.trackerNode?.position = position //5
+        self.trackerNode?.position = position
         displayGamezonePlacementMenu()
     }
 
@@ -255,7 +263,25 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         sceneView.scene.rootNode.addChildNode(explosionNode)
         explosionNode.addParticleSystem(explosion)
         ball.removeFromParentNode()
-        scoreIncrement(points: 10)
+        
+        print(contact.nodeA.name!)
+        print(contact.nodeB.name!)
+        
+        if(contact.nodeA.physicsBody!.categoryBitMask == CATEGORY_BIT_MASK.TARGET.rawValue ||
+            contact.nodeB.physicsBody!.categoryBitMask == CATEGORY_BIT_MASK.TARGET.rawValue) {
+            
+            if (contact.nodeA.name! == BALL_ROOT_NODE_NAME && contact.nodeB.name! == BALL_ROOT_NODE_NAME) {
+                print("Collision with ball")
+            } else if (contact.nodeA.name! == "block" || contact.nodeB.name! == "block") {
+                scoreIncrement(points: POINTS_BLOCK)
+                print("Collision with block")
+            }else if (contact.nodeA.name! == "target" || contact.nodeB.name! == "target") {
+                scoreIncrement(points: POINTS_TARGET)
+                print("Collision with target")
+            }
+        }
+        
+        
         scoreUpdate()
     }
     
