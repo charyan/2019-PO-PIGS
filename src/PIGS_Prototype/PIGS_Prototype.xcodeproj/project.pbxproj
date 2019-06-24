@@ -11,6 +11,7 @@
 		8B34476122A54B9D00E63DD8 /* pigs-launch-background.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B34476022A54B9D00E63DD8 /* pigs-launch-background.png */; };
 		8B3987FA22A93EFC002EFD44 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B3987F822A93EFC002EFD44 /* spark.png */; };
 		8B3987FB22A93EFC002EFD44 /* Explosion.scnp in Resources */ = {isa = PBXBuildFile; fileRef = 8B3987F922A93EFC002EFD44 /* Explosion.scnp */; };
+		8BAA54F522B27F7E005DB8EC /* Skater_Girls_Rock.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8BAA54F422B27F7E005DB8EC /* Skater_Girls_Rock.ttf */; };
 		8BAE78952297C611003F496A /* app-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BAE78942297C611003F496A /* app-icon.png */; };
 		8BC707BB229C021B00CA688A /* launchscreen-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BC707BA229C021B00CA688A /* launchscreen-logo.png */; };
 		8BFCB2592284476000E54C18 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFCB2582284476000E54C18 /* AppDelegate.swift */; };
@@ -25,6 +26,7 @@
 		8B34476022A54B9D00E63DD8 /* pigs-launch-background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "pigs-launch-background.png"; path = "art.scnassets/img/pigs-launch-background.png"; sourceTree = "<group>"; };
 		8B3987F822A93EFC002EFD44 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 		8B3987F922A93EFC002EFD44 /* Explosion.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = Explosion.scnp; sourceTree = "<group>"; };
+		8BAA54F422B27F7E005DB8EC /* Skater_Girls_Rock.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Skater_Girls_Rock.ttf; path = PIGS_Prototype/fonts/Skater_Girls_Rock.ttf; sourceTree = SOURCE_ROOT; };
 		8BAE78942297C611003F496A /* app-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "app-icon.png"; path = "art.scnassets/img/app-icon.png"; sourceTree = "<group>"; };
 		8BC707BA229C021B00CA688A /* launchscreen-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "launchscreen-logo.png"; path = "art.scnassets/img/launchscreen-logo.png"; sourceTree = "<group>"; };
 		8BFCB2552284476000E54C18 /* PIGS_Prototype.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PIGS_Prototype.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -47,6 +49,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8BAA54F322B27EFF005DB8EC /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				8BAA54F422B27F7E005DB8EC /* Skater_Girls_Rock.ttf */,
+			);
+			path = fonts;
+			sourceTree = "<group>";
+		};
 		8BFCB24C2284476000E54C18 = {
 			isa = PBXGroup;
 			children = (
@@ -68,6 +78,7 @@
 		8BFCB2572284476000E54C18 /* PIGS_Prototype */ = {
 			isa = PBXGroup;
 			children = (
+				8BAA54F322B27EFF005DB8EC /* fonts */,
 				8BFCB2582284476000E54C18 /* AppDelegate.swift */,
 				8B13A512228EF23200047809 /* art.scnassets */,
 				8BFCB25C2284476000E54C18 /* ViewController.swift */,
@@ -147,6 +158,7 @@
 				8B3987FB22A93EFC002EFD44 /* Explosion.scnp in Resources */,
 				8BAE78952297C611003F496A /* app-icon.png in Resources */,
 				8B3987FA22A93EFC002EFD44 /* spark.png in Resources */,
+				8BAA54F522B27F7E005DB8EC /* Skater_Girls_Rock.ttf in Resources */,
 				8BC707BB229C021B00CA688A /* launchscreen-logo.png in Resources */,
 				8BFCB2602284476000E54C18 /* Main.storyboard in Resources */,
 			);
