@@ -102,6 +102,8 @@
                         <outlet property="crosshair" destination="rgs-g0-f9u" id="7u5-lj-4MG"/>
                         <outlet property="doneButton" destination="xDm-KS-Eiz" id="bG4-UF-pXs"/>
                         <outlet property="labelPoints" destination="TC9-Ht-wuS" id="CBd-uv-ktn"/>
+                        <outlet property="leftButton" destination="8Fd-hn-gke" id="9BD-4g-lFJ"/>
+                        <outlet property="rightButton" destination="jbx-Bh-iyA" id="aJ2-34-syo"/>
                         <outlet property="sceneView" destination="Dc5-Qt-QHU" id="ozr-I5-c07"/>
                         <outlet property="scoreLabel" destination="sTO-X4-XNH" id="HPa-Sl-E84"/>
                         <outlet property="shootButton" destination="QxQ-gC-I1M" id="6zI-JO-ABI"/>

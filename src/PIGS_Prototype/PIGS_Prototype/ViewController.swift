@@ -67,7 +67,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         self.shootButton.backgroundColor = UIColor.lightGray
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
             self.shootButton.backgroundColor = UIColor.green
-            self.enableButton()
+            self.enableShootButton()
         })
     }
     
@@ -75,6 +75,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     @IBOutlet weak var labelPoints: UILabel!
     @IBOutlet weak var shootButton: UIButton!
     @IBOutlet weak var crosshair: UIImageView!
+    @IBOutlet weak var leftButton: UIButton!
+    @IBOutlet weak var rightButton: UIButton!
     
     
     // When the Done button is pressed
@@ -115,7 +117,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     
 
     // Enable shoot button after cooldown
-    func enableButton() {
+    func enableShootButton() {
         self.shootButton.isEnabled = true
         self.shootButton.backgroundColor = UIColor.white
     }
@@ -143,6 +145,12 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     func displayGamezonePlacementMenu() {
         self.doneButton.isHidden = false
         self.doneButton.isEnabled = true
+        
+        self.leftButton.isHidden = false
+        self.leftButton.isEnabled = true
+        
+        self.rightButton.isHidden = false
+        self.rightButton.isEnabled = true
     }
     
     // Hide the gamezone placement menu
@@ -150,6 +158,14 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         doneButton.isHidden = true
         doneButton.isEnabled = false
         doneButton.isOpaque = false
+        
+        self.leftButton.isHidden = true
+        self.leftButton.isEnabled = false
+        self.leftButton.isOpaque = false
+        
+        self.rightButton.isHidden = true
+        self.rightButton.isEnabled = false
+        self.rightButton.isOpaque = false
     }
     
     // Variables for play zone
