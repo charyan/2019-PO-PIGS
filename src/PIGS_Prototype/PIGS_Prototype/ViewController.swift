@@ -20,6 +20,7 @@ let BALL_SPEED : Float = 15
 
 // LAUNCHER
 let PITCH_LAUNCHER : Float = 0.1 // 0 is straight forward
+let LAUNCHER_COOLDOWN : Float = 0.5
 
 // TARGET
 let TARGET_SCENE_NAME : String! = "art.scnassets/models/target.scn"
@@ -59,6 +60,12 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     @IBAction func onShootButton(_ sender: UIButton) {
         debugPrint(Date().debugDescription + " : Shoot")
         fireProjectile(type: BALL_PROJECTILE_NAME)
+        self.shootButton.isEnabled = false
+        self.shootButton.backgroundColor = UIColor.lightGray
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+            self.shootButton.backgroundColor = UIColor.green
+            self.enableButton()
+        })
     }
     
     @IBOutlet weak var doneButton: UIButton!
@@ -84,6 +91,12 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         }
         displayGameMenu()
         hideGamezonePlacementMenu()
+    }
+    
+    // Enable shoot button after cooldown
+    func enableButton() {
+        self.shootButton.isEnabled = true
+        self.shootButton.backgroundColor = UIColor.white
     }
     
     // Display the game menu
