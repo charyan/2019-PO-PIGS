@@ -12,6 +12,8 @@ import ARKit
 
 ///////////////////////////////////////////////////////////////
 
+let DEBUG_MODE : Bool = false
+
 // BALL
 let BALL_PROJECTILE_NAME : String! = "ball"
 let BALL_ROOT_NODE_NAME : String! = "Sphere"
@@ -102,15 +104,15 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     var rotationDeg: Float = 0
     
     @IBAction func onLeftButton(_ sender: Any) {
-        self.trackerNode?.eulerAngles.y += GLKMathDegreesToRadians(ROTATION_DEG)
-        rotationDeg += ROTATION_DEG
+        self.trackerNode?.eulerAngles.y -= GLKMathDegreesToRadians(ROTATION_DEG)
+        rotationDeg -= ROTATION_DEG
         print(rotationDeg)
     }
     
     
     @IBAction func onRightButton(_ sender: Any) {
-        self.trackerNode?.eulerAngles.y -= GLKMathDegreesToRadians(ROTATION_DEG)
-         rotationDeg -= ROTATION_DEG
+        self.trackerNode?.eulerAngles.y += GLKMathDegreesToRadians(ROTATION_DEG)
+         rotationDeg += ROTATION_DEG
         print(rotationDeg)
     }
     
@@ -357,10 +359,13 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         // Show statistics such as fps and timing information
         sceneView.showsStatistics = true
         
-        /// Debug options
-        sceneView.debugOptions = [ARSCNDebugOptions.showWorldOrigin,
-                                  ARSCNDebugOptions.showPhysicsShapes,
-                                  ARSCNDebugOptions.showFeaturePoints]
+        if(DEBUG_MODE) {
+            /// Debug options
+            sceneView.debugOptions = [ARSCNDebugOptions.showWorldOrigin,
+                                      ARSCNDebugOptions.showPhysicsShapes,
+                                      ARSCNDebugOptions.showFeaturePoints]
+        }
+        
         // Enable antialiasing
         sceneView.antialiasingMode = .multisampling4X
         
