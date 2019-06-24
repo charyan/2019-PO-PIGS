@@ -20,6 +20,10 @@ SceneKit est une bibliothèque permettant de gérer un environnement 3D. On l'ut
 Cette bibliothèque permet de gérer les éléments graphiques de l'application (boutons, labels, champs textes, etc...). Nous utiliserons cette bibliothèque afin de créer l'interface graphique de notre jeu.
 
 ## Placement de la zone de jeu
-Pour placer la zone de jeu, nous commençons par détecter une zone plane. 
+Pour placer la zone de jeu, nous commençons par détecter une zone plane. Une fois que la zone plane est détectée, on affiche une image transparente de la taille du terrain de jeu, cette dernière est déplaçable, pour fixer le terrain de jeu, on appuis sur un bouton.  
+
+Pour un fonctionnement idéal, la surface sur laquel devra se poser le terrain de jeu doit être irrégulière (par exemple, une planche de bois).
 ## Lanceur
 Le lanceur permet de créer une balle à la position de l'iPad dans le monde virtuel et d'appliquer une force permettant de déplacer cette balle. Le lancement de la balle est déclenché par l'appuis d'un bouton.
+## Cibles
+Différentes cibles sont placées sur la table, elles rapportent différentes quantités de points. 
