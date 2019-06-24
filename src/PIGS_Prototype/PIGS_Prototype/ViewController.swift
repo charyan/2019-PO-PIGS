@@ -20,6 +20,7 @@ let BALL_SPEED : Float = 15
 
 // LAUNCHER
 let PITCH_LAUNCHER : Float = 0.1 // 0 is straight forward
+let LAUNCHER_COOLDOWN : Float = 0.5
 
 // TARGET
 let TARGET_SCENE_NAME : String! = "art.scnassets/models/target.scn"
@@ -40,6 +41,9 @@ let PLACEHOLDER_PLANE_TRANSPARENCY : CGFloat = 0.5
 let POINTS_BLOCK : Int = 10
 let POINTS_TARGET : Int = 50
 
+// Default value rotation
+let ROTATION_DEG : Float = 5;
+
 ////////////////////////////////////////////////////////////
 
 class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SCNPhysicsContactDelegate {
@@ -59,12 +63,20 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     @IBAction func onShootButton(_ sender: UIButton) {
         debugPrint(Date().debugDescription + " : Shoot")
         fireProjectile(type: BALL_PROJECTILE_NAME)
+        self.shootButton.isEnabled = false
+        self.shootButton.backgroundColor = UIColor.lightGray
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+            self.shootButton.backgroundColor = UIColor.green
+            self.enableShootButton()
+        })
     }
     
     @IBOutlet weak var doneButton: UIButton!
     @IBOutlet weak var labelPoints: UILabel!
     @IBOutlet weak var shootButton: UIButton!
     @IBOutlet weak var crosshair: UIImageView!
+    @IBOutlet weak var leftButton: UIButton!
+    @IBOutlet weak var rightButton: UIButton!
     
     
     // When the Done button is pressed
@@ -86,6 +98,31 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         hideGamezonePlacementMenu()
     }
     
+
+    var rotationDeg: Float = 0
+    
+    @IBAction func onLeftButton(_ sender: Any) {
+        self.trackerNode?.eulerAngles.y += GLKMathDegreesToRadians(ROTATION_DEG)
+        rotationDeg += ROTATION_DEG
+        print(rotationDeg)
+    }
+    
+    
+    @IBAction func onRightButton(_ sender: Any) {
+        self.trackerNode?.eulerAngles.y -= GLKMathDegreesToRadians(ROTATION_DEG)
+         rotationDeg -= ROTATION_DEG
+        print(rotationDeg)
+    }
+    
+    
+
+    // Enable shoot button after cooldown
+    func enableShootButton() {
+        self.shootButton.isEnabled = true
+        self.shootButton.backgroundColor = UIColor.white
+    }
+    
+
     // Display the game menu
     func displayGameMenu() {
         scoreLabel.isHidden = false
@@ -108,6 +145,12 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     func displayGamezonePlacementMenu() {
         self.doneButton.isHidden = false
         self.doneButton.isEnabled = true
+        
+        self.leftButton.isHidden = false
+        self.leftButton.isEnabled = true
+        
+        self.rightButton.isHidden = false
+        self.rightButton.isEnabled = true
     }
     
     // Hide the gamezone placement menu
@@ -115,6 +158,14 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         doneButton.isHidden = true
         doneButton.isEnabled = false
         doneButton.isOpaque = false
+        
+        self.leftButton.isHidden = true
+        self.leftButton.isEnabled = false
+        self.leftButton.isOpaque = false
+        
+        self.rightButton.isHidden = true
+        self.rightButton.isEnabled = false
+        self.rightButton.isOpaque = false
     }
     
     // Variables for play zone
@@ -140,10 +191,23 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             plane.firstMaterial?.transparency = CGFloat(PLACEHOLDER_PLANE_TRANSPARENCY)
             trackerNode = SCNNode(geometry: plane)
             trackerNode?.eulerAngles.x = -.pi * 0.5
+            //self.trackerNode?.rotation = SCNVector4(0, 1, 0, GLKMathDegreesToRadians(270))
+ 
+            
             self.sceneView.scene.rootNode.addChildNode(self.trackerNode!)
             foundSurface = true
         }
+        
         self.trackerNode?.position = position
+        
+        //self.trackerNode?.rotation.x = GLKMathDegreesToRadians(270)
+        
+        //self.trackerNode?.rotation = SCNVector4(0, 1, 0,GLKMathDegreesToRadians(Float(rotationDeg)))
+       
+        //self.trackerNode?.rotation =  SCNVector4(0, 1, 0,GLKMathDegreesToRadians(Float(rotationDeg)))
+       //self.trackerNode?.rotation = SCNVector4(1, 0, 0, GLKMathDegreesToRadians(270))
+      
+        
         displayGamezonePlacementMenu()
     }
 
@@ -189,7 +253,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         node.scale = TARGET_SCALE
         node.name = TARGET_ROOT_NODE_NAME
         node.position = TARGET_POSITION
-        node.rotation = SCNVector4(1, 0, 0, GLKMathDegreesToRadians(90))
+      node.rotation = SCNVector4(1, 0, 0, GLKMathDegreesToRadians(90))
         
         node.physicsBody = SCNPhysicsBody(type: .static, shape: nil)
         
@@ -205,7 +269,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         node.name = GAMEZONE_ROOT_NODE_NAME
 
         node.position = position
-        //node.rotation = SCNVector4(0, 1, 0, GLKMathDegreesToRadians(90))
+        node.rotation = SCNVector4(0, 1, 0, GLKMathDegreesToRadians(Float(rotationDeg)))
         //node.rotation = SCNVector4(1, 0, 0, GLKMathDegreesToRadians(90))
         //node.physicsBody = SCNPhysicsBody(type: .static, shape: nil)
 
