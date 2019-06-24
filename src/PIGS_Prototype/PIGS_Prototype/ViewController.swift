@@ -40,6 +40,9 @@ let PLACEHOLDER_PLANE_TRANSPARENCY : CGFloat = 0.5
 let POINTS_BLOCK : Int = 10
 let POINTS_TARGET : Int = 50
 
+// Default value rotation
+let ROTATION_DEG : Float = 5;
+
 ////////////////////////////////////////////////////////////
 
 class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SCNPhysicsContactDelegate {
@@ -85,6 +88,22 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         displayGameMenu()
         hideGamezonePlacementMenu()
     }
+    
+    var rotationDeg: Float = 0
+    
+    @IBAction func onLeftButton(_ sender: Any) {
+        self.trackerNode?.eulerAngles.y += GLKMathDegreesToRadians(ROTATION_DEG)
+        rotationDeg += ROTATION_DEG
+        print(rotationDeg)
+    }
+    
+    
+    @IBAction func onRightButton(_ sender: Any) {
+        self.trackerNode?.eulerAngles.y -= GLKMathDegreesToRadians(ROTATION_DEG)
+         rotationDeg -= ROTATION_DEG
+        print(rotationDeg)
+    }
+    
     
     // Display the game menu
     func displayGameMenu() {
@@ -140,10 +159,23 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             plane.firstMaterial?.transparency = CGFloat(PLACEHOLDER_PLANE_TRANSPARENCY)
             trackerNode = SCNNode(geometry: plane)
             trackerNode?.eulerAngles.x = -.pi * 0.5
+            //self.trackerNode?.rotation = SCNVector4(0, 1, 0, GLKMathDegreesToRadians(270))
+ 
+            
             self.sceneView.scene.rootNode.addChildNode(self.trackerNode!)
             foundSurface = true
         }
+        
         self.trackerNode?.position = position
+        
+        //self.trackerNode?.rotation.x = GLKMathDegreesToRadians(270)
+        
+        //self.trackerNode?.rotation = SCNVector4(0, 1, 0,GLKMathDegreesToRadians(Float(rotationDeg)))
+       
+        //self.trackerNode?.rotation =  SCNVector4(0, 1, 0,GLKMathDegreesToRadians(Float(rotationDeg)))
+       //self.trackerNode?.rotation = SCNVector4(1, 0, 0, GLKMathDegreesToRadians(270))
+      
+        
         displayGamezonePlacementMenu()
     }
 
@@ -189,7 +221,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         node.scale = TARGET_SCALE
         node.name = TARGET_ROOT_NODE_NAME
         node.position = TARGET_POSITION
-        node.rotation = SCNVector4(1, 0, 0, GLKMathDegreesToRadians(90))
+      node.rotation = SCNVector4(1, 0, 0, GLKMathDegreesToRadians(90))
         
         node.physicsBody = SCNPhysicsBody(type: .static, shape: nil)
         
@@ -205,7 +237,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         node.name = GAMEZONE_ROOT_NODE_NAME
 
         node.position = position
-        //node.rotation = SCNVector4(0, 1, 0, GLKMathDegreesToRadians(90))
+        node.rotation = SCNVector4(0, 1, 0, GLKMathDegreesToRadians(Float(rotationDeg)))
         //node.rotation = SCNVector4(1, 0, 0, GLKMathDegreesToRadians(90))
         //node.physicsBody = SCNPhysicsBody(type: .static, shape: nil)
 

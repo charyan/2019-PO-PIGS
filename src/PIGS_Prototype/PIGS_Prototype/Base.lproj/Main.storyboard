@@ -78,6 +78,9 @@
                                 <state key="normal" title="&lt;">
                                     <color key="titleColor" red="1" green="0.0" blue="0.024170271520000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="onLeftButton:" destination="BV1-FR-VrT" eventType="touchUpInside" id="IO9-mH-rKv"/>
+                                </connections>
                             </button>
                             <button opaque="NO" alpha="0.60000002384185791" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jbx-Bh-iyA" userLabel="Right">
                                 <rect key="frame" x="317" y="837" width="187" height="174"/>
@@ -87,6 +90,9 @@
                                 <state key="normal" title="&gt;">
                                     <color key="titleColor" red="1" green="0.0" blue="0.024170271520000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="onRightButton:" destination="BV1-FR-VrT" eventType="touchUpInside" id="ajG-cd-KPW"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
