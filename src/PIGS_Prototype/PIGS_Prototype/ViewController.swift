@@ -47,8 +47,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     var score = 0
     
     enum CATEGORY_BIT_MASK: Int {
-        case BALL   = 2
-        case TARGET  = 3
+        case BALL    = 2
+        case TARGET  = 3 // A target is any object with which the collision give points to the player
     }
     
     
@@ -106,8 +106,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     
     // Display the gamezone placement menu
     func displayGamezonePlacementMenu() {
-        doneButton.isHidden = false
-        doneButton.isEnabled = true
+        self.doneButton.isHidden = false
+        self.doneButton.isEnabled = true
     }
     
     // Hide the gamezone placement menu
@@ -132,7 +132,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         guard let result = hitTest.first else { return }
         let translation = SCNMatrix4(result.worldTransform)
         let position = SCNVector3Make(translation.m41, translation.m42, translation.m43)
-        
+
         if trackerNode == nil {
             let plane = SCNPlane(width: 1.6, height: 1.6)
             plane.firstMaterial?.diffuse.contents = UIImage(named: "art.scnassets/img/app-icon.png")
@@ -246,7 +246,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     }
 
     func scoreUpdate() {
-        self.scoreLabel.text = String(score)
+        DispatchQueue.main.async {
+            self.scoreLabel.text = String(self.score)
+        }
     }
     
     func scoreIncrement(points: Int) {
@@ -263,9 +265,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         sceneView.scene.rootNode.addChildNode(explosionNode)
         explosionNode.addParticleSystem(explosion)
         ball.removeFromParentNode()
-        
-        print(contact.nodeA.name!)
-        print(contact.nodeB.name!)
         
         if(contact.nodeA.physicsBody!.categoryBitMask == CATEGORY_BIT_MASK.TARGET.rawValue ||
             contact.nodeB.physicsBody!.categoryBitMask == CATEGORY_BIT_MASK.TARGET.rawValue) {
@@ -297,8 +296,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         /// Debug options
         sceneView.debugOptions = [ARSCNDebugOptions.showWorldOrigin,
                                   ARSCNDebugOptions.showPhysicsShapes,
-                                  ARSCNDebugOptions.showFeaturePoints
-        ]
+                                  ARSCNDebugOptions.showFeaturePoints]
         // Enable antialiasing
         sceneView.antialiasingMode = .multisampling4X
         
