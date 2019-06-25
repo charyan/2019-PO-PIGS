@@ -22,10 +22,16 @@ Cette bibliothèque permet de gérer les éléments graphiques de l'application 
 ## Placement de la zone de jeu
 Pour placer la zone de jeu, nous commençons par détecter une zone plane, sur cette zone plane, placer un placeholder, éffectuer une rotation afin d'ajuster le placement du placeholder et enfin remplacer le placeholder par la map.
 ### Detection d'une zone plate
-### Placement du placeholder
-### Rotation du placeholder
-### Placement de la map
+Pour détecter une zone plate, l'Ipad utilise des points de repères virtuels se fixant sur des imperfections de la surface réelle où nous voulons placer la zone de jeu. Plus cette surface contient des imperfections, plus elle sera utilisable pour la réalité augmentée. Une table couverte d'une couche de plastique ne sera pas adapté car elle contient très peu d'impérféctions et reflète énormément la lumière contrairement à une table en boit brut qui sera beaucoup plus intéressante dans notre cas.
 
+![DetectionZonePlate](https://user-images.githubusercontent.com/43779006/60086632-be1dcf00-973b-11e9-9341-460c4b517711.jpg)
+### Placement du placeholder
+
+### Rotation du placeholder
+![rotationPlaceholder](https://user-images.githubusercontent.com/43779006/60085871-6337a800-973a-11e9-9859-132d410c097d.jpg)
+
+### Placement de la map
+![PlacementMap](https://user-images.githubusercontent.com/43779006/60085878-6468d500-973a-11e9-94fc-f780bff341b4.jpg)
 ### Rotation du placeholder
 
 Pour placer la zone de jeu, nous commençons par détecter une zone plane. Une fois que la zone plane est détectée, on affiche une image transparente de la taille du terrain de jeu, cette dernière est déplaçable, pour fixer le terrain de jeu, on appuis sur un bouton.  
