@@ -20,6 +20,14 @@ SceneKit est une bibliothèque permettant de gérer un environnement 3D. On l'ut
 Cette bibliothèque permet de gérer les éléments graphiques de l'application (boutons, labels, champs textes, etc...). Nous utiliserons cette bibliothèque afin de créer l'interface graphique de notre jeu.
 
 ## Placement de la zone de jeu
+Pour placer la zone de jeu, nous commençons par détecter une zone plane, sur cette zone plane, placer un placeholder, éffectuer une rotation afin d'ajuster le placement du placeholder et enfin remplacer le placeholder par la map.
+### Detection d'une zone plate
+### Placement du placeholder
+### Rotation du placeholder
+### Placement de la map
+
+### Rotation du placeholder
+
 Pour placer la zone de jeu, nous commençons par détecter une zone plane. Une fois que la zone plane est détectée, on affiche une image transparente de la taille du terrain de jeu, cette dernière est déplaçable, pour fixer le terrain de jeu, on appuis sur un bouton.  
 
 Pour un fonctionnement idéal, la surface sur laquel devra se poser le terrain de jeu doit être irrégulière (par exemple, une planche de bois).
