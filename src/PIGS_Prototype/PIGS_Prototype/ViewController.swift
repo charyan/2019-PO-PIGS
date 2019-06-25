@@ -12,13 +12,13 @@ import ARKit
 
 ///////////////////////////////////////////////////////////////
 
-let DEBUG_MODE : Bool = false
+let DEBUG_MODE : Bool = false // TRUE is ON
 
 // BALL
 let BALL_PROJECTILE_NAME : String! = "ball"
 let BALL_ROOT_NODE_NAME : String! = "Sphere"
 let BALL_SCENE_NAME : String! = "art.scnassets/models/pink_ball.scn"
-let BALL_SPEED : Float = 15
+let BALL_SPEED : Float = 30
 
 // LAUNCHER
 let PITCH_LAUNCHER : Float = 0.1 // 0 is straight forward
@@ -42,8 +42,10 @@ let PLACEHOLDER_PLANE_TRANSPARENCY : CGFloat = 0.5
 // POINTS
 let POINTS_BLOCK : Int = 10
 let POINTS_TARGET : Int = 50
+let POINTS_TARGET_2 : Int = 30
+let POINTS_PIG : Int = 15
 
-// Default value rotation
+// Default value rotation for the gamezone placement
 let ROTATION_DEG : Float = 5;
 
 ////////////////////////////////////////////////////////////
@@ -319,6 +321,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     
     func scoreIncrement(points: Int) {
         score += points
+        print("+" + String(points) + " points")
     }
     
 
@@ -343,6 +346,12 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             }else if (contact.nodeA.name! == "target" || contact.nodeB.name! == "target") {
                 scoreIncrement(points: POINTS_TARGET)
                 print("Collision with target")
+            } else if (contact.nodeA.name! == "target2" || contact.nodeB.name! == "target2") {
+                scoreIncrement(points: POINTS_TARGET_2)
+                print("Collision with target2")
+            } else if (contact.nodeA.name! == "pig" || contact.nodeB.name! == "pig") {
+                scoreIncrement(points: POINTS_PIG)
+                print("Collision with pig")
             }
         }
         

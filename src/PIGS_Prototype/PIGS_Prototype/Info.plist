@@ -28,7 +28,7 @@
 	<string></string>
 	<key>UIAppFonts</key>
 	<array>
-		<string>Skater_Girls_Rock.ttf</string>
+		<string>Skater Girls Rock.ttf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
