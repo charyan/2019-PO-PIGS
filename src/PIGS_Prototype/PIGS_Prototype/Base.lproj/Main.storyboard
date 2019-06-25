@@ -39,7 +39,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sTO-X4-XNH" userLabel="scoreLabel">
-                                <rect key="frame" x="180" y="49" width="263" height="61"/>
+                                <rect key="frame" x="202" y="49" width="241" height="100"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <accessibility key="accessibilityConfiguration" hint="score" identifier="scoreLabel" label="scoreLabel">
                                     <accessibilityTraits key="traits" staticText="YES" notEnabled="YES"/>
@@ -49,7 +49,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Points :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TC9-Ht-wuS" userLabel="labelPoints">
-                                <rect key="frame" x="46" y="49" width="126" height="61"/>
+                                <rect key="frame" x="46" y="49" width="511" height="100"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <accessibility key="accessibilityConfiguration" hint="score" identifier="scoreLabel" label="scoreLabel">
                                     <accessibilityTraits key="traits" staticText="YES" notEnabled="YES"/>

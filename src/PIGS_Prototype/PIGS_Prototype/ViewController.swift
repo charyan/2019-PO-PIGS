@@ -48,6 +48,11 @@ let POINTS_PIG : Int = 15
 // Default value rotation for the gamezone placement
 let ROTATION_DEG : Float = 5;
 
+// FONT
+let FONT_NAME : String = "Skater Girls Rock"
+let FONT_SIZE_BTN : CGFloat = 50
+let FONT_SIZE_PTS : CGFloat = 50
+
 ////////////////////////////////////////////////////////////
 
 class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SCNPhysicsContactDelegate {
@@ -365,10 +370,10 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         // Set the view's delegate
         sceneView.delegate = self
         
-        // Show statistics such as fps and timing information
-        sceneView.showsStatistics = true
-        
         if(DEBUG_MODE) {
+            // Show statistics such as fps and timing information
+            sceneView.showsStatistics = true
+            
             /// Debug options
             sceneView.debugOptions = [ARSCNDebugOptions.showWorldOrigin,
                                       ARSCNDebugOptions.showPhysicsShapes,
@@ -379,6 +384,14 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         sceneView.antialiasingMode = .multisampling4X
         
         sceneView.scene.physicsWorld.contactDelegate = self
+        
+        doneButton.titleLabel?.font = UIFont(name: FONT_NAME, size: FONT_SIZE_BTN)
+        shootButton.titleLabel?.font = UIFont(name: FONT_NAME, size: FONT_SIZE_BTN)
+        leftButton.titleLabel?.font = UIFont(name: FONT_NAME, size: FONT_SIZE_BTN)
+        rightButton.titleLabel?.font = UIFont(name: FONT_NAME, size: FONT_SIZE_BTN)
+        
+        labelPoints.font = UIFont(name: FONT_NAME, size: FONT_SIZE_PTS)
+        scoreLabel.font = UIFont(name: FONT_NAME, size: FONT_SIZE_PTS)
         
         hideGameMenu()
         hideGamezonePlacementMenu()
