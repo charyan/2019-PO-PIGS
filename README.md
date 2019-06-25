@@ -1,6 +1,8 @@
 # PIGS
 ![logo](https://user-images.githubusercontent.com/43775161/58420616-0939b900-808e-11e9-8312-b0da9cbf21e5.png)
 
+Figure 1 :
+
 ## Introduction
 ### Présentation
 PIGS est un jeu dans lequel deux joueurs s'affrontent dans un monde entre le réel et le virtuel. Ce monde est constitué d'obstacles destructibles plus originaux les uns que les autres. Chaque jour possède trois **lance-cochon**. Chaque joueur devra tenter de détruire les lanceurs de son adversaire afin de gagner la partie.
@@ -8,6 +10,8 @@ PIGS est un jeu dans lequel deux joueurs s'affrontent dans un monde entre le ré
 Chaque joueur disposera d'une tablette au travers de laquel il pourra voir et interagir avec le jeu.
 ### Plan du stand
 ![plan](https://user-images.githubusercontent.com/43775161/58421157-916c8e00-808f-11e9-9d4d-e0fb333a133e.png)
+
+Figure 2 :
 
 ## Fonctionnement
 Le jeu utilise les bibliothèques ARKit, SceneKit et UIKit. Toutes ces bibliothèques sont développées par Apple. Nous utiliserons Xcode comme IDE et nous programmerons en Swift, version 5.
@@ -25,18 +29,26 @@ Pour placer la zone de jeu, nous commençons par détecter une zone plane, sur c
 Pour détecter une zone plate, l'Ipad utilise des points de repères virtuels se fixant sur des imperfections de la surface réelle où nous voulons placer la zone de jeu. Plus cette surface contient des imperfections, plus elle sera utilisable pour la réalité augmentée. Une table couverte d'une couche de plastique ne sera pas adapté car elle contient très peu d'impérféctions et reflète énormément la lumière contrairement à une table en boit brut qui sera beaucoup plus intéressante dans notre cas.
 
 ![DetectionZonePlate](https://user-images.githubusercontent.com/43779006/60086632-be1dcf00-973b-11e9-9341-460c4b517711.jpg)
+
+Figure 3 : Points de repère utilisés par l'iPad pour détecter une zone plate
+
 ### Placement du placeholder
+Une fois qu'une zone plate a été détectée, le placeholer apparait automatiquement sur la zone plate. Si nous nous déplaçons avec l'Ipad, le placeholder va automatiquement se déplacer pour se fixer sur la nouvelle zone plate mise à disposition.
 
 ### Rotation du placeholder
-![rotationPlaceholder](https://user-images.githubusercontent.com/43779006/60085871-6337a800-973a-11e9-9859-132d410c097d.jpg)
+Pour effectuer une rotation du placeholder, l'utilisateur peut utiliser deux boutons. Les bontons modifient la position du placeholder sur l'axe Y.
+
+![RotationPlaceholder](https://user-images.githubusercontent.com/43779006/60091773-a51a1b80-9745-11e9-815c-3d998478c431.jpg)
+
+Figure 4 : Boutons sur l'iPad pour modifier la position de l'écran
 
 ### Placement de la map
+Une fois que le placeholder est à l'endroit où nous le souhaitons, il nous suffit de presser sur le bouton "Done" pour placer la map.
+
 ![PlacementMap](https://user-images.githubusercontent.com/43779006/60085878-6468d500-973a-11e9-94fc-f780bff341b4.jpg)
-### Rotation du placeholder
 
-Pour placer la zone de jeu, nous commençons par détecter une zone plane. Une fois que la zone plane est détectée, on affiche une image transparente de la taille du terrain de jeu, cette dernière est déplaçable, pour fixer le terrain de jeu, on appuis sur un bouton.  
+Figure 5 : Terrain de jeu
 
-Pour un fonctionnement idéal, la surface sur laquel devra se poser le terrain de jeu doit être irrégulière (par exemple, une planche de bois).
 ## Lanceur
 Le lanceur permet de créer une balle à la position de l'iPad dans le monde virtuel et d'appliquer une force permettant de déplacer cette balle. Le lancement de la balle est déclenché par l'appuis d'un bouton.
 ## Cibles
