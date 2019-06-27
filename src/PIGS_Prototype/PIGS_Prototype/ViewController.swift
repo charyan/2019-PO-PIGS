@@ -22,7 +22,7 @@ let BALL_SPEED : Float = 20
 
 // LAUNCHER
 let PITCH_LAUNCHER : Float = 0.1 // 0 is straight forward
-let LAUNCHER_COOLDOWN_SECONDS : Int = 1
+let LAUNCHER_COOLDOWN_MILLISECONDS : Int = 500
 
 // TARGET
 let TARGET_SCENE_NAME : String! = "art.scnassets/models/target.scn"
@@ -74,7 +74,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         fireProjectile(type: BALL_PROJECTILE_NAME)
         self.shootButton.isEnabled = false
         self.shootButton.backgroundColor = UIColor.lightGray
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(LAUNCHER_COOLDOWN_SECONDS), execute: {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(LAUNCHER_COOLDOWN_MILLISECONDS), execute: {
             self.shootButton.backgroundColor = UIColor.green
             self.enableShootButton()
         })
@@ -192,7 +192,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         guard let result = hitTest.first else { return }
         let translation = SCNMatrix4(result.worldTransform)
         let position = SCNVector3Make(translation.m41, translation.m42, translation.m43)
-
+        
         if trackerNode == nil {
             let plane = SCNPlane(width: 1.6, height: 1.6)
             plane.firstMaterial?.diffuse.contents = UIImage(named: "art.scnassets/img/app-icon.png")
@@ -201,7 +201,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             trackerNode = SCNNode(geometry: plane)
             trackerNode?.eulerAngles.x = -.pi * 0.5
             //self.trackerNode?.rotation = SCNVector4(0, 1, 0, GLKMathDegreesToRadians(270))
- 
+            
             
             self.sceneView.scene.rootNode.addChildNode(self.trackerNode!)
             foundSurface = true
@@ -212,10 +212,10 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         //self.trackerNode?.rotation.x = GLKMathDegreesToRadians(270)
         
         //self.trackerNode?.rotation = SCNVector4(0, 1, 0,GLKMathDegreesToRadians(Float(rotationDeg)))
-       
+        
         //self.trackerNode?.rotation =  SCNVector4(0, 1, 0,GLKMathDegreesToRadians(Float(rotationDeg)))
-       //self.trackerNode?.rotation = SCNVector4(1, 0, 0, GLKMathDegreesToRadians(270))
-      
+        //self.trackerNode?.rotation = SCNVector4(1, 0, 0, GLKMathDegreesToRadians(270))
+        
         
         displayGamezonePlacementMenu()
     }
@@ -370,6 +370,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         // Set the view's delegate
         sceneView.delegate = self
         
+        
         if(DEBUG_MODE) {
             // Show statistics such as fps and timing information
             sceneView.showsStatistics = true
@@ -384,6 +385,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         sceneView.antialiasingMode = .multisampling4X
         
         sceneView.scene.physicsWorld.contactDelegate = self
+        
+        
         
         
         // Change the font for the GUI
