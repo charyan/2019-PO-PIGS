@@ -22,7 +22,7 @@ let BALL_SPEED : Float = 20
 
 // LAUNCHER
 let PITCH_LAUNCHER : Float = 0.1 // 0 is straight forward
-let LAUNCHER_COOLDOWN_SECONDS : Int = 1
+let LAUNCHER_COOLDOWN_MILLISECONDS : Int = 500
 
 // TARGET
 let TARGET_SCENE_NAME : String! = "art.scnassets/models/target.scn"
@@ -74,7 +74,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         fireProjectile(type: BALL_PROJECTILE_NAME)
         self.shootButton.isEnabled = false
         self.shootButton.backgroundColor = UIColor.lightGray
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(LAUNCHER_COOLDOWN_SECONDS), execute: {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(LAUNCHER_COOLDOWN_MILLISECONDS), execute: {
             self.shootButton.backgroundColor = UIColor.green
             self.enableShootButton()
         })
