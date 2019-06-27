@@ -22,7 +22,7 @@ let BALL_SPEED : Float = 20
 
 // LAUNCHER
 let PITCH_LAUNCHER : Float = 0.1 // 0 is straight forward
-let LAUNCHER_COOLDOWN : Float = 0.5
+let LAUNCHER_COOLDOWN_SECONDS : Int = 1
 
 // TARGET
 let TARGET_SCENE_NAME : String! = "art.scnassets/models/target.scn"
@@ -74,7 +74,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         fireProjectile(type: BALL_PROJECTILE_NAME)
         self.shootButton.isEnabled = false
         self.shootButton.backgroundColor = UIColor.lightGray
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(LAUNCHER_COOLDOWN_SECONDS), execute: {
             self.shootButton.backgroundColor = UIColor.green
             self.enableShootButton()
         })
@@ -385,6 +385,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         
         sceneView.scene.physicsWorld.contactDelegate = self
         
+        
+        // Change the font for the GUI
         doneButton.titleLabel?.font = UIFont(name: FONT_NAME, size: FONT_SIZE_BTN)
         shootButton.titleLabel?.font = UIFont(name: FONT_NAME, size: FONT_SIZE_BTN)
         leftButton.titleLabel?.font = UIFont(name: FONT_NAME, size: FONT_SIZE_BTN)
@@ -393,6 +395,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         labelPoints.font = UIFont(name: FONT_NAME, size: FONT_SIZE_PTS)
         scoreLabel.font = UIFont(name: FONT_NAME, size: FONT_SIZE_PTS)
         
+        // Hide the menus
         hideGameMenu()
         hideGamezonePlacementMenu()
     }
