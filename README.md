@@ -49,14 +49,9 @@ Une fois que le placeholder est à l'endroit où nous le souhaitons, il nous suf
 
 Figure 5 : Terrain de jeu
 
-## Map
-
-## 3D
-
-## Cube...
-
 ## Lanceur
 Le lanceur permet de créer une balle à la position de l'iPad dans le monde virtuel et d'appliquer une force permettant de déplacer cette balle. Le lancement de la balle est déclenché par l'appuis d'un bouton. Le lanceur empêche l'utilisateur d'appuyer à répétition sur le bouton à l'aide d'un système de cooldown qui désactive le bouton.
 
-## Cibles
-Différentes cibles sont placées sur la table, elles rapportent différentes quantités de points. 
+## Score
+Différentes cibles sont placées sur la table, elles rapportent différentes quantités de points.
+
