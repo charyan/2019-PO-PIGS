@@ -364,12 +364,29 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         scoreUpdate()
     }
     
+    func alertButton() {
+        
+        let alert = UIAlertController(title: "Comment vous appelez vous ?", message: nil, preferredStyle: .alert)
+        
+        alert.addTextField(configurationHandler: { textField in
+            textField.placeholder = "Entrez votre nom ici..."
+        })
+        
+        alert.addAction(UIAlertAction(title: "Valider", style: .default, handler: { action in
+            
+            if let name = alert.textFields?.first?.text {
+                print("Your name: \(name)")
+            }
+        }))
+        
+        self.present(alert, animated: true)        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Set the view's delegate
         sceneView.delegate = self
-        
         
         if(DEBUG_MODE) {
             // Show statistics such as fps and timing information
@@ -401,6 +418,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         // Hide the menus
         hideGameMenu()
         hideGamezonePlacementMenu()
+        
+        alertButton()
     }
     
     override func viewWillAppear(_ animated: Bool) {
