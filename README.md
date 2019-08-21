@@ -13,6 +13,17 @@ Chaque joueur disposera d'une tablette au travers de laquel il pourra voir et in
 
 Figure 2 :
 
+## Organisation
+### Séances
+Nous organisons une petite séance de 10-15min chaque matin pour regarder l'avancement de nos précédentes tâches et si celles-ci sont terminées, nous nous fixons de nouveaux objectifs pour la journée.
+### Outils
+#### Todoist
+Nous utilisons Todoist pour lister toutes les choses à faire sur le projet, que ce soit de grandes tâches ou de toutes petites comme par exemple, remplacer l'image du placeholder. 
+#### GitHub
+Nous utilisons l'outil GitHub pour organiser les grandes tâches ainsi que connaître leurs états.
+#### Framaboard
+Au début, nous utilisions Framaboard mais nous avons décidé de ne plus utiliser cet outil car nous le trouvons peu pratique et que ça prend beaucoup de temps à utiliser.
+
 ## Fonctionnement
 Le jeu utilise les bibliothèques ARKit, SceneKit et UIKit. Toutes ces bibliothèques sont développées par Apple. Nous utiliserons Xcode comme IDE et nous programmerons en Swift, version 5.
 ### Bibliothèques
