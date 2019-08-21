@@ -66,3 +66,8 @@ Le lanceur permet de créer une balle à la position de l'iPad dans le monde vir
 ## Score
 Différentes cibles sont placées sur la table, elles rapportent différentes quantités de points.
 
+## Création des blocs
+Les blocs sont directement créer dans SceneKit car nous avons trouvé que c'était la solution la plus simple. Nous leur application ensuite leurs paramètres physique et une texture.
+
+## Gestion des collision
+La gestion des collision est géré par rapport au bitmask des objets en collision. Suivant le bitmask des objets, on ajoute le nombre de points correspondants au score du joueur.
