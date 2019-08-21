@@ -94,12 +94,40 @@
                                     <action selector="onRightButton:" destination="BV1-FR-VrT" eventType="touchUpInside" id="ajG-cd-KPW"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lnI-O3-28U">
+                                <rect key="frame" x="579" y="873" width="187" height="105"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="48"/>
+                                <state key="normal" title="SEND"/>
+                                <connections>
+                                    <action selector="onSendButton:" destination="BV1-FR-VrT" eventType="touchUpInside" id="1mg-Fx-us5"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F7B-OS-QSi">
+                                <rect key="frame" x="561" y="1007" width="224" height="105"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="48"/>
+                                <state key="normal" title="CONNECT"/>
+                                <connections>
+                                    <action selector="onConnectButton:" destination="BV1-FR-VrT" eventType="touchUpInside" id="5aF-VB-iY2"/>
+                                </connections>
+                            </button>
+                            <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="cbK-iA-I5f" userLabel="Debug text view">
+                                <rect key="frame" x="46" y="197" width="511" height="632"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="AA5-RC-t3s"/>
                     </view>
                     <connections>
                         <outlet property="crosshair" destination="rgs-g0-f9u" id="7u5-lj-4MG"/>
+                        <outlet property="debugTextView" destination="cbK-iA-I5f" id="Hz0-I4-ZHd"/>
                         <outlet property="doneButton" destination="xDm-KS-Eiz" id="bG4-UF-pXs"/>
                         <outlet property="labelPoints" destination="TC9-Ht-wuS" id="CBd-uv-ktn"/>
                         <outlet property="leftButton" destination="8Fd-hn-gke" id="9BD-4g-lFJ"/>

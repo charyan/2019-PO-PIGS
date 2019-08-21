@@ -9,6 +9,7 @@
 import UIKit
 import SceneKit
 import ARKit
+import MultipeerConnectivity
 
 ///////////////////////////////////////////////////////////////
 
@@ -55,8 +56,103 @@ let FONT_SIZE_PTS : CGFloat = 50
 
 ////////////////////////////////////////////////////////////
 
-class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SCNPhysicsContactDelegate {
-
+class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SCNPhysicsContactDelegate, MCSessionDelegate, MCBrowserViewControllerDelegate {
+    
+    
+    @IBOutlet weak var debugTextView: UITextView!
+    
+    @IBAction func onConnectButton(_ sender: Any) {
+        showConnectionMenu()
+        debugPrint("Showing connection menu")
+    }
+    
+    @IBAction func onSendButton(_ sender: Any) {
+        messageToSend = "\(peerID.displayName): Hello \(NSDate())"
+        let message = messageToSend.data(using: String.Encoding.utf8, allowLossyConversion: false)
+        do {
+            try self.mcSession.send(message!, toPeers: self.mcSession.connectedPeers, with: .unreliable)
+            debugTextView.text = debugTextView.text + messageToSend + "\n"        }
+        catch {
+            debugTextView.text = debugTextView.text + "Error sending message" + "\n"
+            debugPrint("Error sending message")
+        }
+    }
+    
+    var peerID: MCPeerID!
+    var mcSession: MCSession!
+    var mcAdvertiserAssistant: MCAdvertiserAssistant!
+    var messageToSend: String!
+    
+    func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
+        switch state {
+        case .connected:
+            debugTextView.text = debugTextView.text + "Connected: \(peerID.displayName)" + "\n"
+            debugPrint("Connected: \(peerID.displayName)")
+        case .connecting:
+            debugTextView.text = debugTextView.text + "Connecting: \(peerID.displayName)" + "\n"
+            debugPrint("Connecting: \(peerID.displayName)")
+        case .notConnected:
+            debugTextView.text = debugTextView.text + "Not Connected: \(peerID.displayName)" + "\n"
+            debugPrint("Not Connected: \(peerID.displayName)")
+        @unknown default:
+            debugTextView.text = debugTextView.text + "fatal error" + "\n"
+            debugPrint("fatal error")
+        }
+    }
+    
+    func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
+        DispatchQueue.main.async { [unowned self] in
+            // send message
+            let message = NSString(data: data as Data, encoding: String.Encoding.utf8.rawValue)! as String
+            self.debugTextView.text = self.debugTextView.text + message + "\n"
+        }
+    }
+    
+    func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
+        
+    }
+    
+    func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, with progress: Progress) {
+        
+    }
+    
+    func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
+        
+    }
+    
+    func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
+        dismiss(animated: true)
+    }
+    
+    func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
+        dismiss(animated: true)
+    }
+    
+    @objc func showConnectionMenu() {
+        let ac = UIAlertController(title: "Connection Menu", message: nil, preferredStyle: .actionSheet)
+        ac.addAction(UIAlertAction(title: "Host a session", style: .default, handler: hostSession))
+        ac.addAction(UIAlertAction(title: "Join a session", style: .default, handler: joinSession))
+        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        
+        if let popoverController = ac.popoverPresentationController {
+            popoverController.sourceView = self.view //to set the source of your alert
+            popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0) // you can set this as per your requirement.
+            popoverController.permittedArrowDirections = [] //to hide the arrow of any particular direction
+        }
+        self.present(ac, animated: true)
+    }
+    
+    func hostSession(action: UIAlertAction) {
+        mcAdvertiserAssistant = MCAdvertiserAssistant(serviceType: "pigs", discoveryInfo: nil, session: mcSession)
+        mcAdvertiserAssistant.start()
+    }
+    
+    func joinSession(action: UIAlertAction) {
+        let mcBrowser = MCBrowserViewController(serviceType: "pigs", session: mcSession)
+        mcBrowser.delegate = self
+        present(mcBrowser, animated: true)
+    }
+    
     var score = 0
     
     enum CATEGORY_BIT_MASK: Int {
@@ -401,6 +497,12 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         // Hide the menus
         hideGameMenu()
         hideGamezonePlacementMenu()
+        
+        // Creates a multipeer session with the system name as the peerID
+        peerID = MCPeerID(displayName: UIDevice.current.name)
+        mcSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .required)
+        mcSession.delegate = self
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
