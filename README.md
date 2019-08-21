@@ -58,7 +58,7 @@ Une fois que le placeholder est à l'endroit où nous le souhaitons, il nous suf
 
 ![PlacementMap](https://user-images.githubusercontent.com/43779006/60085878-6468d500-973a-11e9-94fc-f780bff341b4.jpg)
 
-Figure 5 : Terrain de jeu
+Figure 6 : Terrain de jeu
 
 ## Lanceur
 Le lanceur permet de créer une balle à la position de l'iPad dans le monde virtuel et d'appliquer une force permettant de déplacer cette balle. Le lancement de la balle est déclenché par l'appuis d'un bouton. Le lanceur empêche l'utilisateur d'appuyer à répétition sur le bouton à l'aide d'un système de cooldown qui désactive le bouton.
@@ -69,10 +69,12 @@ Différentes cibles sont placées sur la table, elles rapportent différentes qu
 ## Création des blocs
 Les blocs sont directement créés dans SceneKit car nous avons trouvé que c'était la solution la plus simple. Nous leur application ensuite leurs paramètres physique et une texture.
 ![création_cube](https://user-images.githubusercontent.com/43775161/63411909-ddad3d00-c3f6-11e9-80c4-76a0ddaa8bc8.png)
-Figure 5 : Cube et ses propriétés physiques
+Figure 7 : Cube et ses propriétés physiques
 
+## Création de la map
+Les blocs sont empilés sur la map. On a placé un cube invisible pour le sol. La map est enregistré en format SceneKit (.scn).
 ![map](https://user-images.githubusercontent.com/43775161/63411910-ddad3d00-c3f6-11e9-9af6-0fc7e93f9233.png)
-Figure 6 : Map
+Figure 8 : Map
 
 
 ## Gestion des collision
