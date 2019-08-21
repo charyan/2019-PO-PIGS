@@ -70,4 +70,4 @@ Différentes cibles sont placées sur la table, elles rapportent différentes qu
 Les blocs sont directement créer dans SceneKit car nous avons trouvé que c'était la solution la plus simple. Nous leur application ensuite leurs paramètres physique et une texture.
 
 ## Gestion des collision
-La gestion des collision est géré par rapport au category bitmask des objets en collision. Suivant le category bitmask des objets, on ajoute le nombre de points correspondants au score du joueur.
+La gestion des collision est géré par rapport au category bitmask des objets en collision. Suivant le category bitmask des objets, on ajoute le nombre de points correspondants au score du joueur. Les balles lancées par le joueur ont un category bitmask de 2 et tous les objets rapportant des points disposent du category bitmask 3.
