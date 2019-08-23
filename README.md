@@ -11,7 +11,7 @@ Chaque joueur disposera d'une tablette au travers de laquel il pourra voir et in
 ### Plan du stand
 ![plan](https://user-images.githubusercontent.com/43775161/58421157-916c8e00-808f-11e9-9d4d-e0fb333a133e.png)
 
-Figure 2 :
+Figure 2 : Plan du stand
 
 ## Organisation
 ### Séances
@@ -79,3 +79,11 @@ Figure 8 : Map
 
 ## Gestion des collision
 La gestion des collision est gérée par rapport au category bitmask des objets en collision. Suivant le category bitmask des objets, on ajoute le nombre de points correspondants au score du joueur. Les balles lancées par le joueur ont un category bitmask de 2 et tous les objets rapportant des points disposent du category bitmask 3.
+
+## Problèmes rencontrés
+### Blocs instables
+
+![Capture d’écran 2019-08-23 à 15 55 33](https://user-images.githubusercontent.com/43779006/63597768-7d68f780-c5be-11e9-931a-75f789cdc5e3.png)
+
+
+
