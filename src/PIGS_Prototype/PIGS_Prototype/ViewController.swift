@@ -32,7 +32,7 @@ let TARGET_POSITION : SCNVector3 = SCNVector3(0, 0, -20)
 let TARGET_ROOT_NODE_NAME : String! = "Target"
 
 // GAMEZONE
-let GAMEZONE_SCENE_NAME : String! = "art.scnassets/level/newMap.scn"
+let GAMEZONE_SCENE_NAME : String! = "art.scnassets/level/zeroMap.scn"
 let GAMEZONE_SCALE : SCNVector3 = SCNVector3(1, 1, 1)
 let GAMEZONE_POSITION : SCNVector3 = SCNVector3(0, -0.5, -0.8)
 let GAMEZONE_ROOT_NODE_NAME : String! = "root"
@@ -162,6 +162,21 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         present(mcBrowser, animated: true)
     }
     
+extension UIViewController {
+    func HideKeyboard() {
+        let Tap:UITapGestureRecognizer = UITapGestureRecognizer(target: self , action: #selector(DismissKeyboard))
+        
+        view.addGestureRecognizer(Tap)
+    }
+    
+    @objc func DismissKeyboard() {
+        view.endEditing(true)
+    }
+}
+
+
+class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SCNPhysicsContactDelegate {
+
     var score = 0
     
     enum CATEGORY_BIT_MASK: Int {
@@ -191,6 +206,14 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     @IBOutlet weak var crosshair: UIImageView!
     @IBOutlet weak var leftButton: UIButton!
     @IBOutlet weak var rightButton: UIButton!
+    @IBOutlet weak var nameMenuTextField: UITextField!
+    @IBOutlet weak var nameMenuError: UILabel!
+    @IBOutlet weak var playerName: UILabel!
+    @IBOutlet weak var HUD: UILabel!
+    
+    // View choose name menu
+    @IBOutlet weak var Pseudo: UIView!
+    
     
     
     // When the Done button is pressed
@@ -208,8 +231,21 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             //directionalLightNode = container.childNode(withName: "directionalLight", recursively: false)
             tracking = false
         }
-        displayGameMenu()
+        displayNameMenu()
         hideGamezonePlacementMenu()
+    }
+    
+    @IBAction func onPlayButton(_ sender: Any) {
+        if nameMenuTextField.text!.isEmpty {
+            displayNameMenuError()
+        } else {
+            hideNameMenuError()
+            playerName.text = nameMenuTextField.text
+            hideNameMenu()
+            DismissKeyboard()
+            displayGameMenu()
+            hideGamezonePlacementMenu()
+        }
     }
     
 
@@ -240,11 +276,19 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     // Display the game menu
     func displayGameMenu() {
         gameView.isHidden = false
+
+        // TOCHECK
+        playerName.isHidden = false
+        HUD.isHidden = false
     }
     
     // Hide the game menu
     func hideGameMenu() {
         gameView.isHidden = true
+
+        // TOCHECK
+        playerName.isHidden = true
+        HUD.isHidden = true
     }
     
     // Display the gamezone placement menu
@@ -263,6 +307,23 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     // Hide the gamezone placement menu
     func hideGamezonePlacementMenu() {
         gamePlacementView.isHidden = true
+    }
+    
+    func displayNameMenu() {
+        self.Pseudo.isHidden = false
+        self.nameMenuError.isHidden = true
+    }
+    
+    func hideNameMenu() {
+        Pseudo.isHidden = true
+    }
+    
+    func displayNameMenuError() {
+        nameMenuError.isHidden = false
+    }
+    
+    func hideNameMenuError() {
+        nameMenuError.isHidden = true
     }
     
     // Variables for play zone
@@ -455,9 +516,12 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        sceneView.scene.physicsWorld.timeStep = 1/200
+        
+        self.HideKeyboard()
+        
         // Set the view's delegate
         sceneView.delegate = self
-        
         
         if(DEBUG_MODE) {
             // Show statistics such as fps and timing information
@@ -474,8 +538,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         sceneView.antialiasingMode = .multisampling4X
         
         sceneView.scene.physicsWorld.contactDelegate = self
-        
-        
         
         
         // Change the font for the GUI
@@ -495,7 +557,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         peerID = MCPeerID(displayName: UIDevice.current.name)
         mcSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .required)
         mcSession.delegate = self
-        
+        hideNameMenu()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -503,7 +565,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         
         // Create a session configuration
         let configuration = ARWorldTrackingConfiguration()
-
+        
         // Run the view's session
         sceneView.session.run(configuration)
     }
