@@ -31,7 +31,7 @@ let TARGET_POSITION : SCNVector3 = SCNVector3(0, 0, -20)
 let TARGET_ROOT_NODE_NAME : String! = "Target"
 
 // GAMEZONE
-let GAMEZONE_SCENE_NAME : String! = "art.scnassets/level/newMap.scn"
+let GAMEZONE_SCENE_NAME : String! = "art.scnassets/level/zeroMap.scn"
 let GAMEZONE_SCALE : SCNVector3 = SCNVector3(1, 1, 1)
 let GAMEZONE_POSITION : SCNVector3 = SCNVector3(0, -0.5, -0.8)
 let GAMEZONE_ROOT_NODE_NAME : String! = "root"
