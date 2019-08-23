@@ -59,8 +59,16 @@ let FONT_SIZE_PTS : CGFloat = 50
 class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SCNPhysicsContactDelegate, MCSessionDelegate, MCBrowserViewControllerDelegate {
     
     
+    @IBOutlet weak var doneNetworkingButton: UIButton!
+    @IBOutlet weak var networkingView: UIView!
     @IBOutlet weak var debugTextView: UITextView!
+    @IBOutlet weak var gameView: UIView!
+    @IBOutlet weak var gamePlacementView: UIView!
     
+    @IBAction func onDoneNetworkingButton(_ sender: Any) {
+        networkingView.isHidden = true
+        
+    }
     @IBAction func onConnectButton(_ sender: Any) {
         showConnectionMenu()
         debugPrint("Showing connection menu")
@@ -88,6 +96,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         case .connected:
             debugTextView.text = debugTextView.text + "Connected: \(peerID.displayName)" + "\n"
             debugPrint("Connected: \(peerID.displayName)")
+            doneNetworkingButton.isEnabled = true
         case .connecting:
             debugTextView.text = debugTextView.text + "Connecting: \(peerID.displayName)" + "\n"
             debugPrint("Connecting: \(peerID.displayName)")
@@ -230,47 +239,22 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
 
     // Display the game menu
     func displayGameMenu() {
-        scoreLabel.isHidden = false
-        doneButton.isHidden = false
-        labelPoints.isHidden = false
-        shootButton.isHidden = false
-        crosshair.isHidden = false
+        gameView.isHidden = false
     }
     
     // Hide the game menu
     func hideGameMenu() {
-        scoreLabel.isHidden = true
-        doneButton.isHidden = true
-        labelPoints.isHidden = true
-        shootButton.isHidden = true
-        crosshair.isHidden = true
+        gameView.isHidden = true
     }
     
     // Display the gamezone placement menu
     func displayGamezonePlacementMenu() {
-        self.doneButton.isHidden = false
-        self.doneButton.isEnabled = true
-        
-        self.leftButton.isHidden = false
-        self.leftButton.isEnabled = true
-        
-        self.rightButton.isHidden = false
-        self.rightButton.isEnabled = true
+        gamePlacementView.isHidden = false
     }
     
     // Hide the gamezone placement menu
     func hideGamezonePlacementMenu() {
-        doneButton.isHidden = true
-        doneButton.isEnabled = false
-        doneButton.isOpaque = false
-        
-        self.leftButton.isHidden = true
-        self.leftButton.isEnabled = false
-        self.leftButton.isOpaque = false
-        
-        self.rightButton.isHidden = true
-        self.rightButton.isEnabled = false
-        self.rightButton.isOpaque = false
+        gamePlacementView.isHidden = true
     }
     
     // Variables for play zone
