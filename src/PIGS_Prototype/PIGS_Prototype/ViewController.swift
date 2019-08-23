@@ -195,7 +195,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     
     // When the Done button is pressed
     @IBAction func onDoneButton(_ sender: Any) {
-        if tracking {
+        if (tracking) {
             //Set up the scene
             guard foundSurface else { return }
             let trackingPosition = trackerNode!.position
@@ -250,6 +250,14 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     // Display the gamezone placement menu
     func displayGamezonePlacementMenu() {
         gamePlacementView.isHidden = false
+        
+        if (self.sceneView.session.currentFrame?.rawFeaturePoints!.points.count)! > 50 {
+            doneButton.isEnabled = true
+            doneButton.backgroundColor = #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)
+        } else {
+            doneButton.isEnabled = false
+            doneButton.backgroundColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)
+        }
     }
     
     // Hide the gamezone placement menu
@@ -459,6 +467,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             sceneView.debugOptions = [ARSCNDebugOptions.showWorldOrigin,
                                       ARSCNDebugOptions.showPhysicsShapes,
                                       ARSCNDebugOptions.showFeaturePoints]
+            doneNetworkingButton.isEnabled = true
         }
         
         // Enable antialiasing
