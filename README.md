@@ -85,7 +85,6 @@ La gestion des collision est gérée par rapport au category bitmask des objets 
 Quand nous plaçons la map, tous les blocs se mettent à trembler et par conséquent, ils tombent tous de la map. Les blocs empilés bougent davantage que ceux qui sont juste placés sur le sol.
 
 ![Capture d’écran 2019-08-23 à 15 55 33](https://user-images.githubusercontent.com/43779006/63597768-7d68f780-c5be-11e9-931a-75f789cdc5e3.png)
-
 Figure 9 : Blocs qui tombent de la map
 
 Pour régler le problème, nous avons essayé de modifier la taille, la physique, la hitbox, la masse, la gravité, le type(plan, box, floor), l'emplacement des blocs et du sol.
