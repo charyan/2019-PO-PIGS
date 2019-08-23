@@ -161,21 +161,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         mcBrowser.delegate = self
         present(mcBrowser, animated: true)
     }
-    
-extension UIViewController {
-    func HideKeyboard() {
-        let Tap:UITapGestureRecognizer = UITapGestureRecognizer(target: self , action: #selector(DismissKeyboard))
-        
-        view.addGestureRecognizer(Tap)
-    }
-    
-    @objc func DismissKeyboard() {
-        view.endEditing(true)
-    }
-}
-
-
-class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SCNPhysicsContactDelegate {
 
     var score = 0
     
@@ -276,7 +261,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     // Display the game menu
     func displayGameMenu() {
         gameView.isHidden = false
-
+        
         // TOCHECK
         playerName.isHidden = false
         HUD.isHidden = false
@@ -539,13 +524,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         
         sceneView.scene.physicsWorld.contactDelegate = self
         
-        
-        // Change the font for the GUI
-        doneButton.titleLabel?.font = UIFont(name: FONT_NAME, size: FONT_SIZE_BTN)
-        shootButton.titleLabel?.font = UIFont(name: FONT_NAME, size: FONT_SIZE_BTN)
-        leftButton.titleLabel?.font = UIFont(name: FONT_NAME, size: FONT_SIZE_BTN)
-        rightButton.titleLabel?.font = UIFont(name: FONT_NAME, size: FONT_SIZE_BTN)
-        
         labelPoints.font = UIFont(name: FONT_NAME, size: FONT_SIZE_PTS)
         scoreLabel.font = UIFont(name: FONT_NAME, size: FONT_SIZE_PTS)
         
@@ -601,5 +579,17 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     func sessionInterruptionEnded(_ session: ARSession) {
         // Reset tracking and/or remove existing anchors if consistent tracking is required
         
+    }
+}
+
+extension UIViewController {
+    func HideKeyboard() {
+        let Tap:UITapGestureRecognizer = UITapGestureRecognizer(target: self , action: #selector(DismissKeyboard))
+        
+        view.addGestureRecognizer(Tap)
+    }
+    
+    @objc func DismissKeyboard() {
+        view.endEditing(true)
     }
 }
