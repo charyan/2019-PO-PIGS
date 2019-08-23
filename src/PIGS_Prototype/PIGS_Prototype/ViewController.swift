@@ -13,7 +13,7 @@ import MultipeerConnectivity
 
 ///////////////////////////////////////////////////////////////
 
-let DEBUG_MODE : Bool = false // TRUE is ON
+let DEBUG_MODE : Bool = true // TRUE is ON
 
 // BALL
 let BALL_PROJECTILE_NAME : String! = "ball"
