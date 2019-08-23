@@ -55,6 +55,19 @@ let FONT_SIZE_PTS : CGFloat = 50
 
 ////////////////////////////////////////////////////////////
 
+extension UIViewController {
+    func HideKeyboard() {
+        let Tap:UITapGestureRecognizer = UITapGestureRecognizer(target: self , action: #selector(DismissKeyboard))
+        
+        view.addGestureRecognizer(Tap)
+    }
+    
+    @objc func DismissKeyboard() {
+        view.endEditing(true)
+    }
+}
+
+
 class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SCNPhysicsContactDelegate {
 
     var score = 0
@@ -86,6 +99,14 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     @IBOutlet weak var crosshair: UIImageView!
     @IBOutlet weak var leftButton: UIButton!
     @IBOutlet weak var rightButton: UIButton!
+    @IBOutlet weak var nameMenuTextField: UITextField!
+    @IBOutlet weak var nameMenuError: UILabel!
+    @IBOutlet weak var playerName: UILabel!
+    @IBOutlet weak var HUD: UILabel!
+    
+    // View choose name menu
+    @IBOutlet weak var Pseudo: UIView!
+    
     
     
     // When the Done button is pressed
@@ -103,8 +124,21 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             //directionalLightNode = container.childNode(withName: "directionalLight", recursively: false)
             tracking = false
         }
-        displayGameMenu()
+        displayNameMenu()
         hideGamezonePlacementMenu()
+    }
+    
+    @IBAction func onPlayButton(_ sender: Any) {
+        if nameMenuTextField.text!.isEmpty {
+            displayNameMenuError()
+        } else {
+            hideNameMenuError()
+            playerName.text = nameMenuTextField.text
+            hideNameMenu()
+            DismissKeyboard()
+            displayGameMenu()
+            hideGamezonePlacementMenu()
+        }
     }
     
 
@@ -139,6 +173,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         labelPoints.isHidden = false
         shootButton.isHidden = false
         crosshair.isHidden = false
+        playerName.isHidden = false
+        HUD.isHidden = false
     }
     
     // Hide the game menu
@@ -148,6 +184,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         labelPoints.isHidden = true
         shootButton.isHidden = true
         crosshair.isHidden = true
+        playerName.isHidden = true
+        HUD.isHidden = true
     }
     
     // Display the gamezone placement menu
@@ -175,6 +213,23 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         self.rightButton.isHidden = true
         self.rightButton.isEnabled = false
         self.rightButton.isOpaque = false
+    }
+    
+    func displayNameMenu() {
+        self.Pseudo.isHidden = false
+        self.nameMenuError.isHidden = true
+    }
+    
+    func hideNameMenu() {
+        Pseudo.isHidden = true
+    }
+    
+    func displayNameMenuError() {
+        nameMenuError.isHidden = false
+    }
+    
+    func hideNameMenuError() {
+        nameMenuError.isHidden = true
     }
     
     // Variables for play zone
@@ -364,26 +419,12 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         scoreUpdate()
     }
     
-    func alertButton() {
-        
-        let alert = UIAlertController(title: "Comment vous appelez vous ?", message: nil, preferredStyle: .alert)
-        
-        alert.addTextField(configurationHandler: { textField in
-            textField.placeholder = "Entrez votre nom ici..."
-        })
-        
-        alert.addAction(UIAlertAction(title: "Valider", style: .default, handler: { action in
-            
-            if let name = alert.textFields?.first?.text {
-                print("Your name: \(name)")
-            }
-        }))
-        
-        self.present(alert, animated: true)        
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        sceneView.scene.physicsWorld.timeStep = 1/200
+        
+        self.HideKeyboard()
         
         // Set the view's delegate
         sceneView.delegate = self
@@ -404,8 +445,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         sceneView.scene.physicsWorld.contactDelegate = self
         
         
-        
-        
         // Change the font for the GUI
         doneButton.titleLabel?.font = UIFont(name: FONT_NAME, size: FONT_SIZE_BTN)
         shootButton.titleLabel?.font = UIFont(name: FONT_NAME, size: FONT_SIZE_BTN)
@@ -418,8 +457,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         // Hide the menus
         hideGameMenu()
         hideGamezonePlacementMenu()
-        
-        alertButton()
+        hideNameMenu()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -427,7 +465,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         
         // Create a session configuration
         let configuration = ARWorldTrackingConfiguration()
-
+        
         // Run the view's session
         sceneView.session.run(configuration)
     }
