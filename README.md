@@ -82,6 +82,8 @@ La gestion des collision est gérée par rapport au category bitmask des objets 
 
 ## Problèmes rencontrés
 ### Blocs instables
+Une fois 
+
 
 ![Capture d’écran 2019-08-23 à 15 55 33](https://user-images.githubusercontent.com/43779006/63597768-7d68f780-c5be-11e9-931a-75f789cdc5e3.png)
 
