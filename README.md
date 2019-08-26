@@ -80,6 +80,12 @@ Figure 8 : Map
 ## Gestion des collision
 La gestion des collision est gérée par rapport au category bitmask des objets en collision. Suivant le category bitmask des objets, on ajoute le nombre de points correspondants au score du joueur. Les balles lancées par le joueur ont un category bitmask de 2 et tous les objets rapportant des points disposent du category bitmask 3.
 
+## Multijoueur
+Pour développer le multijoueur, nous avons créé la branche **multiplayer** sur GitHub. De cette manière le développement du mode multijoueur ne perturbera pas le développement du reste du jeu. 
+### Problème de merge
+Lors d'une tentative de merge entre la branche **multiplayer** et la branche **master**, nous avons eu un problème de conflit avec le fichier **storyboard** de Xcode qui contient l'interface graphique de notre application dans un format **xml**. Git n'arrivant pas à merger les deux storyboard automatiquement, ce processus a dû être effectué manuellement. Après avoir manuellement combiné les deux fichiers, certains boutons avaient disparus et ont donc dû être recréé.  
+Il est donc préférable d'éviter d'avoir à merge les fichiers **.storyboard** afin d'éviter ces complications.
+
 ## Problèmes rencontrés
 ### Blocs instables
 Quand nous plaçons la map, tous les blocs se mettent à trembler et par conséquent, ils tombent tous de la map. Les blocs empilés bougent davantage que ceux qui sont juste placés sur le sol.
