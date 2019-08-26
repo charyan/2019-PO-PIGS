@@ -9,10 +9,11 @@
 import UIKit
 import SceneKit
 import ARKit
+import MultipeerConnectivity
 
 ///////////////////////////////////////////////////////////////
 
-let DEBUG_MODE : Bool = false // TRUE is ON
+let DEBUG_MODE : Bool = true // TRUE is ON
 
 // BALL
 let BALL_PROJECTILE_NAME : String! = "ball"
@@ -55,20 +56,111 @@ let FONT_SIZE_PTS : CGFloat = 50
 
 ////////////////////////////////////////////////////////////
 
-extension UIViewController {
-    func HideKeyboard() {
-        let Tap:UITapGestureRecognizer = UITapGestureRecognizer(target: self , action: #selector(DismissKeyboard))
+class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SCNPhysicsContactDelegate, MCSessionDelegate, MCBrowserViewControllerDelegate {
+    
+    
+    @IBOutlet weak var doneNetworkingButton: UIButton!
+    @IBOutlet weak var networkingView: UIView!
+    @IBOutlet weak var debugTextView: UITextView!
+    @IBOutlet weak var gameView: UIView!
+    @IBOutlet weak var gamePlacementView: UIView!
+    
+    @IBAction func onDoneNetworkingButton(_ sender: Any) {
+        networkingView.isHidden = true
         
-        view.addGestureRecognizer(Tap)
+    }
+    @IBAction func onConnectButton(_ sender: Any) {
+        showConnectionMenu()
+        debugPrint("Showing connection menu")
     }
     
-    @objc func DismissKeyboard() {
-        view.endEditing(true)
+    @IBAction func onSendButton(_ sender: Any) {
+        messageToSend = "\(peerID.displayName): Hello \(NSDate())"
+        let message = messageToSend.data(using: String.Encoding.utf8, allowLossyConversion: false)
+        do {
+            try self.mcSession.send(message!, toPeers: self.mcSession.connectedPeers, with: .unreliable)
+            debugTextView.text = debugTextView.text + messageToSend + "\n"        }
+        catch {
+            debugTextView.text = debugTextView.text + "Error sending message" + "\n"
+            debugPrint("Error sending message")
+        }
     }
-}
-
-
-class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SCNPhysicsContactDelegate {
+    
+    var peerID: MCPeerID!
+    var mcSession: MCSession!
+    var mcAdvertiserAssistant: MCAdvertiserAssistant!
+    var messageToSend: String!
+    
+    func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
+        switch state {
+        case .connected:
+            debugTextView.text = debugTextView.text + "Connected: \(peerID.displayName)" + "\n"
+            debugPrint("Connected: \(peerID.displayName)")
+            doneNetworkingButton.isEnabled = true
+        case .connecting:
+            debugTextView.text = debugTextView.text + "Connecting: \(peerID.displayName)" + "\n"
+            debugPrint("Connecting: \(peerID.displayName)")
+        case .notConnected:
+            debugTextView.text = debugTextView.text + "Not Connected: \(peerID.displayName)" + "\n"
+            debugPrint("Not Connected: \(peerID.displayName)")
+        @unknown default:
+            debugTextView.text = debugTextView.text + "fatal error" + "\n"
+            debugPrint("fatal error")
+        }
+    }
+    
+    func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
+        DispatchQueue.main.async { [unowned self] in
+            // send message
+            let message = NSString(data: data as Data, encoding: String.Encoding.utf8.rawValue)! as String
+            self.debugTextView.text = self.debugTextView.text + message + "\n"
+        }
+    }
+    
+    func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
+        
+    }
+    
+    func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, with progress: Progress) {
+        
+    }
+    
+    func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
+        
+    }
+    
+    func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
+        dismiss(animated: true)
+    }
+    
+    func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
+        dismiss(animated: true)
+    }
+    
+    @objc func showConnectionMenu() {
+        let ac = UIAlertController(title: "Connection Menu", message: nil, preferredStyle: .actionSheet)
+        ac.addAction(UIAlertAction(title: "Host a session", style: .default, handler: hostSession))
+        ac.addAction(UIAlertAction(title: "Join a session", style: .default, handler: joinSession))
+        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        
+        if let popoverController = ac.popoverPresentationController {
+            popoverController.sourceView = self.view //to set the source of your alert
+            popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0) // you can set this as per your requirement.
+            popoverController.permittedArrowDirections = [] //to hide the arrow of any particular direction
+        }
+        self.present(ac, animated: true)
+    }
+    
+    func hostSession(action: UIAlertAction) {
+        mcAdvertiserAssistant = MCAdvertiserAssistant(serviceType: "pigs", discoveryInfo: nil, session: mcSession)
+        mcAdvertiserAssistant.start()
+    }
+    
+    func joinSession(action: UIAlertAction) {
+        let mcBrowser = MCBrowserViewController(serviceType: "pigs", session: mcSession)
+        mcBrowser.delegate = self
+        present(mcBrowser, animated: true)
+    }
 
     var score = 0
     
@@ -111,7 +203,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     
     // When the Done button is pressed
     @IBAction func onDoneButton(_ sender: Any) {
-        if tracking {
+        if (tracking) {
             //Set up the scene
             guard foundSurface else { return }
             let trackingPosition = trackerNode!.position
@@ -168,51 +260,38 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
 
     // Display the game menu
     func displayGameMenu() {
-        scoreLabel.isHidden = false
-        doneButton.isHidden = false
-        labelPoints.isHidden = false
-        shootButton.isHidden = false
-        crosshair.isHidden = false
+        gameView.isHidden = false
+        
+        // TOCHECK
         playerName.isHidden = false
         HUD.isHidden = false
     }
     
     // Hide the game menu
     func hideGameMenu() {
-        scoreLabel.isHidden = true
-        doneButton.isHidden = true
-        labelPoints.isHidden = true
-        shootButton.isHidden = true
-        crosshair.isHidden = true
+        gameView.isHidden = true
+
+        // TOCHECK
         playerName.isHidden = true
         HUD.isHidden = true
     }
     
     // Display the gamezone placement menu
     func displayGamezonePlacementMenu() {
-        self.doneButton.isHidden = false
-        self.doneButton.isEnabled = true
+        gamePlacementView.isHidden = false
         
-        self.leftButton.isHidden = false
-        self.leftButton.isEnabled = true
-        
-        self.rightButton.isHidden = false
-        self.rightButton.isEnabled = true
+        if (self.sceneView.session.currentFrame?.rawFeaturePoints!.points.count)! > 50 {
+            doneButton.isEnabled = true
+            doneButton.backgroundColor = #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)
+        } else {
+            doneButton.isEnabled = false
+            doneButton.backgroundColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)
+        }
     }
     
     // Hide the gamezone placement menu
     func hideGamezonePlacementMenu() {
-        doneButton.isHidden = true
-        doneButton.isEnabled = false
-        doneButton.isOpaque = false
-        
-        self.leftButton.isHidden = true
-        self.leftButton.isEnabled = false
-        self.leftButton.isOpaque = false
-        
-        self.rightButton.isHidden = true
-        self.rightButton.isEnabled = false
-        self.rightButton.isOpaque = false
+        gamePlacementView.isHidden = true
     }
     
     func displayNameMenu() {
@@ -437,6 +516,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             sceneView.debugOptions = [ARSCNDebugOptions.showWorldOrigin,
                                       ARSCNDebugOptions.showPhysicsShapes,
                                       ARSCNDebugOptions.showFeaturePoints]
+            doneNetworkingButton.isEnabled = true
         }
         
         // Enable antialiasing
@@ -444,19 +524,17 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         
         sceneView.scene.physicsWorld.contactDelegate = self
         
-        
-        // Change the font for the GUI
-        doneButton.titleLabel?.font = UIFont(name: FONT_NAME, size: FONT_SIZE_BTN)
-        shootButton.titleLabel?.font = UIFont(name: FONT_NAME, size: FONT_SIZE_BTN)
-        leftButton.titleLabel?.font = UIFont(name: FONT_NAME, size: FONT_SIZE_BTN)
-        rightButton.titleLabel?.font = UIFont(name: FONT_NAME, size: FONT_SIZE_BTN)
-        
         labelPoints.font = UIFont(name: FONT_NAME, size: FONT_SIZE_PTS)
         scoreLabel.font = UIFont(name: FONT_NAME, size: FONT_SIZE_PTS)
         
         // Hide the menus
         hideGameMenu()
         hideGamezonePlacementMenu()
+        
+        // Creates a multipeer session with the system name as the peerID
+        peerID = MCPeerID(displayName: UIDevice.current.name)
+        mcSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .required)
+        mcSession.delegate = self
         hideNameMenu()
     }
     
@@ -501,5 +579,17 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     func sessionInterruptionEnded(_ session: ARSession) {
         // Reset tracking and/or remove existing anchors if consistent tracking is required
         
+    }
+}
+
+extension UIViewController {
+    func HideKeyboard() {
+        let Tap:UITapGestureRecognizer = UITapGestureRecognizer(target: self , action: #selector(DismissKeyboard))
+        
+        view.addGestureRecognizer(Tap)
+    }
+    
+    @objc func DismissKeyboard() {
+        view.endEditing(true)
     }
 }
