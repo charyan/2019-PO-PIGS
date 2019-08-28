@@ -101,12 +101,12 @@ Pour régler le problème, nous avons essayé de modifier la taille, la physique
 
 Après de nombreuses recherches sur le web, plusieurs messages envoyés sur des forums et plus de trois jours de travaillent à deux dessus, nous avons résolu le problème en reconstruisant tous la map et les blocs.
 
-![pyramid](../../master/doc/Images/pyramid.png?token=AKOAHSWZHO2ZHM6CHSC3CXC5MY63Y)
+![pyramid](https://raw.githubusercontent.com/charyan000/2019-PO-PIGS/master/doc/Images/pyramid.png?token=AKOAHSW5BLFVPWFE6VWMXZK5MY7GM)
 Figure 10 : Blocs empilés en pyramide
 
 ## Gameplay
 ### Cibles
-![targetBlocs](../../master/doc/Images/targetBlocs.png?token=AKOAHSXEUYCFORSPMMLXGRC5MY66G)
+![targetBlocs](https://raw.githubusercontent.com/charyan000/2019-PO-PIGS/master/doc/Images/targetBlocs.png?token=AKOAHSXEUYCFORSPMMLXGRC5MY66G)
 Figure 11 : 
 
 ### Points
