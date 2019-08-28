@@ -10,7 +10,6 @@ PIGS est un jeu dans lequel deux joueurs s'affrontent dans un monde entre le ré
 Chaque joueur disposera d'une tablette au travers de laquel il pourra voir et interagir avec le jeu.
 ### Plan du stand
 ![plan](https://user-images.githubusercontent.com/43775161/58421157-916c8e00-808f-11e9-9d4d-e0fb333a133e.png)
-
 Figure 2 : Plan du stand
 
 ## Organisation
@@ -40,7 +39,6 @@ Pour placer la zone de jeu, nous commençons par détecter une zone plane, sur c
 Pour détecter une zone plate, l'Ipad utilise des points de repères virtuels se fixant sur des imperfections de la surface réelle où nous voulons placer la zone de jeu. Plus cette surface contient des imperfections, plus elle sera utilisable pour la réalité augmentée. Une table couverte d'une couche de plastique ne sera pas adapté car elle contient très peu d'impérféctions et reflète énormément la lumière contrairement à une table en boit brut qui sera beaucoup plus intéressante dans notre cas.
 
 ![DetectionZonePlate](https://user-images.githubusercontent.com/43779006/60086632-be1dcf00-973b-11e9-9341-460c4b517711.jpg)
-
 Figure 3 : Points de repère utilisés par l'iPad pour détecter une zone plate
 
 ### Placement du placeholder
@@ -50,14 +48,12 @@ Une fois qu'une zone plate a été détectée, le placeholer apparait automatiqu
 Pour effectuer une rotation du placeholder, l'utilisateur peut utiliser deux boutons. Les bontons modifient la position du placeholder sur l'axe Y.
 
 ![RotationPlaceholder](https://user-images.githubusercontent.com/43779006/60091773-a51a1b80-9745-11e9-815c-3d998478c431.jpg)
-
 Figure 4 : Boutons sur l'iPad pour modifier la position de l'écran
 
 ### Placement de la map
 Une fois que le placeholder est à l'endroit où nous le souhaitons, il nous suffit de presser sur le bouton "Done" pour placer la map.
 
 ![PlacementMap](https://user-images.githubusercontent.com/43779006/60085878-6468d500-973a-11e9-94fc-f780bff341b4.jpg)
-
 Figure 6 : Terrain de jeu
 
 ## Lanceur
