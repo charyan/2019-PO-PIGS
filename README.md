@@ -104,6 +104,13 @@ Pour régler le problème, nous avons essayé de modifier la taille, la physique
 
 Après de nombreuses recherches sur le web, plusieurs messages envoyés sur des forums et plus de trois jours de travaillent à deux dessus, nous avons résolu le problème en reconstruisant tous la map et les blocs.
 
+La solution n'étant pas réellement concluante, nous avons trouvé une manière de contourner le problème.
+Les blocs empilés les uns sur les autres provoque un tremblement faisant tomber la pile de cubes. Lorsque les blocs sont de taille réduite, la gravité agit plus "fortement". Les blocs tombent beaucoup plus vite et la physique est approximative.
+
+Nous avons remarqué que si nous empilions les cubes en pyramide et qu'il ont au moins un contact avec deux autres blocs, ils tombaient rarement.
+
+Nous allons créer un map sur ce principe afin d'avoir un terrain de jeu stable.
+
 ![pyramid](https://raw.githubusercontent.com/charyan000/2019-PO-PIGS/master/doc/Images/pyramid.png?token=AKOAHSW5BLFVPWFE6VWMXZK5MY7GM)
 
 Figure 10 : Blocs empilés en pyramide
