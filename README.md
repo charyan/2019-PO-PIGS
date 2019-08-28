@@ -110,7 +110,7 @@ Figure 10 : Blocs empilés en pyramide
 
 ## Gameplay
 ### Cibles
-![targetBlocs](https://raw.githubusercontent.com/charyan000/2019-PO-PIGS/master/doc/Images/targetBlocs.png?token=AKOAHSXEUYCFORSPMMLXGRC5MY66G)
+![targetBlocs](https://raw.githubusercontent.com/charyan000/2019-PO-PIGS/master/doc/Images/targetBlocs.png?token=AKOAHSV3FPVIR75VNEC7AGK5MY7YY)
 
 Figure 11 : 
 
