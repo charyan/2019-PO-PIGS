@@ -101,12 +101,12 @@ Pour régler le problème, nous avons essayé de modifier la taille, la physique
 
 Après de nombreuses recherches sur le web, plusieurs messages envoyés sur des forums et plus de trois jours de travaillent à deux dessus, nous avons résolu le problème en reconstruisant tous la map et les blocs.
 
-![pyramid](../doc/images/pyramid.png)
+![pyramid](../../doc/images/pyramid.png)
 Figure 10 : Blocs empilés en pyramide
 
 ## Gameplay
 ### Cibles
-![targetBlocs](../doc/images/targetBlocs.png)
+![targetBlocs](../../doc/images/targetBlocs.png)
 Figure 11 : 
 
 ### Points
