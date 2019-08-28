@@ -30,9 +30,8 @@ let TARGET_SCENE_NAME : String! = "art.scnassets/models/target.scn"
 let TARGET_SCALE : SCNVector3 = SCNVector3(3, 0.4, 3)
 let TARGET_POSITION : SCNVector3 = SCNVector3(0, 0, -20)
 let TARGET_ROOT_NODE_NAME : String! = "Target"
-
 // GAMEZONE
-let GAMEZONE_SCENE_NAME : String! = "art.scnassets/level/zeroMap.scn"
+let GAMEZONE_SCENE_NAME : String! = "art.scnassets/level/pigsMap.scn"
 let GAMEZONE_SCALE : SCNVector3 = SCNVector3(1, 1, 1)
 let GAMEZONE_POSITION : SCNVector3 = SCNVector3(0, -0.5, -0.8)
 let GAMEZONE_ROOT_NODE_NAME : String! = "root"
@@ -41,9 +40,7 @@ let GAMEZONE_ROOT_NODE_NAME : String! = "root"
 let PLACEHOLDER_PLANE_TRANSPARENCY : CGFloat = 0.5
 
 // POINTS
-let POINTS_BLOCK : Int = 10
-let POINTS_TARGET : Int = 50
-let POINTS_TARGET_2 : Int = 30
+let POINTS_TARGET : Int = 500
 let POINTS_PIG : Int = 15
 
 // Default value rotation for the gamezone placement
@@ -280,7 +277,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     func displayGamezonePlacementMenu() {
         gamePlacementView.isHidden = false
         
-        if (self.sceneView.session.currentFrame?.rawFeaturePoints!.points.count)! > 50 {
+        if (self.sceneView.session.currentFrame?.rawFeaturePoints!.points.count)! > 50 || DEBUG_MODE {
             doneButton.isEnabled = true
             doneButton.backgroundColor = #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)
         } else {
@@ -467,7 +464,22 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     // Register collision
     func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
         let ball = contact.nodeA.physicsBody!.contactTestBitMask == 3 ? contact.nodeA : contact.nodeB
-        let explosion = SCNParticleSystem(named: "Explosion.scnp", inDirectory: nil)!
+        
+        var explosionType = "Target Explosion.scnp"
+        
+        if (contact.nodeA.name! == "pig reference" || contact.nodeB.name! == "pig reference") {
+            
+            explosionType = "Pig Explosion.scnp"
+            
+        } else if (contact.nodeA.name! == "flying target" || contact.nodeB.name! == "flying target") {
+            
+            explosionType = "Flying Target Explosion.scnp"
+
+            
+        }
+        
+        let explosion = SCNParticleSystem(named: explosionType, inDirectory: nil)!
+        
         let explosionNode = SCNNode()
         explosionNode.position = ball.presentation.position
         sceneView.scene.rootNode.addChildNode(explosionNode)
@@ -479,21 +491,14 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             
             if (contact.nodeA.name! == BALL_ROOT_NODE_NAME && contact.nodeB.name! == BALL_ROOT_NODE_NAME) {
                 print("Collision with ball")
-            } else if (contact.nodeA.name! == "block" || contact.nodeB.name! == "block") {
-                scoreIncrement(points: POINTS_BLOCK)
-                print("Collision with block")
             }else if (contact.nodeA.name! == "target" || contact.nodeB.name! == "target") {
                 scoreIncrement(points: POINTS_TARGET)
                 print("Collision with target")
-            } else if (contact.nodeA.name! == "target2" || contact.nodeB.name! == "target2") {
-                scoreIncrement(points: POINTS_TARGET_2)
-                print("Collision with target2")
             } else if (contact.nodeA.name! == "pig" || contact.nodeB.name! == "pig") {
                 scoreIncrement(points: POINTS_PIG)
                 print("Collision with pig")
             }
         }
-        
         
         scoreUpdate()
     }
