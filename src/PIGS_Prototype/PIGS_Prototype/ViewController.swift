@@ -56,9 +56,17 @@ let FONT_SIZE_PTS : CGFloat = 50
 
 ////////////////////////////////////////////////////////////
 
-class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SCNPhysicsContactDelegate {
+class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SCNPhysicsContactDelegate, MCBrowserViewControllerDelegate {
+    func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
+        dismiss(animated: true)
+    }
     
-    var multipeerSession: MultipeerSession!
+    func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
+        dismiss(animated: true)
+    }
+    
+    var isGameHost: Bool = false
+    var multipeerSession: MultipeerSession! = MultipeerSession()
     
     @IBOutlet weak var doneNetworkingButton: UIButton!
     @IBOutlet weak var networkingView: UIView!
@@ -68,16 +76,43 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     
     @IBAction func onDoneNetworkingButton(_ sender: Any) {
         networkingView.isHidden = true
-        
     }
     @IBAction func onConnectButton(_ sender: Any) {
-        debugPrint("Connect: This button does nothing")
+        showConnectionMenu()
+        debugPrint("Showing connection menu")
     }
     
     @IBAction func onSendButton(_ sender: Any) {
-        print("Send: This button does nothing")
+        multipeerSession.sendMessage()
+        print("Sent message")
     }
     
+    @objc func showConnectionMenu() {
+        let ac = UIAlertController(title: "Connection Menu", message: nil, preferredStyle: .actionSheet)
+        ac.addAction(UIAlertAction(title: "Host a session", style: .default, handler: hostSession))
+        ac.addAction(UIAlertAction(title: "Join a session", style: .default, handler: joinSession))
+        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        
+        if let popoverController = ac.popoverPresentationController {
+            popoverController.sourceView = self.view //to set the source of your alert
+            popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0) // you can set this as per your requirement.
+            popoverController.permittedArrowDirections = [] //to hide the arrow of any particular direction
+        }
+        self.present(ac, animated: true)
+    }
+    
+    func hostSession(action: UIAlertAction) {
+       isGameHost = true
+        multipeerSession.setMcAdvertiserAssistant(MCAdvertiserAssistant(serviceType: "pigs", discoveryInfo: nil, session: multipeerSession.session))
+        multipeerSession.getMcAdvertiserAssistant().start()
+    }
+    
+    func joinSession(action: UIAlertAction) {
+        isGameHost = false
+        let mcBrowser = MCBrowserViewController(serviceType: "pigs", session: multipeerSession.session)
+        mcBrowser.delegate = self
+        present(mcBrowser, animated: true)
+    }
 
     var score = 0
     
@@ -85,8 +120,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         case BALL    = 2
         case TARGET  = 3 // A target is any object with which the collision give points to the player
     }
-    
-    
+
     @IBOutlet var sceneView: ARSCNView!
     @IBOutlet weak var scoreLabel: UILabel!
     
@@ -313,7 +347,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         node.scale = TARGET_SCALE
         node.name = TARGET_ROOT_NODE_NAME
         node.position = TARGET_POSITION
-      node.rotation = SCNVector4(1, 0, 0, GLKMathDegreesToRadians(90))
+        node.rotation = SCNVector4(1, 0, 0, GLKMathDegreesToRadians(90))
         
         node.physicsBody = SCNPhysicsBody(type: .static, shape: nil)
         
@@ -447,12 +481,38 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         // Hide the menus
         hideGameMenu()
         hideGamezonePlacementMenu()
-        
-        // Creates a multipeer session with the system name as the peerID
-        peerID = MCPeerID(displayName: UIDevice.current.name)
-        mcSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .required)
-        mcSession.delegate = self
         hideNameMenu()
+        
+        multipeerSession.delegate = self
+        multipeerSession.setLogView(debugTextView)
+    }
+    
+    var mapProvider: MCPeerID?
+    
+    /// - Tag: ReceiveData
+    func receivedData(_ data: Data, from peer: MCPeerID) {
+        do {
+            if let worldMap = try NSKeyedUnarchiver.unarchivedObject(ofClass: ARWorldMap.self, from: data) {
+                // Run the session with the received world map.
+                let configuration = ARWorldTrackingConfiguration()
+                configuration.planeDetection = .horizontal
+                configuration.initialWorldMap = worldMap
+                sceneView.session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
+                
+                // Remember who provided the map for showing UI feedback.
+                mapProvider = peer
+            }
+            else
+                if let anchor = try NSKeyedUnarchiver.unarchivedObject(ofClass: ARAnchor.self, from: data) {
+                    // Add anchor to the session, ARSCNView delegate adds visible content.
+                    sceneView.session.add(anchor: anchor)
+                }
+                else {
+                    print("unknown data received from \(peer)")
+            }
+        } catch {
+            print("can't decode data received from \(peer)")
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -508,5 +568,18 @@ extension UIViewController {
     
     @objc func DismissKeyboard() {
         view.endEditing(true)
+    }
+}
+
+extension ViewController : MultipeerSessionServiceDelegate {
+    func colorChanged(manager: MultipeerSession, colorString: String) {
+        //
+    }
+    
+    
+    func connectedDevicesChanged(manager: MultipeerSession, connectedDevices: [String]) {
+        OperationQueue.main.addOperation {
+            print("Connections: \(connectedDevices)")
+        }
     }
 }
