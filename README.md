@@ -10,6 +10,7 @@ PIGS est un jeu dans lequel deux joueurs s'affrontent dans un monde entre le ré
 Chaque joueur disposera d'une tablette au travers de laquel il pourra voir et interagir avec le jeu.
 ### Plan du stand
 ![plan](https://user-images.githubusercontent.com/43775161/58421157-916c8e00-808f-11e9-9d4d-e0fb333a133e.png)
+
 Figure 2 : Plan du stand
 
 ## Organisation
@@ -39,6 +40,7 @@ Pour placer la zone de jeu, nous commençons par détecter une zone plane, sur c
 Pour détecter une zone plate, l'Ipad utilise des points de repères virtuels se fixant sur des imperfections de la surface réelle où nous voulons placer la zone de jeu. Plus cette surface contient des imperfections, plus elle sera utilisable pour la réalité augmentée. Une table couverte d'une couche de plastique ne sera pas adapté car elle contient très peu d'impérféctions et reflète énormément la lumière contrairement à une table en boit brut qui sera beaucoup plus intéressante dans notre cas.
 
 ![DetectionZonePlate](https://user-images.githubusercontent.com/43779006/60086632-be1dcf00-973b-11e9-9341-460c4b517711.jpg)
+
 Figure 3 : Points de repère utilisés par l'iPad pour détecter une zone plate
 
 ### Placement du placeholder
@@ -48,12 +50,14 @@ Une fois qu'une zone plate a été détectée, le placeholer apparait automatiqu
 Pour effectuer une rotation du placeholder, l'utilisateur peut utiliser deux boutons. Les bontons modifient la position du placeholder sur l'axe Y.
 
 ![RotationPlaceholder](https://user-images.githubusercontent.com/43779006/60091773-a51a1b80-9745-11e9-815c-3d998478c431.jpg)
+
 Figure 4 : Boutons sur l'iPad pour modifier la position de l'écran
 
 ### Placement de la map
 Une fois que le placeholder est à l'endroit où nous le souhaitons, il nous suffit de presser sur le bouton "Done" pour placer la map.
 
 ![PlacementMap](https://user-images.githubusercontent.com/43779006/60085878-6468d500-973a-11e9-94fc-f780bff341b4.jpg)
+
 Figure 6 : Terrain de jeu
 
 ## Lanceur
@@ -65,11 +69,13 @@ Différentes cibles sont placées sur la table, elles rapportent différentes qu
 ## Création des blocs
 Les blocs sont directement créés dans SceneKit car nous avons trouvé que c'était la solution la plus simple. Nous leur application ensuite leurs paramètres physique et une texture.
 ![création_cube](https://user-images.githubusercontent.com/43775161/63411909-ddad3d00-c3f6-11e9-80c4-76a0ddaa8bc8.png)
+
 Figure 7 : Cube et ses propriétés physiques
 
 ## Création de la map
 Les blocs sont empilés sur la map. On a placé un cube invisible pour le sol. La map est enregistré en format SceneKit (.scn).
 ![map](https://user-images.githubusercontent.com/43775161/63411910-ddad3d00-c3f6-11e9-9af6-0fc7e93f9233.png)
+
 Figure 8 : Map
 
 
@@ -91,6 +97,7 @@ Il est donc préférable d'éviter d'avoir à merge les fichiers **.storyboard**
 Quand nous plaçons la map, tous les blocs se mettent à trembler et par conséquent, ils tombent tous de la map. Les blocs empilés bougent davantage que ceux qui sont juste placés sur le sol.
 
 ![Capture d’écran 2019-08-23 à 15 55 33](https://user-images.githubusercontent.com/43779006/63597768-7d68f780-c5be-11e9-931a-75f789cdc5e3.png)
+
 Figure 9 : Blocs qui tombent de la map
 
 Pour régler le problème, nous avons essayé de modifier la taille, la physique, la hitbox, la masse, la gravité, le type(plan, box, floor), l'emplacement des blocs et du sol.
@@ -98,11 +105,13 @@ Pour régler le problème, nous avons essayé de modifier la taille, la physique
 Après de nombreuses recherches sur le web, plusieurs messages envoyés sur des forums et plus de trois jours de travaillent à deux dessus, nous avons résolu le problème en reconstruisant tous la map et les blocs.
 
 ![pyramid](https://raw.githubusercontent.com/charyan000/2019-PO-PIGS/master/doc/Images/pyramid.png?token=AKOAHSW5BLFVPWFE6VWMXZK5MY7GM)
+
 Figure 10 : Blocs empilés en pyramide
 
 ## Gameplay
 ### Cibles
 ![targetBlocs](https://raw.githubusercontent.com/charyan000/2019-PO-PIGS/master/doc/Images/targetBlocs.png?token=AKOAHSXEUYCFORSPMMLXGRC5MY66G)
+
 Figure 11 : 
 
 ### Points
