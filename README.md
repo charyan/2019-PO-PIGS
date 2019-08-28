@@ -102,3 +102,8 @@ Pour régler le problème, nous avons essayé de modifier la taille, la physique
 
 Après de nombreuses recherches sur le web, plusieurs messages envoyés sur des forums et plus de trois jours de travaillent à deux dessus, nous avons résolu le problème en reconstruisant tous la map et les blocs.
 
+![pyramid](doc/image/pyramid.png)
+
+Figure 10 : Blocs empilés en pyramide
+
+![targetBlocs](doc/image/targetBlocs.png)
