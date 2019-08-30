@@ -65,6 +65,10 @@ Nous avons créée un réseau sans-fil avec un access point permettant de transf
 Nos appareils ont tous une adresse fixe, le même masque et le même NetId.
 
 Un schéma logique et une liste du matériel sont disponibles dans le dossier "charyan000/2019-PO-PIGS/doc".
+### Serveur
+Nous utilisons un ordinateur Intel NUC afin de proposer divers services nécessaires à notre projet : service Apache, MySQL, PHP. Nous utilisons XAMPP.  
+![Panneau de contrôle XAMPP](https://user-images.githubusercontent.com/43775161/64027001-26c06800-cb40-11e9-9130-cc560776a135.png)
+Le NUC utilise Windows 10 Pro.
 
 ### Wifi
 
@@ -83,12 +87,12 @@ Nous avons créé une base de données pour gérer le classement des joueurs ain
 | SCORE_util | Int |
 
 ### Insertion de données
-L'iPad utilise la méthode POST pour envoyer le nom et le score du joueur à une page PHP qui va insérer les informations dans la base de données.
+L'iPad utilise une requête HTTP (méthode POST) pour envoyer le nom et le score du joueur à une page PHP (**input.php**) qui va insérer les informations dans la base de données. Par exemple, pour le corps de la requête HTTP: `player=Théo&score=200`.
 
 ### Affichage du classement
-L'iPad utilise la méthode POST pour envoyer le nom et le score du joueur à une page PHP qui va insérer les informations dans la base de données.
+L'iPad utilise la méthode POST pour envoyer le nom et le score du joueur à une page PHP qui va insérer les informations dans la base de données. Nous avons décidé d'utiliser cette manière de faire car il n'existe pas de connecteur MySQL officiel pour SWIFT.
 
-Une page PHP sélectionne le nom et le score de tous les joueurs de la base de données. Il insère ces informations dans un tableau. La page est rafraichie automatiquement chaque seconde par une petite extension du navigateur.
+La page PHP effectue une requête **SELECT** sur la base de donnée et retourne le nom et le score de tous les joueurs. Il affiche ces informations dans un tableau. La page est rafraichie automatiquement chaque seconde par une petite extension pour **Google Chrome** appellée **![Auto Refresh](https://chrome.google.com/webstore/detail/auto-refresh/ifooldnmmcmlbdennkpdnlnbgbmfalko)**.
 
 ## Lanceur
 Le lanceur permet de créer une balle à la position de l'iPad dans le monde virtuel et d'appliquer une force permettant de déplacer cette balle. Le lancement de la balle est déclenché par l'appuis d'un bouton. Le lanceur empêche l'utilisateur d'appuyer à répétition sur le bouton à l'aide d'un système de cooldown qui désactive le bouton.
