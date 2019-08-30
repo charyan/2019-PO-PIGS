@@ -66,7 +66,8 @@ Nos appareils ont tous une adresse fixe, le même masque et le même NetId.
 
 Un schéma logique et une liste du matériel sont disponibles dans le dossier "charyan000/2019-PO-PIGS/doc".
 
-### Wifi 
+### Wifi
+
 | SSID | PIGS-WIFI |
 | Security mode | WPA2-Personnal |
 | MDP | Admlocal0 |
@@ -81,10 +82,13 @@ Nous avons créé une base de données pour gérer le classement des joueurs ain
 | NOM_util | Varchar |
 | SCORE_util | Int |
 
-### Ajout de données dans la base de
+### Insertion de données
+L'iPad utilise la méthode POST pour envoyer le nom et le score du joueur à une page PHP qui va insérer les informations dans la base de données.
 
+### Affichage du classement
+L'iPad utilise la méthode POST pour envoyer le nom et le score du joueur à une page PHP qui va insérer les informations dans la base de données.
 
-
+Une page PHP sélectionne le nom et le score de tous les joueurs de la base de données. Il insère ces informations dans un tableau. La page est rafraichie automatiquement chaque seconde par une petite extension du navigateur.
 
 ## Lanceur
 Le lanceur permet de créer une balle à la position de l'iPad dans le monde virtuel et d'appliquer une force permettant de déplacer cette balle. Le lancement de la balle est déclenché par l'appuis d'un bouton. Le lanceur empêche l'utilisateur d'appuyer à répétition sur le bouton à l'aide d'un système de cooldown qui désactive le bouton.
