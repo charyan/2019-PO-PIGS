@@ -60,6 +60,27 @@ Une fois que le placeholder est à l'endroit où nous le souhaitons, il nous suf
 
 Figure 6 : Terrain de jeu
 
+## Réseau
+Nous avons créée un réseau sans-fil avec un access point permettant de transférer des informations entre le serveur et les iPad.
+Nos appareils ont tous une adresse fixe, le même masque et le même NetId.
+
+Un schéma logique et une liste du matériel sont disponibles dans le dossier "charyan000/2019-PO-PIGS/doc".
+
+## Classement des joueurs
+### Base de données "utilisateur"
+Nous avons créé une base de données pour gérer le classement des joueurs ainsi que leurs scores.
+
+| Nom | Type |
+| ----------- | ----------- |
+| ID_util | Int |
+| NOM_util | Varchar |
+| SCORE_util | Int |
+
+### Connexion entre 
+
+
+
+
 ## Lanceur
 Le lanceur permet de créer une balle à la position de l'iPad dans le monde virtuel et d'appliquer une force permettant de déplacer cette balle. Le lancement de la balle est déclenché par l'appuis d'un bouton. Le lanceur empêche l'utilisateur d'appuyer à répétition sur le bouton à l'aide d'un système de cooldown qui désactive le bouton.
 
