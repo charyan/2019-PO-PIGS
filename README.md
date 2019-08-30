@@ -94,7 +94,7 @@ Il est donc préférable d'éviter d'avoir à merge les fichiers **.storyboard**
 
 ## Problèmes rencontrés
 ### Blocs instables
-Quand nous plaçons la map, tous les blocs se mettent à trembler et par conséquent, ils tombent tous de la map. Les blocs empilés bougent davantage que ceux qui sont juste placés sur le sol.
+Lors du placement de la map, les blocs se mettent à trembler. Le problème est accru quand les blocs sont empilés les uns sur les autres.
 
 ![Capture d’écran 2019-08-23 à 15 55 33](https://user-images.githubusercontent.com/43779006/63597768-7d68f780-c5be-11e9-931a-75f789cdc5e3.png)
 
@@ -102,9 +102,7 @@ Figure 9 : Blocs qui tombent de la map
 
 Pour régler le problème, nous avons essayé de modifier la taille, la physique, la hitbox, la masse, la gravité, le type(plan, box, floor), l'emplacement des blocs et du sol.
 
-Après de nombreuses recherches sur le web, plusieurs messages envoyés sur des forums et plus de trois jours de travaillent à deux dessus, nous avons résolu le problème en reconstruisant tous la map et les blocs.
-
-La solution n'étant pas réellement concluante, nous avons trouvé une manière de contourner le problème.
+Après de nombreuses recherches sur le web, plusieurs messages envoyés sur des forums et plus de trois jours de travaillent à deux dessus, nous avons trouvé une manière de contourner le problème.
 Les blocs empilés les uns sur les autres provoque un tremblement faisant tomber la pile de cubes. Lorsque les blocs sont de taille réduite, la gravité agit plus "fortement". Les blocs tombent beaucoup plus vite et la physique est approximative.
 
 Nous avons remarqué que si nous empilions les cubes en pyramide et qu'il ont au moins un contact avec deux autres blocs, ils tombaient rarement.
