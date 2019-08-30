@@ -66,6 +66,11 @@ Nos appareils ont tous une adresse fixe, le même masque et le même NetId.
 
 Un schéma logique et une liste du matériel sont disponibles dans le dossier "charyan000/2019-PO-PIGS/doc".
 
+### Wifi 
+| SSID | PIGS-WIFI |
+| Security mode | WPA2-Personnal |
+| MDP | Admlocal0 |
+
 ## Classement des joueurs
 ### Base de données "utilisateur"
 Nous avons créé une base de données pour gérer le classement des joueurs ainsi que leurs scores.
@@ -76,7 +81,7 @@ Nous avons créé une base de données pour gérer le classement des joueurs ain
 | NOM_util | Varchar |
 | SCORE_util | Int |
 
-### Connexion entre 
+### Ajout de données dans la base de
 
 
 
