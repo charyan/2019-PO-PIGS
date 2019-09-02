@@ -191,6 +191,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     @IBOutlet weak var rightButton: UIButton!
     @IBOutlet weak var nameMenuTextField: UITextField!
     @IBOutlet weak var nameMenuError: UILabel!
+    @IBOutlet weak var nameLengthError: UILabel!
     @IBOutlet weak var playerName: UILabel!
     @IBOutlet weak var HUD: UILabel!
     
@@ -221,8 +222,11 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     @IBAction func onPlayButton(_ sender: Any) {
         if nameMenuTextField.text!.isEmpty {
             displayNameMenuError()
+        } else if (nameMenuTextField.text!.count > 20) {
+            displayNameLengthError()
         } else {
             hideNameMenuError()
+            hideNameLengthError()
             playerName.text = nameMenuTextField.text
             hideNameMenu()
             DismissKeyboard()
@@ -296,6 +300,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     func displayNameMenu() {
         self.Pseudo.isHidden = false
         self.nameMenuError.isHidden = true
+        self.nameLengthError.isHidden = true
     }
     
     func hideNameMenu() {
@@ -308,6 +313,14 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     
     func hideNameMenuError() {
         nameMenuError.isHidden = true
+    }
+    
+    func displayNameLengthError() {
+        nameLengthError.isHidden = false
+    }
+    
+    func hideNameLengthError() {
+        nameLengthError.isHidden = true
     }
     
     // Variables for play zone
@@ -491,6 +504,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             
             explosionType = "Flying Target Explosion.scnp"
 
+        } else if (contact.nodeA.name! == "door" || contact.nodeB.name! == "door") {
+            explosionType = "Door Explosion.scnp"
         }
         
         let explosion = SCNParticleSystem(named: explosionType, inDirectory: nil)!

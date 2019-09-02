@@ -217,6 +217,13 @@
                                         <color key="textColor" red="0.80000000000000004" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="20 caractères maximum !" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nwW-O7-7Om" userLabel="nameLengthError">
+                                        <rect key="frame" x="310" y="617" width="215" height="24"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="SkaterGirlsRock" family="Skater Girls Rock" pointSize="23"/>
+                                        <color key="textColor" red="0.80000000000000004" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <viewLayoutGuide key="safeArea" id="IAF-s0-rQu"/>
@@ -236,6 +243,7 @@
                         <outlet property="gameView" destination="kSJ-U9-iR1" id="nAy-li-IJW"/>
                         <outlet property="labelPoints" destination="TC9-Ht-wuS" id="CBd-uv-ktn"/>
                         <outlet property="leftButton" destination="8Fd-hn-gke" id="9BD-4g-lFJ"/>
+                        <outlet property="nameLengthError" destination="nwW-O7-7Om" id="vPB-LS-Eho"/>
                         <outlet property="nameMenuError" destination="e81-nF-DZ2" id="Zvq-Wk-jAb"/>
                         <outlet property="nameMenuTextField" destination="RKF-6t-BWv" id="ahR-MX-43C"/>
                         <outlet property="networkingView" destination="Ond-14-Fcs" id="wo6-tT-Vsy"/>
