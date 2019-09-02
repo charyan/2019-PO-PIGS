@@ -52,6 +52,8 @@ let FONT_NAME : String = "Skater Girls Rock"
 let FONT_SIZE_BTN : CGFloat = 50
 let FONT_SIZE_PTS : CGFloat = 50
 
+let URL_POST : String = "http://192.168.1.1/pigs/input.php"
+
 ////////////////////////////////////////////////////////////
 
 class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SCNPhysicsContactDelegate, MCSessionDelegate, MCBrowserViewControllerDelegate {
@@ -170,6 +172,32 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         case TARGET  = 3 // A target is any object with which the collision give points to the player
     }
     
+    func postPlayerRecord() {
+        let url = URL(string: URL_POST)!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        let name = playerName.text
+        let score = scoreLabel.text
+        let playerLabel = "player="
+        let scoreLabel = "&score="
+        
+        let body = playerLabel + name! + scoreLabel + score!
+        request.httpBody = body.data(using: .utf8)
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let error = error {
+                print("error: \(error)")
+            } else {
+                if let response = response as? HTTPURLResponse {
+                    print("statusCode: \(response.statusCode)")
+                }
+                if let data = data, let dataString = String(data: data, encoding: .utf8) {
+                    print("data: \(dataString)")
+                }
+            }
+        }
+        task.resume()
+    }
+    
     
     @IBOutlet var sceneView: ARSCNView!
     @IBOutlet weak var scoreLabel: UILabel!
@@ -201,6 +229,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     // View choose name menu
     @IBOutlet weak var Pseudo: UIView!
     
+    @IBOutlet weak var NameJoueur: UILabel!
+    @IBOutlet weak var NumberPoints: UILabel!
+    @IBOutlet weak var Results: UIView!
     
     
     // When the Done button is pressed
@@ -236,8 +267,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             displayGameMenu()
             hideGamezonePlacementMenu()
             playAnimation()
+            runTimer()
         }
-        runTimer()
+        
     }
     
 
@@ -283,6 +315,10 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         HUD.isHidden = true
     }
     
+    func hideResultsView() {
+        Results.isHidden = true
+    }
+    
     // Display the gamezone placement menu
     func displayGamezonePlacementMenu() {
         gamePlacementView.isHidden = false
@@ -305,6 +341,12 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         self.Pseudo.isHidden = false
         self.nameMenuError.isHidden = true
         self.nameLengthError.isHidden = true
+    }
+    
+    
+    func displayResultsView() {
+        self.Results.isHidden = false
+        NumberPoints.text = scoreLabel.text
     }
     
     func hideNameMenu() {
@@ -478,21 +520,28 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         score += points
         print("+" + String(points) + " points")
     }
-        
-    var seconds = 60
+    
+    var seconds = 20
+    
     var timer = Timer()
     var isTimerRunning = false
     
     func runTimer() {
         timer = Timer.scheduledTimer(timeInterval: 1, target: self,   selector: (#selector(self.updateTimer)), userInfo: nil, repeats: true)
+        NameJoueur.text = nameMenuTextField.text
+        
     }
     
     @objc func updateTimer() {
         if seconds == 0 {
             timer.invalidate()
+            hideGameMenu()
+            displayResultsView()
+              postPlayerRecord()
         }else{
             seconds -= 1
             timeLabel.text = "\(seconds)"
+           
         }
         
     }
@@ -501,8 +550,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         timer.invalidate()
         seconds = 60
         timeLabel.text = "\(seconds)"
-
-        func playAnimation() {
+    }
+    
+    func playAnimation() {
         let animation = CABasicAnimation(keyPath: "geometry.extrusionDepth")
         animation.fromValue = 0.0
         animation.toValue = 100.0
@@ -515,7 +565,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         node = scene.rootNode.childNode(withName: "flying target", recursively: true)!
         node.addAnimation(animation, forKey : "move")
     }
-    
 
     // Register collision
     func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
@@ -581,6 +630,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        hideResultsView()
         
         sceneView.scene.physicsWorld.timeStep = 1/200
         
@@ -611,12 +661,13 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         // Hide the menus
         hideGameMenu()
         hideGamezonePlacementMenu()
+        hideNameMenu()
+   
         
         // Creates a multipeer session with the system name as the peerID
         peerID = MCPeerID(displayName: UIDevice.current.name)
         mcSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .required)
         mcSession.delegate = self
-        hideNameMenu()
         
     }
     
