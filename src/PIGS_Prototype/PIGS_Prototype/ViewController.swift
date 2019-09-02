@@ -234,6 +234,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             displayGameMenu()
             hideGamezonePlacementMenu()
         }
+        runTimer()
     }
     
 
@@ -552,7 +553,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         
         sceneView.scene.physicsWorld.contactDelegate = self
         
-        labelPoints.font = UIFont(name: FONT_NAME, size: FONT_SIZE_PTS)
+//        labelPoints.font = UIFont(name: FONT_NAME, size: FONT_SIZE_PTS)
         scoreLabel.font = UIFont(name: FONT_NAME, size: FONT_SIZE_PTS)
         
         // Hide the menus
@@ -565,7 +566,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         mcSession.delegate = self
         hideNameMenu()
         
-        runTimer()
     }
     
     override func viewWillAppear(_ animated: Bool) {
