@@ -72,6 +72,18 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         networkingView.isHidden = true
         
     }
+    
+    func hiddenNetworkingView() {
+        networkingView.isHidden = true
+        
+    }
+    
+    func displayNetworkingView() {
+        networkingView.isHidden = false
+    showConnectionMenu()
+        
+    }
+    
     @IBAction func onConnectButton(_ sender: Any) {
         showConnectionMenu()
         debugPrint("Showing connection menu")
@@ -233,7 +245,11 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     @IBOutlet weak var NumberPoints: UILabel!
     @IBOutlet weak var Results: UIView!
     
-    
+    @IBAction func SwipeGesture(_ sender: Any) {
+        exit(0)
+    }
+
+
     // When the Done button is pressed
     @IBAction func onDoneButton(_ sender: Any) {
         if (tracking) {

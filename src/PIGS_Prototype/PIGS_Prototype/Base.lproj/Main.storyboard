@@ -308,6 +308,9 @@
                                 <variation key="heightClass=regular-widthClass=regular">
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </variation>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="BFB-E7-hbf" appends="YES" id="cmV-tQ-awA"/>
+                                </connections>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -339,6 +342,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="right" id="BFB-E7-hbf">
+                    <connections>
+                        <action selector="SwipeGesture:" destination="BV1-FR-VrT" id="f1l-30-b6P"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-1331.6546762589928" y="-45.323741007194243"/>
         </scene>
