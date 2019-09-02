@@ -72,7 +72,8 @@ Nous utilisons un ordinateur Intel NUC sous Windows 10 Pro afin de proposer dive
 Figure 6 : Panneau de contrôle de XAMPP
 
 ### Wifi
-
+| Propriété | Valeur |
+| ----------- | ----------- |
 | SSID | PIGS-WIFI |
 | Security mode | WPA2-Personnal |
 | MDP | Admlocal0 |
