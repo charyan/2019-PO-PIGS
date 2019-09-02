@@ -19,7 +19,7 @@ let DEBUG_MODE : Bool = true // TRUE is ON
 let BALL_PROJECTILE_NAME : String! = "ball"
 let BALL_ROOT_NODE_NAME : String! = "Sphere"
 let BALL_SCENE_NAME : String! = "art.scnassets/models/pink_ball.scn"
-let BALL_SPEED : Float = 20
+let BALL_SPEED : Float = 3
 
 // LAUNCHER
 let PITCH_LAUNCHER : Float = 0.1 // 0 is straight forward
@@ -40,8 +40,9 @@ let GAMEZONE_ROOT_NODE_NAME : String! = "root"
 let PLACEHOLDER_PLANE_TRANSPARENCY : CGFloat = 0.5
 
 // POINTS
-let POINTS_TARGET : Int = 500
-let POINTS_PIG : Int = 15
+let POINTS_TARGET : Int = 10
+let POINTS_FLYING_TARGET : Int = 50
+let POINTS_PIG : Int = 200
 
 // Default value rotation for the gamezone placement
 let ROTATION_DEG : Float = 5;
@@ -227,6 +228,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             DismissKeyboard()
             displayGameMenu()
             hideGamezonePlacementMenu()
+            playAnimation()
         }
     }
     
@@ -460,6 +462,20 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         print("+" + String(points) + " points")
     }
     
+    func playAnimation() {
+        let animation = CABasicAnimation(keyPath: "geometry.extrusionDepth")
+        animation.fromValue = 0.0
+        animation.toValue = 100.0
+        animation.duration = 5.0
+        animation.autoreverses = true
+        animation.repeatCount = .infinity
+        
+        var node = SCNNode()
+        let scene = SCNScene(named: GAMEZONE_SCENE_NAME)!
+        node = scene.rootNode.childNode(withName: "flying target", recursively: true)!
+        node.addAnimation(animation, forKey : "move")
+    }
+    
 
     // Register collision
     func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
@@ -475,26 +491,44 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             
             explosionType = "Flying Target Explosion.scnp"
 
-            
         }
         
         let explosion = SCNParticleSystem(named: explosionType, inDirectory: nil)!
         
-        let explosionNode = SCNNode()
-        explosionNode.position = ball.presentation.position
-        sceneView.scene.rootNode.addChildNode(explosionNode)
-        explosionNode.addParticleSystem(explosion)
-        ball.removeFromParentNode()
+        // Make a target dissapear if there's a collision
+        if (contact.nodeA.name! == "target" || contact.nodeA.name! == "flying target"
+            || contact.nodeA.name! == "pig reference" || contact.nodeA.name! == "door") {
+            contact.nodeA.removeFromParentNode()
+        } else if (contact.nodeB.name! == "target" || contact.nodeB.name! == "flying target"
+            || contact.nodeB.name! == "pig reference" || contact.nodeB.name! == "door") {
+            contact.nodeB.removeFromParentNode()
+        }
         
+        // Remove ball and generate particle only when there's a collision with a target.
+        // Static nodes and boxes aren't affected
+        if (contact.nodeA.name! == "box" || contact.nodeB.name! == "box") {
+            print("Collision with box")
+        } else {
+            let explosionNode = SCNNode()
+            explosionNode.position = ball.presentation.position
+            sceneView.scene.rootNode.addChildNode(explosionNode)
+            explosionNode.addParticleSystem(explosion)
+            ball.removeFromParentNode()
+        }
+        
+        // Update score on collision with target
         if(contact.nodeA.physicsBody!.categoryBitMask == CATEGORY_BIT_MASK.TARGET.rawValue ||
             contact.nodeB.physicsBody!.categoryBitMask == CATEGORY_BIT_MASK.TARGET.rawValue) {
             
             if (contact.nodeA.name! == BALL_ROOT_NODE_NAME && contact.nodeB.name! == BALL_ROOT_NODE_NAME) {
                 print("Collision with ball")
-            }else if (contact.nodeA.name! == "target" || contact.nodeB.name! == "target") {
+            } else if (contact.nodeA.name! == "target" || contact.nodeB.name! == "target") {
                 scoreIncrement(points: POINTS_TARGET)
-                print("Collision with target")
-            } else if (contact.nodeA.name! == "pig" || contact.nodeB.name! == "pig") {
+                print("Collision with cubic target")
+            } else if (contact.nodeA.name! == "flying target" || contact.nodeB.name! == "flying target") {
+                scoreIncrement(points: POINTS_FLYING_TARGET)
+                print("Collision with flying target")
+            } else if (contact.nodeA.name! == "pig reference" || contact.nodeB.name! == "pig reference") {
                 scoreIncrement(points: POINTS_PIG)
                 print("Collision with pig")
             }
@@ -541,6 +575,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         mcSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .required)
         mcSession.delegate = self
         hideNameMenu()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

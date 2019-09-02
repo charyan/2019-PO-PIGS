@@ -15,6 +15,8 @@
 		8BAE78952297C611003F496A /* app-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BAE78942297C611003F496A /* app-icon.png */; };
 		8BC707BB229C021B00CA688A /* launchscreen-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BC707BA229C021B00CA688A /* launchscreen-logo.png */; };
 		8BD8B9AE22C0C18B00C1B37D /* Target Explosion.scnp in Resources */ = {isa = PBXBuildFile; fileRef = 8BD8B9AD22C0C18B00C1B37D /* Target Explosion.scnp */; };
+		8BF6C84A2316AD6B000F835D /* Pig Explosion.scnp in Resources */ = {isa = PBXBuildFile; fileRef = 8B2796292316A33D008241C0 /* Pig Explosion.scnp */; };
+		8BF6C84B2316AD6E000F835D /* Flying Target Explosion.scnp in Resources */ = {isa = PBXBuildFile; fileRef = 8B27962A2316A3C3008241C0 /* Flying Target Explosion.scnp */; };
 		8BFCB2592284476000E54C18 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFCB2582284476000E54C18 /* AppDelegate.swift */; };
 		8BFCB25D2284476000E54C18 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFCB25C2284476000E54C18 /* ViewController.swift */; };
 		8BFCB2602284476000E54C18 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BFCB25E2284476000E54C18 /* Main.storyboard */; };
@@ -162,7 +164,9 @@
 				8BFCB2652284476200E54C18 /* LaunchScreen.storyboard in Resources */,
 				8B13A513228EF23300047809 /* art.scnassets in Resources */,
 				8B34476122A54B9D00E63DD8 /* pigs-launch-background.png in Resources */,
+				8BF6C84B2316AD6E000F835D /* Flying Target Explosion.scnp in Resources */,
 				8BFCB2622284476200E54C18 /* Assets.xcassets in Resources */,
+				8BF6C84A2316AD6B000F835D /* Pig Explosion.scnp in Resources */,
 				8B3987FB22A93EFC002EFD44 /* ExplosionOld.scnp in Resources */,
 				8BAE78952297C611003F496A /* app-icon.png in Resources */,
 				8B3987FA22A93EFC002EFD44 /* spark.png in Resources */,
