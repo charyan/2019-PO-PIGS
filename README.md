@@ -81,6 +81,8 @@ Figure 6 : Panneau de contrôle de XAMPP
 ## Classement des joueurs
 ### Base de données "utilisateur"
 Nous avons créé une base de données pour gérer le classement des joueurs ainsi que leurs scores.
+La gestion de la base de donnée se fait avec l'aide de **phpMyAdmin** qui est installé avec **XAMPP**.
+Ce logiciel nous permet de manipuler notre base de donnée tout en utilisant l'interface adaptée.
 
 | Nom | Type |
 | ----------- | ----------- |
@@ -131,11 +133,15 @@ La partie networking est géré par la bibliothèque [MultipeerConnectivity](htt
 ### Gestion des rôles
 La gestion des rôles est organisées par la variable **isGameHost** qui permettera de déterminer le rôle de l'iPad. Cette méthode permet d'identifier uniquement deux rôles : **Game host** et **Guest**.
 
+## Problèmes rencontrés
 ### Problème de merge
 Lors d'une tentative de merge entre la branche **multiplayer** et la branche **master**, nous avons eu un problème de conflit avec le fichier **storyboard** de Xcode qui contient l'interface graphique de notre application dans un format **xml**. Git n'arrivant pas à merger les deux storyboard automatiquement, ce processus a dû être effectué manuellement. Après avoir manuellement combiné les deux fichiers, certains boutons avaient disparus et ont donc dû être recréé.  
 Il est donc préférable d'éviter d'avoir à merge les fichiers **.storyboard** afin d'éviter ces complications.
 
-## Problèmes rencontrés
+## Gameplay
+### Cibles
+![targetBlocs](https://raw.githubusercontent.com/charyan000/2019-PO-PIGS/master/doc/Images/targetBlocs.png?token=AKOAHSV3FPVIR75VNEC7AGK5MY7YY)
+
 ### Blocs instables
 Lors du placement de la map, les blocs se mettent à trembler. Le problème est accru quand les blocs sont empilés les uns sur les autres.
 
@@ -156,10 +162,3 @@ Nous allons créer un map sur ce principe afin d'avoir un terrain de jeu stable.
 
 Figure 10 : Blocs empilés en pyramide
 
-## Gameplay
-### Cibles
-![targetBlocs](https://raw.githubusercontent.com/charyan000/2019-PO-PIGS/master/doc/Images/targetBlocs.png?token=AKOAHSV3FPVIR75VNEC7AGK5MY7YY)
-
-Figure 11 : 
-
-### Points
