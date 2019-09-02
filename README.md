@@ -87,9 +87,13 @@ Nous avons créé une base de données pour gérer le classement des joueurs ain
 | NOM_util | Varchar |
 | SCORE_util | Int |
 
+## Traitement des données
+Toute les données sont traitées par l'interpréteur PHP installé sur le serveur. Le projet PHP suit le modèle MVC.
+![Structure du projet PHP](https://user-images.githubusercontent.com/43775161/64113030-6fb72d00-cd89-11e9-904f-c9bc23f3f493.png)  Structure du projet PHP
+
 ### Insertion de données
 L'iPad utilise une requête HTTP (méthode POST) pour envoyer le nom et le score du joueur à une page PHP (**input.php**) qui va insérer les informations dans la base de données. Par exemple, pour le corps de la requête HTTP: `player=Théo&score=200`.
-Nous avons décidé d'utiliser cette manière de faire car il n'existe pas de connecteur MySQL officiel pour SWIFT.
+Nous avons décidé d'utiliser cette manière de faire car il n'existe pas de connecteur MySQL officiel pour SWIFT. Lorsque la page PHP reçoit les paramètres de la requête POST, il les récupère après les avoir assaini. La requête SQL INSERT est protégé des injections de code SQL en utilisant des [paramètres](https://www.w3schools.com/PHP/php_mysql_prepared_statements.asp).
 
 ### Affichage du classement
 On accède à la page PHP **leaderboard.php** sur le NUC avec le navigateur **Google Chrome**.
