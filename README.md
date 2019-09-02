@@ -89,8 +89,7 @@ Nous avons créé une base de données pour gérer le classement des joueurs ain
 
 ## Traitement des données
 Toute les données sont traitées par l'interpréteur PHP installé sur le serveur. Le projet PHP suit le modèle MVC.
-![Structure du projet PHP](https://user-images.githubusercontent.com/43775161/64113030-6fb72d00-cd89-11e9-904f-c9bc23f3f493.png)
-Structure du projet PHP
+![Structure du projet PHP](https://user-images.githubusercontent.com/43775161/64113030-6fb72d00-cd89-11e9-904f-c9bc23f3f493.png)  Structure du projet PHP
 
 ### Insertion de données
 L'iPad utilise une requête HTTP (méthode POST) pour envoyer le nom et le score du joueur à une page PHP (**input.php**) qui va insérer les informations dans la base de données. Par exemple, pour le corps de la requête HTTP: `player=Théo&score=200`.
