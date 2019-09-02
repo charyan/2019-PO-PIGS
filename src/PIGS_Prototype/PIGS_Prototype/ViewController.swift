@@ -65,6 +65,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     @IBOutlet weak var gameView: UIView!
     @IBOutlet weak var gamePlacementView: UIView!
     
+    @IBOutlet weak var timeLabel: UILabel!
+    
+    
     @IBAction func onDoneNetworkingButton(_ sender: Any) {
         networkingView.isHidden = true
         
@@ -463,6 +466,31 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         print("+" + String(points) + " points")
     }
     
+    
+    var seconds = 60
+    var timer = Timer()
+    var isTimerRunning = false
+    
+    func runTimer() {
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self,   selector: (#selector(self.updateTimer)), userInfo: nil, repeats: true)
+    }
+    
+    @objc func updateTimer() {
+        if seconds == 0 {
+            timer.invalidate()
+        }else{
+            seconds -= 1
+            timeLabel.text = "\(seconds)"
+        }
+        
+    }
+    
+    func resetTimer(){
+        timer.invalidate()
+        seconds = 60
+        timeLabel.text = "\(seconds)"
+    }
+    
 
     // Register collision
     func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
@@ -536,6 +564,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         mcSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .required)
         mcSession.delegate = self
         hideNameMenu()
+        
+        runTimer()
     }
     
     override func viewWillAppear(_ animated: Bool) {
