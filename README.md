@@ -174,6 +174,13 @@ Nous allons créer un map sur ce principe afin d'avoir un terrain de jeu stable.
 
 Figure  : Blocs empilés en pyramide
 
+### Animations
+Nous avons intégré un système de déplacement automatique pour les cibles volantes.
+Chaque cible bouge individuellement grâce à une génération de valeurs aléatoires.
+Chaque cible a un pattern d'aller et retour se modifiant automatiquement à chaque trajet.
+Pour pouvoir donner une animation à chaque cible, une fonction permet de lire tous les noeuds. À partir de ça nous avons fait un test pour savoir si le noeud actuel est nommé "flying target".
+Ensuite on joue l'animation pour chaque cible une par une.
+
 ## Leçons à retenir
 Ici se trouvent les leçons qu'on a retenu en réalisant ce projet.
 - Éviter les platformes propriétaires pour les raisons suivantes : Problèmes de certificats et technologies peu utilisée
