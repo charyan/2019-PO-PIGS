@@ -40,9 +40,10 @@ let GAMEZONE_ROOT_NODE_NAME : String! = "root"
 let PLACEHOLDER_PLANE_TRANSPARENCY : CGFloat = 0.5
 
 // POINTS
-let POINTS_TARGET : Int = 10
-let POINTS_FLYING_TARGET : Int = 50
-let POINTS_PIG : Int = 200
+let POINTS_FURNITURE : Int = 10
+let POINTS_TARGET : Int = 50
+let POINTS_FLYING_TARGET : Int = 100
+let POINTS_PIG : Int = 300
 
 // Default value rotation for the gamezone placement
 let ROTATION_DEG : Float = 5;
@@ -220,7 +221,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     }
     
     @IBAction func onPlayButton(_ sender: Any) {
-        if nameMenuTextField.text!.isEmpty {
+        if (nameMenuTextField.text!.isEmpty || nameMenuTextField.text!.count < 2) {
             displayNameMenuError()
         } else if (nameMenuTextField.text!.count > 20) {
             displayNameLengthError()
@@ -474,22 +475,28 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         score += points
         print("+" + String(points) + " points")
     }
-    
+
     func playAnimation() {
-        let animation = CABasicAnimation(keyPath: "geometry.extrusionDepth")
-        animation.fromValue = 0.0
-        animation.toValue = 100.0
-        animation.duration = 5.0
-        animation.autoreverses = true
-        animation.repeatCount = .infinity
         
-        var node = SCNNode()
-        let scene = SCNScene(named: GAMEZONE_SCENE_NAME)!
-        node = scene.rootNode.childNode(withName: "flying target", recursively: true)!
-        node.addAnimation(animation, forKey : "move")
+        let moveY = SCNAction.moveBy(x: 0, y: 1, z: 0, duration: 1.5)
+        let moveZ = SCNAction.moveBy(x: 0, y: 0, z: -1, duration: 1.5)
+        let moveYZ = SCNAction.sequence([moveY, moveZ])
+        
+        // This line of code will reverse your animation
+        moveYZ.reversed()
+        
+        let moveYZLoop = SCNAction.sequence([moveYZ, moveYZ.reversed()])
+        
+        let repeatForever = SCNAction.repeatForever(moveYZLoop)
+        
+        self.sceneView.scene.rootNode.enumerateChildNodes { (node, _) in
+            if node.name == "flying target" {
+                node.runAction(repeatForever)
+                //node.runAction(SCNAction.repeatForever(SCNAction.moveBy(x: 0, y: 1, z: 0, duration: 1)))
+            }
+        }
     }
     
-
     // Register collision
     func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
         let ball = contact.nodeA.physicsBody!.contactTestBitMask == 3 ? contact.nodeA : contact.nodeB
@@ -505,24 +512,35 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             explosionType = "Flying Target Explosion.scnp"
 
         } else if (contact.nodeA.name! == "door" || contact.nodeB.name! == "door") {
+            
             explosionType = "Door Explosion.scnp"
+            
+        } else if (contact.nodeA.name! == "window" || contact.nodeB.name! == "window") {
+            
+            explosionType = "Window Explosion.scnp"
+             
         }
         
         let explosion = SCNParticleSystem(named: explosionType, inDirectory: nil)!
         
         // Make a target dissapear if there's a collision
         if (contact.nodeA.name! == "target" || contact.nodeA.name! == "flying target"
-            || contact.nodeA.name! == "pig reference" || contact.nodeA.name! == "door") {
+            || contact.nodeA.name! == "pig reference" || contact.nodeA.name! == "door"
+            || contact.nodeA.name! == "window") {
             contact.nodeA.removeFromParentNode()
         } else if (contact.nodeB.name! == "target" || contact.nodeB.name! == "flying target"
-            || contact.nodeB.name! == "pig reference" || contact.nodeB.name! == "door") {
+            || contact.nodeB.name! == "pig reference" || contact.nodeB.name! == "door"
+            || contact.nodeB.name! == "window") {
             contact.nodeB.removeFromParentNode()
         }
         
         // Remove ball and generate particle only when there's a collision with a target.
         // Static nodes and boxes aren't affected
-        if (contact.nodeA.name! == "box" || contact.nodeB.name! == "box") {
+        if (contact.nodeA.name! == "box" || contact.nodeB.name! == "box"
+            || contact.nodeA.name! == "small_rock" || contact.nodeB.name! == "small_rock") {
             print("Collision with box")
+        } else if (contact.nodeA.name! == "cloud" || contact.nodeB.name! == "cloud") {
+            ball.removeFromParentNode()
         } else {
             let explosionNode = SCNNode()
             explosionNode.position = ball.presentation.position
@@ -546,6 +564,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             } else if (contact.nodeA.name! == "pig reference" || contact.nodeB.name! == "pig reference") {
                 scoreIncrement(points: POINTS_PIG)
                 print("Collision with pig")
+            } else if (contact.nodeA.name! == "door" || contact.nodeB.name! == "door"
+                || contact.nodeA.name! == "window" || contact.nodeB.name! == "window") {
+                scoreIncrement(points: POINTS_FURNITURE)
             }
         }
         
@@ -566,9 +587,13 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             // Show statistics such as fps and timing information
             sceneView.showsStatistics = true
             
-            /// Debug options
+            /// Debug options with physics fields
+            //sceneView.debugOptions = [ARSCNDebugOptions.showWorldOrigin,
+              //                        ARSCNDebugOptions.showPhysicsShapes,
+                //                      ARSCNDebugOptions.showFeaturePoints]
+            
+            /// Debug options without physics fields
             sceneView.debugOptions = [ARSCNDebugOptions.showWorldOrigin,
-                                      ARSCNDebugOptions.showPhysicsShapes,
                                       ARSCNDebugOptions.showFeaturePoints]
             doneNetworkingButton.isEnabled = true
         }
