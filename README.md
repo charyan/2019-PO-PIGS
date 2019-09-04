@@ -35,7 +35,15 @@ SceneKit est une bibliothèque permettant de gérer un environnement 3D. On l'ut
 Cette bibliothèque permet de gérer les éléments graphiques de l'application (boutons, labels, champs textes, etc...). Nous utiliserons cette bibliothèque afin de créer l'interface graphique de notre jeu.
 
 ## Fin de partie
+### Minuteur
+Notre minuteur utilise 2 fonctions. La première fonction **runTimer** démarre le minuteur. Elle est appelée dans la fonction **onPlayButton**  qui est exécutée après la saisi du nom de l'utilisateur. La seconde fonction **updateTimer** met à jour le label et vérifie que le minuteur a bien atteint 0 seconde. Une fois que le minuteur atteint 0 seconde, il appelle automatiquement la dernière vue **Results**.
 
+### Dernière vue "Results"
+La dernière vue affiche le nom, le score et un message de remerciment pour l'utilisateur.
+
+![IMG_0788 1](https://user-images.githubusercontent.com/43779006/64234652-1240ee80-cef7-11e9-9cdd-ad3c3bd33dbe.PNG)
+
+Figure : Dernière vue
 
 ## Placement de la zone de jeu
 Pour placer la zone de jeu, nous commençons par détecter une zone plane, sur cette zone plane, placer un placeholder, éffectuer une rotation afin d'ajuster le placement du placeholder et enfin remplacer le placeholder par la map.
