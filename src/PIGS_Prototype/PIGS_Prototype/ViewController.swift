@@ -19,7 +19,7 @@ let DEBUG_MODE : Bool = true // TRUE is ON
 let BALL_PROJECTILE_NAME : String! = "ball"
 let BALL_ROOT_NODE_NAME : String! = "Sphere"
 let BALL_SCENE_NAME : String! = "art.scnassets/models/pink_ball.scn"
-let BALL_SPEED : Float = 20
+let BALL_SPEED : Float = 3
 
 // LAUNCHER
 let PITCH_LAUNCHER : Float = 0.1 // 0 is straight forward
@@ -30,9 +30,8 @@ let TARGET_SCENE_NAME : String! = "art.scnassets/models/target.scn"
 let TARGET_SCALE : SCNVector3 = SCNVector3(3, 0.4, 3)
 let TARGET_POSITION : SCNVector3 = SCNVector3(0, 0, -20)
 let TARGET_ROOT_NODE_NAME : String! = "Target"
-
 // GAMEZONE
-let GAMEZONE_SCENE_NAME : String! = "art.scnassets/level/zeroMap.scn"
+let GAMEZONE_SCENE_NAME : String! = "art.scnassets/level/pigsMap.scn"
 let GAMEZONE_SCALE : SCNVector3 = SCNVector3(1, 1, 1)
 let GAMEZONE_POSITION : SCNVector3 = SCNVector3(0, -0.5, -0.8)
 let GAMEZONE_ROOT_NODE_NAME : String! = "root"
@@ -41,10 +40,10 @@ let GAMEZONE_ROOT_NODE_NAME : String! = "root"
 let PLACEHOLDER_PLANE_TRANSPARENCY : CGFloat = 0.5
 
 // POINTS
-let POINTS_BLOCK : Int = 10
+let POINTS_FURNITURE : Int = 10
 let POINTS_TARGET : Int = 50
-let POINTS_TARGET_2 : Int = 30
-let POINTS_PIG : Int = 15
+let POINTS_FLYING_TARGET : Int = 100
+let POINTS_PIG : Int = 300
 
 // Default value rotation for the gamezone placement
 let ROTATION_DEG : Float = 5;
@@ -53,6 +52,8 @@ let ROTATION_DEG : Float = 5;
 let FONT_NAME : String = "Skater Girls Rock"
 let FONT_SIZE_BTN : CGFloat = 50
 let FONT_SIZE_PTS : CGFloat = 50
+
+let URL_POST : String = "http://192.168.1.1/pigs/input.php"
 
 ////////////////////////////////////////////////////////////
 
@@ -74,9 +75,24 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     @IBOutlet weak var gameView: UIView!
     @IBOutlet weak var gamePlacementView: UIView!
     
+    @IBOutlet weak var timeLabel: UILabel!
+    
+    
     @IBAction func onDoneNetworkingButton(_ sender: Any) {
         networkingView.isHidden = true
     }
+    
+    func hiddenNetworkingView() {
+        networkingView.isHidden = true
+        
+    }
+    
+    func displayNetworkingView() {
+        networkingView.isHidden = false
+    showConnectionMenu()
+        
+    }
+    
     @IBAction func onConnectButton(_ sender: Any) {
         showConnectionMenu()
         debugPrint("Showing connection menu")
@@ -120,7 +136,33 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         case BALL    = 2
         case TARGET  = 3 // A target is any object with which the collision give points to the player
     }
-
+    
+    func postPlayerRecord() {
+        let url = URL(string: URL_POST)!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        let name = playerName.text
+        let score = scoreLabel.text
+        let playerLabel = "player="
+        let scoreLabel = "&score="
+        
+        let body = playerLabel + name! + scoreLabel + score!
+        request.httpBody = body.data(using: .utf8)
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let error = error {
+                print("error: \(error)")
+            } else {
+                if let response = response as? HTTPURLResponse {
+                    print("statusCode: \(response.statusCode)")
+                }
+                if let data = data, let dataString = String(data: data, encoding: .utf8) {
+                    print("data: \(dataString)")
+                }
+            }
+        }
+        task.resume()
+    }
+    
     @IBOutlet var sceneView: ARSCNView!
     @IBOutlet weak var scoreLabel: UILabel!
     
@@ -144,14 +186,22 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     @IBOutlet weak var rightButton: UIButton!
     @IBOutlet weak var nameMenuTextField: UITextField!
     @IBOutlet weak var nameMenuError: UILabel!
+    @IBOutlet weak var nameLengthError: UILabel!
     @IBOutlet weak var playerName: UILabel!
     @IBOutlet weak var HUD: UILabel!
     
     // View choose name menu
     @IBOutlet weak var Pseudo: UIView!
     
+    @IBOutlet weak var NameJoueur: UILabel!
+    @IBOutlet weak var NumberPoints: UILabel!
+    @IBOutlet weak var Results: UIView!
     
-    
+    @IBAction func SwipeGesture(_ sender: Any) {
+        exit(0)
+    }
+
+
     // When the Done button is pressed
     @IBAction func onDoneButton(_ sender: Any) {
         if (tracking) {
@@ -172,16 +222,22 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     }
     
     @IBAction func onPlayButton(_ sender: Any) {
-        if nameMenuTextField.text!.isEmpty {
+        if (nameMenuTextField.text!.isEmpty || nameMenuTextField.text!.count < 2) {
             displayNameMenuError()
+        } else if (nameMenuTextField.text!.count > 20) {
+            displayNameLengthError()
         } else {
             hideNameMenuError()
+            hideNameLengthError()
             playerName.text = nameMenuTextField.text
             hideNameMenu()
             DismissKeyboard()
             displayGameMenu()
             hideGamezonePlacementMenu()
+            playAnimation()
+            runTimer()
         }
+        
     }
     
 
@@ -227,11 +283,15 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         HUD.isHidden = true
     }
     
+    func hideResultsView() {
+        Results.isHidden = true
+    }
+    
     // Display the gamezone placement menu
     func displayGamezonePlacementMenu() {
         gamePlacementView.isHidden = false
         
-        if (self.sceneView.session.currentFrame?.rawFeaturePoints!.points.count)! > 50 {
+        if (self.sceneView.session.currentFrame?.rawFeaturePoints!.points.count)! > 50 || DEBUG_MODE {
             doneButton.isEnabled = true
             doneButton.backgroundColor = #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)
         } else {
@@ -248,6 +308,13 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     func displayNameMenu() {
         self.Pseudo.isHidden = false
         self.nameMenuError.isHidden = true
+        self.nameLengthError.isHidden = true
+    }
+    
+    
+    func displayResultsView() {
+        self.Results.isHidden = false
+        NumberPoints.text = scoreLabel.text
     }
     
     func hideNameMenu() {
@@ -260,6 +327,14 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     
     func hideNameMenuError() {
         nameMenuError.isHidden = true
+    }
+    
+    func displayNameLengthError() {
+        nameLengthError.isHidden = false
+    }
+    
+    func hideNameLengthError() {
+        nameLengthError.isHidden = true
     }
     
     // Variables for play zone
@@ -414,43 +489,135 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         print("+" + String(points) + " points")
     }
     
+    var seconds = 20
+    
+    var timer = Timer()
+    var isTimerRunning = false
+    
+    func runTimer() {
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self,   selector: (#selector(self.updateTimer)), userInfo: nil, repeats: true)
+        NameJoueur.text = nameMenuTextField.text
+        
+    }
+    
+    @objc func updateTimer() {
+        if seconds == 0 {
+            timer.invalidate()
+            hideGameMenu()
+            displayResultsView()
+              postPlayerRecord()
+        }else{
+            seconds -= 1
+            timeLabel.text = "\(seconds)"
+           
+        }
+        
+    }
+    
+    func resetTimer(){
+        timer.invalidate()
+        seconds = 60
+        timeLabel.text = "\(seconds)"
+    }
+    
+    func playAnimation() {
+        
+        self.sceneView.scene.rootNode.enumerateChildNodes { (node, _) in
+            
+            let moveY = SCNAction.moveBy(x: CGFloat.random(in: -0.4 ..< 0.4), y: CGFloat.random(in: -0.4 ..< 0.4), z: CGFloat.random(in: -0.4 ..< 0.4), duration: 2.5)
+            let moveZ = SCNAction.moveBy(x: CGFloat.random(in: -0.4 ..< 0.4), y: CGFloat.random(in: -0.4 ..< 0.4), z: CGFloat.random(in: -0.4 ..< 0.4), duration: 2.5)
+            let moveYZ = SCNAction.sequence([moveY, moveZ])
+            
+            let moveYZLoop = SCNAction.sequence([moveYZ, moveYZ.reversed()])
+            
+            let repeatForever = SCNAction.repeatForever(moveYZLoop)
+            
+            if node.name == "flying target" {
+                node.runAction(repeatForever)
+                //node.runAction(SCNAction.repeatForever(SCNAction.moveBy(x: 0, y: 1, z: 0, duration: 5)))
+            }
+        }        
+    }
 
     // Register collision
     func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
         let ball = contact.nodeA.physicsBody!.contactTestBitMask == 3 ? contact.nodeA : contact.nodeB
-        let explosion = SCNParticleSystem(named: "Explosion.scnp", inDirectory: nil)!
-        let explosionNode = SCNNode()
-        explosionNode.position = ball.presentation.position
-        sceneView.scene.rootNode.addChildNode(explosionNode)
-        explosionNode.addParticleSystem(explosion)
-        ball.removeFromParentNode()
         
+        var explosionType = "Target Explosion.scnp"
+        
+        if (contact.nodeA.name! == "pig reference" || contact.nodeB.name! == "pig reference") {
+            
+            explosionType = "Pig Explosion.scnp"
+            
+        } else if (contact.nodeA.name! == "flying target" || contact.nodeB.name! == "flying target") {
+            
+            explosionType = "Flying Target Explosion.scnp"
+
+        } else if (contact.nodeA.name! == "door" || contact.nodeB.name! == "door") {
+            
+            explosionType = "Door Explosion.scnp"
+            
+        } else if (contact.nodeA.name! == "window" || contact.nodeB.name! == "window") {
+            
+            explosionType = "Window Explosion.scnp"
+             
+        }
+        
+        let explosion = SCNParticleSystem(named: explosionType, inDirectory: nil)!
+        
+        // Make a target dissapear if there's a collision
+        if (contact.nodeA.name! == "target" || contact.nodeA.name! == "flying target"
+            || contact.nodeA.name! == "pig reference" || contact.nodeA.name! == "door"
+            || contact.nodeA.name! == "window") {
+            contact.nodeA.removeFromParentNode()
+        } else if (contact.nodeB.name! == "target" || contact.nodeB.name! == "flying target"
+            || contact.nodeB.name! == "pig reference" || contact.nodeB.name! == "door"
+            || contact.nodeB.name! == "window") {
+            contact.nodeB.removeFromParentNode()
+        }
+        
+        // Remove ball and generate particle only when there's a collision with a target.
+        // Static nodes and boxes aren't affected
+        if (contact.nodeA.name! == "box" || contact.nodeB.name! == "box"
+            || contact.nodeA.name! == "small_rock" || contact.nodeB.name! == "small_rock") {
+            print("Collision with box")
+        } else if (contact.nodeA.name! == "cloud" || contact.nodeB.name! == "cloud") {
+            ball.removeFromParentNode()
+        } else {
+            let explosionNode = SCNNode()
+            explosionNode.position = ball.presentation.position
+            sceneView.scene.rootNode.addChildNode(explosionNode)
+            explosionNode.addParticleSystem(explosion)
+            ball.removeFromParentNode()
+        }
+        
+        // Update score on collision with target
         if(contact.nodeA.physicsBody!.categoryBitMask == CATEGORY_BIT_MASK.TARGET.rawValue ||
             contact.nodeB.physicsBody!.categoryBitMask == CATEGORY_BIT_MASK.TARGET.rawValue) {
             
             if (contact.nodeA.name! == BALL_ROOT_NODE_NAME && contact.nodeB.name! == BALL_ROOT_NODE_NAME) {
                 print("Collision with ball")
-            } else if (contact.nodeA.name! == "block" || contact.nodeB.name! == "block") {
-                scoreIncrement(points: POINTS_BLOCK)
-                print("Collision with block")
-            }else if (contact.nodeA.name! == "target" || contact.nodeB.name! == "target") {
+            } else if (contact.nodeA.name! == "target" || contact.nodeB.name! == "target") {
                 scoreIncrement(points: POINTS_TARGET)
-                print("Collision with target")
-            } else if (contact.nodeA.name! == "target2" || contact.nodeB.name! == "target2") {
-                scoreIncrement(points: POINTS_TARGET_2)
-                print("Collision with target2")
-            } else if (contact.nodeA.name! == "pig" || contact.nodeB.name! == "pig") {
+                print("Collision with cubic target")
+            } else if (contact.nodeA.name! == "flying target" || contact.nodeB.name! == "flying target") {
+                scoreIncrement(points: POINTS_FLYING_TARGET)
+                print("Collision with flying target")
+            } else if (contact.nodeA.name! == "pig reference" || contact.nodeB.name! == "pig reference") {
                 scoreIncrement(points: POINTS_PIG)
                 print("Collision with pig")
+            } else if (contact.nodeA.name! == "door" || contact.nodeB.name! == "door"
+                || contact.nodeA.name! == "window" || contact.nodeB.name! == "window") {
+                scoreIncrement(points: POINTS_FURNITURE)
             }
         }
-        
         
         scoreUpdate()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        hideResultsView()
         
         sceneView.scene.physicsWorld.timeStep = 1/200
         
@@ -463,10 +630,13 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             // Show statistics such as fps and timing information
             sceneView.showsStatistics = true
             
-            /// Debug options
-            sceneView.debugOptions = [ARSCNDebugOptions.showWorldOrigin,
-                                      ARSCNDebugOptions.showPhysicsShapes,
-                                      ARSCNDebugOptions.showFeaturePoints]
+            /// Debug options with physics fields
+            //sceneView.debugOptions = [ARSCNDebugOptions.showWorldOrigin,
+              //                        ARSCNDebugOptions.showPhysicsShapes,
+                //                      ARSCNDebugOptions.showFeaturePoints]
+            
+            /// Debug options without physics fields and origin
+            sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints]
             doneNetworkingButton.isEnabled = true
         }
         
@@ -475,7 +645,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         
         sceneView.scene.physicsWorld.contactDelegate = self
         
-        labelPoints.font = UIFont(name: FONT_NAME, size: FONT_SIZE_PTS)
+//        labelPoints.font = UIFont(name: FONT_NAME, size: FONT_SIZE_PTS)
         scoreLabel.font = UIFont(name: FONT_NAME, size: FONT_SIZE_PTS)
         
         // Hide the menus
@@ -513,6 +683,13 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         } catch {
             print("can't decode data received from \(peer)")
         }
+   
+        
+        // Creates a multipeer session with the system name as the peerID
+        peerID = MCPeerID(displayName: UIDevice.current.name)
+        mcSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .required)
+        mcSession.delegate = self
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
