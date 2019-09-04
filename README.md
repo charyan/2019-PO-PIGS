@@ -162,3 +162,7 @@ Nous allons créer un map sur ce principe afin d'avoir un terrain de jeu stable.
 
 Figure 10 : Blocs empilés en pyramide
 
+## Leçons à retenir
+Ici se trouvent les leçons qu'on a retenu en réalisant ce projet.
+- Éviter les platformes propriétaires pour les raisons suivantes : Problèmes de certificats et technologies peu utilisée
+- Vérifier que la technologie que l'on souhaite utiliser est bien documentée et largement utilisé
