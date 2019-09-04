@@ -34,6 +34,9 @@ SceneKit est une bibliothèque permettant de gérer un environnement 3D. On l'ut
 #### UIKit
 Cette bibliothèque permet de gérer les éléments graphiques de l'application (boutons, labels, champs textes, etc...). Nous utiliserons cette bibliothèque afin de créer l'interface graphique de notre jeu.
 
+## Fin de partie
+
+
 ## Placement de la zone de jeu
 Pour placer la zone de jeu, nous commençons par détecter une zone plane, sur cette zone plane, placer un placeholder, éffectuer une rotation afin d'ajuster le placement du placeholder et enfin remplacer le placeholder par la map.
 ### Detection d'une zone plate
@@ -121,7 +124,6 @@ Les blocs sont empilés sur la map. On a placé un cube invisible pour le sol. L
 ![map](https://user-images.githubusercontent.com/43775161/63411910-ddad3d00-c3f6-11e9-9af6-0fc7e93f9233.png)
 
 Figure : Map
-
 
 ## Gestion des collision
 La gestion des collision est gérée par rapport au category bitmask des objets en collision. Suivant le category bitmask des objets, on ajoute le nombre de points correspondants au score du joueur. Les balles lancées par le joueur ont un category bitmask de 2 et tous les objets rapportant des points disposent du category bitmask 3.
