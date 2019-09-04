@@ -1,7 +1,7 @@
 # PIGS
 ![logo](https://user-images.githubusercontent.com/43775161/58420616-0939b900-808e-11e9-8312-b0da9cbf21e5.png)
 
-Figure 1 : Logo
+Figure : Logo
 
 ## Introduction
 ### Présentation
@@ -11,7 +11,7 @@ Chaque joueur disposera d'une tablette au travers de laquel il pourra voir et in
 ### Plan du stand
 ![plan](https://user-images.githubusercontent.com/43775161/58421157-916c8e00-808f-11e9-9d4d-e0fb333a133e.png)
 
-Figure 2 : Plan du stand
+Figure : Plan du stand
 
 ## Organisation
 ### Séances
@@ -41,7 +41,7 @@ Pour détecter une zone plate, l'Ipad utilise des points de repères virtuels se
 
 ![DetectionZonePlate](https://user-images.githubusercontent.com/43779006/60086632-be1dcf00-973b-11e9-9341-460c4b517711.jpg)
 
-Figure 3 : Points de repère utilisés par l'iPad pour détecter une zone plate
+Figure : Points de repère utilisés par l'iPad pour détecter une zone plate
 
 ### Placement du placeholder
 Une fois qu'une zone plate a été détectée, le placeholer apparait automatiquement sur la zone plate. Si nous nous déplaçons avec l'Ipad, le placeholder va automatiquement se déplacer pour se fixer sur la nouvelle zone plate mise à disposition.
@@ -51,7 +51,7 @@ Pour effectuer une rotation du placeholder, l'utilisateur peut utiliser deux bou
 
 ![RotationPlaceholder](https://user-images.githubusercontent.com/43779006/60091773-a51a1b80-9745-11e9-815c-3d998478c431.jpg)
 
-Figure 4 : Boutons sur l'iPad pour modifier la position de l'écran
+Figure : Boutons sur l'iPad pour modifier la position de l'écran
 
 ### Placement de la map
 Une fois que le placeholder est à l'endroit où nous le souhaitons, il nous suffit de presser sur le bouton "Done" pour placer la map.
@@ -69,7 +69,7 @@ Un schéma logique et une liste du matériel sont disponibles dans le dossier "c
 Nous utilisons un ordinateur Intel NUC sous Windows 10 Pro afin de proposer divers services nécessaires à notre projet : service Apache, MySQL, PHP. Nous utilisons XAMPP.  
 ![Panneau de contrôle XAMPP](https://user-images.githubusercontent.com/43775161/64027001-26c06800-cb40-11e9-9130-cc560776a135.png)
 
-Figure 6 : Panneau de contrôle de XAMPP
+Figure : Panneau de contrôle de XAMPP
 
 ### Wifi
 | Propriété | Valeur |
@@ -79,6 +79,12 @@ Figure 6 : Panneau de contrôle de XAMPP
 | MDP | Admlocal0 |
 
 ## Classement des joueurs
+### Traitement des données
+Toute les données sont traitées par l'interpréteur PHP installé sur le serveur. Le projet PHP suit le modèle MVC.
+![Structure du projet PHP](https://user-images.githubusercontent.com/43775161/64113030-6fb72d00-cd89-11e9-904f-c9bc23f3f493.png)
+
+Figure : Structure du projet PHP
+
 ### Base de données "utilisateur"
 Nous avons créé une base de données pour gérer le classement des joueurs ainsi que leurs scores.
 La gestion de la base de donnée se fait avec l'aide de **phpMyAdmin** qui est installé avec **XAMPP**.
@@ -89,10 +95,6 @@ Ce logiciel nous permet de manipuler notre base de donnée tout en utilisant l'i
 | ID_util | Int |
 | NOM_util | Varchar |
 | SCORE_util | Int |
-
-## Traitement des données
-Toute les données sont traitées par l'interpréteur PHP installé sur le serveur. Le projet PHP suit le modèle MVC.
-![Structure du projet PHP](https://user-images.githubusercontent.com/43775161/64113030-6fb72d00-cd89-11e9-904f-c9bc23f3f493.png)  Structure du projet PHP
 
 ### Insertion de données
 L'iPad utilise une requête HTTP (méthode POST) pour envoyer le nom et le score du joueur à une page PHP (**input.php**) qui va insérer les informations dans la base de données. Par exemple, pour le corps de la requête HTTP: `player=Théo&score=200`.
@@ -118,7 +120,7 @@ Figure 7 : Cube et ses propriétés physiques
 Les blocs sont empilés sur la map. On a placé un cube invisible pour le sol. La map est enregistré en format SceneKit (.scn).
 ![map](https://user-images.githubusercontent.com/43775161/63411910-ddad3d00-c3f6-11e9-9af6-0fc7e93f9233.png)
 
-Figure 8 : Map
+Figure : Map
 
 
 ## Gestion des collision
@@ -147,7 +149,7 @@ Lors du placement de la map, les blocs se mettent à trembler. Le problème est 
 
 ![Blocs instables](https://user-images.githubusercontent.com/43779006/63597768-7d68f780-c5be-11e9-931a-75f789cdc5e3.png)
 
-Figure 9 : Blocs qui tombent de la map
+Figure : Blocs qui tombent de la map
 
 Pour régler le problème, nous avons essayé de modifier la taille, la physique, la hitbox, la masse, la gravité, le type(plan, box, floor), l'emplacement des blocs et du sol.
 
@@ -160,7 +162,7 @@ Nous allons créer un map sur ce principe afin d'avoir un terrain de jeu stable.
 
 ![pyramid](https://raw.githubusercontent.com/charyan000/2019-PO-PIGS/master/doc/Images/pyramid.png?token=AKOAHSW5BLFVPWFE6VWMXZK5MY7GM)
 
-Figure 10 : Blocs empilés en pyramide
+Figure  : Blocs empilés en pyramide
 
 ## Leçons à retenir
 Ici se trouvent les leçons qu'on a retenu en réalisant ce projet.
