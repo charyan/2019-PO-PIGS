@@ -478,23 +478,21 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
 
     func playAnimation() {
         
-        let moveY = SCNAction.moveBy(x: 0, y: 1, z: 0, duration: 1.5)
-        let moveZ = SCNAction.moveBy(x: 0, y: 0, z: -1, duration: 1.5)
-        let moveYZ = SCNAction.sequence([moveY, moveZ])
-        
-        // This line of code will reverse your animation
-        moveYZ.reversed()
-        
-        let moveYZLoop = SCNAction.sequence([moveYZ, moveYZ.reversed()])
-        
-        let repeatForever = SCNAction.repeatForever(moveYZLoop)
-        
         self.sceneView.scene.rootNode.enumerateChildNodes { (node, _) in
+            
+            let moveY = SCNAction.moveBy(x: CGFloat.random(in: -0.4 ..< 0.4), y: CGFloat.random(in: -0.4 ..< 0.4), z: CGFloat.random(in: -0.4 ..< 0.4), duration: 2.5)
+            let moveZ = SCNAction.moveBy(x: CGFloat.random(in: -0.4 ..< 0.4), y: CGFloat.random(in: -0.4 ..< 0.4), z: CGFloat.random(in: -0.4 ..< 0.4), duration: 2.5)
+            let moveYZ = SCNAction.sequence([moveY, moveZ])
+            
+            let moveYZLoop = SCNAction.sequence([moveYZ, moveYZ.reversed()])
+            
+            let repeatForever = SCNAction.repeatForever(moveYZLoop)
+            
             if node.name == "flying target" {
                 node.runAction(repeatForever)
-                //node.runAction(SCNAction.repeatForever(SCNAction.moveBy(x: 0, y: 1, z: 0, duration: 1)))
+                //node.runAction(SCNAction.repeatForever(SCNAction.moveBy(x: 0, y: 1, z: 0, duration: 5)))
             }
-        }
+        }        
     }
     
     // Register collision
@@ -592,9 +590,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
               //                        ARSCNDebugOptions.showPhysicsShapes,
                 //                      ARSCNDebugOptions.showFeaturePoints]
             
-            /// Debug options without physics fields
-            sceneView.debugOptions = [ARSCNDebugOptions.showWorldOrigin,
-                                      ARSCNDebugOptions.showFeaturePoints]
+            /// Debug options without physics fields and origin
+            sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints]
             doneNetworkingButton.isEnabled = true
         }
         
