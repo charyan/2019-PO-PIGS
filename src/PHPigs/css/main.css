@@ -1,0 +1,71 @@
+@font-face {
+    font-family:"Skater Girls Rock";
+    src: url("./../fonts/Skater Girls Rock.ttf") format("truetype");
+}
+
+* {
+    font-family: "Skater Girls Rock", Arial, cursive;
+}
+
+html {
+
+}
+
+header {
+    font-size: 150px;
+    text-align: center;
+}
+
+table {
+    font-size: 64px;
+    border: none;
+	width: 100%;
+}
+
+table tbody tr {
+    border: none;
+	width: 100%;
+	vertical-align: bottom;
+}
+
+table tbody tr td {
+    border: none;
+	vertical-align: middle;
+}
+
+table tbody tr td.col-pos {
+    text-align: right;
+	margin-left: 3%;
+}
+
+table tbody tr td.col-name {
+    text-align: left;
+	padding-left: 3%;
+}
+
+table tbody tr td.col-score {
+    text-align: right;
+	padding-right: 3%;
+}
+
+table tbody tr:nth-child(odd) {
+    background-color: #dbd9da;
+}
+
+table tbody tr:nth-child(1),
+table tbody tr:nth-child(2),
+table tbody tr:nth-child(3){
+    font-size: 80px;
+}
+
+table tbody tr:nth-child(1) {
+    background-color: #fff8ba;
+}
+
+table tbody tr:nth-child(2) {
+    background-color: #c2c2c2;
+}
+
+table tbody tr:nth-child(3) {
+    background-color: #bca694;
+}

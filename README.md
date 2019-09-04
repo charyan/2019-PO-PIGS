@@ -1,7 +1,7 @@
 # PIGS
 ![logo](https://user-images.githubusercontent.com/43775161/58420616-0939b900-808e-11e9-8312-b0da9cbf21e5.png)
 
-Figure 1 : Logo
+Figure : Logo
 
 ## Introduction
 ### Présentation
@@ -11,7 +11,7 @@ Chaque joueur disposera d'une tablette au travers de laquel il pourra voir et in
 ### Plan du stand
 ![plan](https://user-images.githubusercontent.com/43775161/58421157-916c8e00-808f-11e9-9d4d-e0fb333a133e.png)
 
-Figure 2 : Plan du stand
+Figure : Plan du stand
 
 ## Organisation
 ### Séances
@@ -34,6 +34,17 @@ SceneKit est une bibliothèque permettant de gérer un environnement 3D. On l'ut
 #### UIKit
 Cette bibliothèque permet de gérer les éléments graphiques de l'application (boutons, labels, champs textes, etc...). Nous utiliserons cette bibliothèque afin de créer l'interface graphique de notre jeu.
 
+## Fin de partie
+### Minuteur
+Notre minuteur utilise 2 fonctions. La première fonction **runTimer** démarre le minuteur. Elle est appelée dans la fonction **onPlayButton**  qui est exécutée après la saisi du nom de l'utilisateur. La seconde fonction **updateTimer** met à jour le label et vérifie que le minuteur a bien atteint 0 seconde. Une fois que le minuteur atteint 0 seconde, il appelle automatiquement la dernière vue **Results**.
+
+### Dernière vue "Results"
+La dernière vue affiche le nom, le score et un message de remerciment pour l'utilisateur.
+
+![IMG_0788 1](https://user-images.githubusercontent.com/43779006/64234652-1240ee80-cef7-11e9-9cdd-ad3c3bd33dbe.PNG)
+
+Figure : Dernière vue
+
 ## Placement de la zone de jeu
 Pour placer la zone de jeu, nous commençons par détecter une zone plane, sur cette zone plane, placer un placeholder, éffectuer une rotation afin d'ajuster le placement du placeholder et enfin remplacer le placeholder par la map.
 ### Detection d'une zone plate
@@ -41,7 +52,7 @@ Pour détecter une zone plate, l'Ipad utilise des points de repères virtuels se
 
 ![DetectionZonePlate](https://user-images.githubusercontent.com/43779006/60086632-be1dcf00-973b-11e9-9341-460c4b517711.jpg)
 
-Figure 3 : Points de repère utilisés par l'iPad pour détecter une zone plate
+Figure : Points de repère utilisés par l'iPad pour détecter une zone plate
 
 ### Placement du placeholder
 Une fois qu'une zone plate a été détectée, le placeholer apparait automatiquement sur la zone plate. Si nous nous déplaçons avec l'Ipad, le placeholder va automatiquement se déplacer pour se fixer sur la nouvelle zone plate mise à disposition.
@@ -51,7 +62,7 @@ Pour effectuer une rotation du placeholder, l'utilisateur peut utiliser deux bou
 
 ![RotationPlaceholder](https://user-images.githubusercontent.com/43779006/60091773-a51a1b80-9745-11e9-815c-3d998478c431.jpg)
 
-Figure 4 : Boutons sur l'iPad pour modifier la position de l'écran
+Figure : Boutons sur l'iPad pour modifier la position de l'écran
 
 ### Placement de la map
 Une fois que le placeholder est à l'endroit où nous le souhaitons, il nous suffit de presser sur le bouton "Done" pour placer la map.
@@ -69,17 +80,26 @@ Un schéma logique et une liste du matériel sont disponibles dans le dossier "c
 Nous utilisons un ordinateur Intel NUC sous Windows 10 Pro afin de proposer divers services nécessaires à notre projet : service Apache, MySQL, PHP. Nous utilisons XAMPP.  
 ![Panneau de contrôle XAMPP](https://user-images.githubusercontent.com/43775161/64027001-26c06800-cb40-11e9-9130-cc560776a135.png)
 
-Figure 6 : Panneau de contrôle de XAMPP
+Figure : Panneau de contrôle de XAMPP
 
 ### Wifi
-
+| Propriété | Valeur |
+| ----------- | ----------- |
 | SSID | PIGS-WIFI |
 | Security mode | WPA2-Personnal |
 | MDP | Admlocal0 |
 
 ## Classement des joueurs
+### Traitement des données
+Toute les données sont traitées par l'interpréteur PHP installé sur le serveur. Le projet PHP suit le modèle MVC.
+![Structure du projet PHP](https://user-images.githubusercontent.com/43775161/64113030-6fb72d00-cd89-11e9-904f-c9bc23f3f493.png)
+
+Figure : Structure du projet PHP
+
 ### Base de données "utilisateur"
 Nous avons créé une base de données pour gérer le classement des joueurs ainsi que leurs scores.
+La gestion de la base de donnée se fait avec l'aide de **phpMyAdmin** qui est installé avec **XAMPP**.
+Ce logiciel nous permet de manipuler notre base de donnée tout en utilisant l'interface adaptée.
 
 | Nom | Type |
 | ----------- | ----------- |
@@ -89,7 +109,7 @@ Nous avons créé une base de données pour gérer le classement des joueurs ain
 
 ### Insertion de données
 L'iPad utilise une requête HTTP (méthode POST) pour envoyer le nom et le score du joueur à une page PHP (**input.php**) qui va insérer les informations dans la base de données. Par exemple, pour le corps de la requête HTTP: `player=Théo&score=200`.
-Nous avons décidé d'utiliser cette manière de faire car il n'existe pas de connecteur MySQL officiel pour SWIFT.
+Nous avons décidé d'utiliser cette manière de faire car il n'existe pas de connecteur MySQL officiel pour SWIFT. Lorsque la page PHP reçoit les paramètres de la requête POST, il les récupère après les avoir assaini. La requête SQL INSERT est protégé des injections de code SQL en utilisant des [paramètres](https://www.w3schools.com/PHP/php_mysql_prepared_statements.asp).
 
 ### Affichage du classement
 On accède à la page PHP **leaderboard.php** sur le NUC avec le navigateur **Google Chrome**.
@@ -111,8 +131,7 @@ Figure 7 : Cube et ses propriétés physiques
 Les blocs sont empilés sur la map. On a placé un cube invisible pour le sol. La map est enregistré en format SceneKit (.scn).
 ![map](https://user-images.githubusercontent.com/43775161/63411910-ddad3d00-c3f6-11e9-9af6-0fc7e93f9233.png)
 
-Figure 8 : Map
-
+Figure : Map
 
 ## Gestion des collision
 La gestion des collision est gérée par rapport au category bitmask des objets en collision. Suivant le category bitmask des objets, on ajoute le nombre de points correspondants au score du joueur. Les balles lancées par le joueur ont un category bitmask de 2 et tous les objets rapportant des points disposent du category bitmask 3.
@@ -126,17 +145,21 @@ La partie networking est géré par la bibliothèque [MultipeerConnectivity](htt
 ### Gestion des rôles
 La gestion des rôles est organisées par la variable **isGameHost** qui permettera de déterminer le rôle de l'iPad. Cette méthode permet d'identifier uniquement deux rôles : **Game host** et **Guest**.
 
+## Problèmes rencontrés
 ### Problème de merge
 Lors d'une tentative de merge entre la branche **multiplayer** et la branche **master**, nous avons eu un problème de conflit avec le fichier **storyboard** de Xcode qui contient l'interface graphique de notre application dans un format **xml**. Git n'arrivant pas à merger les deux storyboard automatiquement, ce processus a dû être effectué manuellement. Après avoir manuellement combiné les deux fichiers, certains boutons avaient disparus et ont donc dû être recréé.  
 Il est donc préférable d'éviter d'avoir à merge les fichiers **.storyboard** afin d'éviter ces complications.
 
-## Problèmes rencontrés
+## Gameplay
+### Cibles
+![targetBlocs](https://raw.githubusercontent.com/charyan000/2019-PO-PIGS/master/doc/Images/targetBlocs.png?token=AKOAHSV3FPVIR75VNEC7AGK5MY7YY)
+
 ### Blocs instables
 Lors du placement de la map, les blocs se mettent à trembler. Le problème est accru quand les blocs sont empilés les uns sur les autres.
 
 ![Blocs instables](https://user-images.githubusercontent.com/43779006/63597768-7d68f780-c5be-11e9-931a-75f789cdc5e3.png)
 
-Figure 9 : Blocs qui tombent de la map
+Figure : Blocs qui tombent de la map
 
 Pour régler le problème, nous avons essayé de modifier la taille, la physique, la hitbox, la masse, la gravité, le type(plan, box, floor), l'emplacement des blocs et du sol.
 
@@ -149,12 +172,9 @@ Nous allons créer un map sur ce principe afin d'avoir un terrain de jeu stable.
 
 ![pyramid](https://raw.githubusercontent.com/charyan000/2019-PO-PIGS/master/doc/Images/pyramid.png?token=AKOAHSW5BLFVPWFE6VWMXZK5MY7GM)
 
-Figure 10 : Blocs empilés en pyramide
+Figure  : Blocs empilés en pyramide
 
-## Gameplay
-### Cibles
-![targetBlocs](https://raw.githubusercontent.com/charyan000/2019-PO-PIGS/master/doc/Images/targetBlocs.png?token=AKOAHSV3FPVIR75VNEC7AGK5MY7YY)
-
-Figure 11 : 
-
-### Points
+## Leçons à retenir
+Ici se trouvent les leçons qu'on a retenu en réalisant ce projet.
+- Éviter les platformes propriétaires pour les raisons suivantes : Problèmes de certificats et technologies peu utilisée
+- Vérifier que la technologie que l'on souhaite utiliser est bien documentée et largement utilisé
