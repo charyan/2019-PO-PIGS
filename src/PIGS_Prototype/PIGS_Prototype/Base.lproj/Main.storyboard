@@ -352,7 +352,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="crosshair" width="125" height="125"/>
+        <image name="crosshair" width="500" height="500"/>
         <image name="launchscreen-logo.png" width="240" height="240"/>
     </resources>
 </document>

@@ -42,8 +42,8 @@ let PLACEHOLDER_PLANE_TRANSPARENCY : CGFloat = 0.5
 // POINTS
 let POINTS_FURNITURE : Int = 10
 let POINTS_TARGET : Int = 50
-let POINTS_FLYING_TARGET : Int = 100
-let POINTS_PIG : Int = 300
+let POINTS_FLYING_TARGET : Int = 150
+let POINTS_PIG : Int = 400
 
 // Default value rotation for the gamezone placement
 let ROTATION_DEG : Float = 5;
@@ -538,7 +538,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         print("+" + String(points) + " points")
     }
     
-    var seconds = 20
+    var seconds = 60
     
     var timer = Timer()
     var isTimerRunning = false
@@ -571,10 +571,15 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     
     func playAnimation() {
         
+       // let action : SCNAction = SCNAction.rotate(by: .pi, around: SCNVector3(0, 1, 0), duration: 10.0)
+        let action : SCNAction = SCNAction.rotate(by: .pi, around: SCNVector3(0, 2, 0), duration: 5)
+
+        let forever = SCNAction.repeatForever(action)
+        
         self.sceneView.scene.rootNode.enumerateChildNodes { (node, _) in
             
-            let moveY = SCNAction.moveBy(x: CGFloat.random(in: -0.4 ..< 0.4), y: CGFloat.random(in: -0.4 ..< 0.4), z: CGFloat.random(in: -0.4 ..< 0.4), duration: 2.5)
-            let moveZ = SCNAction.moveBy(x: CGFloat.random(in: -0.4 ..< 0.4), y: CGFloat.random(in: -0.4 ..< 0.4), z: CGFloat.random(in: -0.4 ..< 0.4), duration: 2.5)
+            let moveY = SCNAction.moveBy(x: CGFloat.random(in: -0.2 ..< 0.2), y: CGFloat.random(in: -0.2 ..< 0.2), z: CGFloat.random(in: -0.2 ..< 0.2), duration: 0.6)
+            let moveZ = SCNAction.moveBy(x: CGFloat.random(in: -0.2 ..< 0.2), y: CGFloat.random(in: -0.2 ..< 0.2), z: CGFloat.random(in: -0.2 ..< 0.2), duration: 0.6)
             let moveYZ = SCNAction.sequence([moveY, moveZ])
             
             let moveYZLoop = SCNAction.sequence([moveYZ, moveYZ.reversed()])
@@ -583,7 +588,10 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             
             if node.name == "flying target" {
                 node.runAction(repeatForever)
-                //node.runAction(SCNAction.repeatForever(SCNAction.moveBy(x: 0, y: 1, z: 0, duration: 5)))
+            }
+            
+            if node.name == "boat target" {
+                node.runAction(forever)
             }
         }        
     }
@@ -594,7 +602,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         
         var explosionType = "Target Explosion.scnp"
         
-        if (contact.nodeA.name! == "pig reference" || contact.nodeB.name! == "pig reference") {
+        if (contact.nodeA.name! == "pig" || contact.nodeB.name! == "pig") {
             
             explosionType = "Pig Explosion.scnp"
             
@@ -615,14 +623,13 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         let explosion = SCNParticleSystem(named: explosionType, inDirectory: nil)!
         
         // Make a target dissapear if there's a collision
-        if (contact.nodeA.name! == "target" || contact.nodeA.name! == "flying target"
-            || contact.nodeA.name! == "pig reference" || contact.nodeA.name! == "door"
-            || contact.nodeA.name! == "window") {
+        if (contact.nodeA.name! == "target" || contact.nodeB.name! == "target"
+            || contact.nodeA.name! == "flying target" || contact.nodeB.name! == "flying target"
+            || contact.nodeA.name! == "pig" || contact.nodeB.name! == "pig"
+            || contact.nodeA.name! == "door" || contact.nodeB.name! == "door"
+            || contact.nodeA.name! == "window" || contact.nodeB.name! == "window") {
+            
             contact.nodeA.removeFromParentNode()
-        } else if (contact.nodeB.name! == "target" || contact.nodeB.name! == "flying target"
-            || contact.nodeB.name! == "pig reference" || contact.nodeB.name! == "door"
-            || contact.nodeB.name! == "window") {
-            contact.nodeB.removeFromParentNode()
         }
         
         // Remove ball and generate particle only when there's a collision with a target.
@@ -631,7 +638,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             || contact.nodeA.name! == "small_rock" || contact.nodeB.name! == "small_rock") {
             print("Collision with box")
         } else if (contact.nodeA.name! == "cloud" || contact.nodeB.name! == "cloud") {
-            ball.removeFromParentNode()
+            // ball.removeFromParentNode()
+            print("Collision with ball")
         } else {
             let explosionNode = SCNNode()
             explosionNode.position = ball.presentation.position
@@ -652,7 +660,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             } else if (contact.nodeA.name! == "flying target" || contact.nodeB.name! == "flying target") {
                 scoreIncrement(points: POINTS_FLYING_TARGET)
                 print("Collision with flying target")
-            } else if (contact.nodeA.name! == "pig reference" || contact.nodeB.name! == "pig reference") {
+            } else if (contact.nodeA.name! == "pig" || contact.nodeB.name! == "pig") {
                 scoreIncrement(points: POINTS_PIG)
                 print("Collision with pig")
             } else if (contact.nodeA.name! == "door" || contact.nodeB.name! == "door"
