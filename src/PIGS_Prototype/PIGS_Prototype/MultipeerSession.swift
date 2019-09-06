@@ -1,5 +1,7 @@
 import Foundation
 import MultipeerConnectivity
+import UIKit
+import ARKit
 
 protocol MultipeerSessionServiceDelegate {
     
@@ -20,6 +22,42 @@ class MultipeerSession : NSObject {
     private var log: String = ""
     private var isNetReady: Bool = false
     private var logView: UITextView!
+    private var doneNetworkingButton: UIButton!
+    private var sceneView: ARSCNView!
+    private var isNetworkingViewEnabled: Bool! = false
+    private var isGamePlacementViewEnabled: Bool! = false
+    private var isNameViewEnabled: Bool! = false
+    private var isGameViewEnabled: Bool! = false
+    private var isResultsViewEnabled: Bool! = false
+    
+    
+    public func setIsNetworkingViewEnabled(_ _isNetworkingViewEnabled: Bool) {
+        isNetworkingViewEnabled = _isNetworkingViewEnabled
+    }
+    
+    public func setIsGamePlacementViewEnabled(_ _isGamePlacementViewEnabled: Bool) {
+        isGamePlacementViewEnabled = _isGamePlacementViewEnabled
+    }
+    
+    public func setIsNameViewEnabled(_ _isNameViewEnabled: Bool) {
+        isNameViewEnabled = _isNameViewEnabled
+    }
+    
+    public func setIsGameViewEnabled(_ _isGameViewEnabled: Bool) {
+        isGameViewEnabled = _isGameViewEnabled
+    }
+    
+    public func setIsResultsViewEnabled(_ _isResultsViewEnabled: Bool) {
+        isResultsViewEnabled = _isResultsViewEnabled
+    }
+    
+    public func setSceneView(_ _sceneView: inout ARSCNView) {
+        sceneView = _sceneView
+    }
+    
+    public func setDoneNetworkingButton(_ _doneNetworkingButton: UIButton) {
+        doneNetworkingButton = _doneNetworkingButton
+    }
     
     public func getMcAdvertiserAssistant() -> MCAdvertiserAssistant {
         return mcAdvertiserAssistant
@@ -97,6 +135,7 @@ extension MultipeerSession : MCSessionDelegate {
         case .connected:
             log = log + "Connected: \(peerID.displayName)" + "\n"
             debugPrint("Connected: \(peerID.displayName)")
+            doneNetworkingButton.isEnabled = true
             isNetReady = true
         case .connecting:
             log = log + "Connecting: \(peerID.displayName)" + "\n"
@@ -104,6 +143,7 @@ extension MultipeerSession : MCSessionDelegate {
         case .notConnected:
             log = log + "Not Connected: \(peerID.displayName)" + "\n"
             debugPrint("Not Connected: \(peerID.displayName)")
+            isNetReady = false
         @unknown default:
             log = log + "fatal error" + "\n"
             debugPrint("fatal error")
@@ -114,11 +154,32 @@ extension MultipeerSession : MCSessionDelegate {
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         NSLog("%@", "didReceiveData: \(data)")
         
-        DispatchQueue.main.async { [unowned self] in
-            // send message
-            let message = NSString(data: data as Data, encoding: String.Encoding.utf8.rawValue)! as String
-            self.log = self.log + message + "\n"
-            self.logView.text = self.log
+        if(isNetworkingViewEnabled) {
+            DispatchQueue.main.async { [unowned self] in
+                // send message
+                let message = NSString(data: data as Data, encoding: String.Encoding.utf8.rawValue)! as String
+                self.log = self.log + message + "\n"
+                self.logView.text = self.log
+            }
+        } else if(isGamePlacementViewEnabled) {
+            do {
+                if let worldMap = try NSKeyedUnarchiver.unarchivedObject(ofClass: ARWorldMap.self, from: data) { // If we received a ARWorldMap
+                    // Run the session with the received world map.
+                    let configuration = ARWorldTrackingConfiguration()
+                    configuration.planeDetection = .horizontal
+                    configuration.initialWorldMap = worldMap
+                    sceneView.session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
+                    debugPrint("1001: " + worldMap.debugDescription)
+                }
+            } catch {
+                print("can't decode data received from \(peerID)")
+            }
+        } else if(isNameViewEnabled) {
+            
+        } else if(isGameViewEnabled) {
+            
+        } else if(isResultsViewEnabled) {
+            
         }
     }
     

@@ -13,7 +13,7 @@ import MultipeerConnectivity
 
 ///////////////////////////////////////////////////////////////
 
-let DEBUG_MODE : Bool = true // TRUE is ON
+let DEBUG_MODE : Bool = false // TRUE is ON
 
 // BALL
 let BALL_PROJECTILE_NAME : String! = "ball"
@@ -80,6 +80,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     
     @IBAction func onDoneNetworkingButton(_ sender: Any) {
         networkingView.isHidden = true
+        multipeerSession.setIsNetworkingViewEnabled(false)
+        multipeerSession.setIsGamePlacementViewEnabled(true)
     }
     
     func hiddenNetworkingView() {
@@ -219,6 +221,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         }
         displayNameMenu()
         hideGamezonePlacementMenu()
+        
+        multipeerSession.setIsGamePlacementViewEnabled(false)
+        multipeerSession.setIsNameViewEnabled(true)
     }
     
     @IBAction func onPlayButton(_ sender: Any) {
@@ -226,7 +231,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             displayNameMenuError()
         } else if (nameMenuTextField.text!.count > 20) {
             displayNameLengthError()
-        } else {
+        } else { // Everything is ok
             hideNameMenuError()
             hideNameLengthError()
             playerName.text = nameMenuTextField.text
@@ -235,6 +240,10 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             displayGameMenu()
             hideGamezonePlacementMenu()
             playAnimation()
+            
+            multipeerSession.setIsNameViewEnabled(false)
+            multipeerSession.setIsGameViewEnabled(true)
+            
             runTimer()
         }
         
@@ -347,37 +356,39 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     var container: SCNNode!
     
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
-        guard tracking else { return }
-        let hitTest = self.sceneView.hitTest(CGPoint(x: self.view.frame.midX, y: self.view.frame.midY), types: .featurePoint)
-        guard let result = hitTest.first else { return }
-        let translation = SCNMatrix4(result.worldTransform)
-        let position = SCNVector3Make(translation.m41, translation.m42, translation.m43)
-        
-        if trackerNode == nil {
-            let plane = SCNPlane(width: 1.6, height: 1.6)
-            plane.firstMaterial?.diffuse.contents = UIImage(named: "art.scnassets/img/app-icon.png")
-            plane.firstMaterial?.isDoubleSided = true
-            plane.firstMaterial?.transparency = CGFloat(PLACEHOLDER_PLANE_TRANSPARENCY)
-            trackerNode = SCNNode(geometry: plane)
-            trackerNode?.eulerAngles.x = -.pi * 0.5
-            //self.trackerNode?.rotation = SCNVector4(0, 1, 0, GLKMathDegreesToRadians(270))
+        if(isGameHost) {
+            guard tracking else { return }
+            let hitTest = self.sceneView.hitTest(CGPoint(x: self.view.frame.midX, y: self.view.frame.midY), types: .featurePoint)
+            guard let result = hitTest.first else { return }
+            let translation = SCNMatrix4(result.worldTransform)
+            let position = SCNVector3Make(translation.m41, translation.m42, translation.m43)
+            
+            if trackerNode == nil {
+                let plane = SCNPlane(width: 1.6, height: 1.6)
+                plane.firstMaterial?.diffuse.contents = UIImage(named: "art.scnassets/img/app-icon.png")
+                plane.firstMaterial?.isDoubleSided = true
+                plane.firstMaterial?.transparency = CGFloat(PLACEHOLDER_PLANE_TRANSPARENCY)
+                trackerNode = SCNNode(geometry: plane)
+                trackerNode?.eulerAngles.x = -.pi * 0.5
+                //self.trackerNode?.rotation = SCNVector4(0, 1, 0, GLKMathDegreesToRadians(270))
+                
+                
+                self.sceneView.scene.rootNode.addChildNode(self.trackerNode!)
+                foundSurface = true
+            }
+            
+            self.trackerNode?.position = position
+            
+            //self.trackerNode?.rotation.x = GLKMathDegreesToRadians(270)
+            
+            //self.trackerNode?.rotation = SCNVector4(0, 1, 0,GLKMathDegreesToRadians(Float(rotationDeg)))
+            
+            //self.trackerNode?.rotation =  SCNVector4(0, 1, 0,GLKMathDegreesToRadians(Float(rotationDeg)))
+            //self.trackerNode?.rotation = SCNVector4(1, 0, 0, GLKMathDegreesToRadians(270))
             
             
-            self.sceneView.scene.rootNode.addChildNode(self.trackerNode!)
-            foundSurface = true
+            displayGamezonePlacementMenu()
         }
-        
-        self.trackerNode?.position = position
-        
-        //self.trackerNode?.rotation.x = GLKMathDegreesToRadians(270)
-        
-        //self.trackerNode?.rotation = SCNVector4(0, 1, 0,GLKMathDegreesToRadians(Float(rotationDeg)))
-        
-        //self.trackerNode?.rotation =  SCNVector4(0, 1, 0,GLKMathDegreesToRadians(Float(rotationDeg)))
-        //self.trackerNode?.rotation = SCNVector4(1, 0, 0, GLKMathDegreesToRadians(270))
-        
-        
-        displayGamezonePlacementMenu()
     }
 
 
@@ -505,7 +516,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             timer.invalidate()
             hideGameMenu()
             displayResultsView()
-              postPlayerRecord()
+            postPlayerRecord()
+            multipeerSession.setIsGameViewEnabled(false)
+            multipeerSession.setIsResultsViewEnabled(true)
         }else{
             seconds -= 1
             timeLabel.text = "\(seconds)"
@@ -655,41 +668,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         
         multipeerSession.delegate = self
         multipeerSession.setLogView(debugTextView)
-    }
-    
-    var mapProvider: MCPeerID?
-    
-    /// - Tag: ReceiveData
-    func receivedData(_ data: Data, from peer: MCPeerID) {
-        do {
-            if let worldMap = try NSKeyedUnarchiver.unarchivedObject(ofClass: ARWorldMap.self, from: data) {
-                // Run the session with the received world map.
-                let configuration = ARWorldTrackingConfiguration()
-                configuration.planeDetection = .horizontal
-                configuration.initialWorldMap = worldMap
-                sceneView.session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
-                
-                // Remember who provided the map for showing UI feedback.
-                mapProvider = peer
-            }
-            else
-                if let anchor = try NSKeyedUnarchiver.unarchivedObject(ofClass: ARAnchor.self, from: data) {
-                    // Add anchor to the session, ARSCNView delegate adds visible content.
-                    sceneView.session.add(anchor: anchor)
-                }
-                else {
-                    print("unknown data received from \(peer)")
-            }
-        } catch {
-            print("can't decode data received from \(peer)")
-        }
-   
-        
-        // Creates a multipeer session with the system name as the peerID
-        peerID = MCPeerID(displayName: UIDevice.current.name)
-        mcSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .required)
-        mcSession.delegate = self
-        
+        multipeerSession.setDoneNetworkingButton(doneNetworkingButton)
+        multipeerSession.setIsNetworkingViewEnabled(true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
