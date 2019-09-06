@@ -204,7 +204,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     }
 
 
-    // When the Done button is pressed
+    // When the Done button (In the gameplacement view) is pressed
     @IBAction func onDoneButton(_ sender: Any) {
         if (tracking) {
             //Set up the scene
@@ -218,6 +218,15 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             //ambientLightNode = container.childNode(withName: "ambientLight", recursively: false)
             //directionalLightNode = container.childNode(withName: "directionalLight", recursively: false)
             tracking = false
+            
+            
+            sceneView.session.getCurrentWorldMap { worldMap, error in
+                guard let map = worldMap
+                    else { print("Error: \(error!.localizedDescription)"); return }
+                guard let data = try? NSKeyedArchiver.archivedData(withRootObject: map, requiringSecureCoding: true)
+                    else { fatalError("can't encode map") }
+                self.multipeerSession.sendToAllPeers(data)
+            }
         }
         displayNameMenu()
         hideGamezonePlacementMenu()
@@ -670,6 +679,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         multipeerSession.setLogView(debugTextView)
         multipeerSession.setDoneNetworkingButton(doneNetworkingButton)
         multipeerSession.setIsNetworkingViewEnabled(true)
+        multipeerSession.setSceneView(&sceneView)
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -96,17 +96,29 @@ class MultipeerSession : NSObject {
         
     }
     
+    func sendToAllPeers(_ data: Data) {
+        do {
+            try session.send(data, toPeers: session.connectedPeers, with: .reliable)
+        } catch {
+            print("error sending data to peers: \(error.localizedDescription)")
+        }
+    }
+    
+    var connectedPeers: [MCPeerID] {
+        return session.connectedPeers
+    }
+    
     public func sendMessage() {
         let messageToSend = "\(myPeerId.displayName): Hello \(NSDate())"
         let message = messageToSend.data(using: String.Encoding.utf8, allowLossyConversion: false)
         do {
             try session.send(message!, toPeers: session.connectedPeers, with: .unreliable)
-                log = log + messageToSend + "\n"        }
-        catch {
-            log = log + "Error sending message" + "\n"
-            debugPrint("Error sending message")
+                log = log + messageToSend + "\n" }
+            catch {
+                log = log + "Error sending message" + "\n"
+                debugPrint("Error sending message")
         }
-        
+            
         logView.text = log
     }
 }
@@ -152,7 +164,7 @@ extension MultipeerSession : MCSessionDelegate {
     }
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-        NSLog("%@", "didReceiveData: \(data)")
+        NSLog("%@", "didReceiveData: \(data.debugDescription)")
         
         if(isNetworkingViewEnabled) {
             DispatchQueue.main.async { [unowned self] in
@@ -164,6 +176,7 @@ extension MultipeerSession : MCSessionDelegate {
         } else if(isGamePlacementViewEnabled) {
             do {
                 if let worldMap = try NSKeyedUnarchiver.unarchivedObject(ofClass: ARWorldMap.self, from: data) { // If we received a ARWorldMap
+                    debugPrint("1001: " + worldMap.debugDescription)
                     // Run the session with the received world map.
                     let configuration = ARWorldTrackingConfiguration()
                     configuration.planeDetection = .horizontal
