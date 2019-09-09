@@ -56,7 +56,7 @@ function insertPlayer($player, $score) {
     try {
         // We prepare the query and the parameters to avoid SQL Injections by the users
         $stmt = $conn->prepare(SQL_INSERT_PLAYER_QUERY . "NULL, ?, ?);");
-        $stmt->bind_param('si',$name,$score);
+        $stmt->bind_param('si',$player,$score);
         $stmt->execute();
         echo 'New record created successfully !';
     } finally {

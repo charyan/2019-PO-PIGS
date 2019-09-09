@@ -16,7 +16,7 @@ const DB_NAME       = 'pigs';
 const DB_TABLE      = 'utilisateur';
 
 // Number of player records displayed on the leaderboard
-const NUM_PLAYERS_LEADERBOARD = 23;
+const NUM_PLAYERS_LEADERBOARD = 20;
 
 const SQL_SELECT_PLAYERS_QUERY = "SELECT ID_util, NOM_util, SCORE_util FROM " . DB_TABLE . " ORDER BY SCORE_util DESC LIMIT " . NUM_PLAYERS_LEADERBOARD;
 const SQL_INSERT_PLAYER_QUERY = "INSERT INTO " . DB_TABLE . " (ID_util, NOM_util, SCORE_util) VALUES (";

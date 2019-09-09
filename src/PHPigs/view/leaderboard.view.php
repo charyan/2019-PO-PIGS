@@ -14,7 +14,7 @@
     <title>PIGS LEADERBOARD</title>
 </head>
 <body>
-    <header>LEADERBOARD</header>
+    <header>CLASSEMENT</header>
     <table cellspacing="0" cellpadding="0">
         <?php $i = 1; foreach($data as $record): ?>
         <tr class="row">
