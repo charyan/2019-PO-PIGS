@@ -141,8 +141,8 @@ Pour développer le multijoueur, nous avons créé la branche **multiplayer** su
 
 ### État du multijoueur
 - Possible de créer une map sur un ARAnchor
-- Possible de recevoir une ARWorldMap
-- Impossible d'envoyer une ARWorldMap à l'autre iPad contenant des ARAnchors, problème inconnu
+- Possible d'envoyer/recevoir une ARWorldMap
+- Impossible d'envoyer une ARWorldMap à l'autre iPad **contenant des ARAnchors**, problème inconnu
 
 ### Networking
 La partie networking est géré par la bibliothèque [MultipeerConnectivity](https://developer.apple.com/documentation/multipeerconnectivity). Cette bibliothèque permet la configuration automatique de la connexion par WiFi, WiFi Peer-to-peer ou Bluetooth, elle permet également de transmettre des informations entre appareils connectés.
