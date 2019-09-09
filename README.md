@@ -139,6 +139,11 @@ La gestion des collision est gérée par rapport au category bitmask des objets 
 ## Multijoueur
 Pour développer le multijoueur, nous avons créé la branche **multiplayer** sur GitHub. De cette manière le développement du mode multijoueur ne perturbera pas le développement du reste du jeu. Nous avons créé une classe **MultipeerSession** permettant de gérer tous les aspects de connexion et de transfert d'informations entre iPads. Cette classe a été reprise d'un [projet démo d'Apple](https://developer.apple.com/documentation/arkit/creating_a_multiuser_ar_experience) et a été adapté à notre jeu.
 
+### État du multijoueur
+- Possible de créer une map sur un ARAnchor
+- Possible de recevoir une ARWorldMap
+- Impossible d'envoyer une ARWorldMap à l'autre iPad contenant des ARAnchors, problème inconnu
+
 ### Networking
 La partie networking est géré par la bibliothèque [MultipeerConnectivity](https://developer.apple.com/documentation/multipeerconnectivity). Cette bibliothèque permet la configuration automatique de la connexion par WiFi, WiFi Peer-to-peer ou Bluetooth, elle permet également de transmettre des informations entre appareils connectés.
 
