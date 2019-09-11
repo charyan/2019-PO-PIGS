@@ -44,6 +44,7 @@ let POINTS_FURNITURE : Int = 10
 let POINTS_TARGET : Int = 50
 let POINTS_FLYING_TARGET : Int = 150
 let POINTS_PIG : Int = 400
+let POINTS_GOLDEN_BALL : Int = 1500
 
 // Default value rotation for the gamezone placement
 let ROTATION_DEG : Float = 5;
@@ -81,7 +82,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     
     func displayNetworkingView() {
         networkingView.isHidden = false
-    showConnectionMenu()
+        showConnectionMenu()
         
     }
     
@@ -177,7 +178,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         mcBrowser.delegate = self
         present(mcBrowser, animated: true)
     }
-
+    
     var score = 0
     
     enum CATEGORY_BIT_MASK: Int {
@@ -249,8 +250,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     @IBAction func SwipeGesture(_ sender: Any) {
         exit(0)
     }
-
-
+    
+    
     // When the Done button is pressed
     @IBAction func onDoneButton(_ sender: Any) {
         if (tracking) {
@@ -289,7 +290,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         
     }
     
-
+    
     var rotationDeg: Float = 0
     
     @IBAction func onLeftButton(_ sender: Any) {
@@ -301,19 +302,19 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     
     @IBAction func onRightButton(_ sender: Any) {
         self.trackerNode?.eulerAngles.y += GLKMathDegreesToRadians(ROTATION_DEG)
-         rotationDeg += ROTATION_DEG
+        rotationDeg += ROTATION_DEG
         print(rotationDeg)
     }
     
     
-
+    
     // Enable shoot button after cooldown
     func enableShootButton() {
         self.shootButton.isEnabled = true
         self.shootButton.backgroundColor = UIColor.white
     }
     
-
+    
     // Display the game menu
     func displayGameMenu() {
         gameView.isHidden = false
@@ -326,7 +327,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     // Hide the game menu
     func hideGameMenu() {
         gameView.isHidden = true
-
+        
         // TOCHECK
         playerName.isHidden = true
         HUD.isHidden = true
@@ -428,8 +429,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         
         displayGamezonePlacementMenu()
     }
-
-
+    
+    
     // Get the user's direction and position
     func getUserVector() -> (SCNVector3, SCNVector3) { // (direction, position)
         // Get the current frame
@@ -471,7 +472,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         node.scale = TARGET_SCALE
         node.name = TARGET_ROOT_NODE_NAME
         node.position = TARGET_POSITION
-      node.rotation = SCNVector4(1, 0, 0, GLKMathDegreesToRadians(90))
+        node.rotation = SCNVector4(1, 0, 0, GLKMathDegreesToRadians(90))
         
         node.physicsBody = SCNPhysicsBody(type: .static, shape: nil)
         
@@ -485,17 +486,17 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         let scene = SCNScene(named: GAMEZONE_SCENE_NAME)!
         node = scene.rootNode.childNode(withName: GAMEZONE_ROOT_NODE_NAME, recursively: true)!
         node.name = GAMEZONE_ROOT_NODE_NAME
-
+        
         node.position = position
         node.rotation = SCNVector4(0, 1, 0, GLKMathDegreesToRadians(Float(rotationDeg)))
         //node.rotation = SCNVector4(1, 0, 0, GLKMathDegreesToRadians(90))
         //node.physicsBody = SCNPhysicsBody(type: .static, shape: nil)
-
+        
         sceneView.scene.rootNode.addChildNode(node)
         
         // Collision Detection
         sceneView.scene.physicsWorld.contactDelegate = self
-
+        
     }
     
     // Fire a projectile
@@ -526,7 +527,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         // Add the node to the scene
         sceneView.scene.rootNode.addChildNode(node)
     }
-
+    
     func scoreUpdate() {
         DispatchQueue.main.async {
             self.scoreLabel.text = String(self.score)
@@ -538,7 +539,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         print("+" + String(points) + " points")
     }
     
-    var seconds = 60
+    var seconds = 45
     
     var timer = Timer()
     var isTimerRunning = false
@@ -554,11 +555,11 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             timer.invalidate()
             hideGameMenu()
             displayResultsView()
-              postPlayerRecord()
+            postPlayerRecord()
         }else{
             seconds -= 1
             timeLabel.text = "\(seconds)"
-           
+            
         }
         
     }
@@ -570,11 +571,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     }
     
     func playAnimation() {
-        
-       // let action : SCNAction = SCNAction.rotate(by: .pi, around: SCNVector3(0, 1, 0), duration: 10.0)
-        let action : SCNAction = SCNAction.rotate(by: .pi, around: SCNVector3(0, 2, 0), duration: 5)
-
-        let forever = SCNAction.repeatForever(action)
         
         self.sceneView.scene.rootNode.enumerateChildNodes { (node, _) in
             
@@ -590,26 +586,50 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
                 node.runAction(repeatForever)
             }
             
-            if node.name == "boat target" {
+            let boatMoveY1 = SCNAction.moveBy(x: CGFloat.random(in: -1 ..< 1), y: CGFloat.random(in: -1 ..< 1), z: CGFloat.random(in: -1 ..< 1), duration: 0.7)
+            let boatMoveZ1 = SCNAction.moveBy(x: CGFloat.random(in: -1 ..< 1), y: CGFloat.random(in: -1 ..< 1), z: CGFloat.random(in: -1 ..< 1), duration: 0.7)
+            let boatMoveY2 = SCNAction.moveBy(x: CGFloat.random(in: -1 ..< 1), y: CGFloat.random(in: -1 ..< 1), z: CGFloat.random(in: -1 ..< 1), duration: 0.7)
+            let boatMoveZ2 = SCNAction.moveBy(x: CGFloat.random(in: -1 ..< 1), y: CGFloat.random(in: -1 ..< 1), z: CGFloat.random(in: -1 ..< 1), duration: 0.7)
+            
+            let boatMoveYZ1 = SCNAction.sequence([boatMoveY1, boatMoveZ1])
+            let boatMoveYZ2 = SCNAction.sequence([boatMoveY2, boatMoveZ2])
+            
+            let boatMoveYZ1Loop = SCNAction.sequence([boatMoveYZ1, boatMoveYZ1.reversed()])
+            let boatMoveYZ2Loop = SCNAction.sequence([boatMoveYZ2, boatMoveYZ2.reversed()])
+            
+            let boatMoveYZ12Loop = SCNAction.sequence([boatMoveYZ1Loop, boatMoveYZ2Loop])
+            
+            let boatRepeatForever = SCNAction.repeatForever(boatMoveYZ12Loop)
+            
+            
+            if node.name == "golden_ball" {
+                node.runAction(boatRepeatForever)
+            }
+            
+            let action : SCNAction = SCNAction.rotate(by: .pi, around: SCNVector3(0, 1, 0), duration: 10)
+            let forever = SCNAction.repeatForever(action)
+            
+            if node.name == "rotation" {
                 node.runAction(forever)
             }
-        }        
+        }
     }
-
+    
     // Register collision
     func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
         let ball = contact.nodeA.physicsBody!.contactTestBitMask == 3 ? contact.nodeA : contact.nodeB
         
         var explosionType = "Target Explosion.scnp"
         
-        if (contact.nodeA.name! == "pig" || contact.nodeB.name! == "pig") {
+        if (contact.nodeA.name! == "pig" || contact.nodeB.name! == "pig"
+            || contact.nodeA.name! == "golden_ball" || contact.nodeB.name! == "golden_ball") {
             
             explosionType = "Pig Explosion.scnp"
             
         } else if (contact.nodeA.name! == "flying target" || contact.nodeB.name! == "flying target") {
             
             explosionType = "Flying Target Explosion.scnp"
-
+            
         } else if (contact.nodeA.name! == "door" || contact.nodeB.name! == "door") {
             
             explosionType = "Door Explosion.scnp"
@@ -617,7 +637,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         } else if (contact.nodeA.name! == "window" || contact.nodeB.name! == "window") {
             
             explosionType = "Window Explosion.scnp"
-             
+            
         }
         
         let explosion = SCNParticleSystem(named: explosionType, inDirectory: nil)!
@@ -627,7 +647,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             || contact.nodeA.name! == "flying target" || contact.nodeB.name! == "flying target"
             || contact.nodeA.name! == "pig" || contact.nodeB.name! == "pig"
             || contact.nodeA.name! == "door" || contact.nodeB.name! == "door"
-            || contact.nodeA.name! == "window" || contact.nodeB.name! == "window") {
+            || contact.nodeA.name! == "window" || contact.nodeB.name! == "window"
+            || contact.nodeA.name! == "golden_ball" || contact.nodeB.name! == "golden_ball") {
             
             contact.nodeA.removeFromParentNode()
         }
@@ -639,7 +660,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             print("Collision with box")
         } else if (contact.nodeA.name! == "cloud" || contact.nodeB.name! == "cloud") {
             // ball.removeFromParentNode()
-            print("Collision with ball")
+            print("Collision with cloud")
         } else {
             let explosionNode = SCNNode()
             explosionNode.position = ball.presentation.position
@@ -666,6 +687,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             } else if (contact.nodeA.name! == "door" || contact.nodeB.name! == "door"
                 || contact.nodeA.name! == "window" || contact.nodeB.name! == "window") {
                 scoreIncrement(points: POINTS_FURNITURE)
+            } else if (contact.nodeA.name! == "golden_ball" || contact.nodeB.name! == "golden_ball") {
+                scoreIncrement(points: POINTS_GOLDEN_BALL)
             }
         }
         
@@ -689,8 +712,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             
             /// Debug options with physics fields
             //sceneView.debugOptions = [ARSCNDebugOptions.showWorldOrigin,
-              //                        ARSCNDebugOptions.showPhysicsShapes,
-                //                      ARSCNDebugOptions.showFeaturePoints]
+            //                        ARSCNDebugOptions.showPhysicsShapes,
+            //                      ARSCNDebugOptions.showFeaturePoints]
             
             /// Debug options without physics fields and origin
             sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints]
@@ -702,14 +725,14 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         
         sceneView.scene.physicsWorld.contactDelegate = self
         
-//        labelPoints.font = UIFont(name: FONT_NAME, size: FONT_SIZE_PTS)
+        //        labelPoints.font = UIFont(name: FONT_NAME, size: FONT_SIZE_PTS)
         scoreLabel.font = UIFont(name: FONT_NAME, size: FONT_SIZE_PTS)
         
         // Hide the menus
         hideGameMenu()
         hideGamezonePlacementMenu()
         hideNameMenu()
-   
+        
         
         // Creates a multipeer session with the system name as the peerID
         peerID = MCPeerID(displayName: UIDevice.current.name)
@@ -734,17 +757,17 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         // Pause the view's session
         sceneView.session.pause()
     }
-
+    
     // MARK: - ARSCNViewDelegate
     
-/*
-    // Override to create and configure nodes for anchors added to the view's session.
-    func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
-        let node = SCNNode()
+    /*
+     // Override to create and configure nodes for anchors added to the view's session.
+     func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
+     let node = SCNNode()
      
-        return node
-    }
-*/
+     return node
+     }
+     */
     
     func session(_ session: ARSession, didFailWithError error: Error) {
         // Present an error message to the user
