@@ -188,7 +188,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         case BALL    = 2
         case TARGET  = 3 // A target is any object with which the collision give points to the player
     }
-        
+
     func postPlayerRecord() {
         let url = URL(string: URL_POST)!
         var request = URLRequest(url: url)
