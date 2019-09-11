@@ -652,9 +652,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             || contact.nodeA.name! == "golden_snitch" || contact.nodeB.name! == "golden_snitch") {
             
             contact.nodeA.removeFromParentNode()
-            
-        } else if (contact.nodeA.name! == "golden_snitch" || contact.nodeB.name! == "golden_snitch"){
-            goldenSnitch = true
+            if (contact.nodeA.name! == "golden_snitch" || contact.nodeB.name! == "golden_snitch"){
+                goldenSnitch = true
+            }
         }
         
         // Remove ball and generate particle only when there's a collision with a target.
