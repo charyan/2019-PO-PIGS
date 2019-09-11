@@ -139,10 +139,11 @@ La gestion des collision est gérée par rapport au category bitmask des objets 
 ## Multijoueur
 Pour développer le multijoueur, nous avons créé la branche **multiplayer** sur GitHub. De cette manière le développement du mode multijoueur ne perturbera pas le développement du reste du jeu. Nous avons créé une classe **MultipeerSession** permettant de gérer tous les aspects de connexion et de transfert d'informations entre iPads. Cette classe a été reprise d'un [projet démo d'Apple](https://developer.apple.com/documentation/arkit/creating_a_multiuser_ar_experience) et a été adapté à notre jeu.
 
-### État du multijoueur
-- Possible de créer une map sur un ARAnchor
-- Possible d'envoyer/recevoir une ARWorldMap
-- Impossible d'envoyer une ARWorldMap à l'autre iPad **contenant des ARAnchors**, problème inconnu
+### Idée originale
+L'idée originale était d'avoir deux personnes jouer dans le même monde virtuel. Cette version du multijoueur étant trop dur à implémenter, nous avons décidé d'implémenter un nouveau mode de jeu.
+
+### Mode Duel
+Dans le mode **Duel**, chaque joueur joue sur son propre monde virtuel. Le timer est partagé, chaque joueur voit son propre score et le score de son adversaire. Le but est de faire plus de points que l'autre joueur. Les scores individuels des joueurs seront ensuite ajoutés au classement. Une fois le timer terminé, chaque joueur est présenté à un écran de fin affichant son score et le score de son adversaire ainsi qu'un texte personnalisé.
 
 ### Networking
 La partie networking est géré par la bibliothèque [MultipeerConnectivity](https://developer.apple.com/documentation/multipeerconnectivity). Cette bibliothèque permet la configuration automatique de la connexion par WiFi, WiFi Peer-to-peer ou Bluetooth, elle permet également de transmettre des informations entre appareils connectés.
