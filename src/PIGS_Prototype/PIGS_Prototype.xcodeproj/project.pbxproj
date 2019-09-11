@@ -11,6 +11,7 @@
 		8B34476122A54B9D00E63DD8 /* pigs-launch-background.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B34476022A54B9D00E63DD8 /* pigs-launch-background.png */; };
 		8B3987FA22A93EFC002EFD44 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B3987F822A93EFC002EFD44 /* spark.png */; };
 		8B3987FB22A93EFC002EFD44 /* ExplosionOld.scnp in Resources */ = {isa = PBXBuildFile; fileRef = 8B3987F922A93EFC002EFD44 /* ExplosionOld.scnp */; };
+		8B56451823290D8E00A7F4D7 /* Bomb Explosion.scnp in Resources */ = {isa = PBXBuildFile; fileRef = 8BA9646E2328DED100EF0B76 /* Bomb Explosion.scnp */; };
 		8B65334B231CFE3400C3D1D5 /* Door Explosion.scnp in Resources */ = {isa = PBXBuildFile; fileRef = 8B65334A231CFE3000C3D1D5 /* Door Explosion.scnp */; };
 		8BAA54F522B27F7E005DB8EC /* Skater Girls Rock.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8BAA54F422B27F7E005DB8EC /* Skater Girls Rock.ttf */; };
 		8BAD9648231D45440064B1E6 /* Window Explosion.scnp in Resources */ = {isa = PBXBuildFile; fileRef = 8BAD9647231D45300064B1E6 /* Window Explosion.scnp */; };
@@ -174,6 +175,7 @@
 				8B34476122A54B9D00E63DD8 /* pigs-launch-background.png in Resources */,
 				8BF6C84B2316AD6E000F835D /* Flying Target Explosion.scnp in Resources */,
 				8BFCB2622284476200E54C18 /* Assets.xcassets in Resources */,
+				8B56451823290D8E00A7F4D7 /* Bomb Explosion.scnp in Resources */,
 				8BF6C84A2316AD6B000F835D /* Pig Explosion.scnp in Resources */,
 				8B3987FB22A93EFC002EFD44 /* ExplosionOld.scnp in Resources */,
 				8B65334B231CFE3400C3D1D5 /* Door Explosion.scnp in Resources */,

@@ -573,6 +573,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         
         self.sceneView.scene.rootNode.enumerateChildNodes { (node, _) in
             
+            // Animation of flying target
             let moveY = SCNAction.moveBy(x: CGFloat.random(in: -0.2 ..< 0.2), y: CGFloat.random(in: -0.2 ..< 0.2), z: CGFloat.random(in: -0.2 ..< 0.2), duration: 0.6)
             let moveZ = SCNAction.moveBy(x: CGFloat.random(in: -0.2 ..< 0.2), y: CGFloat.random(in: -0.2 ..< 0.2), z: CGFloat.random(in: -0.2 ..< 0.2), duration: 0.6)
             let moveYZ = SCNAction.sequence([moveY, moveZ])
@@ -585,11 +586,39 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
                 node.runAction(repeatForever)
             }
             
+            // Animation of golden snitch
             let boatMoveY1 = SCNAction.moveBy(x: CGFloat.random(in: -1 ..< 1), y: CGFloat.random(in: -1 ..< 1), z: CGFloat.random(in: -1 ..< 1), duration: 0.7)
+            
+            let boatMoveR1 = SCNAction.rotate(by: .pi, around: SCNVector3(0, CGFloat.random(in: -200 ..< 200), 0), duration: 0.7)
+            
             let boatMoveZ1 = SCNAction.moveBy(x: CGFloat.random(in: -1 ..< 1), y: CGFloat.random(in: -1 ..< 1), z: CGFloat.random(in: -1 ..< 1), duration: 0.7)
+            
+            let boatMoveR2 = SCNAction.rotate(by: .pi, around: SCNVector3(0, CGFloat.random(in: -200 ..< 200), 0), duration: 0.7)
+            
             let boatMoveY2 = SCNAction.moveBy(x: CGFloat.random(in: -1 ..< 1), y: CGFloat.random(in: -1 ..< 1), z: CGFloat.random(in: -1 ..< 1), duration: 0.7)
+            
+            let boatMoveR3 = SCNAction.rotate(by: .pi, around: SCNVector3(0, CGFloat.random(in: -200 ..< 200), 0), duration: 0.7)
+            
             let boatMoveZ2 = SCNAction.moveBy(x: CGFloat.random(in: -1 ..< 1), y: CGFloat.random(in: -1 ..< 1), z: CGFloat.random(in: -1 ..< 1), duration: 0.7)
             
+            let boatMoveR4 = SCNAction.rotate(by: .pi, around: SCNVector3(0, 0, 0), duration: 0.1)
+            
+            let boatMoveY1R1 = SCNAction.sequence([boatMoveY1, boatMoveR1])
+            let boatMoveZ1R2 = SCNAction.sequence([boatMoveZ1, boatMoveR2])
+            let boatMoveY2R3 = SCNAction.sequence([boatMoveY2, boatMoveR3])
+            let boatMoveZ2R4 = SCNAction.sequence([boatMoveZ2, boatMoveR4])
+            
+            let boatMove1Loop = SCNAction.sequence([boatMoveY1R1, boatMoveZ1R2])
+            let boatMove2Loop = SCNAction.sequence([boatMoveY2R3, boatMoveZ2R4])
+            let boatMove3Loop = SCNAction.sequence([boatMoveY1R1.reversed(), boatMoveZ1R2.reversed()])
+            let boatMove4Loop = SCNAction.sequence([boatMoveY2R3.reversed(), boatMoveZ2R4.reversed()])
+            
+            let boatMove12Loop = SCNAction.sequence([boatMove1Loop, boatMove2Loop])
+            let boatMove34Loop = SCNAction.sequence([boatMove3Loop, boatMove4Loop])
+            
+            let boatMove1234Loop = SCNAction.sequence([boatMove12Loop, boatMove34Loop])
+            
+            /*
             let boatMoveYZ1 = SCNAction.sequence([boatMoveY1, boatMoveZ1])
             let boatMoveYZ2 = SCNAction.sequence([boatMoveY2, boatMoveZ2])
             
@@ -597,15 +626,16 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             let boatMoveYZ2Loop = SCNAction.sequence([boatMoveYZ2, boatMoveYZ2.reversed()])
             
             let boatMoveYZ12Loop = SCNAction.sequence([boatMoveYZ1Loop, boatMoveYZ2Loop])
+             */
             
-            let boatRepeatForever = SCNAction.repeatForever(boatMoveYZ12Loop)
-            
+            let boatRepeatForever = SCNAction.repeatForever(boatMove1234Loop)
             
             if node.name == "golden_snitch" {
                 node.runAction(boatRepeatForever)
             }
             
-            let action : SCNAction = SCNAction.rotate(by: .pi, around: SCNVector3(0, 1, 0), duration: 10)
+            // Animation of boat
+            let action : SCNAction = SCNAction.rotate(by: .pi, around: SCNVector3(0, 1, 0), duration: 5)
             let forever = SCNAction.repeatForever(action)
             
             if node.name == "rotation" || node.name == "pig_rotation" {
