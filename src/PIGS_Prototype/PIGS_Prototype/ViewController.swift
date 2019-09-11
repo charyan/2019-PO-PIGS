@@ -374,7 +374,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     func displayGamezonePlacementMenu() {
         gamePlacementView.isHidden = false
         
-        if (self.sceneView.session.currentFrame?.rawFeaturePoints!.points.count)! > 50 /*|| DEBUG_MODE*/ {
+        if (self.sceneView.session.currentFrame?.rawFeaturePoints!.points.count)! > 50 || DEBUG_MODE {
             doneButton.isEnabled = true
             doneButton.backgroundColor = #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)
         } else {
