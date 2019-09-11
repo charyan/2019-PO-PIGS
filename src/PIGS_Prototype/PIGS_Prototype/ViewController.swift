@@ -40,11 +40,14 @@ let GAMEZONE_ROOT_NODE_NAME : String! = "root"
 let PLACEHOLDER_PLANE_TRANSPARENCY : CGFloat = 0.5
 
 // POINTS
-let POINTS_FURNITURE : Int = 10
-let POINTS_TARGET : Int = 50
-let POINTS_FLYING_TARGET : Int = 200
-let POINTS_PIG : Int = 500
-let POINTS_GOLDEN_SNITCH : Int = 2000
+let POINTS_DYNAMIC_BLOCKS : Int = 1
+let POINTS_FURNITURE : Int = 30
+let POINTS_TARGET : Int = 100
+let POINTS_FLYING_TARGET : Int = 350
+let POINTS_PIG : Int = 700
+let POINTS_GOLDEN_SNITCH : Int = 2500
+
+let POINTS_BOMB : Int = -300
 
 // Default value rotation for the gamezone placement
 let ROTATION_DEG : Float = 5;
@@ -187,7 +190,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         case BALL    = 2
         case TARGET  = 3 // A target is any object with which the collision give points to the player
     }
-    
+
     func postPlayerRecord() {
         let url = URL(string: URL_POST)!
         var request = URLRequest(url: url)
@@ -570,6 +573,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         print("+" + String(points) + " points")
     }
     
+
     var seconds = 60
     
     var timer = Timer()
@@ -620,15 +624,15 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             // Animation of golden snitch
             let boatMoveY1 = SCNAction.moveBy(x: CGFloat.random(in: -1 ..< 1), y: CGFloat.random(in: -1 ..< 1), z: CGFloat.random(in: -1 ..< 1), duration: 0.7)
             
-            let boatMoveR1 = SCNAction.rotate(by: .pi, around: SCNVector3(0, CGFloat.random(in: -200 ..< 200), 0), duration: 0.7)
+            let boatMoveR1 = SCNAction.rotate(by: .pi, around: SCNVector3(0, CGFloat.random(in: -200 ..< 200), 0), duration: 0.5)
             
             let boatMoveZ1 = SCNAction.moveBy(x: CGFloat.random(in: -1 ..< 1), y: CGFloat.random(in: -1 ..< 1), z: CGFloat.random(in: -1 ..< 1), duration: 0.7)
             
-            let boatMoveR2 = SCNAction.rotate(by: .pi, around: SCNVector3(0, CGFloat.random(in: -200 ..< 200), 0), duration: 0.7)
+            let boatMoveR2 = SCNAction.rotate(by: .pi, around: SCNVector3(0, CGFloat.random(in: -200 ..< 200), 0), duration: 0.5)
             
             let boatMoveY2 = SCNAction.moveBy(x: CGFloat.random(in: -1 ..< 1), y: CGFloat.random(in: -1 ..< 1), z: CGFloat.random(in: -1 ..< 1), duration: 0.7)
             
-            let boatMoveR3 = SCNAction.rotate(by: .pi, around: SCNVector3(0, CGFloat.random(in: -200 ..< 200), 0), duration: 0.7)
+            let boatMoveR3 = SCNAction.rotate(by: .pi, around: SCNVector3(0, CGFloat.random(in: -200 ..< 200), 0), duration: 0.5)
             
             let boatMoveZ2 = SCNAction.moveBy(x: CGFloat.random(in: -1 ..< 1), y: CGFloat.random(in: -1 ..< 1), z: CGFloat.random(in: -1 ..< 1), duration: 0.7)
             
@@ -701,6 +705,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             
             explosionType = "Window Explosion.scnp"
             
+        } else if (contact.nodeA.name! == "bomb" || contact.nodeB.name! == "bomb") {
+            
+            explosionType = "Bomb Explosion.scnp"
         }
         
         let explosion = SCNParticleSystem(named: explosionType, inDirectory: nil)!
@@ -712,7 +719,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             || contact.nodeA.name! == "door" || contact.nodeB.name! == "door"
             || contact.nodeA.name! == "window" || contact.nodeB.name! == "window"
             || contact.nodeA.name! == "golden_snitch" || contact.nodeB.name! == "golden_snitch"
-            || contact.nodeA.name! == "pig_rotation" || contact.nodeB.name! == "pig_rotation") {
+            || contact.nodeA.name! == "pig_rotation" || contact.nodeB.name! == "pig_rotation"
+            || contact.nodeA.name! == "bomb" || contact.nodeB.name! == "bomb") {
             
             contact.nodeA.removeFromParentNode()
             if (contact.nodeA.name! == "golden_snitch" || contact.nodeB.name! == "golden_snitch"){
@@ -757,6 +765,10 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
                 scoreIncrement(points: POINTS_FURNITURE)
             } else if (contact.nodeA.name! == "golden_snitch" || contact.nodeB.name! == "golden_snitch") {
                 scoreIncrement(points: POINTS_GOLDEN_SNITCH)
+            } else if (contact.nodeA.name! == "bomb" || contact.nodeB.name! == "bomb") {
+                scoreIncrement(points: POINTS_BOMB)
+            } else {
+                scoreIncrement(points: POINTS_DYNAMIC_BLOCKS)
             }
         }
         

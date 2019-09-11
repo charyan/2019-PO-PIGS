@@ -16,6 +16,7 @@
 		8BAA54F522B27F7E005DB8EC /* Skater Girls Rock.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8BAA54F422B27F7E005DB8EC /* Skater Girls Rock.ttf */; };
 		8BAD9648231D45440064B1E6 /* Window Explosion.scnp in Resources */ = {isa = PBXBuildFile; fileRef = 8BAD9647231D45300064B1E6 /* Window Explosion.scnp */; };
 		8BAE78952297C611003F496A /* app-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BAE78942297C611003F496A /* app-icon.png */; };
+		8BC702BA2329138D006AE461 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BFCB2632284476200E54C18 /* LaunchScreen.storyboard */; };
 		8BC707BB229C021B00CA688A /* launchscreen-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BC707BA229C021B00CA688A /* launchscreen-logo.png */; };
 		8BD8B9AE22C0C18B00C1B37D /* Target Explosion.scnp in Resources */ = {isa = PBXBuildFile; fileRef = 8BD8B9AD22C0C18B00C1B37D /* Target Explosion.scnp */; };
 		8BF6C84A2316AD6B000F835D /* Pig Explosion.scnp in Resources */ = {isa = PBXBuildFile; fileRef = 8B2796292316A33D008241C0 /* Pig Explosion.scnp */; };
@@ -24,7 +25,6 @@
 		8BFCB25D2284476000E54C18 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFCB25C2284476000E54C18 /* ViewController.swift */; };
 		8BFCB2602284476000E54C18 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BFCB25E2284476000E54C18 /* Main.storyboard */; };
 		8BFCB2622284476200E54C18 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8BFCB2612284476200E54C18 /* Assets.xcassets */; };
-		8BFCB2652284476200E54C18 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BFCB2632284476200E54C18 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +39,7 @@
 		8BAA54F422B27F7E005DB8EC /* Skater Girls Rock.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Skater Girls Rock.ttf"; path = "PIGS_Prototype/fonts/Skater Girls Rock.ttf"; sourceTree = SOURCE_ROOT; };
 		8BAD9647231D45300064B1E6 /* Window Explosion.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = "Window Explosion.scnp"; sourceTree = "<group>"; };
 		8BAE78942297C611003F496A /* app-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "app-icon.png"; path = "art.scnassets/img/app-icon.png"; sourceTree = "<group>"; };
+		8BC702B92329131A006AE461 /* pigs-text-font.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pigs-text-font.png"; sourceTree = "<group>"; };
 		8BC707BA229C021B00CA688A /* launchscreen-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "launchscreen-logo.png"; path = "art.scnassets/img/launchscreen-logo.png"; sourceTree = "<group>"; };
 		8BD8B9AD22C0C18B00C1B37D /* Target Explosion.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = "Target Explosion.scnp"; sourceTree = "<group>"; };
 		8BFCB2552284476000E54C18 /* PIGS_Prototype.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PIGS_Prototype.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -105,6 +106,7 @@
 				8BFCB2632284476200E54C18 /* LaunchScreen.storyboard */,
 				8BFCB2662284476200E54C18 /* Info.plist */,
 				8BAE78942297C611003F496A /* app-icon.png */,
+				8BC702B92329131A006AE461 /* pigs-text-font.png */,
 				8B34476022A54B9D00E63DD8 /* pigs-launch-background.png */,
 				8BC707BA229C021B00CA688A /* launchscreen-logo.png */,
 			);
@@ -170,7 +172,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8BD8B9AE22C0C18B00C1B37D /* Target Explosion.scnp in Resources */,
-				8BFCB2652284476200E54C18 /* LaunchScreen.storyboard in Resources */,
 				8B13A513228EF23300047809 /* art.scnassets in Resources */,
 				8B34476122A54B9D00E63DD8 /* pigs-launch-background.png in Resources */,
 				8BF6C84B2316AD6E000F835D /* Flying Target Explosion.scnp in Resources */,
@@ -179,6 +180,7 @@
 				8BF6C84A2316AD6B000F835D /* Pig Explosion.scnp in Resources */,
 				8B3987FB22A93EFC002EFD44 /* ExplosionOld.scnp in Resources */,
 				8B65334B231CFE3400C3D1D5 /* Door Explosion.scnp in Resources */,
+				8BC702BA2329138D006AE461 /* LaunchScreen.storyboard in Resources */,
 				8BAD9648231D45440064B1E6 /* Window Explosion.scnp in Resources */,
 				8BAE78952297C611003F496A /* app-icon.png in Resources */,
 				8B3987FA22A93EFC002EFD44 /* spark.png in Resources */,
