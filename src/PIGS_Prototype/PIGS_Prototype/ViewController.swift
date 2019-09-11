@@ -23,7 +23,7 @@ let BALL_SPEED : Float = 3
 
 // LAUNCHER
 let PITCH_LAUNCHER : Float = 0.1 // 0 is straight forward
-let LAUNCHER_COOLDOWN_MILLISECONDS : Int = 500
+let LAUNCHER_COOLDOWN_MILLISECONDS : Int = 300
 
 // TARGET
 let TARGET_SCENE_NAME : String! = "art.scnassets/models/target.scn"
