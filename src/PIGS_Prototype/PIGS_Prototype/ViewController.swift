@@ -186,6 +186,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         case TARGET  = 3 // A target is any object with which the collision give points to the player
     }
     
+    let goldenSnitch = true
+    
     func postPlayerRecord() {
         let url = URL(string: URL_POST)!
         var request = URLRequest(url: url)
@@ -194,8 +196,19 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         let score = scoreLabel.text
         let playerLabel = "player="
         let scoreLabel = "&score="
+        let goldensnitchLabel = "&goldensnitch="
+        var goldenSnitchValue = "null"
+
+        if goldenSnitch {
+            goldenSnitchValue = "true"
+        } else {
+            goldenSnitchValue = "false"
+        }
         
-        let body = playerLabel + name! + scoreLabel + score!
+        let body = playerLabel + name! + scoreLabel + score! + goldensnitchLabel + goldenSnitchValue
+        
+        debugPrint(body)
+
         request.httpBody = body.data(using: .utf8)
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let error = error {
@@ -539,7 +552,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         print("+" + String(points) + " points")
     }
     
-    var seconds = 45
+    var seconds = 5
     
     var timer = Timer()
     var isTimerRunning = false
