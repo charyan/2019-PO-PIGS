@@ -23,7 +23,7 @@ let BALL_SPEED : Float = 3
 
 // LAUNCHER
 let PITCH_LAUNCHER : Float = 0.1 // 0 is straight forward
-let LAUNCHER_COOLDOWN_MILLISECONDS : Int = 500
+let LAUNCHER_COOLDOWN_MILLISECONDS : Int = 300
 
 // TARGET
 let TARGET_SCENE_NAME : String! = "art.scnassets/models/target.scn"
@@ -42,9 +42,9 @@ let PLACEHOLDER_PLANE_TRANSPARENCY : CGFloat = 0.5
 // POINTS
 let POINTS_FURNITURE : Int = 10
 let POINTS_TARGET : Int = 50
-let POINTS_FLYING_TARGET : Int = 150
-let POINTS_PIG : Int = 400
-let POINTS_GOLDEN_BALL : Int = 1500
+let POINTS_FLYING_TARGET : Int = 200
+let POINTS_PIG : Int = 500
+let POINTS_GOLDEN_SNITCH : Int = 2000
 
 // Default value rotation for the gamezone placement
 let ROTATION_DEG : Float = 5;
@@ -569,15 +569,14 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             hideGameMenu()
             displayResultsView()
             postPlayerRecord()
-        }else{
+        } else {
             seconds -= 1
             timeLabel.text = "\(seconds)"
-            
         }
         
     }
     
-    func resetTimer(){
+    func resetTimer() {
         timer.invalidate()
         seconds = 60
         timeLabel.text = "\(seconds)"
@@ -615,18 +614,20 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             let boatRepeatForever = SCNAction.repeatForever(boatMoveYZ12Loop)
             
             
-            if node.name == "golden_ball" {
+            if node.name == "golden_snitch" {
                 node.runAction(boatRepeatForever)
             }
             
             let action : SCNAction = SCNAction.rotate(by: .pi, around: SCNVector3(0, 1, 0), duration: 10)
             let forever = SCNAction.repeatForever(action)
             
-            if node.name == "rotation" {
+            if node.name == "rotation" || node.name == "pig_rotation" {
                 node.runAction(forever)
             }
         }
     }
+    
+    var goldenSnitch = false
     
     // Register collision
     func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
@@ -635,7 +636,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         var explosionType = "Target Explosion.scnp"
         
         if (contact.nodeA.name! == "pig" || contact.nodeB.name! == "pig"
-            || contact.nodeA.name! == "golden_ball" || contact.nodeB.name! == "golden_ball") {
+            || contact.nodeA.name! == "golden_snitch" || contact.nodeB.name! == "golden_snitch"
+            || contact.nodeA.name! == "pig_rotation" || contact.nodeB.name! == "pig_rotation") {
             
             explosionType = "Pig Explosion.scnp"
             
@@ -661,9 +663,13 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             || contact.nodeA.name! == "pig" || contact.nodeB.name! == "pig"
             || contact.nodeA.name! == "door" || contact.nodeB.name! == "door"
             || contact.nodeA.name! == "window" || contact.nodeB.name! == "window"
-            || contact.nodeA.name! == "golden_ball" || contact.nodeB.name! == "golden_ball") {
+            || contact.nodeA.name! == "golden_snitch" || contact.nodeB.name! == "golden_snitch"
+            || contact.nodeA.name! == "pig_rotation" || contact.nodeB.name! == "pig_rotation") {
             
             contact.nodeA.removeFromParentNode()
+            if (contact.nodeA.name! == "golden_snitch" || contact.nodeB.name! == "golden_snitch"){
+                goldenSnitch = true
+            }
         }
         
         // Remove ball and generate particle only when there's a collision with a target.
@@ -694,14 +700,15 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             } else if (contact.nodeA.name! == "flying target" || contact.nodeB.name! == "flying target") {
                 scoreIncrement(points: POINTS_FLYING_TARGET)
                 print("Collision with flying target")
-            } else if (contact.nodeA.name! == "pig" || contact.nodeB.name! == "pig") {
+            } else if (contact.nodeA.name! == "pig" || contact.nodeB.name! == "pig"
+                || contact.nodeA.name! == "pig_rotation" || contact.nodeB.name! == "pig_rotation") {
                 scoreIncrement(points: POINTS_PIG)
                 print("Collision with pig")
             } else if (contact.nodeA.name! == "door" || contact.nodeB.name! == "door"
                 || contact.nodeA.name! == "window" || contact.nodeB.name! == "window") {
                 scoreIncrement(points: POINTS_FURNITURE)
-            } else if (contact.nodeA.name! == "golden_ball" || contact.nodeB.name! == "golden_ball") {
-                scoreIncrement(points: POINTS_GOLDEN_BALL)
+            } else if (contact.nodeA.name! == "golden_snitch" || contact.nodeB.name! == "golden_snitch") {
+                scoreIncrement(points: POINTS_GOLDEN_SNITCH)
             }
         }
         
