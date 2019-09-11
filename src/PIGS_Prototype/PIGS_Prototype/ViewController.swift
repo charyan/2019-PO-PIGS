@@ -64,6 +64,8 @@ let URL_POST : String = "http://192.168.1.1/pigs/input.php"
 class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SCNPhysicsContactDelegate, MCSessionDelegate, MCBrowserViewControllerDelegate {
     
     
+    
+    
     @IBOutlet weak var doneNetworkingButton: UIButton!
     @IBOutlet weak var networkingView: UIView!
     @IBOutlet weak var debugTextView: UITextView!
@@ -262,16 +264,17 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     @IBOutlet weak var Results: UIView!
     
     @IBAction func SwipeGesture(_ sender: Any) {
-        exit(0)
+        reset()
     }
     
-    
+    var trackingPosition: SCNVector3!
+
     // When the Done button is pressed
     @IBAction func onDoneButton(_ sender: Any) {
         if (tracking) {
             //Set up the scene
             guard foundSurface else { return }
-            let trackingPosition = trackerNode!.position
+            trackingPosition = trackerNode!.position
             trackerNode?.removeFromParentNode()
             /*container = sceneView.scene.rootNode.childNode(withName: "container", recursively: false)!
              container.position = trackingPosition
@@ -328,6 +331,22 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         self.shootButton.backgroundColor = UIColor.white
     }
     
+    // Reset
+    func reset(){
+        
+        // Reset Variables
+        seconds = 60
+        
+        hideResultsView()
+        displayNameMenu()
+        
+        score = 0
+        scoreLabel.text = "0"
+        goldenSnitch = false
+        
+        node.removeFromParentNode()
+        createGameZone(position: trackingPosition)
+    }
     
     // Display the game menu
     func displayGameMenu() {
@@ -355,7 +374,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     func displayGamezonePlacementMenu() {
         gamePlacementView.isHidden = false
         
-        if (self.sceneView.session.currentFrame?.rawFeaturePoints!.points.count)! > 50 || DEBUG_MODE {
+        if (self.sceneView.session.currentFrame?.rawFeaturePoints!.points.count)! > 50 /*|| DEBUG_MODE*/ {
             doneButton.isEnabled = true
             doneButton.backgroundColor = #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)
         } else {
@@ -493,10 +512,11 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         sceneView.scene.rootNode.addChildNode(node)
         
     }
+       var node = SCNNode()
     
     // Create the game zone
     func createGameZone(position : SCNVector3) {
-        var node = SCNNode()
+     
         let scene = SCNScene(named: GAMEZONE_SCENE_NAME)!
         node = scene.rootNode.childNode(withName: GAMEZONE_ROOT_NODE_NAME, recursively: true)!
         node.name = GAMEZONE_ROOT_NODE_NAME
@@ -755,6 +775,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     }
     
     override func viewDidLoad() {
+        debugPrint("ViewDidLoad")
         super.viewDidLoad()
         hideResultsView()
         
@@ -839,9 +860,10 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     }
     
     func sessionInterruptionEnded(_ session: ARSession) {
-        // Reset tracking and/or remove existing anchors if consistent tracking is required
+
         
     }
+    
 }
 
 extension UIViewController {
