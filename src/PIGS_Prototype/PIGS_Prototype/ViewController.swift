@@ -186,8 +186,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         case TARGET  = 3 // A target is any object with which the collision give points to the player
     }
     
-    let goldenSnitch = true
-    
     func postPlayerRecord() {
         let url = URL(string: URL_POST)!
         var request = URLRequest(url: url)
