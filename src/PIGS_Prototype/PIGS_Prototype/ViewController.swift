@@ -553,7 +553,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         print("+" + String(points) + " points")
     }
     
-    var seconds = 45
+    var seconds = 60
     
     var timer = Timer()
     var isTimerRunning = false
