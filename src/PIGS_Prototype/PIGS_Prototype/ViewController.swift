@@ -608,7 +608,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             let action : SCNAction = SCNAction.rotate(by: .pi, around: SCNVector3(0, 1, 0), duration: 10)
             let forever = SCNAction.repeatForever(action)
             
-            if node.name == "rotation" {
+            if node.name == "rotation" || node.name == "pig_rotation" {
                 node.runAction(forever)
             }
         }
@@ -623,7 +623,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         var explosionType = "Target Explosion.scnp"
         
         if (contact.nodeA.name! == "pig" || contact.nodeB.name! == "pig"
-            || contact.nodeA.name! == "golden_snitch" || contact.nodeB.name! == "golden_snitch") {
+            || contact.nodeA.name! == "golden_snitch" || contact.nodeB.name! == "golden_snitch"
+            || contact.nodeA.name! == "pig_rotation" || contact.nodeB.name! == "pig_rotation") {
             
             explosionType = "Pig Explosion.scnp"
             
@@ -649,7 +650,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             || contact.nodeA.name! == "pig" || contact.nodeB.name! == "pig"
             || contact.nodeA.name! == "door" || contact.nodeB.name! == "door"
             || contact.nodeA.name! == "window" || contact.nodeB.name! == "window"
-            || contact.nodeA.name! == "golden_snitch" || contact.nodeB.name! == "golden_snitch") {
+            || contact.nodeA.name! == "golden_snitch" || contact.nodeB.name! == "golden_snitch"
+            || contact.nodeA.name! == "pig_rotation" || contact.nodeB.name! == "pig_rotation") {
             
             contact.nodeA.removeFromParentNode()
             if (contact.nodeA.name! == "golden_snitch" || contact.nodeB.name! == "golden_snitch"){
@@ -685,7 +687,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             } else if (contact.nodeA.name! == "flying target" || contact.nodeB.name! == "flying target") {
                 scoreIncrement(points: POINTS_FLYING_TARGET)
                 print("Collision with flying target")
-            } else if (contact.nodeA.name! == "pig" || contact.nodeB.name! == "pig") {
+            } else if (contact.nodeA.name! == "pig" || contact.nodeB.name! == "pig"
+                || contact.nodeA.name! == "pig_rotation" || contact.nodeB.name! == "pig_rotation") {
                 scoreIncrement(points: POINTS_PIG)
                 print("Collision with pig")
             } else if (contact.nodeA.name! == "door" || contact.nodeB.name! == "door"
