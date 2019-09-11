@@ -44,7 +44,7 @@ let POINTS_FURNITURE : Int = 10
 let POINTS_TARGET : Int = 50
 let POINTS_FLYING_TARGET : Int = 150
 let POINTS_PIG : Int = 400
-let POINTS_GOLDEN_BALL : Int = 1500
+let POINTS_GOLDEN_SNITCH : Int = 1500
 
 // Default value rotation for the gamezone placement
 let ROTATION_DEG : Float = 5;
@@ -556,15 +556,14 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             hideGameMenu()
             displayResultsView()
             postPlayerRecord()
-        }else{
+        } else {
             seconds -= 1
             timeLabel.text = "\(seconds)"
-            
         }
         
     }
     
-    func resetTimer(){
+    func resetTimer() {
         timer.invalidate()
         seconds = 60
         timeLabel.text = "\(seconds)"
@@ -602,7 +601,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             let boatRepeatForever = SCNAction.repeatForever(boatMoveYZ12Loop)
             
             
-            if node.name == "golden_ball" {
+            if node.name == "golden_snitch" {
                 node.runAction(boatRepeatForever)
             }
             
@@ -615,6 +614,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         }
     }
     
+    var goldenSnitch = false
+    
     // Register collision
     func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
         let ball = contact.nodeA.physicsBody!.contactTestBitMask == 3 ? contact.nodeA : contact.nodeB
@@ -622,7 +623,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         var explosionType = "Target Explosion.scnp"
         
         if (contact.nodeA.name! == "pig" || contact.nodeB.name! == "pig"
-            || contact.nodeA.name! == "golden_ball" || contact.nodeB.name! == "golden_ball") {
+            || contact.nodeA.name! == "golden_snitch" || contact.nodeB.name! == "golden_snitch") {
             
             explosionType = "Pig Explosion.scnp"
             
@@ -648,9 +649,11 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             || contact.nodeA.name! == "pig" || contact.nodeB.name! == "pig"
             || contact.nodeA.name! == "door" || contact.nodeB.name! == "door"
             || contact.nodeA.name! == "window" || contact.nodeB.name! == "window"
-            || contact.nodeA.name! == "golden_ball" || contact.nodeB.name! == "golden_ball") {
+            || contact.nodeA.name! == "golden_snitch" || contact.nodeB.name! == "golden_snitch") {
             
             contact.nodeA.removeFromParentNode()
+        } else if (contact.nodeA.name! == "golden_snitch" || contact.nodeB.name! == "golden_snitch"){
+            goldenSnitch = true
         }
         
         // Remove ball and generate particle only when there's a collision with a target.
@@ -687,8 +690,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             } else if (contact.nodeA.name! == "door" || contact.nodeB.name! == "door"
                 || contact.nodeA.name! == "window" || contact.nodeB.name! == "window") {
                 scoreIncrement(points: POINTS_FURNITURE)
-            } else if (contact.nodeA.name! == "golden_ball" || contact.nodeB.name! == "golden_ball") {
-                scoreIncrement(points: POINTS_GOLDEN_BALL)
+            } else if (contact.nodeA.name! == "golden_snitch" || contact.nodeB.name! == "golden_snitch") {
+                scoreIncrement(points: POINTS_GOLDEN_SNITCH)
             }
         }
         
