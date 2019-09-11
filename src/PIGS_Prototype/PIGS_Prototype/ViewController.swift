@@ -42,9 +42,9 @@ let PLACEHOLDER_PLANE_TRANSPARENCY : CGFloat = 0.5
 // POINTS
 let POINTS_FURNITURE : Int = 10
 let POINTS_TARGET : Int = 50
-let POINTS_FLYING_TARGET : Int = 150
-let POINTS_PIG : Int = 400
-let POINTS_GOLDEN_SNITCH : Int = 1500
+let POINTS_FLYING_TARGET : Int = 200
+let POINTS_PIG : Int = 500
+let POINTS_GOLDEN_SNITCH : Int = 2000
 
 // Default value rotation for the gamezone placement
 let ROTATION_DEG : Float = 5;
@@ -652,6 +652,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             || contact.nodeA.name! == "golden_snitch" || contact.nodeB.name! == "golden_snitch") {
             
             contact.nodeA.removeFromParentNode()
+            
         } else if (contact.nodeA.name! == "golden_snitch" || contact.nodeB.name! == "golden_snitch"){
             goldenSnitch = true
         }
