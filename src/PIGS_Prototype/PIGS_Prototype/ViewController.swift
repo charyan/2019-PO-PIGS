@@ -58,6 +58,13 @@ let URL_POST : String = "http://192.168.1.1/pigs/input.php"
 ////////////////////////////////////////////////////////////
 
 class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SCNPhysicsContactDelegate, MCBrowserViewControllerDelegate {
+    // Code used for communication between devices
+    enum CODE : String {
+        case READY = "1:" // Is the other player ready
+        case SCORE = "2:" // What is the score of the other player
+        case NAME  = "3:" // What is the name of the other player
+    }
+    
     func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
         dismiss(animated: true)
     }
@@ -68,15 +75,21 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     
     var isGameHost: Bool = false
     var multipeerSession: MultipeerSession! = MultipeerSession()
+    var isOtherPlayerReady: Bool = false
+    var isSelfReady: Bool = false
     
     @IBOutlet weak var doneNetworkingButton: UIButton!
     @IBOutlet weak var networkingView: UIView!
     @IBOutlet weak var debugTextView: UITextView!
     @IBOutlet weak var gameView: UIView!
     @IBOutlet weak var gamePlacementView: UIView!
+    @IBOutlet weak var waitingView: UIView!
     
     @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var scoreLabelOtherPlayer: UILabel!
     
+    @IBOutlet weak var crownPlayer: UIImageView!
+    @IBOutlet weak var crownOtherPlayer: UIImageView!
     
     @IBAction func onDoneNetworkingButton(_ sender: Any) {
         networkingView.isHidden = true
@@ -84,14 +97,21 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         multipeerSession.setIsGamePlacementViewEnabled(true)
     }
     
-    func hiddenNetworkingView() {
+    func displayWaitingView() {
+        waitingView.isHidden = false
+    }
+    
+    func hideWaitingView() {
+        waitingView.isHidden = true
+    }
+    
+    func hideNetworkingView() {
         networkingView.isHidden = true
-        
     }
     
     func displayNetworkingView() {
         networkingView.isHidden = false
-    showConnectionMenu()
+        showConnectionMenu()
         
     }
     
@@ -101,7 +121,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     }
     
     @IBAction func onSendButton(_ sender: Any) {
-        multipeerSession.sendMessage()
+        multipeerSession.ping()
         print("Sent message")
     }
     
@@ -133,6 +153,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     }
 
     var score = 0
+    var otherPlayerScore = 0
     
     enum CATEGORY_BIT_MASK: Int {
         case BALL    = 2
@@ -218,15 +239,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             //ambientLightNode = container.childNode(withName: "ambientLight", recursively: false)
             //directionalLightNode = container.childNode(withName: "directionalLight", recursively: false)
             tracking = false
-            
-            
-            sceneView.session.getCurrentWorldMap { worldMap, error in
-                guard let map = worldMap
-                    else { print("Error: \(error!.localizedDescription)"); return }
-                guard let data = try? NSKeyedArchiver.archivedData(withRootObject: map, requiringSecureCoding: true)
-                    else { fatalError("can't encode map") }
-                self.multipeerSession.sendToAllPeers(data)
-            }
         }
         displayNameMenu()
         hideGamezonePlacementMenu()
@@ -253,7 +265,16 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             multipeerSession.setIsNameViewEnabled(false)
             multipeerSession.setIsGameViewEnabled(true)
             
-            runTimer()
+            if(isOtherPlayerReady) {
+                runTimer()
+            } else {
+                hideGameMenu()
+                hideNameMenu()
+                displayWaitingView()
+            }
+            
+            multipeerSession.sendMessage(CODE.READY.rawValue)
+            isSelfReady = true
         }
         
     }
@@ -365,39 +386,37 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     var container: SCNNode!
     
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
-        if(isGameHost) {
-            guard tracking else { return }
-            let hitTest = self.sceneView.hitTest(CGPoint(x: self.view.frame.midX, y: self.view.frame.midY), types: .featurePoint)
-            guard let result = hitTest.first else { return }
-            let translation = SCNMatrix4(result.worldTransform)
-            let position = SCNVector3Make(translation.m41, translation.m42, translation.m43)
-            
-            if trackerNode == nil {
-                let plane = SCNPlane(width: 1.6, height: 1.6)
-                plane.firstMaterial?.diffuse.contents = UIImage(named: "art.scnassets/img/app-icon.png")
-                plane.firstMaterial?.isDoubleSided = true
-                plane.firstMaterial?.transparency = CGFloat(PLACEHOLDER_PLANE_TRANSPARENCY)
-                trackerNode = SCNNode(geometry: plane)
-                trackerNode?.eulerAngles.x = -.pi * 0.5
-                //self.trackerNode?.rotation = SCNVector4(0, 1, 0, GLKMathDegreesToRadians(270))
-                
-                
-                self.sceneView.scene.rootNode.addChildNode(self.trackerNode!)
-                foundSurface = true
-            }
-            
-            self.trackerNode?.position = position
-            
-            //self.trackerNode?.rotation.x = GLKMathDegreesToRadians(270)
-            
-            //self.trackerNode?.rotation = SCNVector4(0, 1, 0,GLKMathDegreesToRadians(Float(rotationDeg)))
-            
-            //self.trackerNode?.rotation =  SCNVector4(0, 1, 0,GLKMathDegreesToRadians(Float(rotationDeg)))
-            //self.trackerNode?.rotation = SCNVector4(1, 0, 0, GLKMathDegreesToRadians(270))
+        guard tracking else { return }
+        let hitTest = self.sceneView.hitTest(CGPoint(x: self.view.frame.midX, y: self.view.frame.midY), types: .featurePoint)
+        guard let result = hitTest.first else { return }
+        let translation = SCNMatrix4(result.worldTransform)
+        let position = SCNVector3Make(translation.m41, translation.m42, translation.m43)
+        
+        if trackerNode == nil {
+            let plane = SCNPlane(width: 1.6, height: 1.6)
+            plane.firstMaterial?.diffuse.contents = UIImage(named: "art.scnassets/img/app-icon.png")
+            plane.firstMaterial?.isDoubleSided = true
+            plane.firstMaterial?.transparency = CGFloat(PLACEHOLDER_PLANE_TRANSPARENCY)
+            trackerNode = SCNNode(geometry: plane)
+            trackerNode?.eulerAngles.x = -.pi * 0.5
+            //self.trackerNode?.rotation = SCNVector4(0, 1, 0, GLKMathDegreesToRadians(270))
             
             
-            displayGamezonePlacementMenu()
+            self.sceneView.scene.rootNode.addChildNode(self.trackerNode!)
+            foundSurface = true
         }
+        
+        self.trackerNode?.position = position
+        
+        //self.trackerNode?.rotation.x = GLKMathDegreesToRadians(270)
+        
+        //self.trackerNode?.rotation = SCNVector4(0, 1, 0,GLKMathDegreesToRadians(Float(rotationDeg)))
+        
+        //self.trackerNode?.rotation =  SCNVector4(0, 1, 0,GLKMathDegreesToRadians(Float(rotationDeg)))
+        //self.trackerNode?.rotation = SCNVector4(1, 0, 0, GLKMathDegreesToRadians(270))
+        
+        
+        displayGamezonePlacementMenu()
     }
 
 
@@ -501,6 +520,18 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     func scoreUpdate() {
         DispatchQueue.main.async {
             self.scoreLabel.text = String(self.score)
+            if(self.score > Int(self.scoreLabelOtherPlayer.text!) ?? 0) {
+                // Player is first
+                self.crownPlayer.isHidden = false
+                self.crownOtherPlayer.isHidden = true
+            } else if(Int(self.scoreLabelOtherPlayer.text!) ?? 0 > self.score) {
+                // Other player is first
+                self.crownPlayer.isHidden = true
+                self.crownOtherPlayer.isHidden = false
+            } else {
+                self.crownPlayer.isHidden = true
+                self.crownOtherPlayer.isHidden = true
+            }
         }
     }
     
@@ -524,10 +555,21 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         if seconds == 0 {
             timer.invalidate()
             hideGameMenu()
-            displayResultsView()
+            
             postPlayerRecord()
             multipeerSession.setIsGameViewEnabled(false)
             multipeerSession.setIsResultsViewEnabled(true)
+            
+            if(self.score > Int(self.scoreLabelOtherPlayer.text!) ?? 0) {
+                // Player is first
+                // display winner view
+                
+            } else if(Int(self.scoreLabelOtherPlayer.text!) ?? 0 > self.score) {
+                // Other player is first
+                // display loser view
+            }
+            
+            displayResultsView()
         }else{
             seconds -= 1
             timeLabel.text = "\(seconds)"
@@ -635,6 +677,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         }
         
         scoreUpdate()
+        multipeerSession.sendMessage(CODE.SCORE.rawValue + String(score))
     }
     
     override func viewDidLoad() {
@@ -676,7 +719,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         hideNameMenu()
         
         multipeerSession.delegate = self
-        multipeerSession.setLogView(debugTextView)
+        multipeerSession.setLogView(&debugTextView)
         multipeerSession.setDoneNetworkingButton(doneNetworkingButton)
         multipeerSession.setIsNetworkingViewEnabled(true)
         multipeerSession.setSceneView(&sceneView)
@@ -739,10 +782,38 @@ extension UIViewController {
 }
 
 extension ViewController : MultipeerSessionServiceDelegate {
-    func colorChanged(manager: MultipeerSession, colorString: String) {
-        //
+    func messageReceived(manager: MultipeerSession, message: String) {
+        OperationQueue.main.addOperation {
+            let code = String(message.prefix(2))
+            
+            switch(code) {
+            case CODE.READY.rawValue:
+                if(self.isSelfReady) {
+                    self.hideWaitingView()
+                    self.displayGameMenu()
+                    self.runTimer()
+                } else {
+                    self.isOtherPlayerReady = true
+                }
+                break
+            case CODE.SCORE.rawValue:
+                let start = message.index(message.startIndex, offsetBy: 2)
+                let range = start...
+                
+                let mySubstring = message[range]
+                self.scoreLabelOtherPlayer.text = String(mySubstring)
+                self.scoreUpdate()
+                break
+            case CODE.NAME.rawValue:
+                break
+            default:
+                self.debugTextView.text = self.debugTextView.text + message + "\n"
+                break
+            }
+            
+            debugPrint("Message received : " + message)
+        }
     }
-    
     
     func connectedDevicesChanged(manager: MultipeerSession, connectedDevices: [String]) {
         OperationQueue.main.addOperation {

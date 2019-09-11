@@ -6,8 +6,7 @@ import ARKit
 protocol MultipeerSessionServiceDelegate {
     
     func connectedDevicesChanged(manager : MultipeerSession, connectedDevices: [String])
-    func colorChanged(manager : MultipeerSession, colorString: String)
-    
+    func messageReceived(manager : MultipeerSession, message : String)
 }
 
 class MultipeerSession : NSObject {
@@ -29,6 +28,8 @@ class MultipeerSession : NSObject {
     private var isNameViewEnabled: Bool! = false
     private var isGameViewEnabled: Bool! = false
     private var isResultsViewEnabled: Bool! = false
+    
+    var delegate : MultipeerSessionServiceDelegate?
     
     
     public func setIsNetworkingViewEnabled(_ _isNetworkingViewEnabled: Bool) {
@@ -75,11 +76,9 @@ class MultipeerSession : NSObject {
         return log
     }
     
-    public func setLogView(_ _logView: UITextView) {
+    public func setLogView(_ _logView: inout UITextView) {
         logView = _logView
     }
-    
-    var delegate : MultipeerSessionServiceDelegate?
     
     lazy var session : MCSession = {
         let session = MCSession(peer: self.myPeerId, securityIdentity: nil, encryptionPreference: .required)
@@ -108,17 +107,20 @@ class MultipeerSession : NSObject {
         return session.connectedPeers
     }
     
-    public func sendMessage() {
-        let messageToSend = "\(myPeerId.displayName): Hello \(NSDate())"
+    public func ping() {
+        self.sendMessage("\(myPeerId.displayName): Hello \(NSDate())")
+    }
+    
+    public func sendMessage(_ messageToSend: String) {
         let message = messageToSend.data(using: String.Encoding.utf8, allowLossyConversion: false)
         do {
             try session.send(message!, toPeers: session.connectedPeers, with: .unreliable)
-                log = log + messageToSend + "\n" }
-            catch {
-                log = log + "Error sending message" + "\n"
-                debugPrint("Error sending message")
+            log = logView.text + messageToSend + "\n" }
+        catch {
+            log = logView.text + "Error sending message" + "\n"
+            debugPrint("Error sending message")
         }
-            
+        
         logView.text = log
     }
 }
@@ -166,6 +168,10 @@ extension MultipeerSession : MCSessionDelegate {
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         NSLog("%@", "didReceiveData: \(data.debugDescription)")
         
+        let str = String(data: data, encoding: .utf8)!
+        self.delegate?.messageReceived(manager: self, message: str)
+        
+        /*
         if(isNetworkingViewEnabled) {
             DispatchQueue.main.async { [unowned self] in
                 // send message
@@ -194,6 +200,7 @@ extension MultipeerSession : MCSessionDelegate {
         } else if(isResultsViewEnabled) {
             
         }
+         */
     }
     
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
