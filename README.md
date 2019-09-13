@@ -77,7 +77,7 @@ Nos appareils ont tous une adresse fixe, le même masque et le même NetId.
 
 ![schema](https://user-images.githubusercontent.com/43779006/64861850-5d62ac00-d631-11e9-886e-ed30116fb92d.JPG)
 
-Figure : 
+Figure : Schéma logique du projet
 
 Le schéma logique et une liste du matériel sont disponibles dans le dossier "charyan000/2019-PO-PIGS/doc".
 
