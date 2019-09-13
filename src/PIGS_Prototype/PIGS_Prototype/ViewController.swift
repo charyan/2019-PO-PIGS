@@ -339,6 +339,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             multipeerSession.setIsGameViewEnabled(true)
             
             if(isOtherPlayerReady) {
+                CountDown()
                 runTimer()
             } else {
                 hideGameMenu()
@@ -349,16 +350,12 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             multipeerSession.sendMessage(CODE.READY.rawValue)
             isSelfReady = true
             
-            
             multipeerSession.sendMessage(CODE.NAME.rawValue + playerName.text!)
-
-            runTimer()
-            removeGoldenSnitch()
 
             hideNameMenu()
             
             //displayCountDownView()
-            CountDown()
+            
         }
         
     }
@@ -1008,6 +1005,7 @@ extension ViewController : MultipeerSessionServiceDelegate {
                 if(self.isSelfReady) {
                     self.hideWaitingView()
                     self.displayGameMenu()
+                    self.CountDown()
                     self.runTimer()
                 } else {
                     self.isOtherPlayerReady = true
