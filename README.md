@@ -106,6 +106,7 @@ Ce logiciel nous permet de manipuler notre base de donnée tout en utilisant l'i
 | ID_util | Int |
 | NOM_util | Varchar |
 | SCORE_util | Int |
+| GOLDENSNITCH_util | Int
 
 ### Insertion de données
 L'iPad utilise une requête HTTP (méthode POST) pour envoyer le nom et le score du joueur à une page PHP (**input.php**) qui va insérer les informations dans la base de données. Par exemple, pour le corps de la requête HTTP: `player=Théo&score=200`.
