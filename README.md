@@ -75,7 +75,12 @@ Figure 5 : Terrain de jeu
 Nous avons créée un réseau sans-fil avec un access point permettant de transférer des informations entre le serveur et les iPad.
 Nos appareils ont tous une adresse fixe, le même masque et le même NetId.
 
-Un schéma logique et une liste du matériel sont disponibles dans le dossier "charyan000/2019-PO-PIGS/doc".
+![schema](https://user-images.githubusercontent.com/43779006/64861850-5d62ac00-d631-11e9-886e-ed30116fb92d.JPG)
+
+Figure : Schéma logique du projet
+
+Le schéma logique et une liste du matériel sont disponibles dans le dossier "charyan000/2019-PO-PIGS/doc".
+
 ### Serveur
 Nous utilisons un ordinateur Intel NUC sous Windows 10 Pro afin de proposer divers services nécessaires à notre projet : service Apache, MySQL, PHP. Nous utilisons XAMPP.  
 ![Panneau de contrôle XAMPP](https://user-images.githubusercontent.com/43775161/64027001-26c06800-cb40-11e9-9130-cc560776a135.png)

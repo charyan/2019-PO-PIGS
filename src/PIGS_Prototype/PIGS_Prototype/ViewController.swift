@@ -72,8 +72,13 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     @IBOutlet weak var gameView: UIView!
     @IBOutlet weak var gamePlacementView: UIView!
     
+    @IBOutlet weak var CountDownView: UIView!
     @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var threeLabel: UILabel!
+    @IBOutlet weak var oneLabel: UILabel!
+    @IBOutlet weak var zeroLabel: UIImageView!
     
+    @IBOutlet weak var twoLabel: UILabel!
     
     @IBAction func onDoneNetworkingButton(_ sender: Any) {
         networkingView.isHidden = true
@@ -88,6 +93,53 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     func displayNetworkingView() {
         networkingView.isHidden = false
         showConnectionMenu()
+        
+    }
+    
+    func CountDown() {
+        
+        displayCountDownView()
+        
+        zeroLabel.isHidden = true
+        oneLabel.isHidden = true
+        twoLabel.isHidden = true
+        threeLabel.isHidden = false
+        
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            // your code here
+            debugPrint("1")
+            self.threeLabel.isHidden = true
+            self.twoLabel.isHidden = false
+        }
+        
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            // your code here
+            debugPrint("2")
+            self.twoLabel.isHidden = true
+            self.oneLabel.isHidden = false
+        }
+
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            // your code here
+            debugPrint("3")
+            self.oneLabel.isHidden = true
+            self.zeroLabel.isHidden = false
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+            // your code here
+            self.hideCountDownView()
+            self.displayGameMenu()
+            self.playAnimation()
+            self.runTimer()
+        }
+        
+        
+        
+        
         
     }
     
@@ -297,13 +349,18 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             hideNameMenuError()
             hideNameLengthError()
             playerName.text = nameMenuTextField.text
-            hideNameMenu()
             DismissKeyboard()
-            displayGameMenu()
             hideGamezonePlacementMenu()
+
             playAnimation()
             runTimer()
             removeGoldenSnitch()
+
+            hideNameMenu()
+            
+            //displayCountDownView()
+            CountDown()
+            
         }
         
     }
@@ -323,6 +380,15 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         rotationDeg += ROTATION_DEG
         print(rotationDeg)
     }
+    
+    func displayCountDownView(){
+        CountDownView.isHidden = false;
+    }
+    
+    func hideCountDownView(){
+        CountDownView.isHidden = true;
+    }
+    
     
     
     
@@ -781,6 +847,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         debugPrint("ViewDidLoad")
         super.viewDidLoad()
         hideResultsView()
+        hideCountDownView()
         
         sceneView.scene.physicsWorld.timeStep = 1/200
         
