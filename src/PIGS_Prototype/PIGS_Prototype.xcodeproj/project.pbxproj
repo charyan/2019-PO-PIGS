@@ -74,13 +74,13 @@
 			isa = PBXGroup;
 			children = (
 				8B2796292316A33D008241C0 /* Pig Explosion.scnp */,
-				8B27962A2316A3C3008241C0 /* Flying Target Explosion.scnp */,
-				8B3987F822A93EFC002EFD44 /* spark.png */,
-				8B3987F922A93EFC002EFD44 /* ExplosionOld.scnp */,
 				8B65334A231CFE3000C3D1D5 /* Door Explosion.scnp */,
+				8B27962A2316A3C3008241C0 /* Flying Target Explosion.scnp */,
 				8BD8B9AD22C0C18B00C1B37D /* Target Explosion.scnp */,
 				8BAD9647231D45300064B1E6 /* Window Explosion.scnp */,
 				8BA9646E2328DED100EF0B76 /* Bomb Explosion.scnp */,
+				8B3987F822A93EFC002EFD44 /* spark.png */,
+				8B3987F922A93EFC002EFD44 /* ExplosionOld.scnp */,
 				8BFCB2572284476000E54C18 /* PIGS_Prototype */,
 				8BFCB2562284476000E54C18 /* Products */,
 			);
