@@ -722,9 +722,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         if (contact.nodeA.name! == "box" || contact.nodeB.name! == "box"
             || contact.nodeA.name! == "small_rock" || contact.nodeB.name! == "small_rock") {
             print("Collision with box")
-        } else if (contact.nodeA.name! == "cloud" || contact.nodeB.name! == "cloud") {
-            // ball.removeFromParentNode()
-            print("Collision with cloud")
+        } else if (contact.nodeA.name! == "house flatten" || contact.nodeB.name! == "house flatten") {
+            print("Collision with house")
         } else {
             let explosionNode = SCNNode()
             explosionNode.position = ball.presentation.position
