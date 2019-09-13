@@ -181,11 +181,35 @@ Nous allons créer un map sur ce principe afin d'avoir un terrain de jeu stable.
 Figure  : Blocs empilés en pyramide
 
 ### Animations
+
+#### Cibles volantes
 Nous avons intégré un système de déplacement automatique pour les cibles volantes.
 Chaque cible bouge individuellement grâce à une génération de valeurs aléatoires.
 Chaque cible a un pattern d'aller et retour se modifiant automatiquement à chaque trajet.
 Pour pouvoir donner une animation à chaque cible, une fonction permet de lire tous les noeuds. À partir de ça nous avons fait un test pour savoir si le noeud actuel est nommé "flying target".
 Ensuite on joue l'animation pour chaque cible une par une.
+
+#### Bateau
+Un bateau tourne autour de la map accompagné de quatre cochons.
+Ils sont liés à un noeud situé au centre de la map. On fait tourner ce noeud pour avoir une rotation fluide.
+Nous avons tenté de donner une physique "concave" au bateau pour qu'elle l'enrobe. Cette opération à rendu la map illisible et inutilisable. La map a pu être récupérée grâce à l'archivage sur GitHub.
+
+Pour la physique, nous avons créé des blocs invisibles ayant la même taille que le bateau et tournants en même temps.
+
+#### Vif d'or
+Un élément permettant de marquer beaucoup de points et très difficile à toucher. Il se déplace aléatoirement et fait des rotation entre chaque mouveemnt.
+
+### Points
+
+#### Bombes
+Elles enlèvent des points à la collision. Une animation a été créée pour correspondre avec la bombe.
+
+### Tests utilisateur
+Nous avons fait intervenir diverses personnes pour tester le jeu. En particulier pour améliorer le système de points. Cela nous a permis d'équilibrer les points en fonction des objets destructibles.
+
+### Performances
+À force d'ajouter des éléments dans le jeu, les Ipad ne suivent plus. Il est arrivé que le processeur ait plus de 100% d'utilisation. Certaines structures sont composées de nombreux blocs.
+Il est possible de rassembler plusieurs éléments en un seul puis lui donner une physique. Après avoir fait cela avec les ensembles de blocs, les performances sont à nouveau correct et le jeu plus stable.
 
 ## Leçons à retenir
 Ici se trouvent les leçons qu'on a retenu en réalisant ce projet.
