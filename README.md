@@ -176,10 +176,6 @@ Nous avons remarqué que si nous empilions les cubes en pyramide et qu'il ont au
 
 Nous allons créer un map sur ce principe afin d'avoir un terrain de jeu stable.
 
-![pyramid](https://raw.githubusercontent.com/charyan000/2019-PO-PIGS/master/doc/Images/pyramid.png?token=AKOAHSW5BLFVPWFE6VWMXZK5MY7GM)
-
-Figure  : Blocs empilés en pyramide
-
 ### Animations
 
 #### Cibles volantes
