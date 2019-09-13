@@ -75,7 +75,12 @@ Figure 5 : Terrain de jeu
 Nous avons créée un réseau sans-fil avec un access point permettant de transférer des informations entre le serveur et les iPad.
 Nos appareils ont tous une adresse fixe, le même masque et le même NetId.
 
-Un schéma logique et une liste du matériel sont disponibles dans le dossier "charyan000/2019-PO-PIGS/doc".
+![schema](https://user-images.githubusercontent.com/43779006/64861850-5d62ac00-d631-11e9-886e-ed30116fb92d.JPG)
+
+Figure : Schéma logique du projet
+
+Le schéma logique et une liste du matériel sont disponibles dans le dossier "charyan000/2019-PO-PIGS/doc".
+
 ### Serveur
 Nous utilisons un ordinateur Intel NUC sous Windows 10 Pro afin de proposer divers services nécessaires à notre projet : service Apache, MySQL, PHP. Nous utilisons XAMPP.  
 ![Panneau de contrôle XAMPP](https://user-images.githubusercontent.com/43775161/64027001-26c06800-cb40-11e9-9130-cc560776a135.png)
@@ -176,16 +181,36 @@ Nous avons remarqué que si nous empilions les cubes en pyramide et qu'il ont au
 
 Nous allons créer un map sur ce principe afin d'avoir un terrain de jeu stable.
 
-![pyramid](https://raw.githubusercontent.com/charyan000/2019-PO-PIGS/master/doc/Images/pyramid.png?token=AKOAHSW5BLFVPWFE6VWMXZK5MY7GM)
-
-Figure  : Blocs empilés en pyramide
-
 ### Animations
+
+#### Cibles volantes
 Nous avons intégré un système de déplacement automatique pour les cibles volantes.
 Chaque cible bouge individuellement grâce à une génération de valeurs aléatoires.
 Chaque cible a un pattern d'aller et retour se modifiant automatiquement à chaque trajet.
 Pour pouvoir donner une animation à chaque cible, une fonction permet de lire tous les noeuds. À partir de ça nous avons fait un test pour savoir si le noeud actuel est nommé "flying target".
 Ensuite on joue l'animation pour chaque cible une par une.
+
+#### Bateau
+Un bateau tourne autour de la map accompagné de quatre cochons.
+Ils sont liés à un noeud situé au centre de la map. On fait tourner ce noeud pour avoir une rotation fluide.
+Nous avons tenté de donner une physique "concave" au bateau pour qu'elle l'enrobe. Cette opération à rendu la map illisible et inutilisable. La map a pu être récupérée grâce à l'archivage sur GitHub.
+
+Pour la physique, nous avons créé des blocs invisibles ayant la même taille que le bateau et tournants en même temps.
+
+#### Vif d'or
+Un élément permettant de marquer beaucoup de points et très difficile à toucher. Il se déplace aléatoirement et fait des rotation entre chaque mouveemnt.
+
+### Points
+
+#### Bombes
+Elles enlèvent des points à la collision. Une animation a été créée pour correspondre avec la bombe.
+
+### Tests utilisateur
+Nous avons fait intervenir diverses personnes pour tester le jeu. En particulier pour améliorer le système de points. Cela nous a permis d'équilibrer les points en fonction des objets destructibles.
+
+### Performances
+À force d'ajouter des éléments dans le jeu, les Ipad ne suivent plus. Il est arrivé que le processeur ait plus de 100% d'utilisation. Certaines structures sont composées de nombreux blocs.
+Il est possible de rassembler plusieurs éléments en un seul puis lui donner une physique. Après avoir fait cela avec les ensembles de blocs, les performances sont à nouveau correct et le jeu plus stable.
 
 ## Leçons à retenir
 Ici se trouvent les leçons qu'on a retenu en réalisant ce projet.

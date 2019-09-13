@@ -13,7 +13,7 @@ import MultipeerConnectivity
 
 ///////////////////////////////////////////////////////////////
 
-let DEBUG_MODE : Bool = true // TRUE is ON
+let DEBUG_MODE : Bool = false // TRUE is ON
 
 // BALL
 let BALL_PROJECTILE_NAME : String! = "ball"
@@ -61,8 +61,26 @@ let URL_POST : String = "http://192.168.1.1/pigs/input.php"
 
 ////////////////////////////////////////////////////////////
 
-class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SCNPhysicsContactDelegate, MCSessionDelegate, MCBrowserViewControllerDelegate {
+class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SCNPhysicsContactDelegate, MCBrowserViewControllerDelegate {
+    // Code used for communication between devices
+    enum CODE : String {
+        case READY = "1:" // Is the other player ready
+        case SCORE = "2:" // What is the score of the other player
+        case NAME  = "3:" // What is the name of the other player
+    }
     
+    func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
+        dismiss(animated: true)
+    }
+    
+    func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
+        dismiss(animated: true)
+    }
+    
+    var isGameHost: Bool = false
+    var multipeerSession: MultipeerSession! = MultipeerSession()
+    var isOtherPlayerReady: Bool = false
+    var isSelfReady: Bool = false
     
     
     
@@ -71,23 +89,90 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     @IBOutlet weak var debugTextView: UITextView!
     @IBOutlet weak var gameView: UIView!
     @IBOutlet weak var gamePlacementView: UIView!
+    @IBOutlet weak var waitingView: UIView!
     
+    @IBOutlet weak var CountDownView: UIView!
     @IBOutlet weak var timeLabel: UILabel!
+
+    @IBOutlet weak var scoreLabelOtherPlayer: UILabel!
     
+    @IBOutlet weak var crownPlayer: UIImageView!
+    @IBOutlet weak var crownOtherPlayer: UIImageView!
+
+    @IBOutlet weak var threeLabel: UILabel!
+    @IBOutlet weak var oneLabel: UILabel!
+    @IBOutlet weak var zeroLabel: UIImageView!
+    
+    @IBOutlet weak var twoLabel: UILabel!
     
     @IBAction func onDoneNetworkingButton(_ sender: Any) {
         networkingView.isHidden = true
-        
+        multipeerSession.setIsNetworkingViewEnabled(false)
+        multipeerSession.setIsGamePlacementViewEnabled(true)
     }
     
-    func hiddenNetworkingView() {
+    func displayWaitingView() {
+        waitingView.isHidden = false
+    }
+    
+    func hideWaitingView() {
+        waitingView.isHidden = true
+    }
+    
+    func hideNetworkingView() {
         networkingView.isHidden = true
-        
     }
     
     func displayNetworkingView() {
         networkingView.isHidden = false
         showConnectionMenu()
+        
+    }
+    
+    func CountDown() {
+        
+        displayCountDownView()
+        
+        zeroLabel.isHidden = true
+        oneLabel.isHidden = true
+        twoLabel.isHidden = true
+        threeLabel.isHidden = false
+        
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            // your code here
+            debugPrint("1")
+            self.threeLabel.isHidden = true
+            self.twoLabel.isHidden = false
+        }
+        
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            // your code here
+            debugPrint("2")
+            self.twoLabel.isHidden = true
+            self.oneLabel.isHidden = false
+        }
+
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            // your code here
+            debugPrint("3")
+            self.oneLabel.isHidden = true
+            self.zeroLabel.isHidden = false
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+            // your code here
+            self.hideCountDownView()
+            self.displayGameMenu()
+            self.playAnimation()
+            self.runTimer()
+        }
+        
+        
+        
+        
         
     }
     
@@ -97,66 +182,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     }
     
     @IBAction func onSendButton(_ sender: Any) {
-        messageToSend = "\(peerID.displayName): Hello \(NSDate())"
-        let message = messageToSend.data(using: String.Encoding.utf8, allowLossyConversion: false)
-        do {
-            try self.mcSession.send(message!, toPeers: self.mcSession.connectedPeers, with: .unreliable)
-            debugTextView.text = debugTextView.text + messageToSend + "\n"        }
-        catch {
-            debugTextView.text = debugTextView.text + "Error sending message" + "\n"
-            debugPrint("Error sending message")
-        }
-    }
-    
-    var peerID: MCPeerID!
-    var mcSession: MCSession!
-    var mcAdvertiserAssistant: MCAdvertiserAssistant!
-    var messageToSend: String!
-    
-    func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
-        switch state {
-        case .connected:
-            debugTextView.text = debugTextView.text + "Connected: \(peerID.displayName)" + "\n"
-            debugPrint("Connected: \(peerID.displayName)")
-            doneNetworkingButton.isEnabled = true
-        case .connecting:
-            debugTextView.text = debugTextView.text + "Connecting: \(peerID.displayName)" + "\n"
-            debugPrint("Connecting: \(peerID.displayName)")
-        case .notConnected:
-            debugTextView.text = debugTextView.text + "Not Connected: \(peerID.displayName)" + "\n"
-            debugPrint("Not Connected: \(peerID.displayName)")
-        @unknown default:
-            debugTextView.text = debugTextView.text + "fatal error" + "\n"
-            debugPrint("fatal error")
-        }
-    }
-    
-    func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-        DispatchQueue.main.async { [unowned self] in
-            // send message
-            let message = NSString(data: data as Data, encoding: String.Encoding.utf8.rawValue)! as String
-            self.debugTextView.text = self.debugTextView.text + message + "\n"
-        }
-    }
-    
-    func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
-        
-    }
-    
-    func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, with progress: Progress) {
-        
-    }
-    
-    func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
-        
-    }
-    
-    func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
-        dismiss(animated: true)
-    }
-    
-    func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
-        dismiss(animated: true)
+        multipeerSession.ping()
+        print("Sent message")
     }
     
     @objc func showConnectionMenu() {
@@ -174,17 +201,21 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     }
     
     func hostSession(action: UIAlertAction) {
-        mcAdvertiserAssistant = MCAdvertiserAssistant(serviceType: "pigs", discoveryInfo: nil, session: mcSession)
-        mcAdvertiserAssistant.start()
+       isGameHost = true
+        multipeerSession.setMcAdvertiserAssistant(MCAdvertiserAssistant(serviceType: "pigs", discoveryInfo: nil, session: multipeerSession.session))
+        multipeerSession.getMcAdvertiserAssistant().start()
     }
     
     func joinSession(action: UIAlertAction) {
-        let mcBrowser = MCBrowserViewController(serviceType: "pigs", session: mcSession)
+        isGameHost = false
+        let mcBrowser = MCBrowserViewController(serviceType: "pigs", session: multipeerSession.session)
         mcBrowser.delegate = self
         present(mcBrowser, animated: true)
     }
     
     var score = 0
+    var otherPlayerScore = 0
+    var otherPlayerName : String = ""
     
     enum CATEGORY_BIT_MASK: Int {
         case BALL    = 2
@@ -228,7 +259,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         task.resume()
     }
     
-    
     @IBOutlet var sceneView: ARSCNView!
     @IBOutlet weak var scoreLabel: UILabel!
     
@@ -269,7 +299,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     
     var trackingPosition: SCNVector3!
 
-    // When the Done button is pressed
+    // When the Done button (In the gameplacement view) is pressed
     @IBAction func onDoneButton(_ sender: Any) {
         if (tracking) {
             //Set up the scene
@@ -286,6 +316,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         }
         displayNameMenu()
         hideGamezonePlacementMenu()
+        
+        multipeerSession.setIsGamePlacementViewEnabled(false)
+        multipeerSession.setIsNameViewEnabled(true)
     }
     
     @IBAction func onPlayButton(_ sender: Any) {
@@ -293,16 +326,39 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             displayNameMenuError()
         } else if (nameMenuTextField.text!.count > 20) {
             displayNameLengthError()
-        } else {
+        } else { // Everything is ok
             hideNameMenuError()
             hideNameLengthError()
             playerName.text = nameMenuTextField.text
-            hideNameMenu()
             DismissKeyboard()
-            displayGameMenu()
             hideGamezonePlacementMenu()
+
             playAnimation()
+            
+            multipeerSession.setIsNameViewEnabled(false)
+            multipeerSession.setIsGameViewEnabled(true)
+            
+            if(isOtherPlayerReady) {
+                runTimer()
+            } else {
+                hideGameMenu()
+                hideNameMenu()
+                displayWaitingView()
+            }
+            
+            multipeerSession.sendMessage(CODE.READY.rawValue)
+            isSelfReady = true
+            
+            
+            multipeerSession.sendMessage(CODE.NAME.rawValue + playerName.text!)
+
             runTimer()
+            removeGoldenSnitch()
+
+            hideNameMenu()
+            
+            //displayCountDownView()
+            CountDown()
         }
         
     }
@@ -322,6 +378,15 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         rotationDeg += ROTATION_DEG
         print(rotationDeg)
     }
+    
+    func displayCountDownView(){
+        CountDownView.isHidden = false;
+    }
+    
+    func hideCountDownView(){
+        CountDownView.isHidden = true;
+    }
+    
     
     
     
@@ -395,9 +460,37 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     }
     
     
+    @IBOutlet weak var resultsViewTitle: UILabel!
+    
+    @IBOutlet weak var resultsViewPlayerName: UILabel!
+    @IBOutlet weak var resultsViewPlayerScore: UILabel!
+    
+    @IBOutlet weak var resultsViewOtherPlayerName: UILabel!
+    @IBOutlet weak var resultsViewOtherPlayerScore: UILabel!
+    
+    
     func displayResultsView() {
         self.Results.isHidden = false
         NumberPoints.text = scoreLabel.text
+        
+        resultsViewPlayerName.text = NameJoueur.text
+        resultsViewPlayerScore.text = String(score) + " pts"
+        
+        resultsViewOtherPlayerName.text = otherPlayerName
+        resultsViewOtherPlayerScore.text = String(otherPlayerScore) + " pts"
+        
+        if(self.score > Int(self.scoreLabelOtherPlayer.text!) ?? 0) {
+            // Player is first
+            resultsViewTitle.text = "GAGNÉ !"
+            
+        } else if(Int(self.scoreLabelOtherPlayer.text!) ?? 0 > self.score) {
+            // Other player is first
+            resultsViewTitle.text = "PERDU !"
+            
+        } else {
+            // Draw
+            resultsViewTitle.text = "ÉGALITÉ !"
+        }
     }
     
     func hideNameMenu() {
@@ -562,9 +655,36 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         sceneView.scene.rootNode.addChildNode(node)
     }
     
+    func removeGoldenSnitch() {
+        /*
+        self.sceneView.scene.rootNode.enumerateChildNodes { (node, _) in
+
+            if node.name == "golden_snitch" {
+                node.removeFromParentNode()
+            }
+        }
+        */
+        
+        sceneView.scene.rootNode.childNode(withName: "houses", recursively: false)?.removeFromParentNode()
+    }
+    
     func scoreUpdate() {
         DispatchQueue.main.async {
             self.scoreLabel.text = String(self.score)
+            self.scoreLabelOtherPlayer.text = String(self.otherPlayerScore)
+            
+            if(self.score > self.otherPlayerScore) {
+                // Player is first
+                self.crownPlayer.isHidden = false
+                self.crownOtherPlayer.isHidden = true
+            } else if(self.otherPlayerScore > self.score) {
+                // Other player is first
+                self.crownPlayer.isHidden = true
+                self.crownOtherPlayer.isHidden = false
+            } else {
+                self.crownPlayer.isHidden = true
+                self.crownOtherPlayer.isHidden = true
+            }
         }
     }
     
@@ -588,6 +708,11 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         if seconds == 0 {
             timer.invalidate()
             hideGameMenu()
+            
+            postPlayerRecord()
+            multipeerSession.setIsGameViewEnabled(false)
+            multipeerSession.setIsResultsViewEnabled(true)
+            
             displayResultsView()
             postPlayerRecord()
         } else {
@@ -722,9 +847,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         if (contact.nodeA.name! == "box" || contact.nodeB.name! == "box"
             || contact.nodeA.name! == "small_rock" || contact.nodeB.name! == "small_rock") {
             print("Collision with box")
-        } else if (contact.nodeA.name! == "cloud" || contact.nodeB.name! == "cloud") {
-            // ball.removeFromParentNode()
-            print("Collision with cloud")
+        } else if (contact.nodeA.name! == "house flatten" || contact.nodeB.name! == "house flatten") {
+            print("Collision with house")
         } else {
             let explosionNode = SCNNode()
             explosionNode.position = ball.presentation.position
@@ -762,12 +886,17 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         }
         
         scoreUpdate()
+        multipeerSession.sendMessage(CODE.SCORE.rawValue + String(score))
     }
+    
+    
+    @IBOutlet weak var gameViewTimeLabel: UILabel!
     
     override func viewDidLoad() {
         debugPrint("ViewDidLoad")
         super.viewDidLoad()
         hideResultsView()
+        hideCountDownView()
         
         sceneView.scene.physicsWorld.timeStep = 1/200
         
@@ -803,12 +932,13 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         hideGamezonePlacementMenu()
         hideNameMenu()
         
+        multipeerSession.delegate = self
+        multipeerSession.setLogView(&debugTextView)
+        multipeerSession.setDoneNetworkingButton(doneNetworkingButton)
+        multipeerSession.setIsNetworkingViewEnabled(true)
+        multipeerSession.setSceneView(&sceneView)
         
-        // Creates a multipeer session with the system name as the peerID
-        peerID = MCPeerID(displayName: UIDevice.current.name)
-        mcSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .required)
-        mcSession.delegate = self
-        
+        gameViewTimeLabel.text = String(seconds)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -865,5 +995,51 @@ extension UIViewController {
     
     @objc func DismissKeyboard() {
         view.endEditing(true)
+    }
+}
+
+extension ViewController : MultipeerSessionServiceDelegate {
+    func messageReceived(manager: MultipeerSession, message: String) {
+        OperationQueue.main.addOperation {
+            let code = String(message.prefix(2))
+            
+            switch(code) {
+            case CODE.READY.rawValue:
+                if(self.isSelfReady) {
+                    self.hideWaitingView()
+                    self.displayGameMenu()
+                    self.runTimer()
+                } else {
+                    self.isOtherPlayerReady = true
+                }
+                break
+            case CODE.SCORE.rawValue:
+                let start = message.index(message.startIndex, offsetBy: 2)
+                let range = start...
+                
+                let mySubstring = message[range]
+                self.otherPlayerScore = Int(String(mySubstring)) ?? 0
+                self.scoreUpdate()
+                break
+            case CODE.NAME.rawValue:
+                let start = message.index(message.startIndex, offsetBy: 2)
+                let range = start...
+                
+                let mySubstring = message[range]
+                self.otherPlayerName = String(mySubstring)
+                break
+            default:
+                self.debugTextView.text = self.debugTextView.text + message + "\n"
+                break
+            }
+            
+            debugPrint("Message received : " + message)
+        }
+    }
+    
+    func connectedDevicesChanged(manager: MultipeerSession, connectedDevices: [String]) {
+        OperationQueue.main.addOperation {
+            print("Connections: \(connectedDevices)")
+        }
     }
 }
