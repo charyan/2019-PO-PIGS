@@ -154,6 +154,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
 
     var score = 0
     var otherPlayerScore = 0
+    var otherPlayerName : String = ""
     
     enum CATEGORY_BIT_MASK: Int {
         case BALL    = 2
@@ -275,6 +276,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             
             multipeerSession.sendMessage(CODE.READY.rawValue)
             isSelfReady = true
+            
+            
+            multipeerSession.sendMessage(CODE.NAME.rawValue + playerName.text!)
         }
         
     }
@@ -351,9 +355,37 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     }
     
     
+    @IBOutlet weak var resultsViewTitle: UILabel!
+    
+    @IBOutlet weak var resultsViewPlayerName: UILabel!
+    @IBOutlet weak var resultsViewPlayerScore: UILabel!
+    
+    @IBOutlet weak var resultsViewOtherPlayerName: UILabel!
+    @IBOutlet weak var resultsViewOtherPlayerScore: UILabel!
+    
+    
     func displayResultsView() {
         self.Results.isHidden = false
         NumberPoints.text = scoreLabel.text
+        
+        resultsViewPlayerName.text = NameJoueur.text
+        resultsViewPlayerScore.text = String(score) + " pts"
+        
+        resultsViewOtherPlayerName.text = otherPlayerName
+        resultsViewOtherPlayerScore.text = String(otherPlayerScore) + " pts"
+        
+        if(self.score > Int(self.scoreLabelOtherPlayer.text!) ?? 0) {
+            // Player is first
+            resultsViewTitle.text = "GAGNÉ !"
+            
+        } else if(Int(self.scoreLabelOtherPlayer.text!) ?? 0 > self.score) {
+            // Other player is first
+            resultsViewTitle.text = "PERDU !"
+            
+        } else {
+            // Draw
+            resultsViewTitle.text = "ÉGALITÉ !"
+        }
     }
     
     func hideNameMenu() {
@@ -520,11 +552,13 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     func scoreUpdate() {
         DispatchQueue.main.async {
             self.scoreLabel.text = String(self.score)
-            if(self.score > Int(self.scoreLabelOtherPlayer.text!) ?? 0) {
+            self.scoreLabelOtherPlayer.text = String(self.otherPlayerScore)
+            
+            if(self.score > self.otherPlayerScore) {
                 // Player is first
                 self.crownPlayer.isHidden = false
                 self.crownOtherPlayer.isHidden = true
-            } else if(Int(self.scoreLabelOtherPlayer.text!) ?? 0 > self.score) {
+            } else if(self.otherPlayerScore > self.score) {
                 // Other player is first
                 self.crownPlayer.isHidden = true
                 self.crownOtherPlayer.isHidden = false
@@ -540,7 +574,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         print("+" + String(points) + " points")
     }
     
-    var seconds = 20
+    var seconds = 60
     
     var timer = Timer()
     var isTimerRunning = false
@@ -559,15 +593,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             postPlayerRecord()
             multipeerSession.setIsGameViewEnabled(false)
             multipeerSession.setIsResultsViewEnabled(true)
-            
-            if(self.score > Int(self.scoreLabelOtherPlayer.text!) ?? 0) {
-                // Player is first
-                // display winner view
-                
-            } else if(Int(self.scoreLabelOtherPlayer.text!) ?? 0 > self.score) {
-                // Other player is first
-                // display loser view
-            }
             
             displayResultsView()
         }else{
@@ -680,6 +705,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         multipeerSession.sendMessage(CODE.SCORE.rawValue + String(score))
     }
     
+    
+    @IBOutlet weak var gameViewTimeLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         hideResultsView()
@@ -723,6 +751,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         multipeerSession.setDoneNetworkingButton(doneNetworkingButton)
         multipeerSession.setIsNetworkingViewEnabled(true)
         multipeerSession.setSceneView(&sceneView)
+        
+        gameViewTimeLabel.text = String(seconds)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -801,10 +831,15 @@ extension ViewController : MultipeerSessionServiceDelegate {
                 let range = start...
                 
                 let mySubstring = message[range]
-                self.scoreLabelOtherPlayer.text = String(mySubstring)
+                self.otherPlayerScore = Int(String(mySubstring)) ?? 0
                 self.scoreUpdate()
                 break
             case CODE.NAME.rawValue:
+                let start = message.index(message.startIndex, offsetBy: 2)
+                let range = start...
+                
+                let mySubstring = message[range]
+                self.otherPlayerName = String(mySubstring)
                 break
             default:
                 self.debugTextView.text = self.debugTextView.text + message + "\n"
