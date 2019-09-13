@@ -41,11 +41,11 @@ let PLACEHOLDER_PLANE_TRANSPARENCY : CGFloat = 0.5
 
 // POINTS
 let POINTS_DYNAMIC_BLOCKS : Int = 1
-let POINTS_FURNITURE : Int = 30
+let POINTS_FURNITURE : Int = 25
 let POINTS_TARGET : Int = 100
-let POINTS_FLYING_TARGET : Int = 350
-let POINTS_PIG : Int = 700
-let POINTS_GOLDEN_SNITCH : Int = 2500
+let POINTS_FLYING_TARGET : Int = 250
+let POINTS_PIG : Int = 500
+let POINTS_GOLDEN_SNITCH : Int = 3000
 
 let POINTS_BOMB : Int = -300
 
@@ -651,16 +651,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             let boatMove34Loop = SCNAction.sequence([boatMove3Loop, boatMove4Loop])
             
             let boatMove1234Loop = SCNAction.sequence([boatMove12Loop, boatMove34Loop])
-            
-            /*
-            let boatMoveYZ1 = SCNAction.sequence([boatMoveY1, boatMoveZ1])
-            let boatMoveYZ2 = SCNAction.sequence([boatMoveY2, boatMoveZ2])
-            
-            let boatMoveYZ1Loop = SCNAction.sequence([boatMoveYZ1, boatMoveYZ1.reversed()])
-            let boatMoveYZ2Loop = SCNAction.sequence([boatMoveYZ2, boatMoveYZ2.reversed()])
-            
-            let boatMoveYZ12Loop = SCNAction.sequence([boatMoveYZ1Loop, boatMoveYZ2Loop])
-             */
             
             let boatRepeatForever = SCNAction.repeatForever(boatMove1234Loop)
             
