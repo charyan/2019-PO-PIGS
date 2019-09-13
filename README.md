@@ -107,7 +107,7 @@ La gestion de la base de donnée se fait avec l'aide de **phpMyAdmin** qui est i
 Ce logiciel nous permet de manipuler notre base de donnée tout en utilisant l'interface adaptée.
 
 | Nom | Type |
-| ----------- | ----------- | ----------- |
+| ----------- | ----------- |
 | ID_util | Int |
 | NOM_util | Varchar |
 | SCORE_util | Int |
