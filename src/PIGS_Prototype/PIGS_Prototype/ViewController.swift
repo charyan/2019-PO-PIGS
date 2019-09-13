@@ -352,6 +352,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             
             multipeerSession.sendMessage(CODE.NAME.rawValue + playerName.text!)
 
+            runTimer()
+            removeGoldenSnitch()
+
             hideNameMenu()
             
             //displayCountDownView()
@@ -650,6 +653,19 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         
         // Add the node to the scene
         sceneView.scene.rootNode.addChildNode(node)
+    }
+    
+    func removeGoldenSnitch() {
+        /*
+        self.sceneView.scene.rootNode.enumerateChildNodes { (node, _) in
+
+            if node.name == "golden_snitch" {
+                node.removeFromParentNode()
+            }
+        }
+        */
+        
+        sceneView.scene.rootNode.childNode(withName: "houses", recursively: false)?.removeFromParentNode()
     }
     
     func scoreUpdate() {
