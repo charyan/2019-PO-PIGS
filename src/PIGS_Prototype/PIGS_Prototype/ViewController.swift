@@ -658,19 +658,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         sceneView.scene.rootNode.addChildNode(node)
     }
     
-    func removeGoldenSnitch() {
-        /*
-        self.sceneView.scene.rootNode.enumerateChildNodes { (node, _) in
-
-            if node.name == "golden_snitch" {
-                node.removeFromParentNode()
-            }
-        }
-        */
-        
-        sceneView.scene.rootNode.childNode(withName: "houses", recursively: false)?.removeFromParentNode()
-    }
-    
     func scoreUpdate() {
         DispatchQueue.main.async {
             self.scoreLabel.text = String(self.score)

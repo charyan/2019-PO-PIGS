@@ -75,12 +75,7 @@ Figure 5 : Terrain de jeu
 Nous avons créée un réseau sans-fil avec un access point permettant de transférer des informations entre le serveur et les iPad.
 Nos appareils ont tous une adresse fixe, le même masque et le même NetId.
 
-![schema](https://user-images.githubusercontent.com/43779006/64861850-5d62ac00-d631-11e9-886e-ed30116fb92d.JPG)
-
-Figure : Schéma logique du projet
-
-Le schéma logique et une liste du matériel sont disponibles dans le dossier "charyan000/2019-PO-PIGS/doc".
-
+Un schéma logique et une liste du matériel sont disponibles dans le dossier "charyan000/2019-PO-PIGS/doc".
 ### Serveur
 Nous utilisons un ordinateur Intel NUC sous Windows 10 Pro afin de proposer divers services nécessaires à notre projet : service Apache, MySQL, PHP. Nous utilisons XAMPP.  
 ![Panneau de contrôle XAMPP](https://user-images.githubusercontent.com/43775161/64027001-26c06800-cb40-11e9-9130-cc560776a135.png)
@@ -111,6 +106,7 @@ Ce logiciel nous permet de manipuler notre base de donnée tout en utilisant l'i
 | ID_util | Int |
 | NOM_util | Varchar |
 | SCORE_util | Int |
+| GOLDENSNITCH_util | Int
 
 ### Insertion de données
 L'iPad utilise une requête HTTP (méthode POST) pour envoyer le nom et le score du joueur à une page PHP (**input.php**) qui va insérer les informations dans la base de données. Par exemple, pour le corps de la requête HTTP: `player=Théo&score=200`.
