@@ -699,7 +699,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             timer.invalidate()
             hideGameMenu()
             
-            postPlayerRecord()
             multipeerSession.setIsGameViewEnabled(false)
             multipeerSession.setIsResultsViewEnabled(true)
             
