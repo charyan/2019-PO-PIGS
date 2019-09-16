@@ -296,9 +296,11 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     // View choose name menu
     @IBOutlet weak var Pseudo: UIView!
     
+    @IBOutlet weak var goldenSnitchResults: UILabel!
     @IBOutlet weak var NameJoueur: UILabel!
     @IBOutlet weak var NumberPoints: UILabel!
     @IBOutlet weak var Results: UIView!
+    @IBOutlet weak var goldenSnitchImage: UIImageView!
     
     @IBAction func SwipeGesture(_ sender: Any) {
         reset()
@@ -410,10 +412,15 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     // Reset
     func reset(){
         // Reset Variables
+
         seconds = PLAY_TIME_SECONDS
+        nameMenuTextField.text = ""
         
         hideResultsView()
         displayNameMenu()
+        
+        goldenSnitchImage.isHidden = true
+        goldenSnitchResults.isHidden = true
         
         score = 0
         scoreLabel.text = "0"
@@ -490,6 +497,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         self.Pseudo.isHidden = false
         self.nameMenuError.isHidden = true
         self.nameLengthError.isHidden = true
+        self.nameMenuTextField.becomeFirstResponder()
     }
     
     
@@ -510,7 +518,12 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         resultsViewPlayerScore.text = String(score) + " pts"
         
         resultsViewOtherPlayerName.text = " " + otherPlayerName
-        resultsViewOtherPlayerScore.text =  String(otherPlayerScore) + " pts"
+        resultsViewOtherPlayerScore.text = String(otherPlayerScore) + " pts"
+
+        if goldenSnitch {
+            goldenSnitchImage.isHidden = false
+            goldenSnitchResults.isHidden = false
+        }
         
         if(self.score > Int(self.scoreLabelOtherPlayer.text!) ?? 0) {
             // Player is first
@@ -803,7 +816,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             }
             
             // Animation of boat
-            let action : SCNAction = SCNAction.rotate(by: .pi, around: SCNVector3(0, 1, 0), duration: 5)
+            let action : SCNAction = SCNAction.rotate(by: .pi, around: SCNVector3(0, 1, 0), duration: 7)
             let forever = SCNAction.repeatForever(action)
             
             if node.name == "rotation" || node.name == "pig_rotation" {
@@ -916,6 +929,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         super.viewDidLoad()
         hideResultsView()
         hideCountDownView()
+        
+        goldenSnitchImage.isHidden = true
+        goldenSnitchResults.isHidden = true
         
         sceneView.scene.physicsWorld.timeStep = 1/200
         

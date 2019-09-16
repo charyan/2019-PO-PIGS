@@ -98,10 +98,10 @@
                                     <button opaque="NO" alpha="0.60000002384185791" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Icx-Lf-3k4">
                                         <rect key="frame" x="561" y="734" width="187" height="174"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" red="0.17715969681739807" green="0.41789349913597107" blue="0.71903866529464722" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="SkaterGirlsRock" family="Skater Girls Rock" pointSize="58"/>
                                         <state key="normal" title="Shoot">
-                                            <color key="titleColor" red="1" green="0.0" blue="0.024170271520000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
                                             <action selector="onShootButton:" destination="BV1-FR-VrT" eventType="touchUpInside" id="PbF-iB-dqw"/>
@@ -185,7 +185,7 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ond-14-Fcs" userLabel="NetworkingView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ond-14-Fcs" userLabel="NetworkingView">
                                 <rect key="frame" x="0.0" y="0.0" width="834" height="1112"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
@@ -233,7 +233,7 @@
                                     <action selector="onRightButton:" destination="BV1-FR-VrT" eventType="touchUpInside" id="ajG-cd-KPW"/>
                                 </connections>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IEm-KN-3xh" userLabel="Pseudo">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IEm-KN-3xh" userLabel="Pseudo">
                                 <rect key="frame" x="0.0" y="-1" width="834" height="1112"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
@@ -261,7 +261,7 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" name="SkaterGirlsRock" family="Skater Girls Rock" pointSize="40"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="alphabet"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7gO-dz-PKK" userLabel="nameMenuPlayButton">
                                         <rect key="frame" x="232" y="662" width="370" height="101"/>
@@ -293,7 +293,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <viewLayoutGuide key="safeArea" id="IAF-s0-rQu"/>
                             </view>
-                            <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="quf-MW-xLm" userLabel="WaitingView">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="quf-MW-xLm" userLabel="WaitingView">
                                 <rect key="frame" x="0.0" y="0.0" width="834" height="1112"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
@@ -376,6 +376,18 @@
                                         <color key="textColor" red="0.91764705882352937" green="0.33725490196078434" blue="0.29803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tu as eu le Vif d'or !" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LZz-dt-uDr" userLabel="goldenSnitch">
+                                        <rect key="frame" x="177" y="432" width="372" height="51"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="SkaterGirlsRock" family="Skater Girls Rock" pointSize="50"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="goldensnitch" translatesAutoresizingMaskIntoConstraints="NO" id="vtt-5Z-yVB" userLabel="goldenSnitchImage">
+                                        <rect key="frame" x="544" y="412" width="88" height="71"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <gestureRecognizers/>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <gestureRecognizers/>
@@ -390,6 +402,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="AA5-RC-t3s"/>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="Ond-14-Fcs"/>
+                                <exclude reference="IEm-KN-3xh"/>
+                                <exclude reference="quf-MW-xLm"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="CountDownView" destination="Q55-8y-EPR" id="BqT-yb-gTA"/>
@@ -407,6 +426,8 @@
                         <outlet property="gamePlacementView" destination="I0r-TI-KyM" id="H0P-aE-adF"/>
                         <outlet property="gameView" destination="kSJ-U9-iR1" id="nAy-li-IJW"/>
                         <outlet property="gameViewTimeLabel" destination="TR3-W5-Bfm" id="2vF-ZP-4T2"/>
+                        <outlet property="goldenSnitchImage" destination="vtt-5Z-yVB" id="SGb-dh-hbR"/>
+                        <outlet property="goldenSnitchResults" destination="LZz-dt-uDr" id="K6p-yJ-e1I"/>
                         <outlet property="leftButton" destination="8Fd-hn-gke" id="9BD-4g-lFJ"/>
                         <outlet property="nameLengthError" destination="nwW-O7-7Om" id="vPB-LS-Eho"/>
                         <outlet property="nameMenuError" destination="e81-nF-DZ2" id="Zvq-Wk-jAb"/>
@@ -444,6 +465,7 @@
     <resources>
         <image name="crosshair" width="500" height="500"/>
         <image name="crown.png" width="495.412841796875" height="297.90826416015625"/>
+        <image name="goldensnitch" width="476" height="525"/>
         <image name="launchscreen-logo.png" width="240" height="240"/>
         <image name="pigs-logo.head.png" width="244.482177734375" height="243.62648010253906"/>
     </resources>
