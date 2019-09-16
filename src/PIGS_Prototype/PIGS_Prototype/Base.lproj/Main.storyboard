@@ -262,7 +262,7 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" name="SkaterGirlsRock" family="Skater Girls Rock" pointSize="40"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="alphabet"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7gO-dz-PKK" userLabel="nameMenuPlayButton">
                                         <rect key="frame" x="232" y="662" width="370" height="101"/>
@@ -344,30 +344,23 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0 pts" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o3n-Mb-LEJ" userLabel="playerScore">
-                                        <rect key="frame" x="506" y="208" width="320" height="71"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="-77777 pts" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o3n-Mb-LEJ" userLabel="playerScore">
+                                        <rect key="frame" x="539" y="208" width="275" height="71"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="SkaterGirlsRock" family="Skater Girls Rock" pointSize="70"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Yannis Charalambidis" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X8C-0A-nl5" userLabel="playerName">
-                                        <rect key="frame" x="8" y="210" width="490" height="66"/>
+                                        <rect key="frame" x="26" y="210" width="505" height="66"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="SkaterGirlsRock" family="Skater Girls Rock" pointSize="60"/>
                                         <color key="textColor" red="0.1803921568627451" green="0.41960784313725491" blue="0.71764705882352942" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0 pts" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fKl-Qd-pEh" userLabel="otherPlayerScore">
-                                        <rect key="frame" x="506" y="284" width="320" height="71"/>
+                                        <rect key="frame" x="539" y="284" width="275" height="71"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="SkaterGirlsRock" family="Skater Girls Rock" pointSize="70"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Yannis Charalambidis" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dn2-5a-i2u" userLabel="otherPlayerName">
-                                        <rect key="frame" x="8" y="286" width="490" height="66"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="SkaterGirlsRock" family="Skater Girls Rock" pointSize="60"/>
-                                        <color key="textColor" red="0.91764705882352937" green="0.33725490196078434" blue="0.29803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="GAGNÉ" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dMc-aJ-68C" userLabel="title">
@@ -375,6 +368,13 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="SkaterGirlsRock" family="Skater Girls Rock" pointSize="100"/>
                                         <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Yannis Charalambidis" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dn2-5a-i2u" userLabel="otherPlayerName">
+                                        <rect key="frame" x="26" y="286" width="505" height="66"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="SkaterGirlsRock" family="Skater Girls Rock" pointSize="60"/>
+                                        <color key="textColor" red="0.91764705882352937" green="0.33725490196078434" blue="0.29803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tu as eu le Vif d'or !" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LZz-dt-uDr" userLabel="goldenSnitch">
