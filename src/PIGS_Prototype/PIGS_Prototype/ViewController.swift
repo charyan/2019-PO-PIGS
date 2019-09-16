@@ -59,6 +59,9 @@ let FONT_SIZE_PTS : CGFloat = 50
 
 let URL_POST : String = "http://192.168.1.1/pigs/input.php"
 
+// TIME
+let PLAY_TIME_SECONDS : Int = 4
+
 ////////////////////////////////////////////////////////////
 
 class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SCNPhysicsContactDelegate, MCBrowserViewControllerDelegate {
@@ -67,6 +70,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         case READY = "1:" // Is the other player ready
         case SCORE = "2:" // What is the score of the other player
         case NAME  = "3:" // What is the name of the other player
+        case RESET  = "4:" // Reset your informations about me
     }
     
     func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
@@ -129,15 +133,18 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         
     }
     
-    func CountDown() {
-        
-        displayCountDownView()
-        
+    func resetCountDown() {
         zeroLabel.isHidden = true
         oneLabel.isHidden = true
         twoLabel.isHidden = true
         threeLabel.isHidden = false
+    }
+    
+    func CountDown() {
         
+        displayCountDownView()
+        
+        resetCountDown()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             // your code here
@@ -295,6 +302,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     
     @IBAction func SwipeGesture(_ sender: Any) {
         reset()
+        multipeerSession.sendMessage(CODE.RESET.rawValue)
     }
     
     var trackingPosition: SCNVector3!
@@ -401,9 +409,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     
     // Reset
     func reset(){
-        
         // Reset Variables
-        seconds = 60
+        seconds = PLAY_TIME_SECONDS
         
         hideResultsView()
         displayNameMenu()
@@ -414,6 +421,29 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         
         node.removeFromParentNode()
         createGameZone(position: trackingPosition)
+        
+        // Views
+        displayNameMenu()
+        hideGamezonePlacementMenu()
+        
+        multipeerSession.setIsResultsViewEnabled(false)
+        multipeerSession.setIsGamePlacementViewEnabled(false)
+        multipeerSession.setIsNameViewEnabled(true)
+        
+        gameViewTimeLabel.text = String(seconds)
+        
+        resetCountDown()
+        
+        self.otherPlayerName = ""
+        self.otherPlayerScore = 0
+        self.score = 0
+        
+        self.scoreUpdate()
+        self.isOtherPlayerReady = false
+        self.isSelfReady = false
+        
+        hideResultsView()
+        displayNameMenu()
     }
     
     // Display the game menu
@@ -476,11 +506,11 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         self.Results.isHidden = false
         NumberPoints.text = scoreLabel.text
         
-        resultsViewPlayerName.text = NameJoueur.text
+        resultsViewPlayerName.text = " " + String(NameJoueur.text!)
         resultsViewPlayerScore.text = String(score) + " pts"
         
-        resultsViewOtherPlayerName.text = otherPlayerName
-        resultsViewOtherPlayerScore.text = String(otherPlayerScore) + " pts"
+        resultsViewOtherPlayerName.text = " " + otherPlayerName
+        resultsViewOtherPlayerScore.text =  String(otherPlayerScore) + " pts"
         
         if(self.score > Int(self.scoreLabelOtherPlayer.text!) ?? 0) {
             // Player is first
@@ -683,7 +713,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         print("+" + String(points) + " points")
     }
     
-    var seconds = 60
+    var seconds = PLAY_TIME_SECONDS
     
     var timer = Timer()
     var isTimerRunning = false
@@ -713,7 +743,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     
     func resetTimer() {
         timer.invalidate()
-        seconds = 60
+        seconds = PLAY_TIME_SECONDS
         timeLabel.text = "\(seconds)"
     }
     
@@ -1017,6 +1047,9 @@ extension ViewController : MultipeerSessionServiceDelegate {
                 
                 let mySubstring = message[range]
                 self.otherPlayerName = String(mySubstring)
+                break
+            case CODE.RESET.rawValue:
+                self.reset()
                 break
             default:
                 self.debugTextView.text = self.debugTextView.text + message + "\n"
