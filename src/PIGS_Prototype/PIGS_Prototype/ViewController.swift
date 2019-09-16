@@ -289,9 +289,11 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     // View choose name menu
     @IBOutlet weak var Pseudo: UIView!
     
+    @IBOutlet weak var goldenSnitchResults: UILabel!
     @IBOutlet weak var NameJoueur: UILabel!
     @IBOutlet weak var NumberPoints: UILabel!
     @IBOutlet weak var Results: UIView!
+    @IBOutlet weak var goldenSnitchImage: UIImageView!
     
     @IBAction func SwipeGesture(_ sender: Any) {
         reset()
@@ -409,6 +411,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         hideResultsView()
         displayNameMenu()
         
+        goldenSnitchImage.isHidden = true
+        goldenSnitchResults.isHidden = true
+        
         score = 0
         scoreLabel.text = "0"
         goldenSnitch = false
@@ -479,6 +484,11 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         
         resultsViewPlayerName.text = NameJoueur.text
         resultsViewPlayerScore.text = String(score) + " pts"
+        
+        if goldenSnitch {
+            goldenSnitchImage.isHidden = false
+            goldenSnitchResults.isHidden = false
+        }
         
         resultsViewOtherPlayerName.text = otherPlayerName
         resultsViewOtherPlayerScore.text = String(otherPlayerScore) + " pts"
@@ -700,7 +710,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             timer.invalidate()
             hideGameMenu()
             
-            postPlayerRecord()
             multipeerSession.setIsGameViewEnabled(false)
             multipeerSession.setIsResultsViewEnabled(true)
             
@@ -888,6 +897,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         super.viewDidLoad()
         hideResultsView()
         hideCountDownView()
+        
+        goldenSnitchImage.isHidden = true
+        goldenSnitchResults.isHidden = true
         
         sceneView.scene.physicsWorld.timeStep = 1/200
         
