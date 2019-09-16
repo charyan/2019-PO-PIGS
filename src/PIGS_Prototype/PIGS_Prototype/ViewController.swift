@@ -404,6 +404,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         
         // Reset Variables
         seconds = 60
+        nameMenuTextField.text = ""
         
         hideResultsView()
         displayNameMenu()
