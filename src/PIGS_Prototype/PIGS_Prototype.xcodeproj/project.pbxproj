@@ -11,12 +11,13 @@
 		8B34476122A54B9D00E63DD8 /* pigs-launch-background.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B34476022A54B9D00E63DD8 /* pigs-launch-background.png */; };
 		8B3987FA22A93EFC002EFD44 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B3987F822A93EFC002EFD44 /* spark.png */; };
 		8B3987FB22A93EFC002EFD44 /* ExplosionOld.scnp in Resources */ = {isa = PBXBuildFile; fileRef = 8B3987F922A93EFC002EFD44 /* ExplosionOld.scnp */; };
-		8B56451823290D8E00A7F4D7 /* Bomb Explosion.scnp in Resources */ = {isa = PBXBuildFile; fileRef = 8BA9646E2328DED100EF0B76 /* Bomb Explosion.scnp */; };
+		8B56451823290D8E00A7F4D7 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		8B65334B231CFE3400C3D1D5 /* Door Explosion.scnp in Resources */ = {isa = PBXBuildFile; fileRef = 8B65334A231CFE3000C3D1D5 /* Door Explosion.scnp */; };
 		8B96EE0523141E0600EE961A /* MultipeerSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B96EE0423141E0600EE961A /* MultipeerSession.swift */; };
 		8BAA54F522B27F7E005DB8EC /* Skater Girls Rock.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8BAA54F422B27F7E005DB8EC /* Skater Girls Rock.ttf */; };
 		8BAD9648231D45440064B1E6 /* Window Explosion.scnp in Resources */ = {isa = PBXBuildFile; fileRef = 8BAD9647231D45300064B1E6 /* Window Explosion.scnp */; };
 		8BAE78952297C611003F496A /* app-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BAE78942297C611003F496A /* app-icon.png */; };
+		8BB049FA232F621B00BA94B5 /* Bomb Explosion.scnp in Resources */ = {isa = PBXBuildFile; fileRef = 8BB049F9232F621B00BA94B5 /* Bomb Explosion.scnp */; };
 		8BC702BA2329138D006AE461 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BFCB2632284476200E54C18 /* LaunchScreen.storyboard */; };
 		8BC707BB229C021B00CA688A /* launchscreen-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BC707BA229C021B00CA688A /* launchscreen-logo.png */; };
 		8BD8B9AE22C0C18B00C1B37D /* Target Explosion.scnp in Resources */ = {isa = PBXBuildFile; fileRef = 8BD8B9AD22C0C18B00C1B37D /* Target Explosion.scnp */; };
@@ -40,6 +41,7 @@
 		8BAA54F422B27F7E005DB8EC /* Skater Girls Rock.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Skater Girls Rock.ttf"; path = "PIGS_Prototype/fonts/Skater Girls Rock.ttf"; sourceTree = SOURCE_ROOT; };
 		8BAD9647231D45300064B1E6 /* Window Explosion.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = "Window Explosion.scnp"; sourceTree = "<group>"; };
 		8BAE78942297C611003F496A /* app-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "app-icon.png"; path = "art.scnassets/img/app-icon.png"; sourceTree = "<group>"; };
+		8BB049F9232F621B00BA94B5 /* Bomb Explosion.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = "Bomb Explosion.scnp"; sourceTree = "<group>"; };
 		8BC447FA232BA0EF00106536 /* crown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = crown.png; sourceTree = "<group>"; };
 		8BC707BA229C021B00CA688A /* launchscreen-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "launchscreen-logo.png"; path = "art.scnassets/img/launchscreen-logo.png"; sourceTree = "<group>"; };
 		8BD8B9AD22C0C18B00C1B37D /* Target Explosion.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = "Target Explosion.scnp"; sourceTree = "<group>"; };
@@ -79,7 +81,7 @@
 				8B27962A2316A3C3008241C0 /* Flying Target Explosion.scnp */,
 				8BD8B9AD22C0C18B00C1B37D /* Target Explosion.scnp */,
 				8BAD9647231D45300064B1E6 /* Window Explosion.scnp */,
-				8BA9646E2328DED100EF0B76 /* Bomb Explosion.scnp */,
+				8BB049F9232F621B00BA94B5 /* Bomb Explosion.scnp */,
 				8B3987F822A93EFC002EFD44 /* spark.png */,
 				8B3987F922A93EFC002EFD44 /* ExplosionOld.scnp */,
 				8BFCB2572284476000E54C18 /* PIGS_Prototype */,
@@ -109,7 +111,6 @@
 				8BFCB2662284476200E54C18 /* Info.plist */,
 				8BC447FA232BA0EF00106536 /* crown.png */,
 				8BAE78942297C611003F496A /* app-icon.png */,
-				8BC702B92329131A006AE461 /* pigs-text-font.png */,
 				8B34476022A54B9D00E63DD8 /* pigs-launch-background.png */,
 				8BC707BA229C021B00CA688A /* launchscreen-logo.png */,
 			);
@@ -174,12 +175,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BB049FA232F621B00BA94B5 /* Bomb Explosion.scnp in Resources */,
 				8BD8B9AE22C0C18B00C1B37D /* Target Explosion.scnp in Resources */,
 				8B13A513228EF23300047809 /* art.scnassets in Resources */,
 				8B34476122A54B9D00E63DD8 /* pigs-launch-background.png in Resources */,
 				8BF6C84B2316AD6E000F835D /* Flying Target Explosion.scnp in Resources */,
 				8BFCB2622284476200E54C18 /* Assets.xcassets in Resources */,
-				8B56451823290D8E00A7F4D7 /* Bomb Explosion.scnp in Resources */,
+				8B56451823290D8E00A7F4D7 /* (null) in Resources */,
 				8BF6C84A2316AD6B000F835D /* Pig Explosion.scnp in Resources */,
 				8B3987FB22A93EFC002EFD44 /* ExplosionOld.scnp in Resources */,
 				8B65334B231CFE3400C3D1D5 /* Door Explosion.scnp in Resources */,
