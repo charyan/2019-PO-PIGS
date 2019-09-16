@@ -774,7 +774,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             }
             
             // Animation of boat
-            let action : SCNAction = SCNAction.rotate(by: .pi, around: SCNVector3(0, 1, 0), duration: 5)
+            let action : SCNAction = SCNAction.rotate(by: .pi, around: SCNVector3(0, 1, 0), duration: 7)
             let forever = SCNAction.repeatForever(action)
             
             if node.name == "rotation" || node.name == "pig_rotation" {
