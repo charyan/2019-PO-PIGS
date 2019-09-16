@@ -165,8 +165,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
             // your code here
             self.hideCountDownView()
-            self.displayGameMenu()
             self.playAnimation()
+            self.displayGameMenu()
             self.runTimer()
         }
         
@@ -339,7 +339,16 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             multipeerSession.setIsGameViewEnabled(true)
             
             if(isOtherPlayerReady) {
-                runTimer()
+                self.hideWaitingView()
+                self.hideGameMenu()
+                self.hideNameMenu()
+                self.CountDown()
+
+                /*
+                hideNameMenu()
+                hideGameMenu()
+                CountDown()
+                */
             } else {
                 hideGameMenu()
                 hideNameMenu()
@@ -349,13 +358,10 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             multipeerSession.sendMessage(CODE.READY.rawValue)
             isSelfReady = true
             
-            
             multipeerSession.sendMessage(CODE.NAME.rawValue + playerName.text!)
-
-            hideNameMenu()
             
             //displayCountDownView()
-            CountDown()
+            
         }
         
     }
@@ -991,8 +997,9 @@ extension ViewController : MultipeerSessionServiceDelegate {
             case CODE.READY.rawValue:
                 if(self.isSelfReady) {
                     self.hideWaitingView()
-                    self.displayGameMenu()
-                    self.runTimer()
+                    self.hideGameMenu()
+                    self.hideNameMenu()
+                    self.CountDown()
                 } else {
                     self.isOtherPlayerReady = true
                 }

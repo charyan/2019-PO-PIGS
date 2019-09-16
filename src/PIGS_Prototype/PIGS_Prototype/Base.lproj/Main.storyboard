@@ -27,7 +27,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="834" height="1112"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </arscnView>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Q55-8y-EPR" userLabel="CountDownView">
+                            <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Q55-8y-EPR" userLabel="CountDownView">
                                 <rect key="frame" x="0.0" y="0.0" width="834" height="1112"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
@@ -57,7 +57,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <viewLayoutGuide key="safeArea" id="MSp-ok-cJm"/>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kSJ-U9-iR1" userLabel="GameView">
+                            <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kSJ-U9-iR1" userLabel="GameView">
                                 <rect key="frame" x="0.0" y="0.0" width="834" height="1112"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
@@ -69,7 +69,7 @@
                                         <rect key="frame" x="266" y="-3" width="49" height="43"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="-10000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sTO-X4-XNH" userLabel="scoreLabel">
+                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sTO-X4-XNH" userLabel="scoreLabel">
                                         <rect key="frame" x="48" y="33" width="150" height="100"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.028695380726937461" green="0.030225551159937813" blue="0.63777121113989632" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
@@ -426,8 +426,8 @@
                         <outlet property="shootButton" destination="Icx-Lf-3k4" id="h9g-uS-CXD"/>
                         <outlet property="threeLabel" destination="OAY-EF-ssI" id="xIE-5m-g8b"/>
                         <outlet property="timeLabel" destination="TR3-W5-Bfm" id="Ea5-kk-lne"/>
-                        <outlet property="waitingView" destination="quf-MW-xLm" id="6Bd-0g-x6l"/>
                         <outlet property="twoLabel" destination="pj4-mT-Hy0" id="88Z-wd-z2B"/>
+                        <outlet property="waitingView" destination="quf-MW-xLm" id="6Bd-0g-x6l"/>
                         <outlet property="zeroLabel" destination="P4v-95-xH3" id="e0S-eX-slV"/>
                     </connections>
                 </viewController>
