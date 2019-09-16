@@ -460,6 +460,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         self.Pseudo.isHidden = false
         self.nameMenuError.isHidden = true
         self.nameLengthError.isHidden = true
+        self.nameMenuTextField.becomeFirstResponder()
     }
     
     
