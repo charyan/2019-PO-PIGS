@@ -586,7 +586,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         
         if trackerNode == nil {
             let plane = SCNPlane(width: 1.6, height: 1.6)
-            plane.firstMaterial?.diffuse.contents = UIImage(named: "art.scnassets/img/app-icon.png")
+            plane.firstMaterial?.diffuse.contents = UIImage(named: "art.scnassets/img/pigs-logo.120.png")
             plane.firstMaterial?.isDoubleSided = true
             plane.firstMaterial?.transparency = CGFloat(PLACEHOLDER_PLANE_TRANSPARENCY)
             trackerNode = SCNNode(geometry: plane)
