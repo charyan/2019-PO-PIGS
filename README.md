@@ -1,10 +1,4 @@
 # PIGS
-![pigs-logo v3](https://user-images.githubusercontent.com/43779006/65151787-13116e80-da27-11e9-9e1f-f5a08df56d49.png)
-Figure : Logo actuel
-
-![logo](https://user-images.githubusercontent.com/43775161/58420616-0939b900-808e-11e9-8312-b0da9cbf21e5.png)
-Figure : Ancien logo
-
 ## Introduction
 ### Présentation
 PIGS est un jeu dans lequel deux joueurs s'affrontent dans un monde entre le réel et le virtuel. Ce monde est constitué d'obstacles destructibles plus originaux les uns que les autres. Chaque jour possède trois **lance-cochon**. Chaque joueur devra tenter de détruire les lanceurs de son adversaire afin de gagner la partie.
@@ -15,6 +9,18 @@ Le guide de démarrage permet de mettre en place toute l'infrastructure de PIGS 
 
 ![IMG_0817](https://user-images.githubusercontent.com/43779006/65152840-055ce880-da29-11e9-927c-35674c197cca.jpg)
 Figure : Version papier du guide
+
+### Logos
+Nous disposons de trois logos. Le logo original a été crée par un assemblage d'images trouvés sur Internet. Le nouveau a été totalement créé à la main sur Inkscape. Le dernier est utilisé comme icone de notre application.
+![logo](https://user-images.githubusercontent.com/43775161/58420616-0939b900-808e-11e9-8312-b0da9cbf21e5.png)
+Figure : Logo original
+
+![pigs-logo v3](https://user-images.githubusercontent.com/43779006/65151787-13116e80-da27-11e9-9e1f-f5a08df56d49.png)
+Figure : Logo actuel
+
+![pigs-logo v3](https://user-images.githubusercontent.com/43779006/65154387-ba90a000-da2b-11e9-9847-ebe454ea664b.png)
+Figure : Logo utilisé pour l'icone de l'application
+
 ### Plan du stand
 ![plan](https://user-images.githubusercontent.com/43775161/58421157-916c8e00-808f-11e9-9d4d-e0fb333a133e.png)
 
