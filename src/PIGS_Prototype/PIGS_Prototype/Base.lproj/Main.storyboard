@@ -242,8 +242,8 @@
                                         <rect key="frame" x="70" y="111" width="695" height="385"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Quel est votre nom ?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gBV-k2-9iX" userLabel="nameMenuLabel">
-                                        <rect key="frame" x="268" y="542" width="299" height="41"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Quel est ton nom ?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gBV-k2-9iX" userLabel="nameMenuLabel">
+                                        <rect key="frame" x="268" y="542" width="265" height="41"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="SkaterGirlsRock" family="Skater Girls Rock" pointSize="40"/>
                                         <nil key="textColor"/>
@@ -269,8 +269,8 @@
                                             <action selector="onPlayButton:" destination="BV1-FR-VrT" eventType="touchUpInside" id="ecK-Dd-Nov"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Entrez votre nom d'abord !" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e81-nF-DZ2" userLabel="nameMenuError">
-                                        <rect key="frame" x="303" y="668" width="228" height="24"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Entre ton nom d'abord !" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e81-nF-DZ2" userLabel="nameMenuError">
+                                        <rect key="frame" x="318" y="668" width="199" height="24"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="SkaterGirlsRock" family="Skater Girls Rock" pointSize="23"/>
                                         <color key="textColor" red="0.80000000000000004" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
