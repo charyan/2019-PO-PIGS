@@ -60,7 +60,7 @@ let FONT_SIZE_PTS : CGFloat = 50
 let URL_POST : String = "http://192.168.1.1/pigs/input.php"
 
 // TIME
-let PLAY_TIME_SECONDS : Int = 60
+let PLAY_TIME_SECONDS : Int = 45
 
 ////////////////////////////////////////////////////////////
 
