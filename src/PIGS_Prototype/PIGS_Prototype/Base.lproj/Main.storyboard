@@ -61,6 +61,17 @@
                                 <rect key="frame" x="0.0" y="0.0" width="834" height="1112"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.60000002384185791" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ro6-9Y-6d0" userLabel="timeBackground">
+                                        <rect key="frame" x="666" y="33" width="100" height="100"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.69688362159999995" green="0.0" blue="0.0" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <accessibility key="accessibilityConfiguration" hint="score" identifier="scoreLabel" label="scoreLabel">
+                                            <accessibilityTraits key="traits" staticText="YES" notEnabled="YES"/>
+                                        </accessibility>
+                                        <fontDescription key="fontDescription" name="SkaterGirlsRock" family="Skater Girls Rock" pointSize="45"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="crown.png" translatesAutoresizingMaskIntoConstraints="NO" id="nRp-pf-c0C" userLabel="crownPlayer.png">
                                         <rect key="frame" x="99" y="-3" width="49" height="43"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -108,17 +119,6 @@
                                             <action selector="onShootButton:" destination="BV1-FR-VrT" eventType="touchUpInside" id="PbF-iB-dqw"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="60" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TR3-W5-Bfm" userLabel="timeLabel">
-                                        <rect key="frame" x="666" y="33" width="100" height="100"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <accessibility key="accessibilityConfiguration" hint="score" identifier="scoreLabel" label="scoreLabel">
-                                            <accessibilityTraits key="traits" staticText="YES" notEnabled="YES"/>
-                                        </accessibility>
-                                        <fontDescription key="fontDescription" name="SkaterGirlsRock" family="Skater Girls Rock" pointSize="70"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Yannis Charalambidis" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eEg-xg-8TN" userLabel="playerName">
                                         <rect key="frame" x="177" y="1039" width="481" height="73"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -138,6 +138,16 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="SkaterGirlsRock" family="Skater Girls Rock" pointSize="50"/>
                                         <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.60000002384185791" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="60" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xgU-iA-vlC" userLabel="timeLabel">
+                                        <rect key="frame" x="666" y="33" width="100" height="100"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <accessibility key="accessibilityConfiguration" hint="score" identifier="scoreLabel" label="scoreLabel">
+                                            <accessibilityTraits key="traits" staticText="YES" notEnabled="YES"/>
+                                        </accessibility>
+                                        <fontDescription key="fontDescription" name="SkaterGirlsRock" family="Skater Girls Rock" pointSize="70"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -242,8 +252,8 @@
                                         <rect key="frame" x="70" y="111" width="695" height="385"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Quel est votre nom ?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gBV-k2-9iX" userLabel="nameMenuLabel">
-                                        <rect key="frame" x="268" y="542" width="299" height="41"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Quel est ton nom ?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gBV-k2-9iX" userLabel="nameMenuLabel">
+                                        <rect key="frame" x="268" y="542" width="265" height="41"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="SkaterGirlsRock" family="Skater Girls Rock" pointSize="40"/>
                                         <nil key="textColor"/>
@@ -269,8 +279,8 @@
                                             <action selector="onPlayButton:" destination="BV1-FR-VrT" eventType="touchUpInside" id="ecK-Dd-Nov"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Entrez votre nom d'abord !" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e81-nF-DZ2" userLabel="nameMenuError">
-                                        <rect key="frame" x="303" y="668" width="228" height="24"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Entre ton nom d'abord !" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e81-nF-DZ2" userLabel="nameMenuError">
+                                        <rect key="frame" x="318" y="668" width="199" height="24"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="SkaterGirlsRock" family="Skater Girls Rock" pointSize="23"/>
                                         <color key="textColor" red="0.80000000000000004" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -291,7 +301,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="834" height="1112"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="launchscreen-logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="qig-tF-5QQ" userLabel="nameMenuPicture">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="pigs-logo.v3.png" translatesAutoresizingMaskIntoConstraints="NO" id="qig-tF-5QQ" userLabel="nameMenuPicture">
                                         <rect key="frame" x="70" y="-15" width="695" height="385"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
@@ -412,7 +422,6 @@
                         <outlet property="doneNetworkingButton" destination="pOl-da-mQK" id="5pz-AU-Xmu"/>
                         <outlet property="gamePlacementView" destination="I0r-TI-KyM" id="H0P-aE-adF"/>
                         <outlet property="gameView" destination="kSJ-U9-iR1" id="nAy-li-IJW"/>
-                        <outlet property="gameViewTimeLabel" destination="TR3-W5-Bfm" id="2vF-ZP-4T2"/>
                         <outlet property="goldenSnitchImage" destination="vtt-5Z-yVB" id="SGb-dh-hbR"/>
                         <outlet property="goldenSnitchResults" destination="LZz-dt-uDr" id="K6p-yJ-e1I"/>
                         <outlet property="leftButton" destination="8Fd-hn-gke" id="9BD-4g-lFJ"/>
@@ -433,7 +442,8 @@
                         <outlet property="scoreLabelOtherPlayer" destination="0uz-Wx-unF" id="lkF-Vv-MOM"/>
                         <outlet property="shootButton" destination="Icx-Lf-3k4" id="h9g-uS-CXD"/>
                         <outlet property="threeLabel" destination="OAY-EF-ssI" id="xIE-5m-g8b"/>
-                        <outlet property="timeLabel" destination="TR3-W5-Bfm" id="Ea5-kk-lne"/>
+                        <outlet property="timeBackground" destination="ro6-9Y-6d0" id="J6E-U9-qGH"/>
+                        <outlet property="timeLabel" destination="xgU-iA-vlC" id="ha6-XY-Kjj"/>
                         <outlet property="twoLabel" destination="pj4-mT-Hy0" id="88Z-wd-z2B"/>
                         <outlet property="waitingView" destination="quf-MW-xLm" id="6Bd-0g-x6l"/>
                         <outlet property="zeroLabel" destination="P4v-95-xH3" id="e0S-eX-slV"/>
@@ -453,7 +463,7 @@
         <image name="crosshair" width="500" height="500"/>
         <image name="crown.png" width="495.412841796875" height="297.90826416015625"/>
         <image name="goldensnitch" width="476" height="525"/>
-        <image name="launchscreen-logo.png" width="240" height="240"/>
         <image name="pigs-logo.v3" width="2062" height="2340"/>
+        <image name="pigs-logo.v3.png" width="296.92800903320312" height="337"/>
     </resources>
 </document>

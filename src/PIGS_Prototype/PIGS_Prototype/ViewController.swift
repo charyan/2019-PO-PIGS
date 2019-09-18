@@ -43,7 +43,7 @@ let PLACEHOLDER_PLANE_TRANSPARENCY : CGFloat = 0.5
 let POINTS_DYNAMIC_BLOCKS : Int = 1
 let POINTS_FURNITURE : Int = 25
 let POINTS_TARGET : Int = 100
-let POINTS_FLYING_TARGET : Int = 250
+let POINTS_FLYING_TARGET : Int = 350
 let POINTS_PIG : Int = 500
 let POINTS_GOLDEN_SNITCH : Int = 3000
 
@@ -60,9 +60,22 @@ let FONT_SIZE_PTS : CGFloat = 50
 let URL_POST : String = "http://192.168.1.1/pigs/input.php"
 
 // TIME
-let PLAY_TIME_SECONDS : Int = 4
+let PLAY_TIME_SECONDS : Int = 45
 
 ////////////////////////////////////////////////////////////
+
+// Usage: insert view.pushTransition right before changing content
+extension UIView {
+    func pushTransition(_ duration:CFTimeInterval) {
+        let animation:CATransition = CATransition()
+        animation.timingFunction = CAMediaTimingFunction(name:
+            CAMediaTimingFunctionName.easeInEaseOut)
+        animation.type = CATransitionType.push
+        animation.subtype = CATransitionSubtype.fromTop
+        animation.duration = duration
+        layer.add(animation, forKey: CATransitionType.push.rawValue)
+    }
+}
 
 class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SCNPhysicsContactDelegate, MCBrowserViewControllerDelegate {
     // Code used for communication between devices
@@ -96,7 +109,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     @IBOutlet weak var waitingView: UIView!
     
     @IBOutlet weak var CountDownView: UIView!
-    @IBOutlet weak var timeLabel: UILabel!
 
     @IBOutlet weak var scoreLabelOtherPlayer: UILabel!
     
@@ -149,6 +161,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             // your code here
             debugPrint("1")
+            self.threeLabel.pushTransition(0.17)
             self.threeLabel.isHidden = true
             self.twoLabel.isHidden = false
         }
@@ -157,6 +170,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             // your code here
             debugPrint("2")
+            self.twoLabel.pushTransition(0.17)
             self.twoLabel.isHidden = true
             self.oneLabel.isHidden = false
         }
@@ -165,6 +179,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             // your code here
             debugPrint("3")
+            self.oneLabel.pushTransition(0.17)
             self.oneLabel.isHidden = true
             self.zeroLabel.isHidden = false
         }
@@ -291,6 +306,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     @IBOutlet weak var nameLengthError: UILabel!
     @IBOutlet weak var playerName: UILabel!
     @IBOutlet weak var HUD: UILabel!
+    @IBOutlet weak var timeBackground: UILabel!
     
     // View choose name menu
     @IBOutlet weak var Pseudo: UIView!
@@ -300,6 +316,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     @IBOutlet weak var NumberPoints: UILabel!
     @IBOutlet weak var Results: UIView!
     @IBOutlet weak var goldenSnitchImage: UIImageView!
+    @IBOutlet weak var timeLabel: UILabel!
+    
     
     @IBAction func SwipeGesture(_ sender: Any) {
         reset()
@@ -759,6 +777,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         } else {
             seconds -= 1
             timeLabel.text = "\(seconds)"
+            self.timeLabel.pushTransition(0.17)
         }
         
     }
@@ -787,19 +806,19 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             }
             
             // Animation of golden snitch
-            let boatMoveY1 = SCNAction.moveBy(x: CGFloat.random(in: -1 ..< 1), y: CGFloat.random(in: -1 ..< 1), z: CGFloat.random(in: -1 ..< 1), duration: 0.7)
+            let boatMoveY1 = SCNAction.moveBy(x: CGFloat.random(in: -1 ..< 1), y: CGFloat.random(in: -0.5 ..< 0.5), z: CGFloat.random(in: -1 ..< 1), duration: 0.7)
             
             let boatMoveR1 = SCNAction.rotate(by: .pi, around: SCNVector3(0, CGFloat.random(in: -200 ..< 200), 0), duration: 0.5)
             
-            let boatMoveZ1 = SCNAction.moveBy(x: CGFloat.random(in: -1 ..< 1), y: CGFloat.random(in: -1 ..< 1), z: CGFloat.random(in: -1 ..< 1), duration: 0.7)
+            let boatMoveZ1 = SCNAction.moveBy(x: CGFloat.random(in: -1 ..< 1), y: CGFloat.random(in: -0.5 ..< 0.5), z: CGFloat.random(in: -1 ..< 1), duration: 0.7)
             
             let boatMoveR2 = SCNAction.rotate(by: .pi, around: SCNVector3(0, CGFloat.random(in: -200 ..< 200), 0), duration: 0.5)
             
-            let boatMoveY2 = SCNAction.moveBy(x: CGFloat.random(in: -1 ..< 1), y: CGFloat.random(in: -1 ..< 1), z: CGFloat.random(in: -1 ..< 1), duration: 0.7)
+            let boatMoveY2 = SCNAction.moveBy(x: CGFloat.random(in: -1 ..< 1), y: CGFloat.random(in: -0.5 ..< 0.5), z: CGFloat.random(in: -1 ..< 1), duration: 0.7)
             
             let boatMoveR3 = SCNAction.rotate(by: .pi, around: SCNVector3(0, CGFloat.random(in: -200 ..< 200), 0), duration: 0.5)
             
-            let boatMoveZ2 = SCNAction.moveBy(x: CGFloat.random(in: -1 ..< 1), y: CGFloat.random(in: -1 ..< 1), z: CGFloat.random(in: -1 ..< 1), duration: 0.7)
+            let boatMoveZ2 = SCNAction.moveBy(x: CGFloat.random(in: -1 ..< 1), y: CGFloat.random(in: -0.5 ..< 0.5), z: CGFloat.random(in: -1 ..< 1), duration: 0.7)
             
             let boatMoveR4 = SCNAction.rotate(by: .pi, around: SCNVector3(0, 0, 0), duration: 0.1)
             
@@ -825,7 +844,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             }
             
             // Animation of boat
-            let action : SCNAction = SCNAction.rotate(by: .pi, around: SCNVector3(0, 1, 0), duration: 7)
+            let action : SCNAction = SCNAction.rotate(by: .pi, around: SCNVector3(0, 1, 0), duration: 10)
             let forever = SCNAction.repeatForever(action)
             
             if node.name == "rotation" || node.name == "pig_rotation" {
@@ -982,7 +1001,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         multipeerSession.setIsNetworkingViewEnabled(true)
         multipeerSession.setSceneView(&sceneView)
         
-        gameViewTimeLabel.text = String(seconds)
+        // gameViewTimeLabel.text = String(seconds)
     }
     
     override func viewWillAppear(_ animated: Bool) {
