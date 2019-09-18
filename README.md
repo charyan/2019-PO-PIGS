@@ -18,7 +18,8 @@ Figure : Logo original
 ![pigs-logo v3](https://user-images.githubusercontent.com/43779006/65151787-13116e80-da27-11e9-9e1f-f5a08df56d49.png)
 Figure : Logo actuel
 
-![pigs-logo v3](https://user-images.githubusercontent.com/43779006/65154387-ba90a000-da2b-11e9-9847-ebe454ea664b.png)
+
+![pigs-logo 120](https://user-images.githubusercontent.com/43779006/65155918-6804b300-da2e-11e9-8a88-1ff1f7331227.png)
 Figure : Logo utilisé pour l'icone de l'application
 
 ### Plan du stand
