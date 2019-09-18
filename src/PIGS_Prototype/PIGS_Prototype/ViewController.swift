@@ -64,6 +64,19 @@ let PLAY_TIME_SECONDS : Int = 60
 
 ////////////////////////////////////////////////////////////
 
+// Usage: insert view.pushTransition right before changing content
+extension UIView {
+    func pushTransition(_ duration:CFTimeInterval) {
+        let animation:CATransition = CATransition()
+        animation.timingFunction = CAMediaTimingFunction(name:
+            CAMediaTimingFunctionName.easeInEaseOut)
+        animation.type = CATransitionType.push
+        animation.subtype = CATransitionSubtype.fromTop
+        animation.duration = duration
+        layer.add(animation, forKey: CATransitionType.push.rawValue)
+    }
+}
+
 class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SCNPhysicsContactDelegate, MCBrowserViewControllerDelegate {
     // Code used for communication between devices
     enum CODE : String {
@@ -149,6 +162,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             // your code here
             debugPrint("1")
+            self.threeLabel.pushTransition(0.17)
             self.threeLabel.isHidden = true
             self.twoLabel.isHidden = false
         }
@@ -157,6 +171,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             // your code here
             debugPrint("2")
+            self.twoLabel.pushTransition(0.17)
             self.twoLabel.isHidden = true
             self.oneLabel.isHidden = false
         }
@@ -165,6 +180,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             // your code here
             debugPrint("3")
+            self.oneLabel.pushTransition(0.17)
             self.oneLabel.isHidden = true
             self.zeroLabel.isHidden = false
         }
