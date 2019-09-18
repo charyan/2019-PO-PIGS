@@ -109,7 +109,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     @IBOutlet weak var waitingView: UIView!
     
     @IBOutlet weak var CountDownView: UIView!
-    @IBOutlet weak var timeLabel: UILabel!
 
     @IBOutlet weak var scoreLabelOtherPlayer: UILabel!
     
@@ -303,6 +302,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     @IBOutlet weak var nameLengthError: UILabel!
     @IBOutlet weak var playerName: UILabel!
     @IBOutlet weak var HUD: UILabel!
+    @IBOutlet weak var timeBackground: UILabel!
     
     // View choose name menu
     @IBOutlet weak var Pseudo: UIView!
@@ -312,6 +312,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     @IBOutlet weak var NumberPoints: UILabel!
     @IBOutlet weak var Results: UIView!
     @IBOutlet weak var goldenSnitchImage: UIImageView!
+    @IBOutlet weak var timeLabel: UILabel!
+    
     
     @IBAction func SwipeGesture(_ sender: Any) {
         reset()
@@ -774,6 +776,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         } else {
             seconds -= 1
             timeLabel.text = "\(seconds)"
+            self.timeLabel.pushTransition(0.17)
         }
         
     }
@@ -996,7 +999,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         multipeerSession.setIsNetworkingViewEnabled(true)
         multipeerSession.setSceneView(&sceneView)
         
-        gameViewTimeLabel.text = String(seconds)
+        // gameViewTimeLabel.text = String(seconds)
     }
     
     override func viewWillAppear(_ animated: Bool) {

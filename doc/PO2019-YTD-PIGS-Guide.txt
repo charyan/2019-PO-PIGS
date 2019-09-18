@@ -1,0 +1,126 @@
+﻿MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+MMMMMMMMNNMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNdyoNMMMMMMMM
+MMMMMMMMN:/oydMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMmhs/:::oMMMMMMMMM
+MMMMMMMMMs:::::+shmMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNdyo/:::::::dMMMMMMMMM
+MMMMMMMMMm::os+::::/oydNMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMmhs+:::/ossd+::/MMMMMMMMMM
+MMMMMMMMMM+:/y+sssoo/:::+yNMNmdysoo++/////++osyhdNMNy/:::+ssss+//d:::yMMMMMMMMMM
+MMMMMMMMMMh::h+////+oydhhyo/:::::::::::::::::::::::+shhmho//////so:::NMMMMMMMMMM
+MMMMMMMMMMN/:+y///+ydyo::::::::::::::::::::::::::::::::/shhs////d:::oMMMMMMMMMMM
+MMMMMMMMMMMs::h+sdh+::::::::::::::::::::::::::::::::::::::/sdh+oy:::dMMMMMMMMMMM
+MMMMMMMMMMMm::ymy/:::::::::::::::::::::::::::::::::::::::::::+dN+::/MMMMMMMMMMMM
+MMMMMMMMMMMMsdy::::::::::::::::::::::::::::::::::::::::::::::::+dy:yMMMMMMMMMMMM
+MMMMMMMMMMMMm+:::::::+/:::::::::::::::::::::::::::/+osyh+::::::::smNMMMMMMMMMMMM
+MMMMMMMMMMMd::::::::dMMMMNmdhhysoo+/::::::+osyhmNNo/:.`.ds::::::::+NMMMMMMMMMMMM
+MMMMMMMMMMh::::::::oMMMMMMMM: `.-:oN:::::+MMMMMMMM:     `N/::::::::+NMMMMMMMMMMM
+MMMMMMMMMm:::::::::+MMMMMMMM.     :m:::::+MMMMMMMM:     `N/:::::::::oMMMMMMMMMMM
+MMMMMMMMM+::::::::::yMMMMNy-     /m+::::::yMMMMMm/     .ds:::::::::::hMMMMMMMMMM
+MMMMMMMMd::::::::::::+hho:.``.:ohs:::::::::+ddo-    ./yh+::::::::::::+MMMMMMMMMM
+MMMMMMMMy:::::::::::::::/ossss+/:::::::::::::/osyyyys+::::::::::::::::NMMMMMMMMM
+MMMMMMMMs:::::::::::::::::::::::::://++++/::::::::::::::::::::::::::::mMMMMMMMMM
+MMMMMMMMy:::::::::::::::::::::/shmmmdhhhddmmdyo:::::::::::::::::::::::NMMMMMMMMM
+MMMMMMMMd:::::::::::::::::::smmyo///////////+sdNh+:::::::::::::::::::+MMMMMMMMMM
+MMMMMMMMM/::::::::::::::::/mmo////++/////+/////+yMy::::::::::::::::::hMMMMMMMMMM
+MMMMMMMMMd:::::::::::::::/Nm/////dMMs///dMNo/////oMy::::::::::::::::+MMMMMMMMMMM
+MMMMMMMMMMh::::::::::::::oMs////oMMMN//sMMMm//////mN:::::::::::::::/NMMMMMMMMMMM
+MMMMMMMMMMMh:::::::::::::+My////oMMMN//sMMMm/////+Nd::::::::::::::+NMMMMMMMMMMMM
+Mmddddddddddd/::::::::::::sMy////NMMh//+NMMy////+mm/:::::::::::::smdddddddddddmM
+o:::::::::::+ms::::::::::::+dNy+/+hy////+ys///odNy:::::::::::::/dh:::::::::::::o
+::::::::::::::sds::::::::::::+ymmdyssoooosyhmNds:::::::::::::/hd+:::::::::::::::
+:::::::--------:sdy/:::::::::::::+osyhhhhyso/::::::::::::::ohh/----:::::::::::::
+::::.            `-shy+:::::::::::::::::::::::::::::::::ohh+`       `.-:::::::::
+::::`                -shhs+::::::::::::::::::::::::/oyhho.              .:::::::
+::::`                  -:./syyyso++//::::://+osyyyso::::`                 .:::::
+::::`      .-..`       `:      -+osoooooooosoo:`     .:-       -:-`       `-::::
+::::`      :::::.      `:      .::-      .:::::-------::        .::-   `.-::::::
+::::       :::::-      .:      -::      `:::::::::::::::-`        `.-.-:::::::::
+::::      `::::.      `::      -:.      :::---......--::::-`         `-:::::::::
+::::       ``        `-::      ::`     `:::`          :::::--.          .:::::::
+::::                .::::      ::`     `:::-`.        :::-`  .:-.`        .:::::
+::::             `.::::::     `::.      .:::-`       `::`     `.:::.       .::::
+::::      ....--:::::::::     `:::`       `          `::.        `..       .::::
+::::      :::::::::::::::     `::::.                 .:::-`               `:::::
+::::     `:::::::::::::::     .::::::.``      `.-.   .::::::-.`       ``.-::::::
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+h+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::+h
+
+
+
+============================== GUIDE DE DÉMARRAGE ==============================
+
+
+
+A. Serveur
+	1. 	Brancher L'AP, le NUC et l'écran à la multiprise. 
+	2. 	Démarrer le NUC et allumer l'écran.
+	3. 	Se connecter avec "Admin" comme identifiant et "Admlocal1" comme 
+		mot de passe.
+	4. 	Lancer l'application "XAMPP Control Panel" situé sur le bureau.
+	5. 	Dans l'application, lancer les services "Apache" et "MySQL" en 
+		appuyant sur "Start".
+	6. 	Lancer "Google Chrome".
+	7. 	Vérifier que l'extension "Auto Refresh" est activé avec "0"
+		seconde.
+	8. 	Pressez sur la touche "F11" de votre clavier.
+
+B. Jeu iPads
+	1.	Démarrer les iPads en maintenant le bouton du haut appuyé.
+	2. 	Vérifier que le bluetooth est activé sur les deux iPads.
+	3. 	Vérifier que les iPads sont connectés au wifi "PIGS-WIFI". 
+		// C'est normal que les iPads ne soient pas connectés 
+		à Internet.
+	4. 	Lancer l'application PIGS sur les deux iPads.
+	5. 	Sur l'iPad noir, pressez sur "CONNECT" puis sur
+		"HOST a session".
+	6.	Sur l'iPad blanc, pressez sur "CONNECT" puis sur 
+		"JOIN a session" puis sur "AIF-101149".
+	7.	Pressez sur "Accept" sur l'iPad noir.
+	8.	Pressez sur "Done" sur l'iPad blanc.
+	9.	Appuyez sur "DONE" sur les deux iPads.
+		// Si il y a un problème de connexion, recommencez au
+		point 5.
+	10.	Placez les maps correctement sur les tables.
+		// Si la map n'est pas placé corretement, recommencez 
+		au point 4.
+	11. 	Prêtez les iPads aux visiteurs afin qu'ils puissent saisir 
+		leur nom.
+		// Si le nom est inaproprié, allez au point D.1. une fois 
+		la partie terminée.
+	12. 	Laissez les jouer et consulter leur score une fois la partie 
+		terminée.
+	13.	Pour réinitialiser la partie, glisser de gauche à droite sur 
+		l'écran du résultat sur un des 
+		deux iPads.
+	12.	Recommencez au point 11.
+		// Si un problème survient, recommencez au point 4.
+		
+C. Apple TV
+	1. 	Allumer la TV Samsung "AIF-100911".
+	2. 	Sélectionnez la source "HDMI4/DVI" à l'aide du bouton au dos 
+		de la TV.
+	3. 	Sur l'iPad, activez la "recopie d'écran" et sélectionnez 
+		"AIF-100911".
+	
+		
+D. Problèmes possibles
+	1. Changement de nom dans la DB.
+		1.1. 	Allez sur "Google Chrome" depuis le NUC.
+		1.2.	Pressez sur "F11" pour quitter le mode 
+		plein écran du classement.
+		1.3.	Allez sur le deuxième onglet (PHP My Admin).
+		// http://localhost/phpmyadmin/sql.php?server=1&db=
+		pigs&table=utilisateur&pos=0
+		1.4. 	Dans la colonne NOM_util, faites un double clic sur
+			le pseudo que vous voulez modifier.
+		1.5. 	Revenez sur la page du classement avec la touche "F11".
+
+D. Informations de contact
+	Emails : 	dylan.riat@divtec.ch
+			theo.vuillaume@divtec.ch
+			yannis.charalambidis@divtec.ch
+	
+		
+	
+
+	
+
