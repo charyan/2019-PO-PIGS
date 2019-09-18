@@ -180,7 +180,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             // your code here
             debugPrint("3")
-            self.oneLabel.pushTransition(0.17)
+            self.oneLabel.pushTransition(0.1)
             self.oneLabel.isHidden = true
             self.zeroLabel.isHidden = false
         }
@@ -192,10 +192,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             self.displayGameMenu()
             self.runTimer()
         }
-        
-        
-        
-        
         
     }
     
@@ -388,9 +384,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             //displayCountDownView()
             
         }
-        
     }
-    
     
     var rotationDeg: Float = 0
     
@@ -414,9 +408,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     func hideCountDownView(){
         CountDownView.isHidden = true;
     }
-    
-    
-    
     
     // Enable shoot button after cooldown
     func enableShootButton() {
@@ -700,6 +691,14 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     // Fire a projectile
     func fireProjectile(type : String) {
         
+        self.sceneView.scene.rootNode.enumerateChildNodes { (node, _) in
+            
+            if (node.name == "ball") {
+                node.removeFromParentNode()
+            }
+            
+        }
+        
         // Create the projectile node
         var node = SCNNode()
         node = createProjectile(type: type)
@@ -964,7 +963,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         
         // Set the view's delegate
         sceneView.delegate = self
-        
         if(DEBUG_MODE) {
             // Show statistics such as fps and timing information
             sceneView.showsStatistics = true
