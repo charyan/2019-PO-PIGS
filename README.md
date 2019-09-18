@@ -1,10 +1,8 @@
 # PIGS
 ![pigs-logo v3](https://user-images.githubusercontent.com/43779006/65151787-13116e80-da27-11e9-9e1f-f5a08df56d49.png)
-
 Figure : Logo actuel
 
 ![logo](https://user-images.githubusercontent.com/43775161/58420616-0939b900-808e-11e9-8312-b0da9cbf21e5.png)
-
 Figure : Ancien logo
 
 ## Introduction
@@ -13,7 +11,10 @@ PIGS est un jeu dans lequel deux joueurs s'affrontent dans un monde entre le ré
 ### Interaction
 Chaque joueur disposera d'une tablette au travers de laquel il pourra voir et interagir avec le jeu.
 ### Guide de démarrage du stand
-Le guide de démarrage permet de mettre en place toute l'infrastructure de PIGS et de former les apprentis chargés de présenter le projet. Le guide est disponible sur papier ou au format .txt sur  
+Le guide de démarrage permet de mettre en place toute l'infrastructure de PIGS et de former les apprentis chargés de présenter le projet. Le guide est disponible sur papier ou au format .txt à l'emplacement : https://github.com/charyan000/2019-PO-PIGS/blob/master/doc/PO2019-YTD-PIGS-Guide.txt.
+
+![IMG_0817](https://user-images.githubusercontent.com/43779006/65152840-055ce880-da29-11e9-927c-35674c197cca.jpg)
+Figure : Version papier du guide
 ### Plan du stand
 ![plan](https://user-images.githubusercontent.com/43775161/58421157-916c8e00-808f-11e9-9d4d-e0fb333a133e.png)
 
