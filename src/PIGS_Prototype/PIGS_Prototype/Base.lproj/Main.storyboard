@@ -291,7 +291,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="834" height="1112"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="launchscreen-logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="qig-tF-5QQ" userLabel="nameMenuPicture">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="pigs-logo.v3.png" translatesAutoresizingMaskIntoConstraints="NO" id="qig-tF-5QQ" userLabel="nameMenuPicture">
                                         <rect key="frame" x="70" y="-15" width="695" height="385"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
@@ -453,7 +453,7 @@
         <image name="crosshair" width="500" height="500"/>
         <image name="crown.png" width="495.412841796875" height="297.90826416015625"/>
         <image name="goldensnitch" width="476" height="525"/>
-        <image name="launchscreen-logo.png" width="240" height="240"/>
         <image name="pigs-logo.v3" width="2062" height="2340"/>
+        <image name="pigs-logo.v3.png" width="296.92800903320312" height="337"/>
     </resources>
 </document>
