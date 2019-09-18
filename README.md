@@ -3,7 +3,7 @@
 
 Figure : Ancien logo
 
-![logo](https://user-images.githubusercontent.com/43775161/58420616-0939b900-808e-11e9-8312-b0da9cbf21e5.png)
+![pigs-logo v3](https://user-images.githubusercontent.com/43779006/65151787-13116e80-da27-11e9-9e1f-f5a08df56d49.png)
 
 Figure : Logo actuel
 
