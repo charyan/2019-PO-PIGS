@@ -90,6 +90,8 @@ Nous avons créée un réseau sans-fil avec un access point permettant de transf
 Nos appareils ont tous une adresse fixe, le même masque et le même NetId.
 
 Un schéma logique et une liste du matériel sont disponibles dans le dossier "charyan000/2019-PO-PIGS/doc".
+
+
 ### Serveur
 Nous utilisons un ordinateur Intel NUC sous Windows 10 Pro afin de proposer divers services nécessaires à notre projet : service Apache, MySQL, PHP. Nous utilisons XAMPP.  
 ![Panneau de contrôle XAMPP](https://user-images.githubusercontent.com/43775161/64027001-26c06800-cb40-11e9-9130-cc560776a135.png)
