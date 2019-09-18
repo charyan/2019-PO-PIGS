@@ -18,13 +18,11 @@ Figure : Logo original
 ![pigs-logo v3](https://user-images.githubusercontent.com/43779006/65151787-13116e80-da27-11e9-9e1f-f5a08df56d49.png)
 Figure : Logo actuel
 
-
 ![pigs-logo 120](https://user-images.githubusercontent.com/43779006/65155918-6804b300-da2e-11e9-8a88-1ff1f7331227.png)
 Figure : Logo utilisé pour l'icone de l'application
 
 ### Plan du stand
 ![plan](https://user-images.githubusercontent.com/43775161/58421157-916c8e00-808f-11e9-9d4d-e0fb333a133e.png)
-
 Figure : Plan du stand
 
 ## Organisation
@@ -82,14 +80,17 @@ Figure : Boutons sur l'iPad pour modifier la position de l'écran
 Une fois que le placeholder est à l'endroit où nous le souhaitons, il nous suffit de presser sur le bouton "Done" pour placer la map.
 
 ![PlacementMap](https://user-images.githubusercontent.com/43779006/60085878-6468d500-973a-11e9-94fc-f780bff341b4.jpg)
-
-Figure 5 : Terrain de jeu
+Figure : Terrain de jeu
 
 ## Réseau
 Nous avons créée un réseau sans-fil avec un access point permettant de transférer des informations entre le serveur et les iPad.
 Nos appareils ont tous une adresse fixe, le même masque et le même NetId.
 
 Un schéma logique et une liste du matériel sont disponibles dans le dossier "charyan000/2019-PO-PIGS/doc".
+![PO2019-YTD-PIGD-SchemaLogique](https://user-images.githubusercontent.com/43779006/65156906-27a63480-da30-11e9-8ce8-e9816a95b3d9.JPG)
+Figure : Schéma logique
+
+
 ### Serveur
 Nous utilisons un ordinateur Intel NUC sous Windows 10 Pro afin de proposer divers services nécessaires à notre projet : service Apache, MySQL, PHP. Nous utilisons XAMPP.  
 ![Panneau de contrôle XAMPP](https://user-images.githubusercontent.com/43775161/64027001-26c06800-cb40-11e9-9130-cc560776a135.png)
