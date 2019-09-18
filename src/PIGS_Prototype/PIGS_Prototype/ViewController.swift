@@ -45,7 +45,7 @@ let POINTS_FURNITURE : Int = 25
 let POINTS_TARGET : Int = 100
 let POINTS_FLYING_TARGET : Int = 350
 let POINTS_PIG : Int = 500
-let POINTS_GOLDEN_SNITCH : Int = 3000
+let POINTS_GOLDEN_SNITCH : Int = 5000
 
 let POINTS_BOMB : Int = -300
 
@@ -455,7 +455,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         multipeerSession.setIsGamePlacementViewEnabled(false)
         multipeerSession.setIsNameViewEnabled(true)
         
-        gameViewTimeLabel.text = String(seconds)
+        //gameViewTimeLabel.text = String(seconds)
         
         resetCountDown()
         
@@ -999,7 +999,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         multipeerSession.setIsNetworkingViewEnabled(true)
         multipeerSession.setSceneView(&sceneView)
         
-        // gameViewTimeLabel.text = String(seconds)
+        gameViewTimeLabel.text = String(seconds)
     }
     
     override func viewWillAppear(_ animated: Bool) {
