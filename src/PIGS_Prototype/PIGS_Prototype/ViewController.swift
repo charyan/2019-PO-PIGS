@@ -464,7 +464,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         multipeerSession.setIsGamePlacementViewEnabled(false)
         multipeerSession.setIsNameViewEnabled(true)
         
-        gameViewTimeLabel.text = String(seconds)
+        //gameViewTimeLabel.text = String(seconds)
         
         resetCountDown()
         
