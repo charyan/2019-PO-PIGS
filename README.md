@@ -5,7 +5,7 @@ PIGS est un jeu dans lequel deux joueurs s'affrontent dans un monde entre le ré
 
 Le jeu se joue à 2, le but est de gagner le plus de points dans un temps imparti.
 ### Interaction
-Chaque joueur disposera d'une tablette au travers de laquel il pourra voir et interagir avec le jeu.
+Chaque joueur disposera d'une tablette au travers de laquel il pourra voir et interagir avec le jeu. Chaque joueur peut lancer des balles afin de gagner des points.
 ### Guide de démarrage du stand
 Le guide de démarrage permet de mettre en place toute l'infrastructure de PIGS et de former les apprentis chargés de présenter le projet. Le guide est disponible sur papier ou au format .txt à l'emplacement : https://github.com/charyan000/2019-PO-PIGS/blob/master/doc/PO2019-YTD-PIGS-Guide.txt.
 
