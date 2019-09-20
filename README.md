@@ -15,12 +15,15 @@ Figure : Version papier du guide
 ### Logos
 Nous disposons de trois logos. Le logo original a été crée par un assemblage d'images trouvés sur Internet. Le nouveau a été totalement créé à la main sur Inkscape. Le dernier est utilisé comme icone de notre application.
 ![logo](https://user-images.githubusercontent.com/43775161/58420616-0939b900-808e-11e9-8312-b0da9cbf21e5.png)
+  
 Figure : Logo original
 
 ![pigs-logo v3](https://user-images.githubusercontent.com/43779006/65151787-13116e80-da27-11e9-9e1f-f5a08df56d49.png)
+  
 Figure : Logo actuel
 
 ![pigs-logo 120](https://user-images.githubusercontent.com/43779006/65155918-6804b300-da2e-11e9-8a88-1ff1f7331227.png)
+  
 Figure : Logo utilisé pour l'icone de l'application
 
 ### Plan du stand
