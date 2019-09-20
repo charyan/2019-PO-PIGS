@@ -67,7 +67,6 @@ La dernière vue affiche le nom, le score et un message de remerciement pour l'u
 Vue gagnant             |  Vue perdant
 :-------------------------:|:-------------------------:
 ![resultsView_win](https://user-images.githubusercontent.com/43775161/65326807-98755a00-dbb2-11e9-8a95-c130d2d7cc08.png)  |  ![resultsView_loose](https://user-images.githubusercontent.com/43775161/65326805-98755a00-dbb2-11e9-97b4-5de5d04b5824.png)
-Figure : Vues de résultat
 
 ## Placement de la zone de jeu
 Pour placer la zone de jeu, nous commençons par détecter une zone plane, sur cette zone plane, placer un placeholder, éffectuer une rotation afin d'ajuster le placement du placeholder et enfin remplacer le placeholder par la map.
