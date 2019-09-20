@@ -696,7 +696,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         node.name = GAMEZONE_ROOT_NODE_NAME
         
         node.position = position
-        node.rotation = SCNVector4(0, 1, 0, GLKMathDegreesToRadians(Float(rotationDeg)))
+        node.rotation = SCNVector4(0, 0.7, 0, GLKMathDegreesToRadians(Float(rotationDeg)))
         //node.rotation = SCNVector4(1, 0, 0, GLKMathDegreesToRadians(90))
         //node.physicsBody = SCNPhysicsBody(type: .static, shape: nil)
         
@@ -824,19 +824,19 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             }
             
             // Animation of golden snitch
-            let boatMoveY1 = SCNAction.moveBy(x: CGFloat.random(in: -1 ..< 1), y: CGFloat.random(in: -0.5 ..< 0.5), z: CGFloat.random(in: -1 ..< 1), duration: 1)
+            let boatMoveY1 = SCNAction.moveBy(x: CGFloat.random(in: -1 ..< 1), y: CGFloat.random(in: -0.2 ..< 0.2), z: CGFloat.random(in: -1 ..< 1), duration: 1)
             
-            let boatMoveR1 = SCNAction.rotate(by: .pi, around: SCNVector3(0, CGFloat.random(in: -200 ..< 200), 0), duration: 1.2)
+            let boatMoveR1 = SCNAction.rotate(by: .pi, around: SCNVector3(0, CGFloat.random(in: -170 ..< 170), 0), duration: 1)
             
-            let boatMoveZ1 = SCNAction.moveBy(x: CGFloat.random(in: -1 ..< 1), y: CGFloat.random(in: -0.5 ..< 0.5), z: CGFloat.random(in: -1 ..< 1), duration: 1)
+            let boatMoveZ1 = SCNAction.moveBy(x: CGFloat.random(in: -1 ..< 1), y: CGFloat.random(in: -0.2 ..< 0.2), z: CGFloat.random(in: -1 ..< 1), duration: 1)
             
-            let boatMoveR2 = SCNAction.rotate(by: .pi, around: SCNVector3(0, CGFloat.random(in: -200 ..< 200), 0), duration: 1.2)
+            let boatMoveR2 = SCNAction.rotate(by: .pi, around: SCNVector3(0, CGFloat.random(in: -170 ..< 170), 0), duration: 1)
             
-            let boatMoveY2 = SCNAction.moveBy(x: CGFloat.random(in: -1 ..< 1), y: CGFloat.random(in: -0.5 ..< 0.5), z: CGFloat.random(in: -1 ..< 1), duration: 1)
+            let boatMoveY2 = SCNAction.moveBy(x: CGFloat.random(in: -1 ..< 1), y: CGFloat.random(in: -0.2 ..< 0.2), z: CGFloat.random(in: -1 ..< 1), duration: 1)
             
-            let boatMoveR3 = SCNAction.rotate(by: .pi, around: SCNVector3(0, CGFloat.random(in: -200 ..< 200), 0), duration: 1.2)
+            let boatMoveR3 = SCNAction.rotate(by: .pi, around: SCNVector3(0, CGFloat.random(in: -170 ..< 170), 0), duration: 1)
             
-            let boatMoveZ2 = SCNAction.moveBy(x: CGFloat.random(in: -1 ..< 1), y: CGFloat.random(in: -0.5 ..< 0.5), z: CGFloat.random(in: -1 ..< 1), duration: 1)
+            let boatMoveZ2 = SCNAction.moveBy(x: CGFloat.random(in: -1 ..< 1), y: CGFloat.random(in: -0.2 ..< 0.2), z: CGFloat.random(in: -1 ..< 1), duration: 1)
             
             let boatMoveR4 = SCNAction.rotate(by: .pi, around: SCNVector3(0, 0, 0), duration: 0.1)
             
@@ -908,7 +908,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             
             explosionType = "Door Explosion.scnp"
             
-        } else if (contact.nodeA.name! == "window" || contact.nodeB.name! == "window") {
+        } else if (contact.nodeA.name! == "windows" || contact.nodeB.name! == "windows") {
             
             explosionType = "Window Explosion.scnp"
             
@@ -924,7 +924,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             || contact.nodeA.name! == "flying target" || contact.nodeB.name! == "flying target"
             || contact.nodeA.name! == "pig" || contact.nodeB.name! == "pig"
             || contact.nodeA.name! == "door" || contact.nodeB.name! == "door"
-            || contact.nodeA.name! == "window" || contact.nodeB.name! == "window"
+            || contact.nodeA.name! == "windows" || contact.nodeB.name! == "windows"
             || contact.nodeA.name! == "golden_snitch" || contact.nodeB.name! == "golden_snitch"
             || contact.nodeA.name! == "pig_rotation" || contact.nodeB.name! == "pig_rotation"
             || contact.nodeA.name! == "bomb" || contact.nodeB.name! == "bomb") {
@@ -967,7 +967,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
                 scoreIncrement(points: POINTS_PIG)
                 print("Collision with pig")
             } else if (contact.nodeA.name! == "door" || contact.nodeB.name! == "door"
-                || contact.nodeA.name! == "window" || contact.nodeB.name! == "window") {
+                || contact.nodeA.name! == "windows" || contact.nodeB.name! == "windows") {
                 scoreIncrement(points: POINTS_FURNITURE)
             } else if (contact.nodeA.name! == "golden_snitch" || contact.nodeB.name! == "golden_snitch") {
                 scoreIncrement(points: POINTS_GOLDEN_SNITCH)
