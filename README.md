@@ -24,7 +24,8 @@ Figure : Logo actuel
 Figure : Logo utilisé pour l'icone de l'application
 
 ### Plan du stand
-![plan](https://user-images.githubusercontent.com/43775161/58421157-916c8e00-808f-11e9-9d4d-e0fb333a133e.png)
+![Plan du stand](https://user-images.githubusercontent.com/43775161/65313287-68b75980-db94-11e9-8f36-3b841ab1b73f.png)
+  
 Figure : Plan du stand
 
 ## Organisation
