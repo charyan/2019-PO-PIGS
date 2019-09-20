@@ -309,7 +309,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="pigs-logo.v3.png" translatesAutoresizingMaskIntoConstraints="NO" id="qig-tF-5QQ" userLabel="nameMenuPicture">
-                                        <rect key="frame" x="70" y="109" width="695" height="385"/>
+                                        <rect key="frame" x="70" y="110" width="695" height="385"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                 </subviews>
