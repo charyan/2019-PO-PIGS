@@ -155,7 +155,7 @@ Le lanceur permet de créer une balle à la position de l'iPad dans le monde vir
 Différentes cibles sont placées sur la table, elles rapportent différentes quantités de points.
 
 ## Création des blocs
-Les blocs sont directement créés dans SceneKit car nous avons trouvé que c'était la solution la plus simple. Nous leur application ensuite leurs paramètres physique et une texture.
+Les blocs sont directement créés dans **SceneKit** car nous avons trouvé que c'est la solution la plus simple. Nous leur appliquons ensuite leurs paramètres physiques et une texture.
 
 Cube et ses propriétés physiques
 :--------------------:
