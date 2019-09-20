@@ -189,6 +189,8 @@ Networking View | Envoi de messages
 :--------------------:|:-------------------------:
 <img src="https://user-images.githubusercontent.com/43775161/65335378-9ddba000-dbc4-11e9-8e6c-6abc4c16029b.png" width="100%" />  |  <img src="https://user-images.githubusercontent.com/43775161/65335380-9e743680-dbc4-11e9-9aa0-a10c118efa33.png" width="100%" />
 
+Une fois les appareils connectés, on appuie sur le bouton **Done**. Ensuite, la vue de placement du jeu est affichée.
+
 ### Gestion des rôles
 La gestion des rôles est organisées par la variable **isGameHost** qui permettera de déterminer le rôle de l'iPad. Cette méthode permet d'identifier uniquement deux rôles : **Game host** et **Guest**.
 
