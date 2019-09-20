@@ -4,6 +4,11 @@
 PIGS est un jeu dans lequel deux joueurs s'affrontent dans un monde entre le réel et le virtuel. Ce monde est constitué de différents objets: blocs, cibles volantes ou statiques, vif d'or, etc.  
 
 Le jeu se joue à 2, le but est de gagner le plus de points dans un temps imparti.
+
+Jeu
+:--------------------:
+![gameView](https://user-images.githubusercontent.com/43775161/65329956-dc1f9200-dbb9-11e9-9736-a38a86f96e23.jpg)
+
 ### Interaction
 Chaque joueur disposera d'une tablette au travers de laquel il pourra voir et interagir avec le jeu. Chaque joueur peut lancer des balles afin de gagner des points.
 ### Guide de démarrage du stand
@@ -11,7 +16,7 @@ Le guide de démarrage permet de mettre en place toute l'infrastructure de PIGS 
 
 Version papier du guide
 :--------------------:
-![IMG_0817](https://user-images.githubusercontent.com/43779006/65152840-055ce880-da29-11e9-927c-35674c197cca.jpg)
+![Guide papier](https://user-images.githubusercontent.com/43779006/65152840-055ce880-da29-11e9-927c-35674c197cca.jpg)
 
 ### Logos
 Nous disposons de trois logos. Le logo original a été crée par un assemblage d'images trouvés sur Internet. Le nouveau a été totalement créé à la main sur Inkscape. Le dernier est utilisé comme icone de notre application.
@@ -99,8 +104,7 @@ Un schéma logique et une liste du matériel sont disponibles dans le dossier "c
 
 Schéma logique
 :--------------------:
-![PO2019-YTD-PIGD-SchemaLogique](https://user-images.githubusercontent.com/43779006/65156906-27a63480-da30-11e9-8ce8-e9816a95b3d9.JPG)
-
+![Schéma logique](https://user-images.githubusercontent.com/43775161/65332129-5fdb7d80-dbbe-11e9-8bbe-bb4814e95c69.png)
 
 ### Serveur
 Nous utilisons un ordinateur Intel NUC sous Windows 10 Pro afin de proposer divers services nécessaires à notre projet : service Apache, MySQL, PHP. Nous utilisons XAMPP.  
@@ -151,7 +155,7 @@ Le lanceur permet de créer une balle à la position de l'iPad dans le monde vir
 Différentes cibles sont placées sur la table, elles rapportent différentes quantités de points.
 
 ## Création des blocs
-Les blocs sont directement créés dans SceneKit car nous avons trouvé que c'était la solution la plus simple. Nous leur application ensuite leurs paramètres physique et une texture.
+Les blocs sont directement créés dans **SceneKit** car nous avons trouvé que c'est la solution la plus simple. Nous leur appliquons ensuite leurs paramètres physiques et une texture.
 
 Cube et ses propriétés physiques
 :--------------------:
@@ -178,6 +182,14 @@ Dans le mode **Duel**, chaque joueur joue sur son propre monde virtuel. Le timer
 
 ### Networking
 La partie networking est géré par la bibliothèque [MultipeerConnectivity](https://developer.apple.com/documentation/multipeerconnectivity). Cette bibliothèque permet la configuration automatique de la connexion par WiFi, WiFi Peer-to-peer ou Bluetooth, elle permet également de transmettre des informations entre appareils connectés.
+
+Lors du démarrage de l'application, la vue **networkingView** est affichée, elle permet de connecter les deux appareils ensembles et d'envoyer des messages de test.
+
+Networking View | Envoi de messages
+:--------------------:|:-------------------------:
+<img src="https://user-images.githubusercontent.com/43775161/65335378-9ddba000-dbc4-11e9-8e6c-6abc4c16029b.png" width="100%" />  |  <img src="https://user-images.githubusercontent.com/43775161/65335380-9e743680-dbc4-11e9-9aa0-a10c118efa33.png" width="100%" />
+
+Une fois les appareils connectés, on appuie sur le bouton **Done**. Ensuite, la vue de placement du jeu est affichée.
 
 ### Gestion des rôles
 La gestion des rôles est organisées par la variable **isGameHost** qui permettera de déterminer le rôle de l'iPad. Cette méthode permet d'identifier uniquement deux rôles : **Game host** et **Guest**.
