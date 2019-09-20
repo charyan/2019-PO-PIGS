@@ -17,8 +17,12 @@ Nous disposons de trois logos. Le logo original a été crée par un assemblage 
 
 
 Logo original             |  Logo actuel
-:-------------------------:|:-------------------------:
+:-------------------------:|:-------------------------
 ![logo](https://user-images.githubusercontent.com/43775161/58420616-0939b900-808e-11e9-8312-b0da9cbf21e5.png)  |  ![pigs-logo v3](https://user-images.githubusercontent.com/43779006/65151787-13116e80-da27-11e9-9e1f-f5a08df56d49.png)
+
+Icône de l'application
+:--------------------:
+![pigs-logo 120](https://user-images.githubusercontent.com/43775161/65327312-eb9bdc80-dbb3-11e9-8c38-9c9d3ec12874.png)
 
   
 ![pigs-logo 120](https://user-images.githubusercontent.com/43779006/65155918-6804b300-da2e-11e9-8a88-1ff1f7331227.png)
