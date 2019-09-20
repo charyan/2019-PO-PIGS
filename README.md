@@ -14,12 +14,17 @@ Figure : Version papier du guide
 
 ### Logos
 Nous disposons de trois logos. Le logo original a été crée par un assemblage d'images trouvés sur Internet. Le nouveau a été totalement créé à la main sur Inkscape. Le dernier est utilisé comme icone de notre application.
-![logo](https://user-images.githubusercontent.com/43775161/58420616-0939b900-808e-11e9-8312-b0da9cbf21e5.png)
-Figure : Logo original
 
-![pigs-logo v3](https://user-images.githubusercontent.com/43779006/65151787-13116e80-da27-11e9-9e1f-f5a08df56d49.png)  
-Figure : Logo actuel
 
+Logo original             |  Logo actuel
+:-------------------------:|:-------------------------
+![logo](https://user-images.githubusercontent.com/43775161/58420616-0939b900-808e-11e9-8312-b0da9cbf21e5.png)  |  ![pigs-logo v3](https://user-images.githubusercontent.com/43779006/65151787-13116e80-da27-11e9-9e1f-f5a08df56d49.png)
+
+Icône de l'application
+:--------------------:
+![pigs-logo 120](https://user-images.githubusercontent.com/43775161/65327312-eb9bdc80-dbb3-11e9-8c38-9c9d3ec12874.png)
+
+  
 ![pigs-logo 120](https://user-images.githubusercontent.com/43779006/65155918-6804b300-da2e-11e9-8a88-1ff1f7331227.png)
   
 Figure : Logo utilisé pour l'icone de l'application
@@ -64,9 +69,9 @@ Notre minuteur utilise 2 fonctions. La première fonction **runTimer** démarre 
 ### Dernière vue "Results"
 La dernière vue affiche le nom, le score et un message de remerciement pour l'utilisateur.
 
-![IMG_0788 1](https://user-images.githubusercontent.com/43779006/64234652-1240ee80-cef7-11e9-9cdd-ad3c3bd33dbe.PNG)
-
-Figure : Dernière vue
+Vue gagnant             |  Vue perdant
+:-------------------------:|:-------------------------:
+![resultsView_win](https://user-images.githubusercontent.com/43775161/65326807-98755a00-dbb2-11e9-8a95-c130d2d7cc08.png)  |  ![resultsView_loose](https://user-images.githubusercontent.com/43775161/65326805-98755a00-dbb2-11e9-97b4-5de5d04b5824.png)
 
 ## Placement de la zone de jeu
 Pour placer la zone de jeu, nous commençons par détecter une zone plane, sur cette zone plane, placer un placeholder, éffectuer une rotation afin d'ajuster le placement du placeholder et enfin remplacer le placeholder par la map.
