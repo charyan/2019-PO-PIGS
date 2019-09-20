@@ -17,20 +17,28 @@ Nous disposons de trois logos. Le logo original a été crée par un assemblage 
 ![logo](https://user-images.githubusercontent.com/43775161/58420616-0939b900-808e-11e9-8312-b0da9cbf21e5.png)
   
 Figure : Logo original
-
+  
+  
+  
 ![pigs-logo v3](https://user-images.githubusercontent.com/43779006/65151787-13116e80-da27-11e9-9e1f-f5a08df56d49.png)
   
 Figure : Logo actuel
-
+  
+  
+  
 ![pigs-logo 120](https://user-images.githubusercontent.com/43779006/65155918-6804b300-da2e-11e9-8a88-1ff1f7331227.png)
   
 Figure : Logo utilisé pour l'icone de l'application
-
+  
+  
+  
 ### Plan du stand
 ![Plan du stand](https://user-images.githubusercontent.com/43775161/65313287-68b75980-db94-11e9-8f36-3b841ab1b73f.png)
   
 Figure : Plan du stand
-
+  
+  
+  
 ## Organisation
 ### Séances
 Nous organisons une petite séance de 10-15min chaque matin pour regarder l'avancement de nos précédentes tâches et si celles-ci sont terminées, nous nous fixons de nouveaux objectifs pour la journée.
