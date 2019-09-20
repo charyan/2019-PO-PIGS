@@ -90,6 +90,11 @@ extension UIView {
             self.alpha = 1.0 // Instead of a specific instance of, say, birdTypeLabel, we simply set [thisInstance] (ie, self)'s alpha
         }, completion: nil)
     }
+    
+    func flipFromTop() {
+        UIView.animate(withDuration: 1.0, delay: 0.0, options: .transitionFlipFromTop, animations: {
+        }, completion: nil)
+    }
 }
 
 class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SCNPhysicsContactDelegate, MCBrowserViewControllerDelegate {
@@ -701,7 +706,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         node.name = GAMEZONE_ROOT_NODE_NAME
         
         node.position = position
-        node.rotation = SCNVector4(0, 0.7, 0, GLKMathDegreesToRadians(Float(rotationDeg)))
+        node.rotation = SCNVector4(0, 0.5, 0, GLKMathDegreesToRadians(Float(rotationDeg)))
         //node.rotation = SCNVector4(1, 0, 0, GLKMathDegreesToRadians(90))
         //node.physicsBody = SCNPhysicsBody(type: .static, shape: nil)
         
@@ -799,8 +804,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             seconds -= 1
             timeLabel.text = "\(seconds)"
 
-            //self.timeLabel.startAnimatingFlip(with: 1)
-            self.timeLabel.pushTransition(0.1)
+            //self.timeLabel.pushTransition(0.1)
+            self.timeLabel.flipFromTop()
         }
         
     }
@@ -1013,9 +1018,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             sceneView.showsStatistics = true
             
             /// Debug options with physics fields
-            //sceneView.debugOptions = [ARSCNDebugOptions.showWorldOrigin,
-            //                        ARSCNDebugOptions.showPhysicsShapes,
-            //                      ARSCNDebugOptions.showFeaturePoints]
+            sceneView.debugOptions = [ARSCNDebugOptions.showWorldOrigin,
+                                    ARSCNDebugOptions.showPhysicsShapes,
+                                  ARSCNDebugOptions.showFeaturePoints]
             
             /// Debug options without physics fields and origin
             sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints]
