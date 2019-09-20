@@ -42,7 +42,7 @@ Au début, nous utilisions Framaboard mais nous avons décidé de ne plus utilis
 Nous utilisons Todoist pour lister toutes les choses à faire sur le projet, que ce soit de grandes tâches ou de toutes petites comme par exemple, remplacer l'image du placeholder. Nous avons fini par arrêter de l'utiliser car la gestion des tâches par GitHub est beaucoup plus pratique.
 
 ## Fonctionnement
-Le jeu utilise les bibliothèques ARKit, SceneKit et UIKit. Toutes ces bibliothèques sont développées par Apple. Nous utiliserons Xcode comme IDE et nous programmerons en Swift, version 5.
+Le jeu utilise les bibliothèques ARKit, SceneKit, UIKit et MultipeerConnectivity. Toutes ces bibliothèques sont développées par Apple. Nous utiliserons Xcode comme IDE et nous programmerons en Swift, version 5.
 ### Bibliothèques
 #### ARKit
 ARKit est une bibliothèque permettant de gérer l'expérience de réalité augmentée sur IOS. Cette bibliothèque permet de créer des session AR, de superposer une scène 3D SceneKit sur le flux vidéo de la caméra. Nous utiliserons cette bibliothèque afin de placer notre terrain de jeu virtuel sur une table réelle. 
@@ -50,6 +50,9 @@ ARKit est une bibliothèque permettant de gérer l'expérience de réalité augm
 SceneKit est une bibliothèque permettant de gérer un environnement 3D. On l'utilisera afin de gérer les collisions, la physique et les modèles 3D.
 #### UIKit
 Cette bibliothèque permet de gérer les éléments graphiques de l'application (boutons, labels, champs textes, etc...). Nous utiliserons cette bibliothèque afin de créer l'interface graphique de notre jeu.
+
+#### MultipeerConnectivity
+Cette bibliothèque permet de gèrer la connexion entre les deux iPads et le transfert d'informations. Nous l'avons utilisé pour créer le mode **Duel**.
 
 ## Fin de partie
 ### Minuteur
