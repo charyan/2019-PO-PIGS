@@ -975,7 +975,12 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
                 || contact.nodeA.name! == "windows" || contact.nodeB.name! == "windows") {
                 scoreIncrement(points: POINTS_FURNITURE)
             } else if (contact.nodeA.name! == "golden_snitch" || contact.nodeB.name! == "golden_snitch") {
-                scoreIncrement(points: POINTS_GOLDEN_SNITCH)
+                numberGoldensnitch = numberGoldensnitch + 1
+                
+                if (numberGoldensnitch <= 1) {
+                    scoreIncrement(points: POINTS_GOLDEN_SNITCH)
+                }
+                
             } else if (contact.nodeA.name! == "bomb" || contact.nodeB.name! == "bomb") {
                 scoreIncrement(points: POINTS_BOMB)
             } else {
