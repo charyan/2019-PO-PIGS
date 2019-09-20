@@ -1,9 +1,11 @@
 # PIGS
 ## Introduction
 ### Présentation
-PIGS est un jeu dans lequel deux joueurs s'affrontent dans un monde entre le réel et le virtuel. Ce monde est constitué d'obstacles destructibles plus originaux les uns que les autres. Chaque jour possède trois **lance-cochon**. Chaque joueur devra tenter de détruire les lanceurs de son adversaire afin de gagner la partie.
+PIGS est un jeu dans lequel deux joueurs s'affrontent dans un monde entre le réel et le virtuel. Ce monde est constitué de différents objects, blocs, cibles volantes ou statiques, vif d'or, etc.  
+
+Le jeu se joue à 2, le but est de gagner le plus de points dans un temps imparti.
 ### Interaction
-Chaque joueur disposera d'une tablette au travers de laquel il pourra voir et interagir avec le jeu.
+Chaque joueur disposera d'une tablette au travers de laquel il pourra voir et interagir avec le jeu. Chaque joueur peut lancer des balles afin de gagner des points.
 ### Guide de démarrage du stand
 Le guide de démarrage permet de mettre en place toute l'infrastructure de PIGS et de former les apprentis chargés de présenter le projet. Le guide est disponible sur papier ou au format .txt à l'emplacement : https://github.com/charyan000/2019-PO-PIGS/blob/master/doc/PO2019-YTD-PIGS-Guide.txt.
 
@@ -22,19 +24,22 @@ Figure : Logo actuel
 Figure : Logo utilisé pour l'icone de l'application
 
 ### Plan du stand
-![plan](https://user-images.githubusercontent.com/43775161/58421157-916c8e00-808f-11e9-9d4d-e0fb333a133e.png)
+![Plan du stand](https://user-images.githubusercontent.com/43775161/65313287-68b75980-db94-11e9-8f36-3b841ab1b73f.png)
+  
 Figure : Plan du stand
 
 ## Organisation
 ### Séances
 Nous organisons une petite séance de 10-15min chaque matin pour regarder l'avancement de nos précédentes tâches et si celles-ci sont terminées, nous nous fixons de nouveaux objectifs pour la journée.
 ### Outils
-#### Todoist
-Nous utilisons Todoist pour lister toutes les choses à faire sur le projet, que ce soit de grandes tâches ou de toutes petites comme par exemple, remplacer l'image du placeholder. 
 #### GitHub
-Nous utilisons l'outil GitHub pour organiser les grandes tâches ainsi que connaître leurs états.
+Nous utilisons l'outil GitHub pour organiser les grandes tâches ainsi que connaître leurs états. Pour tracker l'état des tâches, nous utilisons la fonctionnalité de **Project** de GitHub.
+![Gestion des tâches sur GitHub](https://user-images.githubusercontent.com/43775161/65313613-ee3b0980-db94-11e9-922f-df4050e24f7e.png)
+
 #### Framaboard
 Au début, nous utilisions Framaboard mais nous avons décidé de ne plus utiliser cet outil car nous le trouvons peu pratique et que ça prend beaucoup de temps à utiliser.
+#### Todoist
+Nous utilisons Todoist pour lister toutes les choses à faire sur le projet, que ce soit de grandes tâches ou de toutes petites comme par exemple, remplacer l'image du placeholder. Nous avons fini par arrêter de l'utiliser car la gestion des tâches par GitHub est beaucoup plus pratique.
 
 ## Fonctionnement
 Le jeu utilise les bibliothèques ARKit, SceneKit et UIKit. Toutes ces bibliothèques sont développées par Apple. Nous utiliserons Xcode comme IDE et nous programmerons en Swift, version 5.
