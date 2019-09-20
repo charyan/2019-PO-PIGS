@@ -142,7 +142,7 @@ Nous avons décidé d'utiliser cette manière de faire car il n'existe pas de co
 
 ### Affichage du classement
 On accède à la page PHP **leaderboard.php** sur le NUC avec le navigateur **Google Chrome**.
-La page PHP effectue une requête **SELECT** sur la base de donnée et retourne le nom et le score de tous les joueurs. Il affiche ces informations dans un tableau. La page est rafraichie automatiquement chaque seconde par une extension appellée **[Auto Refresh](https://chrome.google.com/webstore/detail/auto-refresh/ifooldnmmcmlbdennkpdnlnbgbmfalko)**.
+La page PHP effectue une requête **SELECT** sur la base de donnée et retourne le nom et le score de tous les joueurs ainsi qu'un booléen pour confirmer si l'utilisateur a touché - ou non - le vif d'or. Il affiche ces informations dans un tableau. La page est rafraichie automatiquement chaque seconde par une extension appellée **[Auto Refresh](https://chrome.google.com/webstore/detail/auto-refresh/ifooldnmmcmlbdennkpdnlnbgbmfalko)**.
 
 ## Lanceur
 Le lanceur permet de créer une balle à la position de l'iPad dans le monde virtuel et d'appliquer une force permettant de déplacer cette balle. Le lancement de la balle est déclenché par l'appuis d'un bouton. Le lanceur empêche l'utilisateur d'appuyer à répétition sur le bouton à l'aide d'un système de cooldown qui désactive le bouton.
