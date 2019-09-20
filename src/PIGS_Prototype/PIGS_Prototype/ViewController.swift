@@ -49,8 +49,11 @@ let POINTS_GOLDEN_SNITCH : Int = 10000
 
 let POINTS_BOMB : Int = -300
 
+//  Number of goldensnitch killed
+var numberGoldensnitch : Int = 0
+
 // Default value rotation for the gamezone placement
-let ROTATION_DEG : Float = 5;
+let ROTATION_DEG : Float = 5
 
 // FONT
 let FONT_NAME : String = "Skater Girls Rock"
@@ -445,6 +448,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             }
             
         }
+        
+        numberGoldensnitch = 0
 
 
         seconds = PLAY_TIME_SECONDS
@@ -966,7 +971,12 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
                 || contact.nodeA.name! == "windows" || contact.nodeB.name! == "windows") {
                 scoreIncrement(points: POINTS_FURNITURE)
             } else if (contact.nodeA.name! == "golden_snitch" || contact.nodeB.name! == "golden_snitch") {
-                scoreIncrement(points: POINTS_GOLDEN_SNITCH)
+                numberGoldensnitch = numberGoldensnitch + 1
+                
+                if (numberGoldensnitch <= 1) {
+                    scoreIncrement(points: POINTS_GOLDEN_SNITCH)
+                }
+                
             } else if (contact.nodeA.name! == "bomb" || contact.nodeB.name! == "bomb") {
                 scoreIncrement(points: POINTS_BOMB)
             } else {
@@ -986,6 +996,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         super.viewDidLoad()
         hideResultsView()
         hideCountDownView()
+        
+        numberGoldensnitch = 0
         
         goldenSnitchImage.isHidden = true
         goldenSnitchResults.isHidden = true
