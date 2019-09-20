@@ -45,7 +45,7 @@ let POINTS_FURNITURE : Int = 25
 let POINTS_TARGET : Int = 100
 let POINTS_FLYING_TARGET : Int = 350
 let POINTS_PIG : Int = 500
-let POINTS_GOLDEN_SNITCH : Int = 3000
+let POINTS_GOLDEN_SNITCH : Int = 5000
 
 let POINTS_BOMB : Int = -300
 
@@ -109,7 +109,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     @IBOutlet weak var waitingView: UIView!
     
     @IBOutlet weak var CountDownView: UIView!
-    @IBOutlet weak var timeLabel: UILabel!
 
     @IBOutlet weak var scoreLabelOtherPlayer: UILabel!
     
@@ -180,7 +179,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             // your code here
             debugPrint("3")
-            self.oneLabel.pushTransition(0.17)
+            self.oneLabel.pushTransition(0.1)
             self.oneLabel.isHidden = true
             self.zeroLabel.isHidden = false
         }
@@ -192,10 +191,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             self.displayGameMenu()
             self.runTimer()
         }
-        
-        
-        
-        
         
     }
     
@@ -307,6 +302,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     @IBOutlet weak var nameLengthError: UILabel!
     @IBOutlet weak var playerName: UILabel!
     @IBOutlet weak var HUD: UILabel!
+    @IBOutlet weak var timeBackground: UILabel!
     
     // View choose name menu
     @IBOutlet weak var Pseudo: UIView!
@@ -316,6 +312,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     @IBOutlet weak var NumberPoints: UILabel!
     @IBOutlet weak var Results: UIView!
     @IBOutlet weak var goldenSnitchImage: UIImageView!
+    @IBOutlet weak var timeLabel: UILabel!
+    
     
     @IBAction func SwipeGesture(_ sender: Any) {
         reset()
@@ -388,9 +386,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             //displayCountDownView()
             
         }
-        
     }
-    
     
     var rotationDeg: Float = 0
     
@@ -414,9 +410,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     func hideCountDownView(){
         CountDownView.isHidden = true;
     }
-    
-    
-    
     
     // Enable shoot button after cooldown
     func enableShootButton() {
@@ -462,7 +455,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         multipeerSession.setIsGamePlacementViewEnabled(false)
         multipeerSession.setIsNameViewEnabled(true)
         
-        gameViewTimeLabel.text = String(seconds)
+        //gameViewTimeLabel.text = String(seconds)
         
         resetCountDown()
         
@@ -700,6 +693,14 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     // Fire a projectile
     func fireProjectile(type : String) {
         
+        self.sceneView.scene.rootNode.enumerateChildNodes { (node, _) in
+            
+            if (node.name == "ball") {
+                node.removeFromParentNode()
+            }
+            
+        }
+        
         // Create the projectile node
         var node = SCNNode()
         node = createProjectile(type: type)
@@ -775,6 +776,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         } else {
             seconds -= 1
             timeLabel.text = "\(seconds)"
+            self.timeLabel.pushTransition(0.17)
         }
         
     }
@@ -964,7 +966,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         
         // Set the view's delegate
         sceneView.delegate = self
-        
         if(DEBUG_MODE) {
             // Show statistics such as fps and timing information
             sceneView.showsStatistics = true

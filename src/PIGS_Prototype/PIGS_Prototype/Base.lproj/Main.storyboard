@@ -61,6 +61,17 @@
                                 <rect key="frame" x="0.0" y="0.0" width="834" height="1112"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.60000002384185791" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ro6-9Y-6d0" userLabel="timeBackground">
+                                        <rect key="frame" x="666" y="33" width="100" height="100"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <accessibility key="accessibilityConfiguration" hint="score" identifier="scoreLabel" label="scoreLabel">
+                                            <accessibilityTraits key="traits" staticText="YES" notEnabled="YES"/>
+                                        </accessibility>
+                                        <fontDescription key="fontDescription" name="SkaterGirlsRock" family="Skater Girls Rock" pointSize="45"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="crown.png" translatesAutoresizingMaskIntoConstraints="NO" id="nRp-pf-c0C" userLabel="crownPlayer.png">
                                         <rect key="frame" x="99" y="-3" width="49" height="43"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -108,17 +119,6 @@
                                             <action selector="onShootButton:" destination="BV1-FR-VrT" eventType="touchUpInside" id="PbF-iB-dqw"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="60" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TR3-W5-Bfm" userLabel="timeLabel">
-                                        <rect key="frame" x="666" y="33" width="100" height="100"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <accessibility key="accessibilityConfiguration" hint="score" identifier="scoreLabel" label="scoreLabel">
-                                            <accessibilityTraits key="traits" staticText="YES" notEnabled="YES"/>
-                                        </accessibility>
-                                        <fontDescription key="fontDescription" name="SkaterGirlsRock" family="Skater Girls Rock" pointSize="70"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Yannis Charalambidis" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eEg-xg-8TN" userLabel="playerName">
                                         <rect key="frame" x="177" y="1039" width="481" height="73"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -138,6 +138,16 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="SkaterGirlsRock" family="Skater Girls Rock" pointSize="50"/>
                                         <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="60" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xgU-iA-vlC" userLabel="timeLabel">
+                                        <rect key="frame" x="666" y="33" width="100" height="100"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <accessibility key="accessibilityConfiguration" hint="score" identifier="scoreLabel" label="scoreLabel">
+                                            <accessibilityTraits key="traits" staticText="YES" notEnabled="YES"/>
+                                        </accessibility>
+                                        <fontDescription key="fontDescription" name="SkaterGirlsRock" family="Skater Girls Rock" pointSize="70"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -405,7 +415,7 @@
                         <outlet property="doneNetworkingButton" destination="pOl-da-mQK" id="5pz-AU-Xmu"/>
                         <outlet property="gamePlacementView" destination="I0r-TI-KyM" id="H0P-aE-adF"/>
                         <outlet property="gameView" destination="kSJ-U9-iR1" id="nAy-li-IJW"/>
-                        <outlet property="gameViewTimeLabel" destination="TR3-W5-Bfm" id="2vF-ZP-4T2"/>
+                        <outlet property="gameViewTimeLabel" destination="xgU-iA-vlC" id="ifD-nV-mY0"/>
                         <outlet property="goldenSnitchImage" destination="vtt-5Z-yVB" id="SGb-dh-hbR"/>
                         <outlet property="goldenSnitchResults" destination="LZz-dt-uDr" id="K6p-yJ-e1I"/>
                         <outlet property="leftButton" destination="8Fd-hn-gke" id="9BD-4g-lFJ"/>
@@ -426,7 +436,8 @@
                         <outlet property="scoreLabelOtherPlayer" destination="0uz-Wx-unF" id="lkF-Vv-MOM"/>
                         <outlet property="shootButton" destination="Icx-Lf-3k4" id="h9g-uS-CXD"/>
                         <outlet property="threeLabel" destination="OAY-EF-ssI" id="xIE-5m-g8b"/>
-                        <outlet property="timeLabel" destination="TR3-W5-Bfm" id="Ea5-kk-lne"/>
+                        <outlet property="timeBackground" destination="ro6-9Y-6d0" id="J6E-U9-qGH"/>
+                        <outlet property="timeLabel" destination="xgU-iA-vlC" id="ha6-XY-Kjj"/>
                         <outlet property="twoLabel" destination="pj4-mT-Hy0" id="88Z-wd-z2B"/>
                         <outlet property="waitingView" destination="quf-MW-xLm" id="6Bd-0g-x6l"/>
                         <outlet property="zeroLabel" destination="P4v-95-xH3" id="e0S-eX-slV"/>
