@@ -32,12 +32,14 @@ Figure : Plan du stand
 ### Séances
 Nous organisons une petite séance de 10-15min chaque matin pour regarder l'avancement de nos précédentes tâches et si celles-ci sont terminées, nous nous fixons de nouveaux objectifs pour la journée.
 ### Outils
-#### Todoist
-Nous utilisons Todoist pour lister toutes les choses à faire sur le projet, que ce soit de grandes tâches ou de toutes petites comme par exemple, remplacer l'image du placeholder. 
 #### GitHub
-Nous utilisons l'outil GitHub pour organiser les grandes tâches ainsi que connaître leurs états.
+Nous utilisons l'outil GitHub pour organiser les grandes tâches ainsi que connaître leurs états. Pour tracker l'état des tâches, nous utilisons la fonctionnalité de **Project** de GitHub.
+![Gestion des tâches sur GitHub](https://user-images.githubusercontent.com/43775161/65313613-ee3b0980-db94-11e9-922f-df4050e24f7e.png)
+
 #### Framaboard
 Au début, nous utilisions Framaboard mais nous avons décidé de ne plus utiliser cet outil car nous le trouvons peu pratique et que ça prend beaucoup de temps à utiliser.
+#### Todoist
+Nous utilisons Todoist pour lister toutes les choses à faire sur le projet, que ce soit de grandes tâches ou de toutes petites comme par exemple, remplacer l'image du placeholder. Nous avons fini par arrêter de l'utiliser car la gestion des tâches par GitHub est beaucoup plus pratique.
 
 ## Fonctionnement
 Le jeu utilise les bibliothèques ARKit, SceneKit et UIKit. Toutes ces bibliothèques sont développées par Apple. Nous utiliserons Xcode comme IDE et nous programmerons en Swift, version 5.
