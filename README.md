@@ -99,8 +99,7 @@ Un schéma logique et une liste du matériel sont disponibles dans le dossier "c
 
 Schéma logique
 :--------------------:
-![PO2019-YTD-PIGD-SchemaLogique](https://user-images.githubusercontent.com/43779006/65156906-27a63480-da30-11e9-8ce8-e9816a95b3d9.JPG)
-
+![Schéma logique](https://user-images.githubusercontent.com/43775161/65332129-5fdb7d80-dbbe-11e9-8bbe-bb4814e95c69.png)
 
 ### Serveur
 Nous utilisons un ordinateur Intel NUC sous Windows 10 Pro afin de proposer divers services nécessaires à notre projet : service Apache, MySQL, PHP. Nous utilisons XAMPP.  
