@@ -19,7 +19,7 @@ Nous disposons de trois logos. Le logo original a été crée par un assemblage 
 
 Logo original             |  Logo actuel
 :-------------------------:|:-------------------------
-![logo](https://user-images.githubusercontent.com/43775161/58420616-0939b900-808e-11e9-8312-b0da9cbf21e5.png)  |  ![pigs-logo v3](https://user-images.githubusercontent.com/43779006/65151787-13116e80-da27-11e9-9e1f-f5a08df56d49.png)
+<img src="https://user-images.githubusercontent.com/43775161/58420616-0939b900-808e-11e9-8312-b0da9cbf21e5.png" width="100%" />  |  <img src="https://user-images.githubusercontent.com/43779006/65151787-13116e80-da27-11e9-9e1f-f5a08df56d49.png" width="100%" />
 
 Icône de l'application
 :--------------------:
@@ -71,7 +71,7 @@ La dernière vue affiche le nom, le score et un message de remerciement pour l'u
 
 Vue gagnant             |  Vue perdant
 :-------------------------:|:-------------------------:
-![resultsView_win](https://user-images.githubusercontent.com/43775161/65326807-98755a00-dbb2-11e9-8a95-c130d2d7cc08.png)  |  ![resultsView_loose](https://user-images.githubusercontent.com/43775161/65326805-98755a00-dbb2-11e9-97b4-5de5d04b5824.png)
+<img src="https://user-images.githubusercontent.com/43775161/65326807-98755a00-dbb2-11e9-8a95-c130d2d7cc08.png" width="100%" />  |  <img src="https://user-images.githubusercontent.com/43775161/65326805-98755a00-dbb2-11e9-97b4-5de5d04b5824.png" width="100%" />
 
 ## Placement de la zone de jeu
 Pour placer la zone de jeu, nous commençons par détecter une zone plane, sur cette zone plane, placer un placeholder, éffectuer une rotation afin d'ajuster le placement du placeholder et enfin remplacer le placeholder par la map.
@@ -89,8 +89,7 @@ Une fois que le placeholder est à l'endroit où nous le souhaitons, il nous suf
 
 Nombre de points de tracking suffisant | Nombre de points de tracking insuffisant
 :--------------------:|:-------------------------:
-![gamePlacementView_right](https://user-images.githubusercontent.com/43775161/65329954-db86fb80-dbb9-11e9-9391-8971b8bfd1de.jpg)  |  
-![gamePlacementView_wrong](https://user-images.githubusercontent.com/43775161/65329955-db86fb80-dbb9-11e9-860b-3a11460c6a5b.jpg)
+<img src="https://user-images.githubusercontent.com/43775161/65329954-db86fb80-dbb9-11e9-9391-8971b8bfd1de.jpg" width="100%" />  |  <img src="https://user-images.githubusercontent.com/43775161/65329955-db86fb80-dbb9-11e9-860b-3a11460c6a5b.jpg" width="100%" />
 
 ## Réseau
 Nous avons créée un réseau sans-fil avec un access point permettant de transférer des informations entre le serveur et les iPad.
