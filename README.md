@@ -62,7 +62,7 @@ Cette bibliothèque permet de gèrer la connexion entre les deux iPads et le tra
 Notre minuteur utilise 2 fonctions. La première fonction **runTimer** démarre le minuteur. Elle est appelée dans la fonction **onPlayButton**  qui est exécutée après la saisi du nom de l'utilisateur. La seconde fonction **updateTimer** met à jour le label et vérifie que le minuteur a bien atteint 0 seconde. Une fois que le minuteur atteint 0 seconde, il appelle automatiquement la dernière vue **Results**.
 
 ### Dernière vue "Results"
-La dernière vue affiche le nom, le score et un message de remerciment pour l'utilisateur.
+La dernière vue affiche le nom, le score et un message de remerciement pour l'utilisateur.
 
 ![IMG_0788 1](https://user-images.githubusercontent.com/43779006/64234652-1240ee80-cef7-11e9-9cdd-ad3c3bd33dbe.PNG)
 
