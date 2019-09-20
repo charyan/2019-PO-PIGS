@@ -45,12 +45,15 @@ let POINTS_FURNITURE : Int = 25
 let POINTS_TARGET : Int = 100
 let POINTS_FLYING_TARGET : Int = 350
 let POINTS_PIG : Int = 500
-let POINTS_GOLDEN_SNITCH : Int = 5000
+let POINTS_GOLDEN_SNITCH : Int = 10000
 
 let POINTS_BOMB : Int = -300
 
+//  Number of goldensnitch killed
+var numberGoldensnitch : Int = 0
+
 // Default value rotation for the gamezone placement
-let ROTATION_DEG : Float = 5;
+let ROTATION_DEG : Float = 5
 
 // FONT
 let FONT_NAME : String = "Skater Girls Rock"
@@ -428,6 +431,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             }
             
         }
+        
+        numberGoldensnitch = 0
 
 
         seconds = PLAY_TIME_SECONDS
@@ -956,6 +961,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         super.viewDidLoad()
         hideResultsView()
         hideCountDownView()
+        
+        numberGoldensnitch = 0
         
         goldenSnitchImage.isHidden = true
         goldenSnitchResults.isHidden = true
