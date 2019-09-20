@@ -4,6 +4,11 @@
 PIGS est un jeu dans lequel deux joueurs s'affrontent dans un monde entre le réel et le virtuel. Ce monde est constitué de différents objets: blocs, cibles volantes ou statiques, vif d'or, etc.  
 
 Le jeu se joue à 2, le but est de gagner le plus de points dans un temps imparti.
+
+Jeu
+:--------------------:
+![gameView](https://user-images.githubusercontent.com/43775161/65329956-dc1f9200-dbb9-11e9-9736-a38a86f96e23.jpg)
+
 ### Interaction
 Chaque joueur disposera d'une tablette au travers de laquel il pourra voir et interagir avec le jeu. Chaque joueur peut lancer des balles afin de gagner des points.
 ### Guide de démarrage du stand
@@ -11,7 +16,7 @@ Le guide de démarrage permet de mettre en place toute l'infrastructure de PIGS 
 
 Version papier du guide
 :--------------------:
-![IMG_0817](https://user-images.githubusercontent.com/43779006/65152840-055ce880-da29-11e9-927c-35674c197cca.jpg)
+![Guide papier](https://user-images.githubusercontent.com/43779006/65152840-055ce880-da29-11e9-927c-35674c197cca.jpg)
 
 ### Logos
 Nous disposons de trois logos. Le logo original a été crée par un assemblage d'images trouvés sur Internet. Le nouveau a été totalement créé à la main sur Inkscape. Le dernier est utilisé comme icone de notre application.
