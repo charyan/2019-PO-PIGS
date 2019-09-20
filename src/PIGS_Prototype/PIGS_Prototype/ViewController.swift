@@ -45,7 +45,7 @@ let POINTS_FURNITURE : Int = 25
 let POINTS_TARGET : Int = 100
 let POINTS_FLYING_TARGET : Int = 350
 let POINTS_PIG : Int = 500
-let POINTS_GOLDEN_SNITCH : Int = 5000
+let POINTS_GOLDEN_SNITCH : Int = 10000
 
 let POINTS_BOMB : Int = -300
 
@@ -68,12 +68,24 @@ let PLAY_TIME_SECONDS : Int = 45
 extension UIView {
     func pushTransition(_ duration:CFTimeInterval) {
         let animation:CATransition = CATransition()
-        animation.timingFunction = CAMediaTimingFunction(name:
-            CAMediaTimingFunctionName.easeInEaseOut)
+        animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
         animation.type = CATransitionType.push
         animation.subtype = CATransitionSubtype.fromTop
         animation.duration = duration
         layer.add(animation, forKey: CATransitionType.push.rawValue)
+    }
+    
+    func fadeOut() {
+        UIView.animate(withDuration: 1.0, delay: 0.0, options: UIView.AnimationOptions.curveEaseOut, animations: {
+            self.alpha = 0.0
+        }, completion: nil)
+    }
+    
+    func fadeIn() {
+        // Move our fade out code from earlier
+        UIView.animate(withDuration: 1.0, delay: 0.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
+            self.alpha = 1.0 // Instead of a specific instance of, say, birdTypeLabel, we simply set [thisInstance] (ie, self)'s alpha
+        }, completion: nil)
     }
 }
 
@@ -158,34 +170,39 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         
         resetCountDown()
         
+        debugPrint("3")
+        self.threeLabel.fadeIn()
+        self.threeLabel.fadeOut()
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            // your code here
-            debugPrint("1")
-            self.threeLabel.pushTransition(0.17)
+            
+            debugPrint("2")
             self.threeLabel.isHidden = true
             self.twoLabel.isHidden = false
+            self.twoLabel.fadeIn()
+            self.twoLabel.fadeOut()
         }
         
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            // your code here
-            debugPrint("2")
-            self.twoLabel.pushTransition(0.17)
+
+            debugPrint("1")
             self.twoLabel.isHidden = true
             self.oneLabel.isHidden = false
+            self.oneLabel.fadeIn()
+            self.oneLabel.fadeOut()
         }
 
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            // your code here
-            debugPrint("3")
-            self.oneLabel.pushTransition(0.1)
+
+            debugPrint("PIGS !")
             self.oneLabel.isHidden = true
             self.zeroLabel.isHidden = false
         }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
-            // your code here
+
             self.hideCountDownView()
             self.playAnimation()
             self.displayGameMenu()
@@ -455,7 +472,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         multipeerSession.setIsGamePlacementViewEnabled(false)
         multipeerSession.setIsNameViewEnabled(true)
         
-        //gameViewTimeLabel.text = String(seconds)
+        gameViewTimeLabel.text = String(seconds)
         
         resetCountDown()
         
@@ -776,7 +793,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         } else {
             seconds -= 1
             timeLabel.text = "\(seconds)"
-            self.timeLabel.pushTransition(0.17)
+
+            //self.timeLabel.startAnimatingFlip(with: 1)
+            self.timeLabel.pushTransition(0.1)
         }
         
     }
@@ -805,19 +824,19 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             }
             
             // Animation of golden snitch
-            let boatMoveY1 = SCNAction.moveBy(x: CGFloat.random(in: -1 ..< 1), y: CGFloat.random(in: -0.5 ..< 0.5), z: CGFloat.random(in: -1 ..< 1), duration: 0.7)
+            let boatMoveY1 = SCNAction.moveBy(x: CGFloat.random(in: -1 ..< 1), y: CGFloat.random(in: -0.5 ..< 0.5), z: CGFloat.random(in: -1 ..< 1), duration: 1)
             
-            let boatMoveR1 = SCNAction.rotate(by: .pi, around: SCNVector3(0, CGFloat.random(in: -200 ..< 200), 0), duration: 0.5)
+            let boatMoveR1 = SCNAction.rotate(by: .pi, around: SCNVector3(0, CGFloat.random(in: -200 ..< 200), 0), duration: 1.2)
             
-            let boatMoveZ1 = SCNAction.moveBy(x: CGFloat.random(in: -1 ..< 1), y: CGFloat.random(in: -0.5 ..< 0.5), z: CGFloat.random(in: -1 ..< 1), duration: 0.7)
+            let boatMoveZ1 = SCNAction.moveBy(x: CGFloat.random(in: -1 ..< 1), y: CGFloat.random(in: -0.5 ..< 0.5), z: CGFloat.random(in: -1 ..< 1), duration: 1)
             
-            let boatMoveR2 = SCNAction.rotate(by: .pi, around: SCNVector3(0, CGFloat.random(in: -200 ..< 200), 0), duration: 0.5)
+            let boatMoveR2 = SCNAction.rotate(by: .pi, around: SCNVector3(0, CGFloat.random(in: -200 ..< 200), 0), duration: 1.2)
             
-            let boatMoveY2 = SCNAction.moveBy(x: CGFloat.random(in: -1 ..< 1), y: CGFloat.random(in: -0.5 ..< 0.5), z: CGFloat.random(in: -1 ..< 1), duration: 0.7)
+            let boatMoveY2 = SCNAction.moveBy(x: CGFloat.random(in: -1 ..< 1), y: CGFloat.random(in: -0.5 ..< 0.5), z: CGFloat.random(in: -1 ..< 1), duration: 1)
             
-            let boatMoveR3 = SCNAction.rotate(by: .pi, around: SCNVector3(0, CGFloat.random(in: -200 ..< 200), 0), duration: 0.5)
+            let boatMoveR3 = SCNAction.rotate(by: .pi, around: SCNVector3(0, CGFloat.random(in: -200 ..< 200), 0), duration: 1.2)
             
-            let boatMoveZ2 = SCNAction.moveBy(x: CGFloat.random(in: -1 ..< 1), y: CGFloat.random(in: -0.5 ..< 0.5), z: CGFloat.random(in: -1 ..< 1), duration: 0.7)
+            let boatMoveZ2 = SCNAction.moveBy(x: CGFloat.random(in: -1 ..< 1), y: CGFloat.random(in: -0.5 ..< 0.5), z: CGFloat.random(in: -1 ..< 1), duration: 1)
             
             let boatMoveR4 = SCNAction.rotate(by: .pi, around: SCNVector3(0, 0, 0), duration: 0.1)
             
@@ -843,11 +862,26 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             }
             
             // Animation of boat
-            let action : SCNAction = SCNAction.rotate(by: .pi, around: SCNVector3(0, 1, 0), duration: 10)
+            let action : SCNAction = SCNAction.rotate(by: .pi, around: SCNVector3(0, 1, 0), duration: 17)
             let forever = SCNAction.repeatForever(action)
             
             if node.name == "rotation" || node.name == "pig_rotation" {
                 node.runAction(forever)
+            }
+            
+            // Animation of boat
+            let actionCloudsLeft : SCNAction = SCNAction.rotate(by: .pi, around: SCNVector3(0, 1, 0), duration: 300)
+            let foreverCloudsLeft = SCNAction.repeatForever(actionCloudsLeft)
+            
+            let actionCloudsRight : SCNAction = SCNAction.rotate(by: .pi, around: SCNVector3(0, -1, 0), duration: 300)
+            let foreverCloudsRight = SCNAction.repeatForever(actionCloudsRight)
+            
+            if node.name == "cloud_rotation_right" {
+                node.runAction(foreverCloudsRight)
+            }
+            
+            if node.name == "cloud_rotation_left" {
+                node.runAction(foreverCloudsLeft)
             }
         }
     }
