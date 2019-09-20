@@ -1,17 +1,22 @@
 # PIGS
 ## Introduction
 ### Présentation
-PIGS est un jeu dans lequel deux joueurs s'affrontent dans un monde entre le réel et le virtuel. Ce monde est constitué de différents objects, blocs, cibles volantes ou statiques, vif d'or, etc.  
+PIGS est un jeu dans lequel deux joueurs s'affrontent dans un monde entre le réel et le virtuel. Ce monde est constitué de différents objets: blocs, cibles volantes ou statiques, vif d'or, etc.  
 
 Le jeu se joue à 2, le but est de gagner le plus de points dans un temps imparti.
+
+Jeu
+:--------------------:
+![gameView](https://user-images.githubusercontent.com/43775161/65329956-dc1f9200-dbb9-11e9-9736-a38a86f96e23.jpg)
+
 ### Interaction
 Chaque joueur disposera d'une tablette au travers de laquel il pourra voir et interagir avec le jeu. Chaque joueur peut lancer des balles afin de gagner des points.
 ### Guide de démarrage du stand
-Le guide de démarrage permet de mettre en place toute l'infrastructure de PIGS et de former les apprentis chargés de présenter le projet. Le guide est disponible sur papier ou au format .txt à l'emplacement : https://github.com/charyan000/2019-PO-PIGS/blob/master/doc/PO2019-YTD-PIGS-Guide.txt.
+Le guide de démarrage permet de mettre en place toute l'infrastructure de PIGS et de former les apprentis chargés de présenter le projet. Le guide est disponible sur papier ou au format .txt [ici](https://github.com/charyan000/2019-PO-PIGS/blob/master/doc/PO2019-YTD-PIGS-Guide.txt).
 
 Version papier du guide
 :--------------------:
-![IMG_0817](https://user-images.githubusercontent.com/43779006/65152840-055ce880-da29-11e9-927c-35674c197cca.jpg)
+![Guide papier](https://user-images.githubusercontent.com/43779006/65152840-055ce880-da29-11e9-927c-35674c197cca.jpg)
 
 ### Logos
 Nous disposons de trois logos. Le logo original a été crée par un assemblage d'images trouvés sur Internet. Le nouveau a été totalement créé à la main sur Inkscape. Le dernier est utilisé comme icone de notre application.
@@ -19,7 +24,7 @@ Nous disposons de trois logos. Le logo original a été crée par un assemblage 
 
 Logo original             |  Logo actuel
 :-------------------------:|:-------------------------
-![logo](https://user-images.githubusercontent.com/43775161/58420616-0939b900-808e-11e9-8312-b0da9cbf21e5.png)  |  ![pigs-logo v3](https://user-images.githubusercontent.com/43779006/65151787-13116e80-da27-11e9-9e1f-f5a08df56d49.png)
+<img src="https://user-images.githubusercontent.com/43775161/58420616-0939b900-808e-11e9-8312-b0da9cbf21e5.png" width="100%" />  |  <img src="https://user-images.githubusercontent.com/43779006/65151787-13116e80-da27-11e9-9e1f-f5a08df56d49.png" width="100%" />
 
 Icône de l'application
 :--------------------:
@@ -71,33 +76,25 @@ La dernière vue affiche le nom, le score et un message de remerciement pour l'u
 
 Vue gagnant             |  Vue perdant
 :-------------------------:|:-------------------------:
-![resultsView_win](https://user-images.githubusercontent.com/43775161/65326807-98755a00-dbb2-11e9-8a95-c130d2d7cc08.png)  |  ![resultsView_loose](https://user-images.githubusercontent.com/43775161/65326805-98755a00-dbb2-11e9-97b4-5de5d04b5824.png)
+<img src="https://user-images.githubusercontent.com/43775161/65326807-98755a00-dbb2-11e9-8a95-c130d2d7cc08.png" width="100%" />  |  <img src="https://user-images.githubusercontent.com/43775161/65326805-98755a00-dbb2-11e9-97b4-5de5d04b5824.png" width="100%" />
 
 ## Placement de la zone de jeu
 Pour placer la zone de jeu, nous commençons par détecter une zone plane, sur cette zone plane, placer un placeholder, éffectuer une rotation afin d'ajuster le placement du placeholder et enfin remplacer le placeholder par la map.
-### Detection d'une zone plate
+### Détection d'une zone plate
 Pour détecter une zone plate, l'Ipad utilise des points de repères virtuels se fixant sur des imperfections de la surface réelle où nous voulons placer la zone de jeu. Plus cette surface contient des imperfections, plus elle sera utilisable pour la réalité augmentée. Une table couverte d'une couche de plastique ne sera pas adapté car elle contient très peu d'impérféctions et reflète énormément la lumière contrairement à une table en boit brut qui sera beaucoup plus intéressante dans notre cas.
 
-Points de repère utilisés par l'iPad pour détecter une zone plate
-:--------------------:
-![DetectionZonePlate](https://user-images.githubusercontent.com/43779006/60086632-be1dcf00-973b-11e9-9341-460c4b517711.jpg)
-
 ### Placement du placeholder
-Une fois qu'une zone plate a été détectée, le placeholer apparait automatiquement sur la zone plate. Si nous nous déplaçons avec l'Ipad, le placeholder va automatiquement se déplacer pour se fixer sur la nouvelle zone plate mise à disposition.
+Une fois qu'une zone plate a été détectée, le placeholer apparaît automatiquement sur la zone plate. Si nous nous déplaçons avec l'Ipad, le placeholder va automatiquement se déplacer pour se fixer sur la nouvelle zone plate mise à disposition.
 
 ### Rotation du placeholder
-Pour effectuer une rotation du placeholder, l'utilisateur peut utiliser deux boutons. Les bontons modifient la position du placeholder sur l'axe Y.
-
-Boutons sur l'iPad pour modifier la position de l'écran
-:--------------------:
-![RotationPlaceholder](https://user-images.githubusercontent.com/43779006/60091773-a51a1b80-9745-11e9-815c-3d998478c431.jpg)
+Pour effectuer une rotation du placeholder, l'utilisateur peut utiliser deux boutons. Les boutons modifient la position du placeholder sur l'axe Y.
 
 ### Placement de la map
-Une fois que le placeholder est à l'endroit où nous le souhaitons, il nous suffit de presser sur le bouton "Done" pour placer la map.
+Une fois que le placeholder est à l'endroit où nous le souhaitons, il nous suffit de presser sur le bouton **Done** pour placer la map. Le bouton **Done** a une couleur rouge si le nombre de points de tracking est inférieur à **50**.
 
-Terrain de jeu
-:--------------------:
-![PlacementMap](https://user-images.githubusercontent.com/43779006/60085878-6468d500-973a-11e9-94fc-f780bff341b4.jpg)
+Nombre de points de tracking suffisant | Nombre de points de tracking insuffisant
+:--------------------:|:-------------------------:
+<img src="https://user-images.githubusercontent.com/43775161/65329954-db86fb80-dbb9-11e9-9391-8971b8bfd1de.jpg" width="100%" />  |  <img src="https://user-images.githubusercontent.com/43775161/65329955-db86fb80-dbb9-11e9-860b-3a11460c6a5b.jpg" width="100%" />
 
 ## Réseau
 Nous avons créée un réseau sans-fil avec un access point permettant de transférer des informations entre le serveur et les iPad.
@@ -107,8 +104,7 @@ Un schéma logique et une liste du matériel sont disponibles dans le dossier "c
 
 Schéma logique
 :--------------------:
-![PO2019-YTD-PIGD-SchemaLogique](https://user-images.githubusercontent.com/43779006/65156906-27a63480-da30-11e9-8ce8-e9816a95b3d9.JPG)
-
+![Schéma logique](https://user-images.githubusercontent.com/43775161/65332129-5fdb7d80-dbbe-11e9-8bbe-bb4814e95c69.png)
 
 ### Serveur
 Nous utilisons un ordinateur Intel NUC sous Windows 10 Pro afin de proposer divers services nécessaires à notre projet : service Apache, MySQL, PHP. Nous utilisons XAMPP.  
@@ -145,12 +141,12 @@ Ce logiciel nous permet de manipuler notre base de donnée tout en utilisant l'i
 | GOLDENSNITCH_util | Int
 
 ### Insertion de données
-L'iPad utilise une requête HTTP (méthode POST) pour envoyer le nom et le score du joueur à une page PHP (**input.php**) qui va insérer les informations dans la base de données. Par exemple, pour le corps de la requête HTTP: `player=Théo&score=200`.
+L'iPad utilise une requête HTTP (méthode POST) pour envoyer le nom et le score du joueur à une page PHP (**input.php**) qui va insérer les informations dans la base de données. Par exemple, pour le corps de la requête HTTP: `player=Théo&score=200&goldensnitch=false`.
 Nous avons décidé d'utiliser cette manière de faire car il n'existe pas de connecteur MySQL officiel pour SWIFT. Lorsque la page PHP reçoit les paramètres de la requête POST, il les récupère après les avoir assaini. La requête SQL INSERT est protégé des injections de code SQL en utilisant des [paramètres](https://www.w3schools.com/PHP/php_mysql_prepared_statements.asp).
 
 ### Affichage du classement
 On accède à la page PHP **leaderboard.php** sur le NUC avec le navigateur **Google Chrome**.
-La page PHP effectue une requête **SELECT** sur la base de donnée et retourne le nom et le score de tous les joueurs. Il affiche ces informations dans un tableau. La page est rafraichie automatiquement chaque seconde par une extension appellée **[Auto Refresh](https://chrome.google.com/webstore/detail/auto-refresh/ifooldnmmcmlbdennkpdnlnbgbmfalko)**.
+La page PHP effectue une requête **SELECT** sur la base de donnée et retourne le nom et le score de tous les joueurs ainsi qu'un booléen pour confirmer si l'utilisateur a touché - ou non - le vif d'or. Il affiche ces informations dans un tableau. La page est rafraichie automatiquement chaque seconde par une extension appellée **[Auto Refresh](https://chrome.google.com/webstore/detail/auto-refresh/ifooldnmmcmlbdennkpdnlnbgbmfalko)**.
 
 ## Lanceur
 Le lanceur permet de créer une balle à la position de l'iPad dans le monde virtuel et d'appliquer une force permettant de déplacer cette balle. Le lancement de la balle est déclenché par l'appuis d'un bouton. Le lanceur empêche l'utilisateur d'appuyer à répétition sur le bouton à l'aide d'un système de cooldown qui désactive le bouton.
@@ -170,7 +166,7 @@ Les blocs sont empilés sur la map. On a placé un cube invisible pour le sol. L
 
 Map
 :--------------------:
-![map](https://user-images.githubusercontent.com/43775161/63411910-ddad3d00-c3f6-11e9-9af6-0fc7e93f9233.png)
+![map](https://user-images.githubusercontent.com/43775161/65330148-43d5dd00-dbba-11e9-88cc-1584a5f8a306.png)
 
 ## Gestion des collision
 La gestion des collision est gérée par rapport au category bitmask des objets en collision. Suivant le category bitmask des objets, on ajoute le nombre de points correspondants au score du joueur. Les balles lancées par le joueur ont un category bitmask de 2 et tous les objets rapportant des points disposent du category bitmask 3.

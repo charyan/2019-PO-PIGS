@@ -913,10 +913,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             
             explosionType = "Door Explosion.scnp"
             
-        } else if (contact.nodeA.name! == "windows" || contact.nodeB.name! == "windows") {
-            
-            explosionType = "Window Explosion.scnp"
-            
         } else if (contact.nodeA.name! == "bomb" || contact.nodeB.name! == "bomb") {
             
             explosionType = "Bomb Explosion.scnp"
