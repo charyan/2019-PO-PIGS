@@ -183,6 +183,12 @@ Dans le mode **Duel**, chaque joueur joue sur son propre monde virtuel. Le timer
 ### Networking
 La partie networking est géré par la bibliothèque [MultipeerConnectivity](https://developer.apple.com/documentation/multipeerconnectivity). Cette bibliothèque permet la configuration automatique de la connexion par WiFi, WiFi Peer-to-peer ou Bluetooth, elle permet également de transmettre des informations entre appareils connectés.
 
+Lors du démarrage de l'application, la vue **networkingView** est affichée, elle permet de connecter les deux appareils ensembles et d'envoyer des messages de test.
+
+Networking View | Envoi de messages
+:--------------------:|:-------------------------:
+<img src="https://user-images.githubusercontent.com/43775161/65335378-9ddba000-dbc4-11e9-8e6c-6abc4c16029b.png" width="100%" />  |  <img src="https://user-images.githubusercontent.com/43775161/65335380-9e743680-dbc4-11e9-9aa0-a10c118efa33.png" width="100%" />
+
 ### Gestion des rôles
 La gestion des rôles est organisées par la variable **isGameHost** qui permettera de déterminer le rôle de l'iPad. Cette méthode permet d'identifier uniquement deux rôles : **Game host** et **Guest**.
 
