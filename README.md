@@ -206,6 +206,24 @@ Une fois les appareils connectés, on appuie sur le bouton **Done**. Ensuite, la
 ### Gestion des rôles
 La gestion des rôles est organisées par la variable **isGameHost** qui permettera de déterminer le rôle de l'iPad. Cette méthode permet d'identifier uniquement deux rôles : **Game host** et **Guest**.
 
+### Communication
+La communication entre les iPads se fait à l'aide de messages textes. Nous avons créé des codes pour définir le but de chaque message.
+
+Schéma de communication
+Map
+:--------------------:
+![image](https://user-images.githubusercontent.com/43775161/65423360-13d04900-de09-11e9-8aee-ef9dd7abf26b.png)
+
+Étape | Description
+:--------------------:|:-------------------------:
+1 | Lorsque le premier joueur appuie sur le bouton **Jouer**, son iPad envoie un message CODE.READY et CODE.NAME à l'autre iPad
+2 | Lorsqu'un joueur appuie sur le bouton **Jouer** et que l'autre n'est pas prêt, on lui affiche une vue d'attente
+3 | Lorsque le deuxième joueur est prêt, son iPad envoie un message CODE.READY et CODE.NAME à l'autre iPad. Les deux iPads lancent alors un compte à rebours et le jeu commence.
+4 | Pendant le jeu, à chaque collision, l'iPad envoie le score actuel du joueur à l'autre iPad, le joueur possédant le plus de points a un couronne au dessus de son score.
+5 | Une fois la partie terminée, la vue des résultats est affiché au joueurs. Pour relancer la partie avec la même configuration réseau et le même placement de la map, il suffit d'effectuer un **swipe** n'importe où sur l'écran. L'iPad envoie ensuite un message CODE.RESET à l'autre iPad et réinitialise son jeu. L'autre iPad va également réinitialiser son jeu à la réception du message CODE.RESET, ce qui permet de réinitialiser le jeu sur les deux iPads avec une seule action.
+
+
+
 ## Problèmes rencontrés
 ### Problème de merge
 Lors d'une tentative de merge entre la branche **multiplayer** et la branche **master**, nous avons eu un problème de conflit avec le fichier **storyboard** de Xcode qui contient l'interface graphique de notre application dans un format **xml**. Git n'arrivant pas à merger les deux storyboard automatiquement, ce processus a dû être effectué manuellement. Après avoir manuellement combiné les deux fichiers, certains boutons avaient disparus et ont donc dû être recréé.  
