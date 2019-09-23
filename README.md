@@ -49,6 +49,13 @@ Gestion des tâches sur GitHub
 :--------------------:
 ![Gestion des tâches sur GitHub](https://user-images.githubusercontent.com/43775161/65313613-ee3b0980-db94-11e9-922f-df4050e24f7e.png)
 
+Nous utilisons GitHub égalemet pour créer des versions (releases) de notre jeu.
+
+Github Releases
+:--------------------:
+![Github releases](https://user-images.githubusercontent.com/43775161/65405058-60049480-dddb-11e9-88c5-1b8e34a790c5.png)
+
+
 #### Framaboard
 Au début, nous utilisions Framaboard mais nous avons décidé de ne plus utiliser cet outil car nous le trouvons peu pratique et que ça prend beaucoup de temps à utiliser.
 #### Todoist
