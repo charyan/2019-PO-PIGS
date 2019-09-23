@@ -5,6 +5,9 @@ PIGS est un jeu dans lequel deux joueurs s'affrontent dans un monde entre le ré
 
 Le jeu se joue à 2, le but est de gagner le plus de points dans un temps imparti.
 
+### Formation personnelle
+N'ayant aucune connaissances dans le développement avec les produits Apple, nous avons appris les bases à l'aide de tutoriels en ligne. Le début du projet a été périlleux, puis les choses se sont améliorées avec l'experience.
+
 Jeu
 :--------------------:
 ![gameView](https://user-images.githubusercontent.com/43775161/65329956-dc1f9200-dbb9-11e9-9736-a38a86f96e23.jpg)
@@ -36,14 +39,12 @@ Plan du stand
 :--------------------:
 ![Plan du stand](https://user-images.githubusercontent.com/43775161/65313287-68b75980-db94-11e9-8f36-3b841ab1b73f.png)
   
-  
-  
 ## Organisation
 ### Séances
 Nous organisons une petite séance de 10-15min chaque matin pour regarder l'avancement de nos précédentes tâches et si celles-ci sont terminées, nous nous fixons de nouveaux objectifs pour la journée.
 ### Outils
 #### GitHub
-Nous utilisons l'outil GitHub pour organiser les grandes tâches ainsi que connaître leurs états. Pour tracker l'état des tâches, nous utilisons la fonctionnalité de **Project** de GitHub.
+Nous utilisons l'outil GitHub pour organiser les grandes tâches ainsi que connaître leurs états. Pour tracker l'état des tâches, nous utilisons la fonctionnalité de **Projects** de GitHub.
 
 Gestion des tâches sur GitHub
 :--------------------:
@@ -55,9 +56,9 @@ Github Releases
 :--------------------:
 ![Github releases](https://user-images.githubusercontent.com/43775161/65405058-60049480-dddb-11e9-88c5-1b8e34a790c5.png)
 
-
 #### Framaboard
-Au début, nous utilisions Framaboard mais nous avons décidé de ne plus utiliser cet outil car nous le trouvons peu pratique et que ça prend beaucoup de temps à utiliser.
+Au début, nous utilisions Framaboard mais nous avons décidé de ne plus utiliser cet outil car nous le trouvions peu pratique et que ça prend beaucoup de temps à utiliser.
+
 #### Todoist
 Nous utilisons Todoist pour lister toutes les choses à faire sur le projet, que ce soit de grandes tâches ou de toutes petites comme par exemple, remplacer l'image du placeholder. Nous avons fini par arrêter de l'utiliser car la gestion des tâches par GitHub est beaucoup plus pratique.
 
@@ -66,8 +67,10 @@ Le jeu utilise les bibliothèques ARKit, SceneKit, UIKit et MultipeerConnectivit
 ### Bibliothèques
 #### ARKit
 ARKit est une bibliothèque permettant de gérer l'expérience de réalité augmentée sur IOS. Cette bibliothèque permet de créer des session AR, de superposer une scène 3D SceneKit sur le flux vidéo de la caméra. Nous utiliserons cette bibliothèque afin de placer notre terrain de jeu virtuel sur une table réelle. 
+
 #### SceneKit
 SceneKit est une bibliothèque permettant de gérer un environnement 3D. On l'utilisera afin de gérer les collisions, la physique et les modèles 3D.
+
 #### UIKit
 Cette bibliothèque permet de gérer les éléments graphiques de l'application (boutons, labels, champs textes, etc...). Nous utiliserons cette bibliothèque afin de créer l'interface graphique de notre jeu.
 
@@ -76,7 +79,7 @@ Cette bibliothèque permet de gèrer la connexion entre les deux iPads et le tra
 
 ## Fin de partie
 ### Minuteur
-Notre minuteur utilise 2 fonctions. La première fonction **runTimer** démarre le minuteur. Elle est appelée dans la fonction **onPlayButton**  qui est exécutée après la saisi du nom de l'utilisateur. La seconde fonction **updateTimer** met à jour le label et vérifie que le minuteur a bien atteint 0 seconde. Une fois que le minuteur atteint 0 seconde, il appelle automatiquement la dernière vue **Results**.
+Notre minuteur utilise 2 fonctions. La première fonction **runTimer** démarre le minuteur. Elle est appelée dans la fonction **onPlayButton**  qui est exécutée après la saisi du nom de l'utilisateur. La seconde fonction **updateTimer** met à jour le label et vérifie que le minuteur aie bien atteint 0 seconde. Une fois que le minuteur atteint 0 seconde, il appelle automatiquement la dernière vue **Results**.
 
 ### Dernière vue "Results"
 La dernière vue affiche le nom, le score et un message de remerciement pour l'utilisateur.
@@ -170,6 +173,8 @@ Cube et ses propriétés physiques
 
 ## Création de la map
 Les blocs sont empilés sur la map. On a placé un cube invisible pour le sol. La map est enregistré en format SceneKit (.scn).
+Nous avons trouvé plusieurs modèles sur des sites dédiés à la 3D. Les modèles blender peuvent être convertis directement en format SceneKit.
+Nous avons ajouté des arbres, des cailloux, des brins d'herbe. Les maisons ont été fabriquées à la main, bloc par bloc.
 
 Map
 :--------------------:
@@ -212,6 +217,7 @@ Il est donc préférable d'éviter d'avoir à merge les fichiers **.storyboard**
 Le projectile est une sphere qui est lancée lors de la pression sur le bouton "Shoot".
 Elle affectée par la gravité et sa trajectoire sera en cloche.
 Sa vitesse à aussi été réglée pour ajouter du réalisme.
+À chaque fois qu'une balle est lancée, elle supprime la balle précédente. Cela assure de bonnes performances et évite de surcharger le terrain afin de conserver une bonne visibilité.
 
 ### Cibles
 #### Statiques
@@ -239,7 +245,7 @@ Les blocs empilés les uns sur les autres provoque un tremblement faisant tomber
 
 Nous avons remarqué que si nous empilions les cubes en pyramide et qu'il ont au moins un contact avec deux autres blocs, ils tombaient rarement.
 
-Nous allons créer un map sur ce principe afin d'avoir un terrain de jeu stable.
+Nous avons créé une map sur ce principe afin d'avoir un terrain de jeu stable.
 
 ### Animations
 
@@ -283,6 +289,11 @@ Il est possible de rassembler plusieurs éléments en un seul puis lui donner un
 En procédant de cette manière, la physique devient instable sur certains points. Pour les brins d'herbe, ce n'est pas un problème car ils ne disposent pas de physique.
 Cependant, les maisons étant des élément solides, sont atteintes par ce problème. Les balles peuvent rester coincées dans certains blocs d'une maison.
 Pour résoudre le problème, nous avons ajouté des murs invisibles autour des maisons pour donner l'impression de tirer sur leurs murs. Le problème persiste sur certaines parties des maisons mais très rarement.
+
+### Reset
+
+#### Balles
+Pour réinitialiser les balles, nous cherchons tous les noeuds dont le nom est "ball", puis nous les supprimons.
 
 ## Leçons à retenir
 Ici se trouvent les leçons qu'on a retenu en réalisant ce projet.
