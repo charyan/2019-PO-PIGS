@@ -207,8 +207,23 @@ Lors d'une tentative de merge entre la branche **multiplayer** et la branche **m
 Il est donc préférable d'éviter d'avoir à merge les fichiers **.storyboard** afin d'éviter ces complications.
 
 ## Gameplay
-### Cibles
 
+### Projectile
+Le projectile est une sphere qui est lancée lors de la pression sur le bouton "Shoot".
+Elle affectée par la gravité et sa trajectoire sera en cloche.
+Sa vitesse à aussi été réglée pour ajouter du réalisme.
+
+### Cibles
+#### Statiques
+Il existe plusieurs types d'éléments permettant de marquer des points.
+Chacun d'eux détruit la balle au contact.
+Les points sont définis dans le code et sont équilibrés.
+
+#### Dynamiques
+Les blocs dynamiques sont différents des autres, car ils donnent un points à chaque collision. Comme ils ne détruisent pas la balle au contact, ils se font toucher plusieurs fois par un tir ce qui permet d'avoir du dynamisme dans les scores.
+
+#### Volantes
+Quelques cibles se trouvent dans la partie aérienne du terrain. Elles bougent aléatoirement entre chaque partie.
 
 ### Blocs instables
 Lors du placement de la map, les blocs se mettent à trembler. Le problème est accru quand les blocs sont empilés les uns sur les autres.
@@ -245,7 +260,15 @@ Pour la physique, nous avons créé des blocs invisibles ayant la même taille q
 #### Vif d'or
 Un élément permettant de marquer beaucoup de points et très difficile à toucher. Il se déplace aléatoirement et fait des rotation entre chaque mouveemnt.
 
+#### Nuages
+Une partie des nuages fait une rotation dans le sens horaire et l'autre en fait une dans le sens antihoraire.
+Ils se mouvoient très lentement et sont esthétiques au jeu.
+Les nuages peuvent cacher les cibles volantes et ainsi servir d'obstacle ajoutant une légère difficulté.
+
 ### Points
+
+#### Vif d'or
+Étant une cible très difficile et unique, il donne beaucoup de points. Ses mouvements sont très rapides mais quand même atteignable.
 
 #### Bombes
 Elles enlèvent des points à la collision. Une animation a été créée pour correspondre avec la bombe.
@@ -255,7 +278,11 @@ Nous avons fait intervenir diverses personnes pour tester le jeu. En particulier
 
 ### Performances
 À force d'ajouter des éléments dans le jeu, les iPads ne suivent plus. Il est arrivé que le processeur ait plus de 100% d'utilisation. Certaines structures sont composées de nombreux blocs.
-Il est possible de rassembler plusieurs éléments en un seul puis lui donner une physique. Après avoir fait cela avec les ensembles de blocs, les performances sont à nouveau correct et le jeu plus stable.
+Il est possible de rassembler plusieurs éléments en un seul puis lui donner une physique. Après avoir fait cela avec les ensembles de blocs, les performances sont à nouveau correctes et le jeu plus stable.
+
+En procédant de cette manière, la physique devient instable sur certains points. Pour les brins d'herbe, ce n'est pas un problème car ils ne disposent pas de physique.
+Cependant, les maisons étant des élément solides, sont atteintes par ce problème. Les balles peuvent rester coincées dans certains blocs d'une maison.
+Pour résoudre le problème, nous avons ajouté des murs invisibles autour des maisons pour donner l'impression de tirer sur leurs murs. Le problème persiste sur certaines parties des maisons mais très rarement.
 
 ## Leçons à retenir
 Ici se trouvent les leçons qu'on a retenu en réalisant ce projet.
