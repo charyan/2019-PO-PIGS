@@ -81,10 +81,10 @@ Vue gagnant             |  Vue perdant
 ## Placement de la zone de jeu
 Pour placer la zone de jeu, nous commençons par détecter une zone plane, sur cette zone plane, placer un placeholder, éffectuer une rotation afin d'ajuster le placement du placeholder et enfin remplacer le placeholder par la map.
 ### Détection d'une zone plate
-Pour détecter une zone plate, l'Ipad utilise des points de repères virtuels se fixant sur des imperfections de la surface réelle où nous voulons placer la zone de jeu. Plus cette surface contient des imperfections, plus elle sera utilisable pour la réalité augmentée. Une table couverte d'une couche de plastique ne sera pas adapté car elle contient très peu d'impérféctions et reflète énormément la lumière contrairement à une table en boit brut qui sera beaucoup plus intéressante dans notre cas.
+Pour détecter une zone plate, l'iPad utilise des points de repères virtuels se fixant sur des imperfections de la surface réelle où nous voulons placer la zone de jeu. Plus cette surface contient des imperfections, plus elle sera utilisable pour la réalité augmentée. Une table couverte d'une couche de plastique ne sera pas adapté car elle contient très peu d'impérféctions et reflète énormément la lumière contrairement à une table en boit brut qui sera beaucoup plus intéressante dans notre cas.
 
 ### Placement du placeholder
-Une fois qu'une zone plate a été détectée, le placeholer apparaît automatiquement sur la zone plate. Si nous nous déplaçons avec l'Ipad, le placeholder va automatiquement se déplacer pour se fixer sur la nouvelle zone plate mise à disposition.
+Une fois qu'une zone plate a été détectée, le placeholer apparaît automatiquement sur la zone plate. Si nous nous déplaçons avec l'iPad, le placeholder va automatiquement se déplacer pour se fixer sur la nouvelle zone plate mise à disposition.
 
 ### Rotation du placeholder
 Pour effectuer une rotation du placeholder, l'utilisateur peut utiliser deux boutons. Les boutons modifient la position du placeholder sur l'axe Y.
@@ -247,7 +247,7 @@ Elles enlèvent des points à la collision. Une animation a été créée pour c
 Nous avons fait intervenir diverses personnes pour tester le jeu. En particulier pour améliorer le système de points. Cela nous a permis d'équilibrer les points en fonction des objets destructibles.
 
 ### Performances
-À force d'ajouter des éléments dans le jeu, les Ipad ne suivent plus. Il est arrivé que le processeur ait plus de 100% d'utilisation. Certaines structures sont composées de nombreux blocs.
+À force d'ajouter des éléments dans le jeu, les iPads ne suivent plus. Il est arrivé que le processeur ait plus de 100% d'utilisation. Certaines structures sont composées de nombreux blocs.
 Il est possible de rassembler plusieurs éléments en un seul puis lui donner une physique. Après avoir fait cela avec les ensembles de blocs, les performances sont à nouveau correct et le jeu plus stable.
 
 ## Leçons à retenir
