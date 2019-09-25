@@ -111,9 +111,6 @@ Nombre de points de tracking suffisant | Nombre de points de tracking insuffisan
 :--------------------:|:-------------------------:
 <img src="https://user-images.githubusercontent.com/43775161/65329954-db86fb80-dbb9-11e9-9391-8971b8bfd1de.jpg" width="100%" />  |  <img src="https://user-images.githubusercontent.com/43775161/65329955-db86fb80-dbb9-11e9-860b-3a11460c6a5b.jpg" width="100%" />
 
-## Affichage en live d'un iPad
-
-
 ## Réseau
 Nous avons créée un réseau sans-fil avec un access point permettant de transférer des informations entre le serveur et les iPad.
 Nos appareils ont tous une adresse fixe, le même masque et le même NetId.
@@ -199,6 +196,10 @@ Une fois que les deux joueurs ont saisi leurs noms et ont pressé sur **Jouer**,
 Décompte
 :--------------------:
 ![countDown](https://user-images.githubusercontent.com/43779006/65583813-29b44a00-df80-11e9-9c74-54e5fcdc07f6.gif)
+
+## Animations UI
+Nous avons ajouté des animations pour le décompte et le timer par code.
+Cela permet d'ajouter du dynamisme dans les interfaces.
 
 ## Diffusion en live d'un iPad sur une TV
 Pour diffuser en live un iPad sur une TV, nous utilisons un Apple TV qui est connecté à notre réseau par wifi.
