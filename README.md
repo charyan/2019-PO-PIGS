@@ -267,7 +267,7 @@ Lors du placement de la map, les blocs se mettent à trembler. Le problème est 
 
 Blocs qui tombent de la map
 :--------------------:
-![Blocs instables](https://user-images.githubusercontent.com/43779006/63597768-7d68f780-c5be-11e9-931a-75f789cdc5e3.png)
+![problèmeBlocks](https://user-images.githubusercontent.com/43775161/65590731-8e28d680-df8b-11e9-8bf4-8ce8b9561714.gif)
 
 Pour régler le problème, nous avons essayé de modifier la taille, la physique, la hitbox, la masse, la gravité, le type(plan, box, floor), l'emplacement des blocs et du sol.
 
