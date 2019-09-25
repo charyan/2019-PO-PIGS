@@ -310,7 +310,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         debugPrint(Date().debugDescription + " : Shoot")
         fireProjectile(type: BALL_PROJECTILE_NAME)
         self.shootButton.isEnabled = false
-        self.shootButton.backgroundColor = #colorLiteral(red: 0.1764705882, green: 0.4196078431, blue: 0.7176470588, alpha: 1)
+        //self.shootButton.backgroundColor = #colorLiteral(red: 0.1764705882, green: 0.4196078431, blue: 0.7176470588, alpha: 1)
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(LAUNCHER_COOLDOWN_MILLISECONDS), execute: {
             self.enableShootButton()
         })
@@ -439,7 +439,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     // Enable shoot button after cooldown
     func enableShootButton() {
         self.shootButton.isEnabled = true
-        self.shootButton.backgroundColor = #colorLiteral(red: 0.1764705882, green: 0.4196078431, blue: 0.7176470588, alpha: 1)
+        //self.shootButton.backgroundColor = #colorLiteral(red: 0.1764705882, green: 0.4196078431, blue: 0.7176470588, alpha: 1)
     }
     
     // Reset
