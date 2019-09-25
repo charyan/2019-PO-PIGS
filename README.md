@@ -89,17 +89,23 @@ Vue gagnant             |  Vue perdant
 <img src="https://user-images.githubusercontent.com/43775161/65326807-98755a00-dbb2-11e9-8a95-c130d2d7cc08.png" width="100%" />  |  <img src="https://user-images.githubusercontent.com/43775161/65326805-98755a00-dbb2-11e9-97b4-5de5d04b5824.png" width="100%" />
 
 ## Placement de la zone de jeu
-Pour placer la zone de jeu, nous commençons par détecter une zone plane, sur cette zone plane, placer un placeholder, éffectuer une rotation afin d'ajuster le placement du placeholder et enfin remplacer le placeholder par la map.
-### Détection d'une zone plate
-Pour détecter une zone plate, l'iPad utilise des points de repères virtuels se fixant sur des imperfections de la surface réelle où nous voulons placer la zone de jeu. Plus cette surface contient des imperfections, plus elle sera utilisable pour la réalité augmentée. Une table couverte d'une couche de plastique ne sera pas adapté car elle contient très peu d'impérféctions et reflète énormément la lumière contrairement à une table en boit brut qui sera beaucoup plus intéressante dans notre cas.
+### Détection d'une zone plane
+Pour détecter une zone plane, l'iPad utilise des points de repères virtuels se fixant sur des imperfections de la surface réelle où nous voulons placer la zone de jeu. Plus cette surface contient des imperfections, plus elle sera utilisable pour la réalité augmentée. Une table couverte d'une couche de plastique ne sera pas adaptée car elle contient très peu d'impérféctions et reflète énormément la lumière contrairement à une table en boit brut qui sera beaucoup plus intéressante dans notre cas.
 
-### Placement du placeholder
-Une fois qu'une zone plate a été détectée, le placeholer apparaît automatiquement sur la zone plate. Si nous nous déplaçons avec l'iPad, le placeholder va automatiquement se déplacer pour se fixer sur la nouvelle zone plate mise à disposition.
+Après avoir éffectué plusieurs tests, nous avons choisi d'utiliser deux grandes feuilles de papier contenant des formes aléatoires à poser sur les tables. Ces formes aléatoires mettent à disposition beaucoup de points de tracking permettant aux iPads de détecter la zone plane. Nous avons profité de l'occasion pour ajouté le logo et la liste objets avec les points qu'ils attribuent.
 
-### Rotation du placeholder
+Installation réelle
+:--------------------:
+![IMG_E0825](https://user-images.githubusercontent.com/43779006/65587323-f7a5e680-df85-11e9-8b03-a411e0740b53.JPG)
+
+## Rotation du placeholder
 Pour effectuer une rotation du placeholder, l'utilisateur peut utiliser deux boutons. Les boutons modifient la position du placeholder sur l'axe Y.
 
-### Placement de la map
+Rotation du placeholder
+:--------------------:
+![IMG_E0083](https://user-images.githubusercontent.com/43779006/65588942-93385680-df88-11e9-973f-2e547d9423d8.JPG)
+
+## Validation du placement
 Une fois que le placeholder est à l'endroit où nous le souhaitons, il nous suffit de presser sur le bouton **Done** pour placer la map. Le bouton **Done** a une couleur rouge si le nombre de points de tracking est inférieur à **50**.
 
 Nombre de points de tracking suffisant | Nombre de points de tracking insuffisant
@@ -184,7 +190,7 @@ Map
 La gestion des collision est gérée par rapport au category bitmask des objets en collision. Suivant le category bitmask des objets, on ajoute le nombre de points correspondants au score du joueur. Les balles lancées par le joueur ont un category bitmask de 2 et tous les objets rapportant des points disposent du category bitmask 3.
 
 ## Décompte
-Une fois que les deux joueurs ont saisi leurs noms et ont pressez sur "Jouer", une vue affichant un décompte laisse le temps au joueur de se préparer au début de la partie.
+Une fois que les deux joueurs ont saisi leurs noms et ont pressez sur "Jouer", une vue affichant un décompte laisse le temps aux joueurs de se préparer au début de la partie.
 
 Décompte
 :--------------------:
