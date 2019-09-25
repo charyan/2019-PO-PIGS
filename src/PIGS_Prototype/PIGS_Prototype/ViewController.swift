@@ -274,12 +274,10 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         let playerLabel = "player="
         let scoreLabel = "&score="
         let goldensnitchLabel = "&goldensnitch="
-        var goldenSnitchValue = "null"
+        var goldenSnitchValue = "false"
 
         if goldenSnitch {
             goldenSnitchValue = "true"
-        } else {
-            goldenSnitchValue = "false"
         }
         
         let body = playerLabel + name! + scoreLabel + score! + goldensnitchLabel + goldenSnitchValue
@@ -338,6 +336,45 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     @IBOutlet weak var Results: UIView!
     @IBOutlet weak var goldenSnitchImage: UIImageView!
     @IBOutlet weak var timeLabel: UILabel!
+    
+    func backToNameView() {
+        // Views
+        hideNameMenu()
+        multipeerSession.setIsNetworkingViewEnabled(false)
+        multipeerSession.setIsNameViewEnabled(false)
+        multipeerSession.setIsGamePlacementViewEnabled(true)
+        
+        tracking = true // We need to start tracking again
+        
+        // Delete the map
+        self.sceneView.scene.rootNode.enumerateChildNodes { (node, _) in
+            if (node.name == GAMEZONE_ROOT_NODE_NAME) {
+                node.removeFromParentNode()
+            }
+        }
+        
+        // Delete the trackerNode
+        self.sceneView.scene.rootNode.enumerateChildNodes { (node, _) in
+            if (node.name == "trackerNode") {
+                node.removeFromParentNode()
+            }
+        }
+        
+        
+        displayGamezonePlacementMenu()
+        
+        // Reset placeholder
+        trackerNode = nil
+        foundSurface = false
+        tracking = true
+        
+        // Hide the nameView keyboard
+        self.HideKeyboard()
+    }
+    
+    @IBAction func onRotationGestureInNameView(_ sender: Any) {
+        backToNameView()
+    }
     
     
     @IBAction func SwipeGesture(_ sender: Any) {
@@ -627,6 +664,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             plane.firstMaterial?.transparency = CGFloat(PLACEHOLDER_PLANE_TRANSPARENCY)
             trackerNode = SCNNode(geometry: plane)
             trackerNode?.eulerAngles.x = -.pi * 0.5
+            trackerNode?.name = "trackerNode"
             //self.trackerNode?.rotation = SCNVector4(0, 1, 0, GLKMathDegreesToRadians(270))
             
             

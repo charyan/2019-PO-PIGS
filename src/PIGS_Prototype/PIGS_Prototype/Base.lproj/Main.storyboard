@@ -318,7 +318,11 @@
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
                                 <viewLayoutGuide key="safeArea" id="IAF-s0-rQu"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="9A8-lw-tjS" appends="YES" id="E2X-Uv-udM"/>
+                                </connections>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="quf-MW-xLm" userLabel="WaitingView">
                                 <rect key="frame" x="0.0" y="0.0" width="834" height="1112"/>
@@ -472,6 +476,11 @@
                         <action selector="SwipeGesture:" destination="BV1-FR-VrT" id="f1l-30-b6P"/>
                     </connections>
                 </swipeGestureRecognizer>
+                <rotationGestureRecognizer id="9A8-lw-tjS">
+                    <connections>
+                        <action selector="onRotationGestureInNameView:" destination="BV1-FR-VrT" id="mxW-ew-Ne2"/>
+                    </connections>
+                </rotationGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-1331.6546762589928" y="-45.323741007194243"/>
         </scene>
