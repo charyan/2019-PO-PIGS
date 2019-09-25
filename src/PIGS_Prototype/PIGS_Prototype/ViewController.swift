@@ -375,8 +375,17 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     }
     
     @IBAction func onRotationGestureInNameView(_ sender: Any) {
+        hideGameMenu()
         backToNameView()
     }
+    
+    @IBAction func onRotationGestureInShootButton(_ sender: Any) {
+        reset()
+        hideGameMenu()
+        
+        multipeerSession.sendMessage(CODE.RESET.rawValue)
+    }
+    
     
     
     @IBAction func SwipeGesture(_ sender: Any) {
@@ -490,6 +499,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     
     // Reset
     func reset(){
+        resetTimer()
+        
         // Reset Variables
 
         self.sceneView.scene.rootNode.enumerateChildNodes { (node, _) in

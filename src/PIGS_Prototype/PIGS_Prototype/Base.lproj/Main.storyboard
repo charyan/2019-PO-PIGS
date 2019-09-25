@@ -111,6 +111,7 @@
                                         </state>
                                         <connections>
                                             <action selector="onShootButton:" destination="BV1-FR-VrT" eventType="touchUpInside" id="PbF-iB-dqw"/>
+                                            <outletCollection property="gestureRecognizers" destination="nBC-8R-Tk7" appends="YES" id="SE8-6E-Rje"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Yannis Charalambidis" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eEg-xg-8TN" userLabel="playerName">
@@ -427,6 +428,7 @@
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <gestureRecognizers/>
                         <viewLayoutGuide key="safeArea" id="AA5-RC-t3s"/>
                     </view>
                     <connections>
@@ -481,6 +483,11 @@
                 <rotationGestureRecognizer id="9A8-lw-tjS">
                     <connections>
                         <action selector="onRotationGestureInNameView:" destination="BV1-FR-VrT" id="mxW-ew-Ne2"/>
+                    </connections>
+                </rotationGestureRecognizer>
+                <rotationGestureRecognizer id="nBC-8R-Tk7">
+                    <connections>
+                        <action selector="onRotationGestureInShootButton:" destination="BV1-FR-VrT" id="vyh-xw-2cs"/>
                     </connections>
                 </rotationGestureRecognizer>
             </objects>
