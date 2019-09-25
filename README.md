@@ -210,7 +210,6 @@ La gestion des rôles est organisées par la variable **isGameHost** qui permett
 La communication entre les iPads se fait à l'aide de messages textes. Nous avons créé des codes pour définir le but de chaque message.
 
 Schéma de communication
-Map
 :--------------------:
 ![image](https://user-images.githubusercontent.com/43775161/65423360-13d04900-de09-11e9-8aee-ef9dd7abf26b.png)
 
