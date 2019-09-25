@@ -98,19 +98,22 @@ Installation réelle
 :--------------------:
 ![IMG_E0825](https://user-images.githubusercontent.com/43779006/65587323-f7a5e680-df85-11e9-8b03-a411e0740b53.JPG)
 
-## Rotation du placeholder
+### Rotation du placeholder
 Pour effectuer une rotation du placeholder, l'utilisateur peut utiliser deux boutons. Les boutons modifient la position du placeholder sur l'axe Y.
 
 Rotation du placeholder
 :--------------------:
 ![IMG_E0083](https://user-images.githubusercontent.com/43779006/65588942-93385680-df88-11e9-973f-2e547d9423d8.JPG)
 
-## Validation du placement
+### Validation du placement
 Une fois que le placeholder est à l'endroit où nous le souhaitons, il nous suffit de presser sur le bouton **Done** pour placer la map. Le bouton **Done** a une couleur rouge si le nombre de points de tracking est inférieur à **50**.
 
 Nombre de points de tracking suffisant | Nombre de points de tracking insuffisant
 :--------------------:|:-------------------------:
 <img src="https://user-images.githubusercontent.com/43775161/65329954-db86fb80-dbb9-11e9-9391-8971b8bfd1de.jpg" width="100%" />  |  <img src="https://user-images.githubusercontent.com/43775161/65329955-db86fb80-dbb9-11e9-860b-3a11460c6a5b.jpg" width="100%" />
+
+## Affichage en live d'un iPad
+
 
 ## Réseau
 Nous avons créée un réseau sans-fil avec un access point permettant de transférer des informations entre le serveur et les iPad.
@@ -196,6 +199,12 @@ Décompte
 :--------------------:
 ![countDown](https://user-images.githubusercontent.com/43779006/65583813-29b44a00-df80-11e9-9c74-54e5fcdc07f6.gif)
 
+## Diffusion en live d'un iPad sur une TV
+Pour diffuser en live un iPad sur une TV, nous utilisons un Apple TV qui est connecté à notre réseau par wifi.
+
+Diffusion en live
+:--------------------:
+![IMG_0093](https://user-images.githubusercontent.com/43779006/65595132-5d996a80-df94-11e9-80ef-8e8532a02ee8.PNG)
 
 ## Multijoueur
 Pour développer le multijoueur, nous avons créé la branche **multiplayer** sur GitHub. De cette manière le développement du mode multijoueur ne perturbera pas le développement du reste du jeu. Nous avons créé une classe **MultipeerSession** permettant de gérer tous les aspects de connexion et de transfert d'informations entre iPads. Cette classe a été reprise d'un [projet démo d'Apple](https://developer.apple.com/documentation/arkit/creating_a_multiuser_ar_experience) et a été adapté à notre jeu.
