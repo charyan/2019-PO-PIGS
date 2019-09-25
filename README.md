@@ -244,7 +244,7 @@ Voici les codes utilisés lors de la communication entre iPads.
         case READY = "1:" // Is the other player ready
         case SCORE = "2:" // What is the score of the other player
         case NAME  = "3:" // What is the name of the other player
-        case RESET  = "4:" // Reset
+        case RESET = "4:" // Reset
     }
 ```
 
