@@ -24,7 +24,6 @@ Version papier du guide
 ### Logos
 Nous disposons de trois logos. Le logo original a été crée par un assemblage d'images trouvés sur Internet. Le nouveau a été totalement créé à la main sur Inkscape. Le dernier est utilisé comme icone de notre application.
 
-
 Logo original             |  Logo actuel
 :-------------------------:|:-------------------------
 <img src="https://user-images.githubusercontent.com/43775161/58420616-0939b900-808e-11e9-8312-b0da9cbf21e5.png" width="100%" />  |  <img src="https://user-images.githubusercontent.com/43779006/65151787-13116e80-da27-11e9-9e1f-f5a08df56d49.png" width="100%" />
@@ -119,7 +118,7 @@ Nombre de points de tracking suffisant | Nombre de points de tracking insuffisan
 Nous avons créée un réseau sans-fil avec un access point permettant de transférer des informations entre le serveur et les iPad.
 Nos appareils ont tous une adresse fixe, le même masque et le même NetId.
 
-Un schéma logique et une liste du matériel sont disponibles dans le dossier "charyan000/2019-PO-PIGS/doc".
+Un schéma logique et une liste du matériel sont disponibles dans le dossier **charyan000/2019-PO-PIGS/doc**.
 
 Schéma logique
 :--------------------:
@@ -195,7 +194,7 @@ Map
 La gestion des collision est gérée par rapport au category bitmask des objets en collision. Suivant le category bitmask des objets, on ajoute le nombre de points correspondants au score du joueur. Les balles lancées par le joueur ont un category bitmask de 2 et tous les objets rapportant des points disposent du category bitmask 3.
 
 ## Décompte
-Une fois que les deux joueurs ont saisi leurs noms et ont pressez sur "Jouer", une vue affichant un décompte laisse le temps aux joueurs de se préparer au début de la partie.
+Une fois que les deux joueurs ont saisi leurs noms et ont pressez sur **Jouer**, une vue affichant un décompte laisse le temps aux joueurs de se préparer au début de la partie.
 
 Décompte
 :--------------------:
