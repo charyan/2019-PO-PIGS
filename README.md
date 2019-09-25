@@ -24,7 +24,6 @@ Version papier du guide
 ### Logos
 Nous disposons de trois logos. Le logo original a été crée par un assemblage d'images trouvés sur Internet. Le nouveau a été totalement créé à la main sur Inkscape. Le dernier est utilisé comme icone de notre application.
 
-
 Logo original             |  Logo actuel
 :-------------------------:|:-------------------------
 <img src="https://user-images.githubusercontent.com/43775161/58420616-0939b900-808e-11e9-8312-b0da9cbf21e5.png" width="100%" />  |  <img src="https://user-images.githubusercontent.com/43779006/65151787-13116e80-da27-11e9-9e1f-f5a08df56d49.png" width="100%" />
@@ -112,14 +111,11 @@ Nombre de points de tracking suffisant | Nombre de points de tracking insuffisan
 :--------------------:|:-------------------------:
 <img src="https://user-images.githubusercontent.com/43775161/65329954-db86fb80-dbb9-11e9-9391-8971b8bfd1de.jpg" width="100%" />  |  <img src="https://user-images.githubusercontent.com/43775161/65329955-db86fb80-dbb9-11e9-860b-3a11460c6a5b.jpg" width="100%" />
 
-## Affichage en live d'un iPad
-
-
 ## Réseau
 Nous avons créée un réseau sans-fil avec un access point permettant de transférer des informations entre le serveur et les iPad.
 Nos appareils ont tous une adresse fixe, le même masque et le même NetId.
 
-Un schéma logique et une liste du matériel sont disponibles dans le dossier "charyan000/2019-PO-PIGS/doc".
+Un schéma logique et une liste du matériel sont disponibles dans le dossier **charyan000/2019-PO-PIGS/doc**.
 
 Schéma logique
 :--------------------:
@@ -170,6 +166,8 @@ La page PHP effectue une requête **SELECT** sur la base de donnée et retourne 
 ## Lanceur
 Le lanceur permet de créer une balle à la position de l'iPad dans le monde virtuel et d'appliquer une force permettant de déplacer cette balle. Le lancement de la balle est déclenché par l'appuis d'un bouton. Le lanceur empêche l'utilisateur d'appuyer à répétition sur le bouton à l'aide d'un système de cooldown qui désactive le bouton.
 
+Après avoir discuté avec les deuxièmes années qui présentaient le stand le mardi des portes ouvertes et l'avis des utilisateurs, nous avons décidé de supprimer le bouton **Shoot** et permettre au joueur de cliquer partout sur l'écran.
+
 ## Score
 Différentes cibles sont placées sur la table, elles rapportent différentes quantités de points.
 
@@ -193,11 +191,15 @@ Map
 La gestion des collision est gérée par rapport au category bitmask des objets en collision. Suivant le category bitmask des objets, on ajoute le nombre de points correspondants au score du joueur. Les balles lancées par le joueur ont un category bitmask de 2 et tous les objets rapportant des points disposent du category bitmask 3.
 
 ## Décompte
-Une fois que les deux joueurs ont saisi leurs noms et ont pressez sur "Jouer", une vue affichant un décompte laisse le temps aux joueurs de se préparer au début de la partie.
+Une fois que les deux joueurs ont saisi leurs noms et ont pressé sur **Jouer**, une vue affichant un décompte laisse le temps aux joueurs de se préparer au début de la partie.
 
 Décompte
 :--------------------:
 ![countDown](https://user-images.githubusercontent.com/43779006/65583813-29b44a00-df80-11e9-9c74-54e5fcdc07f6.gif)
+
+## Animations UI
+Nous avons ajouté des animations pour le décompte et le timer par code.
+Cela permet d'ajouter du dynamisme dans les interfaces.
 
 ## Diffusion en live d'un iPad sur une TV
 Pour diffuser en live un iPad sur une TV, nous utilisons un Apple TV qui est connecté à notre réseau par wifi.

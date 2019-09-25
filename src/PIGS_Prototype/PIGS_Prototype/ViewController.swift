@@ -54,6 +54,7 @@ var numberGoldensnitch : Int = 0
 
 // Default value rotation for the gamezone placement
 let ROTATION_DEG : Float = 5
+let ROTATION_DEG_SWIPE :  Float = 1.3
 
 // FONT
 let FONT_NAME : String = "Skater Girls Rock"
@@ -327,6 +328,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     @IBOutlet weak var HUD: UILabel!
     @IBOutlet weak var timeBackground: UILabel!
     
+    
     // View choose name menu
     @IBOutlet weak var Pseudo: UIView!
     
@@ -452,10 +454,17 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     
     var rotationDeg: Float = 0
     
-    @IBAction func onLeftButton(_ sender: Any) {
-        self.trackerNode?.eulerAngles.y -= GLKMathDegreesToRadians(ROTATION_DEG)
-        rotationDeg -= ROTATION_DEG
+    @IBAction func rotationLeft(_ sender: Any) {
+        
+        self.trackerNode?.eulerAngles.y -= GLKMathDegreesToRadians(ROTATION_DEG_SWIPE)
+        rotationDeg -= ROTATION_DEG_SWIPE
         print(rotationDeg)
+    }
+    
+    @IBAction func onLeftButton(_ sender: Any) {
+          self.trackerNode?.eulerAngles.y -= GLKMathDegreesToRadians(ROTATION_DEG)
+         rotationDeg -= ROTATION_DEG
+         print(rotationDeg)
     }
     
     
