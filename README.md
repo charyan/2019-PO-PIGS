@@ -235,7 +235,18 @@ Schéma de communication
 4 | Pendant le jeu, à chaque collision, l'iPad envoie le score actuel du joueur à l'autre iPad, le joueur possédant le plus de points a un couronne au dessus de son score.
 5 | Une fois la partie terminée, la vue des résultats est affiché au joueurs. Pour relancer la partie avec la même configuration réseau et le même placement de la map, il suffit d'effectuer un **swipe** n'importe où sur l'écran. L'iPad envoie ensuite un message CODE.RESET à l'autre iPad et réinitialise son jeu. L'autre iPad va également réinitialiser son jeu à la réception du message CODE.RESET, ce qui permet de réinitialiser le jeu sur les deux iPads avec une seule action.
 
+#### Codes utilisés
+Voici les codes utilisés lors de la communication entre iPads.
 
+```swift
+    // Code used for communication between devices
+    enum CODE : String {
+        case READY = "1:" // Is the other player ready
+        case SCORE = "2:" // What is the score of the other player
+        case NAME  = "3:" // What is the name of the other player
+        case RESET  = "4:" // Reset
+    }
+```
 
 ## Problèmes rencontrés
 ### Problème de merge
