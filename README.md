@@ -1,7 +1,7 @@
 # PIGS
 ## Introduction
 ### Présentation
-PIGS est un jeu dans lequel deux joueurs s'affrontent dans un monde entre le réel et le virtuel. Ce monde est constitué de différents objets: blocs, cibles volantes ou statiques, vif d'or, etc.  
+PIGS est un jeu dans lequel deux joueurs s'affrontent dans un monde entre le réel et le virtuel. Ce monde est constitué de différents objets: blocs, cibles volantes ou statiques, vif d'or, etc.
 
 Le jeu se joue à 2, le but est de gagner le plus de points dans un temps imparti.
 
@@ -182,6 +182,12 @@ Map
 
 ## Gestion des collision
 La gestion des collision est gérée par rapport au category bitmask des objets en collision. Suivant le category bitmask des objets, on ajoute le nombre de points correspondants au score du joueur. Les balles lancées par le joueur ont un category bitmask de 2 et tous les objets rapportant des points disposent du category bitmask 3.
+
+## Décompte
+Une fois que les deux joueurs ont saisi leurs noms et ont pressez sur "Jouer", une vue affichant un décompte laisse le temps au joueur de se préparer au début de la partie.
+
+![countDown](https://user-images.githubusercontent.com/43779006/65583813-29b44a00-df80-11e9-9c74-54e5fcdc07f6.gif)
+
 
 ## Multijoueur
 Pour développer le multijoueur, nous avons créé la branche **multiplayer** sur GitHub. De cette manière le développement du mode multijoueur ne perturbera pas le développement du reste du jeu. Nous avons créé une classe **MultipeerSession** permettant de gérer tous les aspects de connexion et de transfert d'informations entre iPads. Cette classe a été reprise d'un [projet démo d'Apple](https://developer.apple.com/documentation/arkit/creating_a_multiuser_ar_experience) et a été adapté à notre jeu.
