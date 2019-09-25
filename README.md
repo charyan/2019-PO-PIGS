@@ -78,7 +78,7 @@ Cette bibliothèque permet de gèrer la connexion entre les deux iPads et le tra
 
 ## Fin de partie
 ### Minuteur
-Notre minuteur utilise 2 fonctions. La première fonction **runTimer** démarre le minuteur. Elle est appelée dans la fonction **onPlayButton**  qui est exécutée après la saisi du nom de l'utilisateur. La seconde fonction **updateTimer** met à jour le label et vérifie que le minuteur aie bien atteint 0 seconde. Une fois que le minuteur atteint 0 seconde, il appelle automatiquement la dernière vue **Results** et envoie une requête **HTTP** méthode **POST** à notre serveur web.
+Notre minuteur utilise 2 fonctions. La première fonction **runTimer** démarre le minuteur. Elle est appelée dans la fonction **onPlayButton**  qui est exécutée après la saisie du nom de l'utilisateur. La seconde fonction **updateTimer** met à jour le label et vérifie que le minuteur aie bien atteint 0 seconde. Une fois que le minuteur atteint 0 seconde, il appelle automatiquement la dernière vue **Results** et envoie une requête **HTTP** méthode **POST** à notre serveur web.
 
 ### Dernière vue "Results"
 La dernière vue affiche le nom, le score et un message de remerciement pour l'utilisateur.
@@ -166,7 +166,7 @@ La page PHP effectue une requête **SELECT** sur la base de donnée et retourne 
 ## Lanceur
 Le lanceur permet de créer une balle à la position de l'iPad dans le monde virtuel et d'appliquer une force permettant de déplacer cette balle. Le lancement de la balle est déclenché par l'appuis d'un bouton. Le lanceur empêche l'utilisateur d'appuyer à répétition sur le bouton à l'aide d'un système de cooldown qui désactive le bouton.
 
-Après avoir discuté avec les deuxièmes années qui présentaient le stand le mardi des portes ouvertes et l'avis des utilisateurs, nous avons décidé de supprimer le bouton **Shoot** et permettre au joueur de cliquer partout sur l'écran.
+Après avoir discuté avec les deuxièmes années qui présentaient le stand le mardi des portes ouvertes et l'avis des utilisateurs, nous avons décidé de supprimer le bouton **Shoot** et permettre au joueur d'appuyer sur toute la surface de l'écran.
 
 ## Score
 Différentes cibles sont placées sur la table, elles rapportent différentes quantités de points.
@@ -207,6 +207,9 @@ Pour diffuser en live un iPad sur une TV, nous utilisons un Apple TV qui est con
 Diffusion en live
 :--------------------:
 ![IMG_0093](https://user-images.githubusercontent.com/43779006/65595132-5d996a80-df94-11e9-80ef-8e8532a02ee8.PNG)
+
+## Focus clavier
+Le clavier peut être automatiquement ouvert par code.
 
 ## Multijoueur
 Pour développer le multijoueur, nous avons créé la branche **multiplayer** sur GitHub. De cette manière le développement du mode multijoueur ne perturbera pas le développement du reste du jeu. Nous avons créé une classe **MultipeerSession** permettant de gérer tous les aspects de connexion et de transfert d'informations entre iPads. Cette classe a été reprise d'un [projet démo d'Apple](https://developer.apple.com/documentation/arkit/creating_a_multiuser_ar_experience) et a été adapté à notre jeu.
