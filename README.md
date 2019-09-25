@@ -194,7 +194,7 @@ Map
 La gestion des collision est gérée par rapport au category bitmask des objets en collision. Suivant le category bitmask des objets, on ajoute le nombre de points correspondants au score du joueur. Les balles lancées par le joueur ont un category bitmask de 2 et tous les objets rapportant des points disposent du category bitmask 3.
 
 ## Décompte
-Une fois que les deux joueurs ont saisi leurs noms et ont pressez sur **Jouer**, une vue affichant un décompte laisse le temps aux joueurs de se préparer au début de la partie.
+Une fois que les deux joueurs ont saisi leurs noms et ont pressé sur **Jouer**, une vue affichant un décompte laisse le temps aux joueurs de se préparer au début de la partie.
 
 Décompte
 :--------------------:
