@@ -186,6 +186,8 @@ La gestion des collision est gérée par rapport au category bitmask des objets 
 ## Décompte
 Une fois que les deux joueurs ont saisi leurs noms et ont pressez sur "Jouer", une vue affichant un décompte laisse le temps au joueur de se préparer au début de la partie.
 
+Décompte
+:--------------------:
 ![countDown](https://user-images.githubusercontent.com/43779006/65583813-29b44a00-df80-11e9-9c74-54e5fcdc07f6.gif)
 
 
