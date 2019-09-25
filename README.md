@@ -170,6 +170,8 @@ La page PHP effectue une requête **SELECT** sur la base de donnée et retourne 
 ## Lanceur
 Le lanceur permet de créer une balle à la position de l'iPad dans le monde virtuel et d'appliquer une force permettant de déplacer cette balle. Le lancement de la balle est déclenché par l'appuis d'un bouton. Le lanceur empêche l'utilisateur d'appuyer à répétition sur le bouton à l'aide d'un système de cooldown qui désactive le bouton.
 
+Après avoir discuté avec les deuxièmes années qui présentaient le stand le mardi des portes ouvertes et l'avis des utilisateurs, nous avons décidé de supprimer le bouton **Shoot** et permettre au joueur de cliquer partout sur l'écran.
+
 ## Score
 Différentes cibles sont placées sur la table, elles rapportent différentes quantités de points.
 
