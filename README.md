@@ -203,7 +203,7 @@ Map
 :--------------------:
 ![map](https://user-images.githubusercontent.com/43775161/65330148-43d5dd00-dbba-11e9-88cc-1584a5f8a306.png)
 
-## Gestion des collision
+## Gestion des collisions
 La gestion des collisions est gérée par rapport aux catégories bitmask des objets en collision. Suivant la catégorie bitmask des objets, on ajoute le nombre de points correspondants au score du joueur. Les balles lancées par le joueur ont une catégorie bitmask de 2 et tous les objets rapportant des points disposent de la catégorie bitmask 3.
 
 ## Décompte
@@ -342,9 +342,6 @@ Un élément permettant de marquer beaucoup de points et très difficile à touc
 Une partie des nuages fait une rotation dans le sens horaire et l'autre en fait une dans le sens antihoraire.
 Ils se meuvent très lentement et sont esthétiques au jeu.
 Les nuages peuvent cacher les cibles volantes et ainsi servir d'obstacle ajoutant une légère difficulté.
-
-### Vif d'or
-Étant une cible très difficile et unique, il donne beaucoup de points. Ses mouvements sont très rapides, mais quand même atteignables.
 
 ### Bombes
 Elles enlèvent des points à la collision. Une animation a été créée pour correspondre avec la bombe.
