@@ -164,7 +164,7 @@ On accède à la page PHP **leaderboard.php** sur le NUC avec le navigateur **Go
 La page PHP effectue une requête **SELECT** sur la base de donnée et retourne le nom et le score de tous les joueurs ainsi qu'un booléen pour confirmer si l'utilisateur a touché - ou non - le vif d'or. Il affiche ces informations dans un tableau. La page est rafraichie automatiquement chaque seconde par une extension appellée **[Auto Refresh](https://chrome.google.com/webstore/detail/auto-refresh/ifooldnmmcmlbdennkpdnlnbgbmfalko)**.
 
 ## Lanceur
-Le lanceur permet de créer une balle à la position de l'iPad dans le monde virtuel et d'appliquer une force permettant de déplacer cette balle. Le lancement de la balle est déclenché par l'appuis d'un bouton. Le lanceur empêche l'utilisateur d'appuyer à répétition sur le bouton à l'aide d'un système de cooldown qui désactive le bouton.
+Le lanceur permet de créer une balle à la position de l'iPad dans le monde virtuel et d'appliquer une force permettant de déplacer cette balle. Le lancement de la balle est déclenché par un appuis sur l'écran. Le lanceur empêche l'utilisateur d'appuyer à répétition sur le bouton à l'aide d'un système de cooldown qui désactive le lanceur.
 
 Après avoir discuté avec les deuxièmes années qui présentaient le stand le mardi des portes ouvertes et l'avis des utilisateurs, nous avons décidé de supprimer le bouton **Shoot** et permettre au joueur d'appuyer sur toute la surface de l'écran.
 
@@ -268,6 +268,10 @@ Lors d'une tentative de merge entre la branche **multiplayer** et la branche **m
 Il est donc préférable d'éviter d'avoir à merge les fichiers **.storyboard** afin d'éviter ces complications.
 
 ## Gameplay
+
+## Problème de synchronisation de points en fin de partie
+Un problème peut être remarqué en fin de partie sur la vue de résultat, le score du joueur adverse est plus petit que son score sur son iPad. Le problème est dû à un problème de synchronisation du lancement des du timer entre les deux iPads. Le déclenchement du timer peut être légèrement différé. En fin de partie, quand le premier iPad termine, les scores sont figés car la vue ne met pas à jour automatiquement la vue résultat lors de la réception du score mis à jour de l'autre joueur.  
+Le problème à été réglé en mettant à jour le score affiché dans le label sur la vue de résultat depuis la fonction `scoreUpdate()`.
 
 ### Projectile
 Le projectile est une sphere qui est lancée lors de la pression sur le bouton "Shoot".
