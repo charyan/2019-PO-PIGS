@@ -814,8 +814,12 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     
     func scoreUpdate() {
         DispatchQueue.main.async {
+            // Update scores in gameView
             self.scoreLabel.text = String(self.score)
             self.scoreLabelOtherPlayer.text = String(self.otherPlayerScore)
+            
+            // Update the other player's score in resultsView
+            self.resultsViewOtherPlayerScore.text = String(self.otherPlayerScore)
             
             if(self.score > self.otherPlayerScore) {
                 // Player is first
