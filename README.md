@@ -111,6 +111,13 @@ Nombre de points de tracking suffisant | Nombre de points de tracking insuffisan
 :--------------------:|:-------------------------:
 <img src="https://user-images.githubusercontent.com/43775161/65329954-db86fb80-dbb9-11e9-9391-8971b8bfd1de.jpg" width="100%" />  |  <img src="https://user-images.githubusercontent.com/43775161/65329955-db86fb80-dbb9-11e9-860b-3a11460c6a5b.jpg" width="100%" />
 
+### Replacement de la zone de jeu
+En testant le jeu, nous avons pu nous rendre compte que le placement de la zone de jeu n'était pas assez stable est devait être régulièrement refait. Nous avons donc implémenté deux actions permettant de stopper le jeu et de replacer la zone de jeu:  
+* Lorsqu'un geste de rotation à 2 doigts est effetué sur la vue **Pseudo**, le jeu retourne au menu de placement de la zone.
+* Lorsqu'un geste de rotation à 2 doigts est effetué sur la vue de jeu (**gameView**), le jeu retourne à la vue **Pseudo**.  
+
+Nous pouvons donc désormais arrêter le jeu si la zone ne s'affiche pas et la replacer.
+
 ## Réseau
 Nous avons créée un réseau sans-fil avec un access point permettant de transférer des informations entre le serveur et les iPad.
 Nos appareils ont tous une adresse fixe, le même masque et le même NetId.
