@@ -87,7 +87,7 @@ Cette bibliothèque permet de gèrer la connexion entre les deux iPads et le tra
 ### Minuteur
 Notre minuteur utilise 2 fonctions. La première fonction **runTimer** démarre le minuteur. Elle est appelée dans la fonction **onPlayButton**  qui est exécutée après la saisie du nom de l'utilisateur. La seconde fonction **updateTimer** met à jour le label et vérifie que le minuteur aie bien atteint 0 seconde. Une fois que le minuteur atteint 0 seconde, il appelle automatiquement la dernière vue **Results** et envoie une requête **HTTP** méthode **POST** à notre serveur web.
 
-### Dernière vue "Results"
+### Dernière vue **Results**
 La dernière vue affiche le nom, le score et un message de remerciement pour l'utilisateur.
 
 Vue gagnant             |  Vue perdant
@@ -102,7 +102,7 @@ Après avoir éffectué plusieurs tests, nous avons choisi d'utiliser deux grand
 
 Installation réelle
 :--------------------:
-![IMG_E0825](https://user-images.githubusercontent.com/43779006/65587323-f7a5e680-df85-11e9-8b03-a411e0740b53.JPG)
+![Installation réelle](https://user-images.githubusercontent.com/43779006/65587323-f7a5e680-df85-11e9-8b03-a411e0740b53.JPG)
 
 ### Rotation du placeholder
 Pour effectuer une rotation du placeholder, l'utilisateur peut utiliser deux boutons. Les boutons modifient la position du placeholder sur l'axe Y.
@@ -157,7 +157,7 @@ Structure du projet PHP
 :--------------------:
 ![Structure du projet PHP](https://user-images.githubusercontent.com/43775161/64113030-6fb72d00-cd89-11e9-904f-c9bc23f3f493.png)
 
-### Base de données "utilisateur"
+### Base de données **utilisateur**
 Nous avons créé une base de données pour gérer le classement des joueurs ainsi que leurs scores.
 La gestion de la base de donnée se fait avec l'aide de **phpMyAdmin** qui est installé avec **XAMPP**.
 Ce logiciel nous permet de manipuler notre base de donnée tout en utilisant l'interface adaptée.
@@ -288,7 +288,7 @@ Un problème peut être remarqué en fin de partie sur la vue de résultat, le s
 Le problème à été réglé en mettant à jour le score affiché dans le label sur la vue de résultat depuis la fonction `scoreUpdate()`.
 
 ### Projectile
-Le projectile est une sphere qui est lancée lors de la pression sur le bouton "Shoot".
+Le projectile est une sphere qui est lancée lors de la pression sur le bouton **Shoot**.
 Elle affectée par la gravité et sa trajectoire sera en cloche.
 Sa vitesse à aussi été réglée pour ajouter du réalisme.
 À chaque fois qu'une balle est lancée, elle supprime la balle précédente. Cela assure de bonnes performances et évite de surcharger le terrain afin de conserver une bonne visibilité.
@@ -315,7 +315,7 @@ Blocs qui tombent de la map
 Pour régler le problème, nous avons essayé de modifier la taille, la physique, la hitbox, la masse, la gravité, le type(plan, box, floor), l'emplacement des blocs et du sol.
 
 Après de nombreuses recherches sur le web, plusieurs messages envoyés sur des forums et plus de trois jours de travaillent à deux dessus, nous avons trouvé une manière de contourner le problème.
-Les blocs empilés les uns sur les autres provoque un tremblement faisant tomber la pile de cubes. Lorsque les blocs sont de taille réduite, la gravité agit plus "fortement". Les blocs tombent beaucoup plus vite et la physique est approximative.
+Les blocs empilés les uns sur les autres provoque un tremblement faisant tomber la pile de cubes. Lorsque les blocs sont de taille réduite, la gravité agit plus **fortement**. Les blocs tombent beaucoup plus vite et la physique est approximative
 
 Nous avons remarqué que si nous empilions les cubes en pyramide et qu'il ont au moins un contact avec deux autres blocs, ils tombaient rarement.
 
@@ -327,13 +327,13 @@ Nous avons créé une map sur ce principe afin d'avoir un terrain de jeu stable.
 Nous avons intégré un système de déplacement automatique pour les cibles volantes.
 Chaque cible bouge individuellement grâce à une génération de valeurs aléatoires.
 Chaque cible a un pattern d'aller et retour se modifiant automatiquement à chaque trajet.
-Pour pouvoir donner une animation à chaque cible, une fonction permet de lire tous les noeuds. À partir de ça nous avons fait un test pour savoir si le noeud actuel est nommé "flying target".
+Pour pouvoir donner une animation à chaque cible, une fonction permet de lire tous les noeuds. À partir de ça nous avons fait un test pour savoir si le noeud actuel est nommé **flying target**.
 Ensuite on joue l'animation pour chaque cible une par une.
 
 #### Bateau
 Un bateau tourne autour de la map accompagné de quatre cochons.
 Ils sont liés à un noeud situé au centre de la map. On fait tourner ce noeud pour avoir une rotation fluide.
-Nous avons tenté de donner une physique "concave" au bateau pour qu'elle l'enrobe. Cette opération à rendu la map illisible et inutilisable. La map a pu être récupérée grâce à l'archivage sur GitHub.
+Nous avons tenté de donner une physique **concave** au bateau pour qu'elle l'enrobe. Cette opération à rendu la map illisible et inutilisable. La map a pu être récupérée grâce à l'archivage sur GitHub.
 
 Pour la physique, nous avons créé des blocs invisibles ayant la même taille que le bateau et tournants en même temps.
 
@@ -367,7 +367,7 @@ Pour résoudre le problème, nous avons ajouté des murs invisibles autour des m
 ### Reset
 
 #### Balles
-Pour réinitialiser les balles, nous cherchons tous les noeuds dont le nom est "ball", puis nous les supprimons.
+Pour réinitialiser les balles, nous cherchons tous les noeuds dont le nom est **ball**, puis nous les supprimons.
 
 ## Leçons à retenir
 Ici se trouvent les leçons qu'on a retenu en réalisant ce projet.
