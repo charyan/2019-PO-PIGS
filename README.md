@@ -14,6 +14,7 @@ Jeu
 
 ### Interaction
 Chaque joueur disposera d'une tablette au travers de laquelle il pourra voir et interagir avec le jeu. Chaque joueur peut lancer des balles afin de gagner des points.
+
 ### Guide de démarrage du stand
 Le guide de démarrage permet de mettre en place toute l'infrastructure de PIGS et de former les apprentis chargés de présenter le projet. Le guide est disponible sur papier ou au format .txt [ici](https://github.com/charyan000/2019-PO-PIGS/blob/master/doc/PO2019-YTD-PIGS-Guide.txt).
 
@@ -70,6 +71,7 @@ Nous utilisons Todoist pour lister toutes les choses à faire sur le projet, que
 
 ## Fonctionnement
 Le jeu utilise les bibliothèques ARKit, SceneKit, UIKit et MultipeerConnectivity. Toutes ces bibliothèques sont développées par Apple. Nous utiliserons Xcode comme IDE et nous programmerons en Swift, version 5.
+
 ### Bibliothèques
 #### ARKit
 ARKit est une bibliothèque permettant de gérer l'expérience de réalité augmentée sur IOS. Cette bibliothèque permet de créer des sessions AR, de superposer une scène 3D SceneKit sur le flux vidéo de la caméra. Nous utiliserons cette bibliothèque afin de placer notre terrain de jeu virtuel sur une table réelle. 
@@ -319,34 +321,32 @@ Nous avons remarqué que si nous empilions les cubes en pyramide et qu'il ont au
 
 Nous avons créé une map sur ce principe afin d'avoir un terrain de jeu stable.
 
-### Animations
-
-#### Cibles volantes
+### Cibles volantes
 Nous avons intégré un système de déplacement automatique pour les cibles volantes.
 Chaque cible bouge individuellement grâce à une génération de valeurs aléatoires.
 Chaque cible a un pattern d'aller et retour se modifiant automatiquement à chaque trajet.
 Pour pouvoir donner une animation à chaque cible, une fonction permet de lire tous les noeuds. À partir de ça nous avons fait un test pour savoir si le noeud actuel est nommé **flying target**.
 Ensuite on joue l'animation pour chaque cible une par une.
 
-#### Bateau
+### Bateau
 Un bateau tourne autour de la map accompagnée de quatre cochons.
 Ils sont liés à un noeud situé au centre de la map. On fait tourner ce noeud pour avoir une rotation fluide.
 Nous avons tenté de donner une physique **concave** au bateau pour qu'elle l'enrobe. Cette opération a rendu la map illisible et inutilisable. La map a pu être récupérée grâce à l'archivage sur GitHub.
 
 Pour la physique, nous avons créé des blocs invisibles ayant la même taille que le bateau et tournant en même temps.
 
-#### Vif d'or
+### Vif d'or
 Un élément permettant de marquer beaucoup de points et très difficile à toucher. Il se déplace aléatoirement et fait des rotations entre chaque mouvement.
 
-#### Nuages
+### Nuages
 Une partie des nuages fait une rotation dans le sens horaire et l'autre en fait une dans le sens antihoraire.
 Ils se meuvent très lentement et sont esthétiques au jeu.
 Les nuages peuvent cacher les cibles volantes et ainsi servir d'obstacle ajoutant une légère difficulté.
 
-#### Vif d'or
+### Vif d'or
 Étant une cible très difficile et unique, il donne beaucoup de points. Ses mouvements sont très rapides, mais quand même atteignables.
 
-#### Bombes
+### Bombes
 Elles enlèvent des points à la collision. Une animation a été créée pour correspondre avec la bombe.
 
 ### Tests utilisateur
@@ -362,7 +362,7 @@ Pour résoudre le problème, nous avons ajouté des murs invisibles autour des m
 
 ### Reset
 #### Balles
-Pour réinitialiser les balles, nous cherchons tous les noeuds dont le nom est **ball**, puis nous les supprimons.
+Pour réinitialiser les balles, nous cherchons tous les noeuds dont le nom est **ball**, puis nous les supprimons en utilisant la fonction *removeFromParent*.
 
 ## Leçons à retenir
 Ici se trouvent les leçons qu'on a retenues en réalisant ce projet.
