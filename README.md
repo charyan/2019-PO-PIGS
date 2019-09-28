@@ -269,6 +269,10 @@ Il est donc préférable d'éviter d'avoir à merge les fichiers **.storyboard**
 
 ## Gameplay
 
+## Problème de synchronisation de points en fin de partie
+Un problème peut être remarqué en fin de partie sur la vue de résultat, le score du joueur adverse est plus petit que son score sur son iPad. Le problème est dû à un problème de synchronisation du lancement des du timer entre les deux iPads. Le déclenchement du timer peut être légèrement différé. En fin de partie, quand le premier iPad termine, les scores sont figés car la vue ne met pas à jour automatiquement la vue résultat lors de la réception du score mis à jour de l'autre joueur.  
+Le problème à été réglé en mettant à jour le score affiché dans le label sur la vue de résultat depuis la fonction `scoreUpdate()`.
+
 ### Projectile
 Le projectile est une sphere qui est lancée lors de la pression sur le bouton "Shoot".
 Elle affectée par la gravité et sa trajectoire sera en cloche.
