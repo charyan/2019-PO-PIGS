@@ -102,7 +102,7 @@ Pour effectuer une rotation du placeholder, l'utilisateur peut utiliser deux bou
 
 Rotation du placeholder
 :--------------------:
-![IMG_E0083](https://user-images.githubusercontent.com/43779006/65588942-93385680-df88-11e9-973f-2e547d9423d8.JPG)
+![Rotation du placeholder](https://user-images.githubusercontent.com/43779006/65588942-93385680-df88-11e9-973f-2e547d9423d8.JPG)
 
 ### Validation du placement
 Une fois que le placeholder est à l'endroit où nous le souhaitons, il nous suffit de presser sur le bouton **Done** pour placer la map. Le bouton **Done** a une couleur rouge si le nombre de points de tracking est inférieur à **50**.
@@ -119,7 +119,7 @@ Un schéma logique et une liste du matériel sont disponibles dans le dossier **
 
 Schéma logique
 :--------------------:
-![Schéma logique](https://user-images.githubusercontent.com/43775161/65332129-5fdb7d80-dbbe-11e9-8bbe-bb4814e95c69.png)
+![Schéma logique](https://user-images.githubusercontent.com/43775161/65816124-3216ba00-e1f8-11e9-8d5d-5ecb85096360.png)
 
 ### Serveur
 Nous utilisons un ordinateur Intel NUC sous Windows 10 Pro afin de proposer divers services nécessaires à notre projet : service Apache, MySQL, PHP. Nous utilisons XAMPP.  
