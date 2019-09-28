@@ -6,14 +6,14 @@ PIGS est un jeu dans lequel deux joueurs s'affrontent dans un monde entre le ré
 Le jeu se joue à 2, le but est de gagner le plus de points dans un temps imparti.
 
 ### Formation personnelle
-N'ayant aucune connaissances dans le développement avec les produits Apple, nous avons appris les bases à l'aide de tutoriels en ligne. Le début du projet a été périlleux, puis les choses se sont améliorées avec l'experience.
+N'ayant aucune connaissance dans le développement avec les produits Apple, nous avons appris les bases à l'aide de tutoriels en ligne. Le début du projet a été périlleux, puis les choses se sont améliorées avec l'expérience.
 
 Jeu
 :--------------------:
 ![gameView](https://user-images.githubusercontent.com/43775161/65329956-dc1f9200-dbb9-11e9-9736-a38a86f96e23.jpg)
 
 ### Interaction
-Chaque joueur disposera d'une tablette au travers de laquel il pourra voir et interagir avec le jeu. Chaque joueur peut lancer des balles afin de gagner des points.
+Chaque joueur disposera d'une tablette au travers de laquelle il pourra voir et interagir avec le jeu. Chaque joueur peut lancer des balles afin de gagner des points.
 ### Guide de démarrage du stand
 Le guide de démarrage permet de mettre en place toute l'infrastructure de PIGS et de former les apprentis chargés de présenter le projet. Le guide est disponible sur papier ou au format .txt [ici](https://github.com/charyan000/2019-PO-PIGS/blob/master/doc/PO2019-YTD-PIGS-Guide.txt).
 
@@ -22,7 +22,7 @@ Version papier du guide
 ![Guide papier](https://user-images.githubusercontent.com/43779006/65152840-055ce880-da29-11e9-927c-35674c197cca.jpg)
 
 ### Logos
-Nous disposons de trois logos. Le logo original a été crée par un assemblage d'images trouvés sur Internet. Le nouveau a été totalement créé à la main sur Inkscape. Le dernier est utilisé comme icone de notre application.
+Nous disposons de trois logos. Le logo original a été créé par un assemblage d'images trouvées sur Internet. Le nouveau a été totalement créé à la main sur Inkscape. Le dernier est utilisé comme icône de notre application.
 
 Logo original             |  Logo actuel
 :-------------------------:|:-------------------------
@@ -39,7 +39,7 @@ Plan du stand
 ![Plan du stand](https://user-images.githubusercontent.com/43775161/65313287-68b75980-db94-11e9-8f36-3b841ab1b73f.png)
 
 ### Affiche du stand
-L'affiche du stand à été crée sur Visio à partir d'une affiche de référence.
+L'affiche du stand àa été créée sur Visio à partir d'une affiche de référence.
 
 Affiche du stand
 :--------------------:
