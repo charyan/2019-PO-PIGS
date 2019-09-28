@@ -40,7 +40,7 @@ Plan du stand
 ![Plan du stand](https://user-images.githubusercontent.com/43775161/65313287-68b75980-db94-11e9-8f36-3b841ab1b73f.png)
 
 ### Affiche du stand
-L'affiche du stand a été créée sur Visio à partir d'une affiche de référence.
+L'affiche du stand a été créé sur Visio à partir d'une affiche de référence.
 
 Affiche du stand
 :--------------------:
