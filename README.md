@@ -298,18 +298,6 @@ Il est donc préférable d'éviter d'avoir à merge les fichiers **.storyboard**
 Un problème peut être remarqué en fin de partie sur la vue de résultat, le score du joueur adverse est plus petit que son score sur son iPad. Le problème est dû à un problème de synchronisation du lancement du timer entre les deux iPad. Le déclenchement du timer peut être légèrement différé. En fin de partie, quand le premier iPad termine, les scores sont figés, car la vue ne met pas à jour automatiquement la vue résultante lors de la réception du score mis à jour de l'autre joueur.  
 Le problème a été réglé en mettant à jour le score affiché dans le label sur la vue de résultat depuis la fonction `scoreUpdate()`.
 
-### Cibles
-#### Statiques
-Il existe plusieurs types d'éléments permettant de marquer des points.
-Chacun d'eux détruit la balle au contact.
-Les points sont définis dans le code et sont équilibrés.
-
-#### Dynamiques
-Les blocs dynamiques sont différents des autres, car ils donnent un point à chaque collision. Comme ils ne détruisent pas la balle au contact, ils se font toucher plusieurs fois par un tir ce qui permet d'avoir du dynamisme dans les scores.
-
-#### Volantes
-Quelques cibles se trouvent dans la partie aérienne du terrain. Elles bougent aléatoirement entre chaque partie.
-
 ### Blocs instables
 Lors du placement de la map, les blocs se mettent à trembler. Le problème est accru quand les blocs sont empilés les uns sur les autres.
 
@@ -325,6 +313,18 @@ Les blocs empilés les uns sur les autres provoquent un tremblement faisant tomb
 Nous avons remarqué que si nous empilions les cubes en pyramide et qu'il ont au moins un contact avec deux autres blocs, ils tombaient rarement.
 
 Nous avons créé une map sur ce principe afin d'avoir un terrain de jeu stable.
+
+## Cibles
+### Statiques
+Il existe plusieurs types d'éléments permettant de marquer des points.
+Chacun d'eux détruit la balle au contact.
+Les points sont définis dans le code et sont équilibrés.
+
+### Dynamiques
+Les blocs dynamiques sont différents des autres, car ils donnent un point à chaque collision. Comme ils ne détruisent pas la balle au contact, ils se font toucher plusieurs fois par un tir ce qui permet d'avoir du dynamisme dans les scores.
+
+### Volantes
+Quelques cibles se trouvent dans la partie aérienne du terrain. Elles bougent aléatoirement entre chaque partie.
 
 ### Cibles volantes
 Nous avons intégré un système de déplacement automatique pour les cibles volantes.
